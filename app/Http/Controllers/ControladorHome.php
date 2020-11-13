@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 
-
 class ControladorHome extends Controller
 {
 
