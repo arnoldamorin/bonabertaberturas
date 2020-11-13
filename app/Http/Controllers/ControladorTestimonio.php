@@ -13,7 +13,6 @@ class ControladorTestimonio extends Controller
     public function nuevo()
     {
         $titulo = "Nuevo Testimonio";
-        $array_menu = $entidad->obtenerMenuPadre();
         return view('testimonio.testimonio-nuevo', compact('titulo'));
 
     }
