@@ -12,8 +12,8 @@
     {
         public function nuevo()
         {
-            $titulo = "Nuevo Menú";
-            return view('sistema.menu-nuevo', compact('titulo', 'array_menu'));
+            $titulo = "Nuevo Alumno";
+            return view('alumno.alumno-nuevo', compact('titulo'));
 
         }
     }
