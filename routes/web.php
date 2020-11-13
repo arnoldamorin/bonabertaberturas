@@ -90,8 +90,12 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* --------------------------------------------- */
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
-Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
+    Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
 
+/* --------------------------------------------- */
+/* CONTROLADOR ALUMNOS                           */
+/* --------------------------------------------- */
+    Route::get('admin/alumno/nuevo', 'ControladorAlumno@nuevo');
 
 
 
