@@ -1591,9 +1591,6 @@
             ],
             "description": "Mercado Pago PHP SDK",
             "homepage": "https://github.com/mercadopago/dx-php",
-            "support": {
-                "source": "https://github.com/mercadopago/dx-php/tree/2.2.1"
-            },
             "time": "2020-11-13T21:50:52+00:00"
         },
         {
@@ -4511,10 +4508,6 @@
                 "faker",
                 "fixtures"
             ],
-            "support": {
-                "issues": "https://github.com/fzaninotto/Faker/issues",
-                "source": "https://github.com/fzaninotto/Faker/tree/v1.9.1"
-            },
             "abandoned": true,
             "time": "2019-12-12T13:22:17+00:00"
         },
