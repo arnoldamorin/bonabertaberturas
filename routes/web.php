@@ -97,6 +97,12 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* --------------------------------------------- */
     Route::get('admin/alumno/nuevo', 'ControladorAlumno@nuevo');
 
+/* --------------------------------------------- */
+/* CONTROLADOR CONFERENCIAS                          */
+/* --------------------------------------------- */
+
+Route::get('admin/conferencia/nuevo', 'ControladorConferencia@nuevo');
+
 
 
 });
