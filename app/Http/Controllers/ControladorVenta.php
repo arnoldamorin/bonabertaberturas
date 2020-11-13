@@ -1,4 +1,4 @@
-<?php|
+<?php
 
 namespace App\Http\Controllers;
 
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 require app_path() . '/start/constants.php';
 
-class ControladorMenu extends Controller
+class ControladorVenta extends Controller
 {
     public function nuevo()
     {
