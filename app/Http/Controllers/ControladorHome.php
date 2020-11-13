@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Entidades\Producto;
-use App\Entidades\Categoria;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
