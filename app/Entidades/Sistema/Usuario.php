@@ -72,10 +72,8 @@ class Usuario extends Model
                 A.activo,
                 A.nombre,
                 A.apellido,
-                A.areapredeterminada,
-                B.idcliente
+                A.areapredeterminada
                 FROM sistema_usuarios A
-                LEFT JOIN clientes B ON A.idusuario = B.fk_idusuario
                 WHERE usuario = '$usuario' AND activo= 1"; 
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
