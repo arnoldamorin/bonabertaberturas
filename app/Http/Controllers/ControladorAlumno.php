@@ -8,7 +8,7 @@
 
     require app_path() . '/start/constants.php';
 
-    class ControladorMenu extends Controller
+    class ControladorAlumno extends Controller
     {
         public function nuevo()
         {
