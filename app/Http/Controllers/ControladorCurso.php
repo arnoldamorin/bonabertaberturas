@@ -13,7 +13,7 @@ class ControladorCurso extends Controller
     public function nuevo()
     {
         $titulo = "Nuevo Curso";
-        return view('sistema.menu-nuevo', compact('titulo', 'array_menu'));
+        return view('curso.curso-nuevo', compact('titulo'));
 
     }
 }
