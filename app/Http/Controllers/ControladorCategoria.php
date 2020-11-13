@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 require app_path() . '/start/constants.php';
 
-class ControladorMenu extends Controller
+class ControladorCategoria extends Controller
 {
     public function nuevo()
     {
