@@ -99,6 +99,8 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 
 Route::get('admin/conferencia/nuevo', 'ControladorConferencia@nuevo');
 
-
-
+/* --------------------------------------------- */
+/* CONTROLADOR CATEGORIAS                          */
+/* --------------------------------------------- */
+Route::get('admin/categoria/nuevo', 'ControladorCategoria@nuevo');
 });
