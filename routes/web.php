@@ -107,4 +107,9 @@ Route::get('admin/conferencia/nuevo', 'ControladorConferencia@nuevo');
 /* CONTROLADOR CATEGORIAS                          */
 /* --------------------------------------------- */
 Route::get('admin/categoria/nuevo', 'ControladorCategoria@nuevo');
+
+/* --------------------------------------------- */
+/* CONTROLADOR VENTAS                          */
+/* --------------------------------------------- */
+Route::get('admin/venta/nueva', 'ControladorVentas@nuevo');
 });
