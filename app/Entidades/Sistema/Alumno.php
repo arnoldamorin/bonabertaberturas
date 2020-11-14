@@ -20,99 +20,45 @@ class Menu extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idalumno = $request->input('id')!="0" ? $request->input('id') : $this->idmenu;
+        $this->idalumno = $request->input('id')!="0" ? $request->input('id') : $this->idalumno;
         $this->nombre = $request->input('txtNombre');
-        $this->apellido = $request->input('lstMenuPadre');
-        $this->dni = $request->input('txtOrden') != "" ? $request->input('txtOrden') : 0;
-        $this->mail = $request->input('lstActivo');
-        $this->telefono = $request->input('txtUrl');
-    }
-
-    public function obtenerFiltrado() {
-        $request = $_REQUEST;
-        $columns = array(
-           0 => 'A.nombre',
-           1 => 'B.nombre',
-           2 => 'A.url',
-           3 => 'A.activo'
-            );
-        $sql = "SELECT DISTINCT
-                    A.idmenu,
-                    A.nombre,
-                    B.nombre as padre,
-                    A.url,
-                    A.activo
-                    FROM sistema_menues A
-                    LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
-                WHERE 1=1
-                ";
-
-        //Realiza el filtrado
-        if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR B.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR A.url LIKE '%" . $request['search']['value'] . "%' )";
-        }
-        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
-
-        $lstRetorno = DB::select($sql);
-
-        return $lstRetorno;
+        $this->apellido = $request->input('txtApellido');
+        $this->dni = $request->input('txtDni');
+        $this->mail = $request->input('txtCorreo');
+        $this->telefono = $request->input('txtTelefono');
     }
 
     public function obtenerTodos() {
         $sql = "SELECT 
-                  A.idmenu,
-                  A.nombre
-                FROM sistema_menues A ORDER BY A.nombre";
+                  A.idalumno,
+                  A.nombre,
+                  A.apellido,
+                  A.dni,
+                  A.mail,
+                  A.telefono
+                FROM alumnos A ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-       public function obtenerMenuPadre() {
-        $sql = "SELECT DISTINCT
-                  A.idmenu,
-                  A.nombre
-                FROM sistema_menues A
-                WHERE A.id_padre = 0 ORDER BY A.nombre";
-        $lstRetorno = DB::select($sql);
-        return $lstRetorno;
-    }
-
-    public function obtenerSubMenu($idmenu=null){
-        if($idmenu){
-            $sql = "SELECT DISTINCT
-                      A.idmenu,
-                      A.nombre
-                    FROM sistema_menues A
-                    WHERE A.idmenu <> '$idmenu' ORDER BY A.nombre";
-            $resultado = DB::select($sql);
-        } else {
-            $resultado = $this->obtenerTodos();
-        }
-        return $resultado;
-    }
-
-    public function obtenerPorId($idmenu) {
+    public function obtenerPorId($idalumno) {
         $sql = "SELECT
-                idmenu,
+                idalumno,
                 nombre,
-                id_padre,
-                orden,
-                activo,
-                url,
-                css
-                FROM sistema_menues WHERE idmenu = '$idmenu'";
+                apellido,
+                dni,
+                mail,
+                telefono
+                FROM alumnos WHERE idalumno = '$idalumno'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
-            $this->idmenu = $lstRetorno[0]->idmenu;
+            $this->idalumno = $lstRetorno[0]->idalumno;
             $this->nombre = $lstRetorno[0]->nombre;
-            $this->id_padre = $lstRetorno[0]->id_padre;
-            $this->orden = $lstRetorno[0]->orden;
-            $this->activo = $lstRetorno[0]->activo;
-            $this->url = $lstRetorno[0]->url;
-            $this->css = $lstRetorno[0]->css;
+            $this->apellido = $lstRetorno[0]->apellido;
+            $this->dni = $lstRetorno[0]->dni;
+            $this->mail = $lstRetorno[0]->mail;
+            $this->telefono = $lstRetorno[0]->telefono;
             return $this;
         }
         return null;
@@ -137,23 +83,21 @@ class Menu extends Model
     }
 
     public function insertar() {
-        $sql = "INSERT INTO sistema_menues (
+        $sql = "INSERT INTO alumnos (
                 nombre,
-                id_padre,
-                orden,
-                activo,
-                url,
-                css
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+                apellido,
+                dni,
+                mail,
+                telefono
+            ) VALUES (?, ?, ?, ?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
-            $this->id_padre, 
-            $this->orden, 
-            $this->activo, 
-            $this->url,
-            $this->css
+            $this->apellido, 
+            $this->dni, 
+            $this->mail, 
+            $this->telefono,
         ]);
-       return $this->idmenu = DB::getPdo()->lastInsertId();
+       return $this->idalumno = DB::getPdo()->lastInsertId();
     }
 
     public function obtenerMenuDelGrupo($idGrupo){

@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($alumno->idalumno) && $alumno->idalumno > 0 ? $alumno->idalumno : 0; ?>';
+    <?php $globalId = isset($alumnod->idalumno) ? $alumno->idalumno : "0"; ?>
 
 </script>
 @endsection
