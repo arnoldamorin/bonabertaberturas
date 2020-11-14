@@ -111,5 +111,5 @@ Route::get('admin/categoria/nuevo', 'ControladorCategoria@nuevo');
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
 /* --------------------------------------------- */
-Route::get('admin/venta/nueva', 'ControladorVentas@nuevo');
+Route::get('admin/venta/nueva', 'ControladorVenta@nuevo');
 });
