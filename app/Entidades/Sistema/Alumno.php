@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Session;
 
-class Menu extends Model
+class Alumno extends Model
 {
     protected $table = 'alumnos';
     public $timestamps = false;
