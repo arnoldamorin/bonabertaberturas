@@ -14,7 +14,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/alumno/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -47,31 +47,23 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $menu->nombre or '' }}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $alumno->nombre or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Men&uacute; padre:</label>
+                    <label>Apellido: *</label>
+                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="{{ $alumno->apellido or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Orden:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$menu->orden or ''}}">
+                    <label>DNI: *</label>
+                    <input type="text" maxlength="8" id="txtDni" name="txtDni" class="form-control" value="{{ $alumno->dni or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Activo: *</label>
-                    <select id="lstActivo" name="lstActivo" class="form-control" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1" {{isset($menu) && $menu->activo == 1? 'selected' : ''}}>Si</option>
-                        <option value="0" {{isset($menu) &&$menu->activo == 0? 'selected' : ''}}>No</option>
-                    </select>
+                    <label>Mail: *</label>
+                    <input type="mail" id="txtCorreo" name="txtCorreo" class="form-control" value="{{ $alumno->correo or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>URL:</label>
-                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="{{$menu->url or ''}}">
-                </div>
-                 <div class="form-group col-lg-6">
-                    <label>CSS:</label>
-                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="{{$menu->css or ''}}">
-                    <a href="https://fontawesome.com/icons?d=gallery" target="blank">Catálogo de íconos</a>
+                    <label>Telefono: *</label>
+                    <input type="tel" id="txtTelefono" name="txtTelefono" class="form-control" value="{{$alumno->telefono or ''}}">
                 </div>
             </div>
             </div>

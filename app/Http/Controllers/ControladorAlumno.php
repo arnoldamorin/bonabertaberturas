@@ -14,7 +14,6 @@
         {
             $titulo = "Nuevo Alumno";
             return view('alumno.alumno-nuevo', compact('titulo'));
-
         }
     }
 
