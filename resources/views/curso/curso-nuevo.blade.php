@@ -14,7 +14,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo Curso</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -47,34 +47,29 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $menu->nombre or '' }}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Men&uacute; padre:</label>
-                    <select id="lstMenuPadre" name="lstMenuPadre" class="form-control">
+                    <label>Categoría:</label>
+                    <select id="lstCategoria" name="lstCategoria" class="form-control">
                         
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Orden:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$menu->orden or ''}}">
+                    <label>Precio: *</label>
+                    <input class = "form-control" type="text" name = "txtPrecio" id = "txtPrecio" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Activo: *</label>
-                    <select id="lstActivo" name="lstActivo" class="form-control" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1" {{isset($menu) && $menu->activo == 1? 'selected' : ''}}>Si</option>
-                        <option value="0" {{isset($menu) &&$menu->activo == 0? 'selected' : ''}}>No</option>
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>URL:</label>
-                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="{{$menu->url or ''}}">
+                    <label>Cupo: *</label>
+                    <input type="number" id="nbCupo" name="nbCupo" class="form-control">
                 </div>
                  <div class="form-group col-lg-6">
-                    <label>CSS:</label>
-                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="{{$menu->css or ''}}">
-                    <a href="https://fontawesome.com/icons?d=gallery" target="blank">Catálogo de íconos</a>
+                    <label>Horario *:</label>
+                    <input type="text" id="txtHorario" name="txtHorario" class="form-control">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripcion:</label>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
                 </div>
             </div>
 			
