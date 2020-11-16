@@ -16,7 +16,7 @@
     <li class="btn-item"><a title="Nuevo" href="/admin/alumno/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
+    <li class="btn-item"><a title="Eliminar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
     <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
@@ -110,7 +110,7 @@ if (isset($msg)) {
             success: function (data) {
                 if (data.err = "0") {
                     msgShow("Registro eliminado exitosamente.", "success");
-                    $("#btnEnviar").hide();
+                    $("#btnEnviar").hide(); //preguntar esto
                     $("#btnEliminar").hide();
                     $('#mdlEliminar').modal('toggle');
                 } else {
