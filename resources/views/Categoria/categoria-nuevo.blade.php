@@ -48,67 +48,12 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $categoria->nombre or '' }}" required>
-                </div>
+                </div>                
                 <div class="form-group col-lg-6">
-                    <label>Men&uacute; padre:</label>
-                    <select id="lstcategoriaPadre" name="lstcategoriaPadre" class="form-control">
-                        <option selected value="0">-</option>
-
-                        @for ($i = 0; $i < count($array_categoria); $i++)
-                            @if (isset($categoria) and $array_categoria[$i]->idcategoria == $categoria->id_padre)
-                                <option selected value="{{ $array_categoria[$i]->idcategoria }}">{{ $array_categoria[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_categoria[$i]->idcategoria }}">{{ $array_categoria[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                        
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Orden:</label>
+                    <label>Descripcion:</label>
                     <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$categoria->orden or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Activo: *</label>
-                    <select id="lstActivo" name="lstActivo" class="form-control" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1" {{isset($categoria) && $categoria->activo == 1? 'selected' : ''}}>Si</option>
-                        <option value="0" {{isset($categoria) &&$categoria->activo == 0? 'selected' : ''}}>No</option>
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>URL:</label>
-                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="{{$categoria->url or ''}}">
-                </div>
-                 <div class="form-group col-lg-6">
-                    <label>CSS:</label>
-                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="{{$categoria->css or ''}}">
-                    <a href="https://fontawesome.com/icons?d=gallery" target="blank">Catálogo de íconos</a>
-                </div>
-            </div>
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fa fa-users fa-fw"></i> Áreas de trabajo:
-				</div>
-				<div class="card-body">
-		            <div class="row">         
-		    	        @foreach (Session::get("array_grupos") as $grupo)
-		                <div class="form-group col-lg-12">
-		                    <label><input type="checkbox" id="chk_{{ $grupo->idarea }}" name="chk_grupo[]" value="{{ $grupo->idarea }}" class="chk-control" /> {{ $grupo->descarea }}
-		                    </label>
-		            	</div>
-		                @endforeach
-	                	@if(isset($array_categoria_grupo) && count($array_categoria_grupo)>0)
-	                	<script>
-	                		@foreach($array_categoria_grupo as $item)
-	                			$("#chk_{{ $item->fk_idarea }}").prop("checked", true);
-                			@endforeach
-            			</script>
-	                    @endif
-		            </div>
-				</div>
-			</div>
-            </div>
+                </div>                
+            </div>			
         </form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
