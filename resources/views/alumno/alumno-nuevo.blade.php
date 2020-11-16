@@ -3,7 +3,7 @@
 @section('scripts')
 <script>
     globalId = '<?php echo isset($alumno->idalumno) && $alumno->idalumno > 0 ? $alumno->idalumno : 0; ?>';
-    <?php $globalId = isset($alumnod->idalumno) ? $alumno->idalumno : "0"; ?>
+    <?php $globalId = isset($alumno->idalumno) ? $alumno->idalumno : "0"; ?>
 
 </script>
 @endsection
@@ -59,7 +59,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Mail: *</label>
-                    <input type="mail" id="txtCorreo" name="txtCorreo" class="form-control" value="{{ $alumno->correo or '' }}" required>
+                    <input type="mail" id="txtCorreo" name="txtCorreo" class="form-control" value="{{ $alumno->mail or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Telefono: *</label>

@@ -32,32 +32,33 @@
             $request = $_REQUEST;
     
             $entidadAlumno = new Alumno();
-            $aMenu = $entidadAlumno->obtenerFiltrado();
+            $aAlumnos = $entidadAlumno->obtenerFiltrado();
     
             $data = array();
     
             $inicio = $request['start'];
             $registros_por_pagina = $request['length'];
     
-            if (count($aMenu) > 0) {
+            if (count($aAlumnos) > 0) {
                 $cont = 0;
             }
     
-            for ($i = $inicio; $i < count($aMenu) && $cont < $registros_por_pagina; $i++) {
+            for ($i = $inicio; $i < count($aAlumnos) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aMenu[$i]->nombre;
-                $row[] = $aMenu[$i]->apellido;
-                $row[] = $aMenu[$i]->dni;
-                $row[] = $aMenu[$i]->mail;
-                $row[] = $aMenu[$i]->telefono;
+                $row[] = $aAlumnos[$i]->nombre;
+                $row[] = $aAlumnos[$i]->apellido;
+                $row[] = $aAlumnos[$i]->dni;
+                $row[] = $aAlumnos[$i]->mail;
+                $row[] = $aAlumnos[$i]->telefono;
+                $row[] = "<a href='/admin/alumno/nuevo/".$aAlumnos[$i]->idalumno."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
     
             $json_data = array(
                 "draw" => intval($request['draw']),
-                "recordsTotal" => count($aMenu), //cantidad total de registros sin paginar
-                "recordsFiltered" => count($aMenu), //cantidad total de registros en la paginacion
+                "recordsTotal" => count($aAlumnos), //cantidad total de registros sin paginar
+                "recordsFiltered" => count($aAlumnos), //cantidad total de registros en la paginacion
                 "data" => $data,
             );
             return json_encode($json_data);
@@ -67,6 +68,25 @@
         {
             $titulo = "Nuevo Alumno";
             return view('alumno.alumno-nuevo', compact('titulo'));
+        }
+
+        public function editar($id)
+        {
+            $titulo = "Modificar Alumno";
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                    $codigo = "MENUMODIFICACION";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    $alumno = new Alumno();
+                    $alumno->obtenerPorId($id);
+    
+                    return view('alumno.alumno-nuevo', compact('alumno', 'titulo'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
         }
 
         public function guardar(Request $request)

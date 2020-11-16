@@ -31,6 +31,7 @@ if (isset($msg)) {
             <th>DNI</th>
             <th>Mail</th>
             <th>Teléfono</th>
+            <th>Edición</th>
         </tr>
     </thead>
 </table> 

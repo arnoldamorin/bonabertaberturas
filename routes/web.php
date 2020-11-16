@@ -99,6 +99,8 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
     Route::post('/admin/alumno/nuevo', 'ControladorAlumno@guardar');
     Route::get('/admin/alumnos', 'ControladorAlumno@index');
     Route::get('/admin/alumnos/cargarGrilla', 'ControladorAlumno@cargarGrilla')->name('alumno.cargarGrilla');
+    Route::get('/admin/alumno/nuevo/{id}', 'ControladorAlumno@editar');
+    Route::post('/admin/alumno/nuevo/{id}', 'ControladorAlumno@guardar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CONFERENCIAS                          */
