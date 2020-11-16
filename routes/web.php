@@ -107,7 +107,13 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* CONTROLADOR CONFERENCIAS                          */
 /* --------------------------------------------- */
 
-Route::get('admin/conferencia/nuevo', 'ControladorConferencia@nuevo');
+    Route::get('/admin/conferencia/nuevo', 'ControladorConferencia@nuevo');
+    Route::post('/admin/conferencia/nuevo', 'ControladorConferencia@guardar');
+    Route::get('/admin/conferencias', 'ControladorConferencia@index');
+    Route::get('/admin/conferencias/cargarGrilla', 'ControladorConferencia@cargarGrilla')->name('conferencia.cargarGrilla');
+    Route::get('/admin/conferencia/nuevo/{id}', 'ControladorConferencia@editar');
+    Route::post('/admin/conferencia/nuevo/{id}', 'ControladorConferencia@guardar');
+    Route::get('/admin/conferencia/eliminar', 'ControladorConferencia@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CATEGORIAS                          */
