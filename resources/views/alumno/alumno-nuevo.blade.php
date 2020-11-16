@@ -9,8 +9,7 @@
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -104,7 +103,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/sistema/menu/eliminar') }}",
+            url: "{{ asset('/admin/alumno/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",

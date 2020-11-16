@@ -101,6 +101,7 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
     Route::get('/admin/alumnos/cargarGrilla', 'ControladorAlumno@cargarGrilla')->name('alumno.cargarGrilla');
     Route::get('/admin/alumno/nuevo/{id}', 'ControladorAlumno@editar');
     Route::post('/admin/alumno/nuevo/{id}', 'ControladorAlumno@guardar');
+    Route::get('/admin/alumno/eliminar', 'ControladorAlumno@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CONFERENCIAS                          */

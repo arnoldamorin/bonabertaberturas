@@ -107,9 +107,9 @@ class Alumno extends Model
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM sistema_menues WHERE 
-            idmenu=?";
-        $affected = DB::delete($sql, [$this->idmenu]);
+        $sql = "DELETE FROM alumnos WHERE 
+            idalumno=?";
+        $affected = DB::delete($sql, [$this->idalumno]);
     }
 
     public function insertar() {
