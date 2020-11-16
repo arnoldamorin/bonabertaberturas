@@ -95,7 +95,10 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* --------------------------------------------- */
 /* CONTROLADOR ALUMNOS                           */
 /* --------------------------------------------- */
-    Route::get('admin/alumno/nuevo', 'ControladorAlumno@nuevo');
+    Route::get('/admin/alumno/nuevo', 'ControladorAlumno@nuevo');
+    Route::post('/admin/alumno/nuevo', 'ControladorAlumno@guardar');
+    Route::get('/admin/alumnos', 'ControladorAlumno@index');
+    Route::get('/admin/alumnos/cargarGrilla', 'ControladorAlumno@cargarGrilla')->name('alumno.cargarGrilla');
 
 /* --------------------------------------------- */
 /* CONTROLADOR CONFERENCIAS                          */

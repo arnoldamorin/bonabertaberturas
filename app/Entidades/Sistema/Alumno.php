@@ -28,6 +28,37 @@ class Alumno extends Model
         $this->telefono = $request->input('txtTelefono');
     }
 
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
+        $columns = array(
+           0 => 'A.nombre',
+           1 => 'A.apellido',
+           2 => 'A.dni',
+           3 => 'A.mail',
+           4 => 'A.telefono'
+            );
+        $sql = "SELECT DISTINCT
+                    A.idalumno,
+                    A.nombre,
+                    A.apellido,
+                    A.dni,
+                    A.mail,
+                    A.telefono
+                    FROM alumnos A
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) { 
+            $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
+
     public function obtenerTodos() {
         $sql = "SELECT 
                   A.idalumno,
@@ -65,15 +96,14 @@ class Alumno extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE sistema_menues SET
-            nombre='$this->nombre',
-            id_padre='$this->id_padre',
-            orden=$this->orden,
-            activo='$this->activo',
-            url='$this->url',
-            css='$this->css'
-            WHERE idmenu=?";
-        $affected = DB::update($sql, [$this->idmenu]);
+        $sql = "UPDATE alumnos SET
+            nombre = '$this->nombre',
+            apellido = '$this->apellido',
+            dni = '$this->dni',
+            mail = '$this->mail',
+            telefono = '$this->telefono'
+            WHERE idalumno=?";
+        $affected = DB::update($sql, [$this->idalumno]);
     }
 
     public  function eliminar() {
