@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Sistema;
+namespace App\Entidades\Alumno;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
