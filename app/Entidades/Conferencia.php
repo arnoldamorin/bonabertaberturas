@@ -104,7 +104,7 @@ class Conferencia extends Model
     public function insertar() {
         $sql = "INSERT INTO conferencias (
                     nombre,
-                    decripcion,
+                    descripcion,
                     imagen
             ) VALUES (?, ?, ?);";
        $result = DB::insert($sql, [
