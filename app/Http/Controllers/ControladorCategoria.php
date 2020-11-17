@@ -46,10 +46,7 @@
             for ($i = $inicio; $i < count($aCategorias) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aCategorias[$i]->nombre;
-                $row[] = $aCategorias[$i]->apellido;
-                $row[] = $aCategorias[$i]->dni;
-                $row[] = $aCategorias[$i]->mail;
-                $row[] = $aCategorias[$i]->telefono;
+                $row[] = $aCategorias[$i]->descripcion;                
                 $row[] = "<a href='/admin/curso/categoria/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
