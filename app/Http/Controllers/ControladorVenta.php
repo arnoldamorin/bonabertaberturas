@@ -14,7 +14,7 @@ class ControladorVenta extends Controller
     public function nuevo()
     {
         $titulo = "Nuevo Venta";
-        return view('venta-nuevo', compact('titulo','array_menu'));
+        return view('ventas.venta-listar', compact('titulo','array_menu'));
 
     }
 
