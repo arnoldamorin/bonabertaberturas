@@ -47,7 +47,7 @@
                 $row = array();
                 $row[] = $aCategorias[$i]->nombre;
                 $row[] = $aCategorias[$i]->descripcion;                
-                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idcategoria."'><i class='fas fa-search'></i></a>";
+              //  $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idcategoria."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
