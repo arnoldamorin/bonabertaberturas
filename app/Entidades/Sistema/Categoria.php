@@ -91,7 +91,7 @@ class Categoria extends Model
     public function insertar() {
         $sql = "INSERT INTO categorias (
                 nombre,
-                descripcion,             
+                descripcion             
             ) VALUES (?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
