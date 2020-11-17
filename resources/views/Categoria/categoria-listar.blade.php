@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de alumnos")
+@section('titulo', "Listado de categorias")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -12,8 +12,8 @@
     <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/alumno/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/alumnos");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/cursos/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/cursos/categorias");'><span>Recargar</span></a></li>
     <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
@@ -33,11 +33,7 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Apellido</th>
-            <th>DNI</th>
-            <th>Mail</th>
-            <th>Teléfono</th>
-            <th>Edición</th>
+            <th>Descripcion</th>         
         </tr>
     </thead>
 </table> 
@@ -50,7 +46,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('alumno.cargarGrilla') }}"
+	    "ajax": "{{ route('categoria.cargarGrilla') }}"
 	});
 </script>
 @endsection
