@@ -92,6 +92,11 @@
 /* --------------------------------------------- */
     Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
     Route::post('/admin/testimonio/nuevo', 'ControladorTestimonio@guardar');
+    Route::get('/admin/testimonios', 'ControladorTestimonio@index');
+    Route::get('/admin/testimonio/cargarGrilla', 'ControladorTestimonio@cargarGrilla')->name('testimonio.cargarGrilla');
+    Route::get('/admin/testimonio/nuevo{id}', 'ControladorTestimonio@editar');
+    Route::post('/admin/testimonio/nuevo/{id}', 'ControladorTestimonio@guardar');
+    Route::get('/admin/testimonio/eliminar', 'ControladorTestimonio@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR ALUMNOS                           */
