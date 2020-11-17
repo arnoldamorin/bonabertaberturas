@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Testimonio;
+namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
