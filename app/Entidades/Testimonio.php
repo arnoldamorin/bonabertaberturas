@@ -56,6 +56,35 @@ class Testimonio extends Model
         return null;
     }
 
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
+          $columns = array(
+             0 => 'A.nombre',
+             1 => 'A.descripcion',
+             2 => 'A.video'
+              );
+          $sql = "SELECT DISTINCT
+                      A.idtestimonio,
+                      A.nombre,
+                      A.descripcion,
+                      A.video
+                      FROM testimonios A
+                  WHERE 1=1
+                  ";
+  
+          //Realiza el filtrado
+          if (!empty($request['search']['value'])) { 
+              $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+              $sql.=" OR A.nombre LIKE '%" . $request['search']['value'] . "%' ";
+              $sql.=" OR A.url LIKE '%" . $request['search']['value'] . "%' )";
+          }
+          $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+  
+          $lstRetorno = DB::select($sql);
+  
+          return $lstRetorno;
+      } 
+
     public function guardar() {
         $sql = "UPDATE testimonios SET
             nombre='$this->nombre',
