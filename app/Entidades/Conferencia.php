@@ -37,6 +37,7 @@ class Conferencia extends Model
         $sql = "SELECT DISTINCT
                     A.idconferencia,
                     A.nombre,
+                    A.descripcion,
                     A.imagen
                     FROM conferencias A
                 WHERE 1=1
@@ -59,7 +60,7 @@ class Conferencia extends Model
         $sql = "SELECT 
                   A.idconferencia,
                   A.nombre,
-                  A.decripcion,
+                  A.descripcion,
                   A.imagen
                 FROM conferencias A ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
@@ -71,7 +72,7 @@ class Conferencia extends Model
         $sql = "SELECT
                     idconferencia,
                     nombre,
-                    decripcion,
+                    descripcion,
                     imagen
                 FROM conferencias WHERE idconferencias = '$idconferencias'";
         $lstRetorno = DB::select($sql);
@@ -104,12 +105,12 @@ class Conferencia extends Model
     public function insertar() {
         $sql = "INSERT INTO conferencias (
                     nombre,
-                    decripcion,
+                    descripcion,
                     imagen
             ) VALUES (?, ?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
-            $this->decripcion, 
+            $this->descripcion, 
             $this->imagen, 
         ]);
        return $this->idconferencia = DB::getPdo()->lastInsertId();
