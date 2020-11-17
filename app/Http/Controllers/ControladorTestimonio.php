@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Entidades\Sistema\Patente;
-use App\Entidades\Sistema\Usuario;
 use App\Entidades\Testimonio;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Menu;
-use App\Entidades\Sistema\MenuArea;
 
 require app_path() . '/start/constants.php';
 
