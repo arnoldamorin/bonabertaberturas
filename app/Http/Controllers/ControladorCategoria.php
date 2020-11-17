@@ -50,7 +50,7 @@
                 $row[] = $aCategorias[$i]->dni;
                 $row[] = $aCategorias[$i]->mail;
                 $row[] = $aCategorias[$i]->telefono;
-                $row[] = "<a href='/admin/categoria/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/curso/categoria/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
