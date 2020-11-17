@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Sistema;
+namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -39,7 +39,6 @@ class Conferencia extends Model
                     A.nombre,
                     A.imagen
                     FROM conferencias A
-                    LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
                 WHERE 1=1
                 ";
 
@@ -103,7 +102,7 @@ class Conferencia extends Model
     }
 
     public function insertar() {
-        $sql = "INSERT INTO conferencia (
+        $sql = "INSERT INTO conferencias (
                     nombre,
                     decripcion,
                     imagen
