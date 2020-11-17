@@ -2,7 +2,7 @@
 
     namespace App\Http\Controllers;
 
-    use App\Entidades\Sistema\Categoria;
+    use App\Entidades\Categoria;
     use Illuminate\Http\Request;
     use App\Entidades\Sistema\Usuario;
     use App\Entidades\Sistema\Patente;
@@ -47,7 +47,7 @@
                 $row = array();
                 $row[] = $aCategorias[$i]->nombre;
                 $row[] = $aCategorias[$i]->descripcion;                
-                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
+              //  $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idcategoria."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
@@ -92,6 +92,7 @@
                 //Define la entidad servicio
                 $titulo = "Modificar Categoria";
                 $entidad = new Categoria();
+                
                 $entidad->cargarDesdeRequest($request);
     
                 //validaciones

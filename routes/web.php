@@ -93,6 +93,7 @@ Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
     Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
+    Route::post('/admin/testimonio/nuevo', 'ControladorTestimonio@guardar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR ALUMNOS                           */
