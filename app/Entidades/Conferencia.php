@@ -8,11 +8,11 @@ use Session;
 
 class Conferencia extends Model
 {
-    protected $table = 'categorias';
+    protected $table = 'conferencias';
     public $timestamps = false;
 
     protected $fillable = [
-        'idcategoria', 'nombre', 'descripcion', 'imagen'
+        'idconferencia', 'nombre', 'descripcion', 'imagen'
     ];
 
     protected $hidden = [
@@ -20,28 +20,25 @@ class Conferencia extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idcategoria = $request->input('id')!="0" ? $request->input('id') : $this->idcategoria;
+        $this->idconferencia = $request->input('id')!="0" ? $request->input('id') : $this->idconferencia;
         $this->nombre = $request->input('txtNombre');
         $this->descripcion = $request->input('txtDescripcion');
         $this->imagen = $request->input('imagen');
 
     }
 
- /*  public function obtenerFiltrado() {
+     public function obtenerFiltrado() {
       $request = $_REQUEST;
         $columns = array(
            0 => 'A.nombre',
-           1 => 'B.nombre',
-           2 => 'A.url',
-           3 => 'A.activo'
+           1 => 'A.descripcion',
+           2 => 'A.imagen'
             );
         $sql = "SELECT DISTINCT
-                    A.idmenu,
+                    A.idconferencia,
                     A.nombre,
-                    B.nombre as padre,
-                    A.url,
-                    A.activo
-                    FROM sistema_menues A
+                    A.imagen
+                    FROM conferencias A
                     LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
                 WHERE 1=1
                 ";
@@ -57,15 +54,15 @@ class Conferencia extends Model
         $lstRetorno = DB::select($sql);
 
         return $lstRetorno;
-    } */
+    } 
 
     public function obtenerTodos() {
         $sql = "SELECT 
-                  A.idcategoria,
+                  A.idconferencia,
                   A.nombre,
                   A.decripcion,
                   A.imagen
-                FROM categorias A ORDER BY A.nombre";
+                FROM conferencias A ORDER BY A.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -73,15 +70,15 @@ class Conferencia extends Model
 
     public function obtenerPorId($idmenu) {
         $sql = "SELECT
-                    idcategoria,
+                    idconferencia,
                     nombre,
                     decripcion,
                     imagen
-                FROM categorias WHERE idcategoria = '$idcategoria'";
+                FROM conferencias WHERE idconferencias = '$idconferencias'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
-            $this->idcategoria = $lstRetorno[0]->idcategoria;
+            $this->idconferencia = $lstRetorno[0]->idconferencia;
             $this->nombre = $lstRetorno[0]->nombre;
             $this->decripcion = $lstRetorno[0]->decripcion;
             $this->imagen = $lstRetorno[0]->imagen;
@@ -91,22 +88,22 @@ class Conferencia extends Model
     }
 
     public function guardar() {
-        $sql = "UPDATE categorias SET
+        $sql = "UPDATE conferencias SET
             nombre='$this->nombre',
             descripcion='$this->descripcion',
             imagen=$this->imagen,
-            WHERE idcategoria=?";
-        $affected = DB::update($sql, [$this->idcategoria]);
+            WHERE idconferencia=?";
+        $affected = DB::update($sql, [$this->idconferencia]);
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM categorias WHERE 
-            idcategoria=?";
-        $affected = DB::delete($sql, [$this->idcategoria]);
+        $sql = "DELETE FROM conferencias WHERE 
+            idconferencia=?";
+        $affected = DB::delete($sql, [$this->idconferencia]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO categorias (
+        $sql = "INSERT INTO conferencia (
                     nombre,
                     decripcion,
                     imagen
@@ -116,7 +113,7 @@ class Conferencia extends Model
             $this->decripcion, 
             $this->imagen, 
         ]);
-       return $this->idmenu = DB::getPdo()->lastInsertId();
+       return $this->idconferencia = DB::getPdo()->lastInsertId();
     }
 
 }
