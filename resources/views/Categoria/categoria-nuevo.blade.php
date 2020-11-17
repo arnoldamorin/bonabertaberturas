@@ -51,7 +51,7 @@ if (isset($msg)) {
                 </div>                
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$categoria->orden or ''}}">
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$categoria->descripcion or ''}}">
                 </div>                
             </div>			
         </form>
