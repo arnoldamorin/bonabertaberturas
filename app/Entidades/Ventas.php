@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Sistema;
+namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -25,7 +25,7 @@ class Ventas extends Model
         $this->importe = $request->input('txtImporte');   
     }
 
-    public function obtenerFiltrado() {
+  public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.fecha',
