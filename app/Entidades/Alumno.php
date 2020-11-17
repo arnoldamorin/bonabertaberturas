@@ -80,7 +80,7 @@ class Alumno extends Model
                 dni,
                 mail,
                 telefono
-                FROM alumnos WHERE idalumno = '$idalumno'";
+                FROM alumnos WHERE idalumno = $idalumno";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -103,13 +103,13 @@ class Alumno extends Model
             mail = '$this->mail',
             telefono = '$this->telefono'
             WHERE idalumno=?";
-        $affected = DB::update($sql, [$this->idalumno]); //nunca usado, para qué sirve esto?
+        DB::update($sql, [$this->idalumno]);
     }
 
     public  function eliminar() {
         $sql = "DELETE FROM alumnos WHERE 
             idalumno=?";
-        $affected = DB::delete($sql, [$this->idalumno]); //nunca usado, para qué sirve esto?
+        DB::delete($sql, [$this->idalumno]);
     }
 
     public function insertar() {

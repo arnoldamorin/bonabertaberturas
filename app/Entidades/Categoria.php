@@ -62,7 +62,7 @@ class Categoria extends Model
                 idcategoria,
                 nombre,
                 descripcion
-                FROM categorias WHERE idcategoria = '$idcategoria'";
+                FROM categorias WHERE idcategoria = $idcategoria";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){

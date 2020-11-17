@@ -138,5 +138,4 @@ class Curso extends Model
        return $this->idcurso = DB::getPdo()->lastInsertId();
     }
 
-
 }
