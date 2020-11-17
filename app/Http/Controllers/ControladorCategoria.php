@@ -130,9 +130,13 @@
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
-                    $entidad->eliminar();
-    
-                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                   
+                    if ($entidad->nombre != "") {
+                        $entidad->eliminar();
+                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                    } else {
+                        $aResultado["err"] = MSG_ERROR;
+                    }    
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";

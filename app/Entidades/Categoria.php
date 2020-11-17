@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Sistema;
+namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -95,7 +95,7 @@ class Categoria extends Model
             ) VALUES (?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
-            $this->descripcion,           
+            $this->descripcion           
         ]);
        return $this->idcategoria = DB::getPdo()->lastInsertId();
     }
