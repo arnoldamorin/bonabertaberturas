@@ -109,8 +109,7 @@
                         $msg["ESTADO"] = MSG_SUCCESS;
                         $msg["MSG"] = OKINSERT;
                     } else {
-                        //Es nuevo
-                        $titulo = "Nuevo Alumno";
+                        //Es nuevo                       
                         $entidad->insertar();
                         
                         $msg["ESTADO"] = MSG_SUCCESS;
