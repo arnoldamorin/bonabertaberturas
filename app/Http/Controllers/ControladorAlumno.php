@@ -109,20 +109,25 @@
                         $msg["ESTADO"] = MSG_SUCCESS;
                         $msg["MSG"] = OKINSERT;
                     } else {
-                        //Es nuevo
-                        $titulo = "Nuevo Alumno";
+                        //Es nuevo                       
                         $entidad->insertar();
                         
                         $msg["ESTADO"] = MSG_SUCCESS;
                         $msg["MSG"] = OKINSERT;
                     }
                     $_POST["id"] = $entidad->idalumno;
-                    return view('alumno.alumno-nuevo', compact('titulo', 'msg'));
+                    return view('alumno.alumno-listar', compact('titulo', 'msg'));
                 }
             } catch (Exception $e) {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = ERRORINSERT;
             }
+
+            $id = $entidad->idalumno;
+            $alumno = new Alumno();
+            $alumno->obtenerPorId($id);
+    
+            return view('alumno.alumno-nuevo', compact('msg', 'alumno', 'titulo')) . '?id=' . $alumno->idalumno;
         }
 
         public function eliminar(Request $request)
