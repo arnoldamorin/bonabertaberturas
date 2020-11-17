@@ -33,8 +33,7 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Descripcion</th>
-            <th>Edición</th>         
+            <th>Descripcion</th>                   
         </tr>
     </thead>
 </table> 
