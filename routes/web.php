@@ -91,6 +91,7 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
     Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
+    Route::post('/admin/testimonio/nuevo', 'ControladorTestimonio@guardar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR ALUMNOS                           */
