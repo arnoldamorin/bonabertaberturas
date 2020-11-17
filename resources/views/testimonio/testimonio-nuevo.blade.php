@@ -10,11 +10,10 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/sistema/menu">Men&uacute;</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/testimonio/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -23,7 +22,7 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/menu";
+    location.href ="/admin/home";
 }
 </script>
 @endsection
@@ -41,75 +40,24 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form1" method="POST">
+        <form id="form1" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $menu->nombre or '' }}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $testimonio->nombre or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Men&uacute; padre:</label>
-                    <select id="lstMenuPadre" name="lstMenuPadre" class="form-control">
-                        <option selected value="0">-</option>
-
-                        @for ($i = 0; $i < count($array_menu); $i++)
-                            @if (isset($menu) and $array_menu[$i]->idmenu == $menu->id_padre)
-                                <option selected value="{{ $array_menu[$i]->idmenu }}">{{ $array_menu[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_menu[$i]->idmenu }}">{{ $array_menu[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                        
-                    </select>
+                    <label>Descripci&oacute;n:</label>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{ $testimonio->descripcion or '' }}">
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Orden:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$menu->orden or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Activo: *</label>
-                    <select id="lstActivo" name="lstActivo" class="form-control" required>
-                        <option value="" disabled selected>Seleccionar</option>
-                        <option value="1" {{isset($menu) && $menu->activo == 1? 'selected' : ''}}>Si</option>
-                        <option value="0" {{isset($menu) &&$menu->activo == 0? 'selected' : ''}}>No</option>
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>URL:</label>
-                    <input type="text" id="txtUrl" name="txtUrl" class="form-control" value="{{$menu->url or ''}}">
-                </div>
-                 <div class="form-group col-lg-6">
-                    <label>CSS:</label>
-                    <input type="text" id="txtCss" name="txtCss" class="form-control" value="{{$menu->css or ''}}">
-                    <a href="https://fontawesome.com/icons?d=gallery" target="blank">Catálogo de íconos</a>
+                    <label>Video:</label>
+                    <input type="file" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
                 </div>
             </div>
-			<div class="card mb-3">
-				<div class="card-header">
-					<i class="fa fa-users fa-fw"></i> Áreas de trabajo:
-				</div>
-				<div class="card-body">
-		            <div class="row">         
-		    	        @foreach (Session::get("array_grupos") as $grupo)
-		                <div class="form-group col-lg-12">
-		                    <label><input type="checkbox" id="chk_{{ $grupo->idarea }}" name="chk_grupo[]" value="{{ $grupo->idarea }}" class="chk-control" /> {{ $grupo->descarea }}
-		                    </label>
-		            	</div>
-		                @endforeach
-	                	@if(isset($array_menu_grupo) && count($array_menu_grupo)>0)
-	                	<script>
-	                		@foreach($array_menu_grupo as $item)
-	                			$("#chk_{{ $item->fk_idarea }}").prop("checked", true);
-                			@endforeach
-            			</script>
-	                    @endif
-		            </div>
-				</div>
-			</div>
-            </div>
-        </form>
+		</form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
