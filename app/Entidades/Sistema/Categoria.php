@@ -22,7 +22,7 @@ class Categoria extends Model
     function cargarDesdeRequest($request) {
         $this->idcategoria = $request->input('id')!="0" ? $request->input('id') : $this->idcategoria;
         $this->nombre = $request->input('txtNombre');
-        $this->apellido = $request->input('txtDescripcion');   
+        $this->descripcion = $request->input('txtDescripcion');   
     }
 
     public function obtenerFiltrado() {
