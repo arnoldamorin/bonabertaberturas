@@ -124,7 +124,7 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
     Route::get('/admin/cursos/categorias/cargarGrilla', 'ControladorCategoria@cargarGrilla')->name('categoria.cargarGrilla');
     Route::get('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@editar');
     Route::post('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@guardar');
-    Route::get('/admin/cursos/categoria/eliminar', 'ControladorCategoria@eliminar');
+    Route::get('/admin/cursos/categorias/eliminar', 'ControladorCategoria@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
