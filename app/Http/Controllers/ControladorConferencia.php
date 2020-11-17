@@ -121,7 +121,15 @@
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = ERRORINSERT;
             }
+
+            $id = $entidad->idconferencia;
+            $conferencia = new Conferencia();
+            $conferencia->obtenerPorId($id);
+
+            return view('conferencia.conferencia-nuevo', compact('msg', 'conferencia', 'titulo')) . '?id=' . $conferencia->idconferencia;
+
         }
+
 
         public function eliminar(Request $request)
         {

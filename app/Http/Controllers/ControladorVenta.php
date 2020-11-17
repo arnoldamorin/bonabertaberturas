@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
+use App\Entidades\Ventas;
 
 require app_path() . '/start/constants.php';
 
@@ -13,7 +14,7 @@ class ControladorVenta extends Controller
     public function nuevo()
     {
         $titulo = "Nuevo Venta";
-        return view('venta.venta-nuevo', compact('titulo','array_menu'));
+        return view('venta-nuevo', compact('titulo','array_menu'));
 
     }
 
