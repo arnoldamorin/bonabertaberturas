@@ -8,11 +8,11 @@ use Session;
 
 class Conferencia extends Model
 {
-    protected $table = 'categorias';
+    protected $table = 'conferencias';
     public $timestamps = false;
 
     protected $fillable = [
-        'idcategoria', 'nombre', 'descripcion', 'imagen'
+        'idconferencia', 'nombre', 'descripcion', 'imagen'
     ];
 
     protected $hidden = [
