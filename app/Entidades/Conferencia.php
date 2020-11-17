@@ -111,7 +111,7 @@ class Conferencia extends Model
        $result = DB::insert($sql, [
             $this->nombre, 
             $this->descripcion, 
-            $this->imagen, 
+            $this->imagen
         ]);
        return $this->idconferencia = DB::getPdo()->lastInsertId();
     }
