@@ -37,10 +37,8 @@ class Conferencia extends Model
         $sql = "SELECT DISTINCT
                     A.idconferencia,
                     A.nombre,
-                    B.nombre as padre,
-                    A.url,
-                    A.activo
-                    FROM sistema_menues A
+                    A.imagen
+                    FROM conferencias A
                     LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
                 WHERE 1=1
                 ";
@@ -56,7 +54,7 @@ class Conferencia extends Model
         $lstRetorno = DB::select($sql);
 
         return $lstRetorno;
-    } */
+    } 
 
     public function obtenerTodos() {
         $sql = "SELECT 
