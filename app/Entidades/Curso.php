@@ -75,30 +75,6 @@ class Curso extends Model
         return $lstRetorno;
     }
 
-    //    public function obtenerMenuPadre() {
-    //     $sql = "SELECT DISTINCT
-    //               A.idmenu,
-    //               A.nombre
-    //             FROM sistema_menues A
-    //             WHERE A.id_padre = 0 ORDER BY A.nombre";
-    //     $lstRetorno = DB::select($sql);
-    //     return $lstRetorno;
-    // }
-
-    // public function obtenerSubMenu($idmenu=null){
-    //     if($idmenu){
-    //         $sql = "SELECT DISTINCT
-    //                   A.idmenu,
-    //                   A.nombre
-    //                 FROM sistema_menues A
-    //                 WHERE A.idmenu <> '$idmenu' ORDER BY A.nombre";
-    //         $resultado = DB::select($sql);
-    //     } else {
-    //         $resultado = $this->obtenerTodos();
-    //     }
-    //     return $resultado;
-    // }
-
     public function obtenerPorId($idcurso) {
         $sql = "SELECT
                 idcurso,
@@ -118,7 +94,7 @@ class Curso extends Model
             $this->precio = $lstRetorno[0]->precio;
             $this->cupo = $lstRetorno[0]->cupo;
             $this->horario = $lstRetorno[0]->horario;
-            $this->fk_idcategoria = $lstRetorno[0]->categoria;
+            $this->categoria = $lstRetorno[0]->categoria;
             return $this;
         }
         return null;
@@ -162,19 +138,5 @@ class Curso extends Model
        return $this->idcurso = DB::getPdo()->lastInsertId();
     }
 
-    // public function obtenerMenuDelGrupo($idGrupo){
-    //     $sql = "SELECT DISTINCT
-    //     A.idmenu,
-    //     A.nombre,
-    //     A.id_padre,
-    //     A.orden,
-    //     A.url,
-    //     A.css
-    //     FROM sistema_menues A
-    //     INNER JOIN sistema_menu_area B ON A.idmenu = B.fk_idmenu
-    //     WHERE A.activo = '1' AND B.fk_idarea = $idGrupo ORDER BY A.orden";
-    //     $resultado = DB::select($sql);
-    //     return $resultado;
-    // }
 
 }
