@@ -31,23 +31,23 @@ class ControladorVenta extends Controller
         {
             $request = $_REQUEST;
     
-            $entidadCategoria = new Categoria();
-            $aCategorias = $entidadCategoria->obtenerFiltrado();
+            $entidadVenta = new Venta();
+            $aCategorias = $entidadVenta->obtenerFiltrado();
     
             $data = array();
     
             $inicio = $request['start'];
             $registros_por_pagina = $request['length'];
     
-            if (count($aCategorias) > 0) {
+            if (count($aVenta) > 0) {
                 $cont = 0;
             }
     
-            for ($i = $inicio; $i < count($aCategorias) && $cont < $registros_por_pagina; $i++) {
+            for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aCategorias[$i]->fecha;
                 $row[] = $aCategorias[$i]->importe;                
-                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
