@@ -94,7 +94,7 @@ class Curso extends Model
             $this->precio = $lstRetorno[0]->precio;
             $this->cupo = $lstRetorno[0]->cupo;
             $this->horario = $lstRetorno[0]->horario;
-            $this->fk_idcategoria = $lstRetorno[0]->categoria;
+            $this->categoria = $lstRetorno[0]->categoria;
             return $this;
         }
         return null;
