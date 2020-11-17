@@ -8,7 +8,7 @@ use Session;
 
 class Ventas extends Model
 {
-    protected $table = 'ventas';
+    protected $table = 'inscripciones';
     public $timestamps = false;
 
     protected $fillable = [
