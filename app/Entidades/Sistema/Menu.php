@@ -103,7 +103,7 @@ class Menu extends Model
                 activo,
                 url,
                 css
-                FROM sistema_menues WHERE idmenu = '$idmenu'";
+                FROM sistema_menues WHERE idmenu = $idmenu";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
