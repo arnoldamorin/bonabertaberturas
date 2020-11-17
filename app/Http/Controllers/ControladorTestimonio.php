@@ -45,7 +45,7 @@ class ControladorTestimonio extends Controller
                 }
             
                 $_POST["id"] = $entidad->idtestimonio;
-                return view('sistema.testimonio-listar', compact('titulo', 'msg'));
+                return view('testimonio.testimonio-listado', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -56,7 +56,7 @@ class ControladorTestimonio extends Controller
         $testimonio = new Testimonio();
         $testimonio->obtenerPorId($id);
 
-        return view('sistema.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
+        return view('testimonio.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
 
     }
 }
