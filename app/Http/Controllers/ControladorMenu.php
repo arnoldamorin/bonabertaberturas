@@ -151,15 +151,7 @@ class ControladorMenu extends Controller
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                $menu_grupo = new MenuArea();
-                $menu_grupo->fk_idmenu = $entidad->idmenu;
-                $menu_grupo->eliminarPorMenu();
-                if ($request->input("chk_grupo") != null && count($request->input("chk_grupo")) > 0) {
-                    foreach ($request->input("chk_grupo") as $grupo_id) {
-                        $menu_grupo->fk_idarea = $grupo_id;
-                        $menu_grupo->insertar();
-                    }
-                }
+            
                 $_POST["id"] = $entidad->idmenu;
                 return view('sistema.menu-listar', compact('titulo', 'msg'));
             }
@@ -175,10 +167,7 @@ class ControladorMenu extends Controller
         $entidad = new Menu();
         $array_menu = $entidad->obtenerMenuPadre($id);
 
-        $menu_grupo = new MenuArea();
-        $array_menu_grupo = $menu_grupo->obtenerPorMenu($id);
-
-        return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu', 'array_menu_grupo')) . '?id=' . $menu->idmenu;
+        return view('sistema.menu-nuevo', compact('msg', 'menu', 'titulo', 'array_menu')) . '?id=' . $menu->idmenu;
 
     }
 }
