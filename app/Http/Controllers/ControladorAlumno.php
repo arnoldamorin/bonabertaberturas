@@ -112,7 +112,7 @@
                         //Es nuevo
                         $titulo = "Nuevo Alumno";
                         $entidad->insertar();
-    
+                        
                         $msg["ESTADO"] = MSG_SUCCESS;
                         $msg["MSG"] = OKINSERT;
                     }
@@ -133,9 +133,14 @@
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
                     $entidad = new Alumno();
                     $entidad->cargarDesdeRequest($request);
-                    $entidad->eliminar();
+
+                    if ($entidad->nombre != "") {
+                        $entidad->eliminar();
+                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                    } else {
+                        $aResultado["err"] = MSG_ERROR;
+                    }
     
-                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
