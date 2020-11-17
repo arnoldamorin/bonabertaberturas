@@ -50,7 +50,7 @@ if (isset($msg)) {
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Descripcion:</label>
+                    <label>Descripción:</label>
                     <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
                 </div>
             </div>

@@ -118,7 +118,13 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* --------------------------------------------- */
 /* CONTROLADOR CATEGORIAS                          */
 /* --------------------------------------------- */
-Route::get('admin/categoria/nuevo', 'ControladorCategoria@nuevo');
+    Route::get('/admin/cursos/categoria/nuevo', 'ControladorCategoria@nuevo');
+    Route::post('/admin/cursos/categoria/nuevo', 'ControladorCategoria@guardar');
+    Route::get('/admin/cursos/categorias', 'ControladorCategoria@index');
+    Route::get('/admin/cursos/categorias/cargarGrilla', 'ControladorCategoria@cargarGrilla')->name('categoria.cargarGrilla');
+    Route::get('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@editar');
+    Route::post('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@guardar');
+    Route::get('/admin/cursos/categorias/eliminar', 'ControladorCategoria@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */

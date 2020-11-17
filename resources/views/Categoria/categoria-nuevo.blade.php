@@ -2,7 +2,7 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($categoria->idcategoria) && $categoria->icategoria > 0 ? $categoria->idcategoria : 0; ?>';
+    globalId = '<?php echo isset($categoria->idcategoria) && $categoria->idcategoria > 0 ? $categoria->idcategoria : 0; ?>';
     <?php $globalId = isset($categoria->idcategoria) ? $categoria->idcategoria : "0"; ?>
 
 </script>
@@ -10,11 +10,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/sistema/categoria">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/admin/cursos/categoria/nuevo">Men&uacute;</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/cursos/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -23,7 +23,7 @@
 </ol>
 <script>
 function fsalir(){
-    location.href ="/sistema/categoria";
+    location.href ="/sistema/menu";
 }
 </script>
 @endsection
@@ -51,7 +51,7 @@ if (isset($msg)) {
                 </div>                
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
-                    <input type="number" id="txtOrden" name="txtOrden" class="form-control" value="{{$categoria->orden or ''}}">
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$categoria->descripcion or ''}}">
                 </div>                
             </div>			
         </form>
@@ -91,7 +91,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/sistema/categoria/eliminar') }}",
+            url: "{{ asset('admin/sistema/cursos/categorias/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",
