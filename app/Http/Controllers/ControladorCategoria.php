@@ -47,7 +47,7 @@
                 $row = array();
                 $row[] = $aCategorias[$i]->nombre;
                 $row[] = $aCategorias[$i]->descripcion;                
-                $row[] = "<a href='/admin/cursos/categoria/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idCategoria."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
@@ -114,7 +114,7 @@
                         $msg["MSG"] = OKINSERT;
                     }
                     $_POST["id"] = $entidad->idCategoria;
-                    return view('Categoria.Categoria-nuevo', compact('titulo', 'msg'));
+                    return view('categoria.categoria-nuevo', compact('titulo', 'msg'));
                 }
             } catch (Exception $e) {
                 $msg["ESTADO"] = MSG_ERROR;
