@@ -103,13 +103,13 @@ class Alumno extends Model
             mail = '$this->mail',
             telefono = '$this->telefono'
             WHERE idalumno=?";
-        $affected = DB::update($sql, [$this->idalumno]);
+        $affected = DB::update($sql, [$this->idalumno]); //nunca usado, para qué sirve esto?
     }
 
     public  function eliminar() {
         $sql = "DELETE FROM alumnos WHERE 
             idalumno=?";
-        $affected = DB::delete($sql, [$this->idalumno]);
+        $affected = DB::delete($sql, [$this->idalumno]); //nunca usado, para qué sirve esto?
     }
 
     public function insertar() {
