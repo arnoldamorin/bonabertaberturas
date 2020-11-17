@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entidades\Sistema;
+namespace App\Entidades;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
@@ -25,7 +25,7 @@ class Ventas extends Model
         $this->importe = $request->input('txtImporte');   
     }
 
-/*    public function obtenerFiltrado() {
+  public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.fecha',
@@ -45,7 +45,7 @@ class Ventas extends Model
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
-    }*/
+    }
 
     public function obtenerTodos() {
         $sql = "SELECT 
