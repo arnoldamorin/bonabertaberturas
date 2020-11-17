@@ -45,17 +45,17 @@ class ControladorVenta extends Controller
     
             for ($i = $inicio; $i < count($aCategorias) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aCategorias[$i]->nombre;
-                $row[] = $aCategorias[$i]->descripcion;                
-                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aCategorias[$i]->idcategoria."'><i class='fas fa-search'></i></a>";
+                $row[] = $aCategorias[$i]->fecha;
+                $row[] = $aCategorias[$i]->importe;                
+                $row[] = "<a href='/admin/cursos/categorias/nuevo/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
     
             $json_data = array(
                 "draw" => intval($request['draw']),
-                "recordsTotal" => count($aCategorias), //cantidad total de registros sin paginar
-                "recordsFiltered" => count($aCategorias), //cantidad total de registros en la paginacion
+                "recordsTotal" => count($aVenta), //cantidad total de registros sin paginar
+                "recordsFiltered" => count($aVenta), //cantidad total de registros en la paginacion
                 "data" => $data,
             );
             return json_encode($json_data);
@@ -63,8 +63,8 @@ class ControladorVenta extends Controller
 
         public function nuevo()
         {
-            $titulo = "Nuevo Categoria";
-            return view('categoria.categoria-nuevo', compact('titulo'));
+            $titulo = "Nuevo Venta";
+            return view('venta.venta-nuevo', compact('titulo'));
         }
 
         public function editar($id)
@@ -76,7 +76,7 @@ class ControladorVenta extends Controller
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    $categoria = new Categoria();
+                    $categoria = new Ventas();
                     $categoria->obtenerPorId($id);
     
                     return view('categoria.categoria-nuevo', compact('categoria', 'titulo'));
