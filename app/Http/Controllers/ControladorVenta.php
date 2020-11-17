@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
+use App\Entidades\Ventas;
 
 require app_path() . '/start/constants.php';
 

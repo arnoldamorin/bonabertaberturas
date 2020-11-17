@@ -92,6 +92,7 @@
                 //Define la entidad servicio
                 $titulo = "Modificar Categoria";
                 $entidad = new Categoria();
+                
                 $entidad->cargarDesdeRequest($request);
     
                 //validaciones
