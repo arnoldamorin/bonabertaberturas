@@ -32,31 +32,31 @@ class ControladorTestimonio extends Controller
             $request = $_REQUEST;
     
             $entidadTestimonio = new Testimonio();
-            $aTestimonio = $entidadTestimonio->obtenerFiltrado();
+            $aTestimonios = $entidadTestimonio->obtenerFiltrado();
     
             $data = array();
     
             $inicio = $request['start'];
             $registros_por_pagina = $request['length'];
     
-            if (count($aTestimonio) > 0) {
+            if (count($aTestimonios) > 0) {
                 $cont = 0;
             }
     
-            for ($i = $inicio; $i < count($aTestimonio) && $cont < $registros_por_pagina; $i++) {
+            for ($i = $inicio; $i < count($aTestimonios) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aTestimonio[$i]->nombre;
-                $row[] = $aTestimonio[$i]->descripcion;
-                $row[] = $aTestimonio[$i]->video;
-                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonio[$i]->idTestimonio."'><i class='fas fa-search'></i></a>";
+                $row[] = $aTestimonios[$i]->nombre;
+                $row[] = $aTestimonios[$i]->descripcion;
+                $row[] = $aTestimonios[$i]->video;
+                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idTestimonio."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
     
             $json_data = array(
                 "draw" => intval($request['draw']),
-                "recordsTotal" => count($aTestimonio), //cantidad total de registros sin paginar
-                "recordsFiltered" => count($aTestimonio), //cantidad total de registros en la paginacion
+                "recordsTotal" => count($aTestimonios), //cantidad total de registros sin paginar
+                "recordsFiltered" => count($aTestimonios), //cantidad total de registros en la paginacion
                 "data" => $data,
             );
             return json_encode($json_data);
