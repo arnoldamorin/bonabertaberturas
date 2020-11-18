@@ -45,7 +45,7 @@
     
             for ($i = $inicio; $i < count($aCategorias) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="/admin/sistema/menu/' . $aCategorias[$i]->idcategoria . '">' . $aCategorias[$i]->nombre . '</a>';
+                $row[] = '<a href="/admin/cursos/categoria/' . $aCategorias[$i]->idcategoria . '">' . $aCategorias[$i]->nombre . '</a>';
                 $row[] = $aCategorias[$i]->descripcion;                     
                 $cont++;
                 $data[] = $row;
