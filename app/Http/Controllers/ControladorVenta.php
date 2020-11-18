@@ -28,7 +28,7 @@ class ControladorVenta extends Controller
         }
     }
 
-    public function cargarGrilla()
+    /*public function cargarGrilla()
         {
             $request = $_REQUEST;
     
@@ -85,7 +85,7 @@ class ControladorVenta extends Controller
             } else {
                 return redirect('admin/login');
             }
-        }
+        }*/
 
     public function guardar(Request $request)
         {
@@ -122,13 +122,13 @@ class ControladorVenta extends Controller
                 $msg["MSG"] = ERRORINSERT;
             }
             $id = $entidad->idinscripcion;
-            $fecha = new Venta();
-            $fecha->obtenerPorId($id);
+            $venta = new Venta();
+            $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe')) . '?id=' . $fecha->idisncripcion;
+            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno')) . '?id=' . $venta->idisncripcion;
         }
 
-public function eliminar(Request $request)
+/*public function eliminar(Request $request)
         {
             $id = $request->input('id');
     
@@ -151,7 +151,7 @@ public function eliminar(Request $request)
             } else {
                 return redirect('admin/login');
             }
-        }
+        }*/
     }
 
 ?>
