@@ -88,6 +88,10 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 /* --------------------------------------------- */
 Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
+Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')->name('curso.cargarGrilla');
+Route::get('/admin/cursos', 'ControladorCurso@index');
+
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR TESTIMONIO                             */
