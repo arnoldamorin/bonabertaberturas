@@ -48,7 +48,7 @@ class ControladorTestimonio extends Controller
                 $row[] = $aTestimonios[$i]->nombre;
                 $row[] = $aTestimonios[$i]->descripcion;
                 $row[] = $aTestimonios[$i]->video;
-                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idTestimonio."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idtestimonio."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
