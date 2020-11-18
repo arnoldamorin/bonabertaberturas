@@ -3,7 +3,7 @@
 @section('scripts')
 <script>
     globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0";?>
 
 </script>
 @endsection
@@ -17,8 +17,10 @@
     <li class="btn-item"><a title="Nuevo" href="/admin/sistema/menu/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
+    @if($globalId > 0)
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
+    @endif
     <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
@@ -37,10 +39,10 @@ if (isset($msg)) {
 <div class="panel-body">
         <div id = "msg"></div>
         <?php
-        if (isset($msg)) {
-            echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
-        }
-        ?>
+if (isset($msg)) {
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+}
+?>
         <form id="form1" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -61,7 +63,7 @@ if (isset($msg)) {
                                 <option value="{{ $array_menu[$i]->idmenu }}">{{ $array_menu[$i]->nombre }}</option>
                             @endif
                         @endfor
-                        
+
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
@@ -91,7 +93,7 @@ if (isset($msg)) {
 					<i class="fa fa-users fa-fw"></i> Áreas de trabajo:
 				</div>
 				<div class="card-body">
-		            <div class="row">         
+		            <div class="row">
 		    	        @foreach (Session::get("array_grupos") as $grupo)
 		                <div class="form-group col-lg-12">
 		                    <label><input type="checkbox" id="chk_{{ $grupo->idarea }}" name="chk_grupo[]" value="{{ $grupo->idarea }}" class="chk-control" /> {{ $grupo->descarea }}
@@ -135,7 +137,7 @@ if (isset($msg)) {
     function guardar() {
         if ($("#form1").valid()) {
             modificado = false;
-            form1.submit(); 
+            form1.submit();
         } else {
             $("#modalGuardar").modal('toggle');
             msgShow("Corrija los errores e intente nuevamente.", "danger");
