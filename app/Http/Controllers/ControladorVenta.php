@@ -61,7 +61,7 @@ class ControladorVenta extends Controller
             );
             return json_encode($json_data);
         }
-
+*/
         public function nuevo()
         {
             $titulo = "Nuevo Venta";
@@ -85,7 +85,7 @@ class ControladorVenta extends Controller
             } else {
                 return redirect('admin/login');
             }
-        }*/
+        }
 
     public function guardar(Request $request)
         {
