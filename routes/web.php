@@ -87,6 +87,8 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 /* CONTROLADOR CURSOS                             */
 /* --------------------------------------------- */
 Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
+Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
+
 /* --------------------------------------------- */
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
@@ -130,5 +132,6 @@ Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
 /* --------------------------------------------- */
-Route::get('admin/venta/nueva', 'ControladorVenta@nuevo');
+Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
+Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
 });

@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($curso->idcurso) && $curso->idcurso > 0 ? $curso->idcurso : 0; ?>';
+    <?php $globalId = isset($curso->idcurso) ? $curso->idcurso : "0"; ?>
 
 </script>
 @endsection
@@ -52,7 +52,14 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Categoría:</label>
                     <select id="lstCategoria" name="lstCategoria" class="form-control">
-                        
+                        <option disabled selected value="">Seleccionar</option>
+                        @for ($i = 0; $i < count($array_categorias); $i++)
+                            @if (isset($curso) and $array_categorias[$i]->idcategoria == $curso->categoria)
+                                <option selected value="{{ $array_categorias[$i]->idcategoria }}">{{ $array_categorias[$i]->nombre }}</option>
+                            @else
+                                <option value="{{ $array_categorias[$i]->idcategoria }}">{{ $array_categorias[$i]->nombre }}</option>
+                            @endif
+                        @endfor
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
