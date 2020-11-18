@@ -122,7 +122,7 @@
         <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header">@yield('titulo')</h3>
+                <h1 class="page-header">@yield('titulo')</h1>
             </div>
         </div>
         <div class="row">

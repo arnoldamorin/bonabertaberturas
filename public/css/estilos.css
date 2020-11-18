@@ -1,3 +1,6 @@
+h1{
+    font-size: 28px;
+}
 @media (min-width: 768px){
 .sidebar {
     width: 215px !important;

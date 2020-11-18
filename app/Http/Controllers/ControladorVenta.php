@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidades\Venta;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
-use App\Entidades\Ventas;
+
 
 require app_path() . '/start/constants.php';
 
@@ -27,7 +28,7 @@ class ControladorVenta extends Controller
         }
     }
 
-    public function cargarGrilla()
+    /*public function cargarGrilla()
         {
             $request = $_REQUEST;
     
@@ -60,7 +61,7 @@ class ControladorVenta extends Controller
             );
             return json_encode($json_data);
         }
-
+*/
         public function nuevo()
         {
             $titulo = "Nuevo Venta";
@@ -76,7 +77,7 @@ class ControladorVenta extends Controller
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    $categoria = new Ventas();
+                    $categoria = new Venta();
                     $categoria->obtenerPorId($id);
     
                     return view('categoria.categoria-nuevo', compact('categoria', 'titulo'));
@@ -95,7 +96,7 @@ class ControladorVenta extends Controller
                 $entidad->cargarDesdeRequest($request);
     
                 //validaciones
-                if ($entidad->nombre == "") {
+                if ($entidad->fecha == "") {
                     $msg["ESTADO"] = MSG_ERROR;
                     $msg["MSG"] = "Complete todos los datos";
                 } else {
@@ -120,14 +121,20 @@ class ControladorVenta extends Controller
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = ERRORINSERT;
             }
+            $id = $entidad->idinscripcion;
+            $venta = new Venta();
+            $venta->obtenerPorId($id);
+    
+            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno')) . '?id=' . $venta->idisncripcion;
         }
-public function eliminar(Request $request)
+
+/*public function eliminar(Request $request)
         {
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
-                    $entidad = new Categoria();
+                    $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
                     if ($entidad->nombre != "") {
@@ -144,7 +151,7 @@ public function eliminar(Request $request)
             } else {
                 return redirect('admin/login');
             }
-        }
+        }*/
     }
 
 ?>
