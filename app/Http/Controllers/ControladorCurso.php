@@ -103,11 +103,10 @@ class ControladorCurso extends Controller
             for ($i = $inicio; $i < count($aCursos) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aCursos[$i]->nombre;
-                $row[] = $aCursos[$i]->descripcion;
-                $row[] = $aCursos[$i]->precio;
+                //$row[] = $aCursos[$i]->categoria;
+                $row[] = "$" . number_format($aCursos[$i]->precio, 2, ",", ".");
                 $row[] = $aCursos[$i]->cupo;
                 $row[] = $aCursos[$i]->horario;
-                $row[] = $aCursos[$i]->categoria;
                 $row[] = "<a href='/admin/curso/nuevo/".$aCursos[$i]->idcurso."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
