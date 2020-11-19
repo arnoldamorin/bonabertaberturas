@@ -120,6 +120,28 @@ class ControladorCurso extends Controller
             );
             return json_encode($json_data);
         }
+
+        public function editar($id)
+        {
+            $entidad = new Categoria();
+            $array_categorias = $entidad->obtenerTodos();
+        
+            $titulo = "Modificar Curso";
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                    $codigo = "MENUMODIFICACION";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    $curso = new Curso();
+                    $curso->obtenerPorId($id);
+    
+                    return view('curso.curso-nuevo', compact('curso', 'titulo', 'array_categorias'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
+        }
 }
 
 ?>
