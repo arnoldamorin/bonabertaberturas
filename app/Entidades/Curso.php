@@ -55,7 +55,7 @@ class Curso extends Model
         if (!empty($request['search']['value'])) { 
             $sql.=" AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' ";
             $sql.=" OR C.precio LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR C.cupo LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR C.cupo LIKE '%" . $request['search']['value'] . "%' ";
             $sql.=" OR C.horario LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
