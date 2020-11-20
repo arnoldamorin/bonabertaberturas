@@ -11,7 +11,7 @@
 |
  */
 
-Route::group(array('domain' => '127.0.0.1'), function () {
+    Route::group(array('domain' => '127.0.0.1'), function () {
 
     Route::get('/', 'ControladorWebHome@index');
 
@@ -87,6 +87,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 /* CONTROLADOR CURSOS                             */
 /* --------------------------------------------- */
 Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
+Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
 Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')->name('curso.cargarGrilla');
 Route::get('/admin/cursos', 'ControladorCurso@index');
@@ -94,14 +95,16 @@ Route::get('/admin/curso/nuevo/{id}', 'ControladorCurso@editar');
 Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
 
 
-
-
-
 /* --------------------------------------------- */
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
     Route::get('/admin/testimonio/nuevo', 'ControladorTestimonio@nuevo');
     Route::post('/admin/testimonio/nuevo', 'ControladorTestimonio@guardar');
+    Route::get('/admin/testimonios', 'ControladorTestimonio@index');
+    Route::get('/admin/testimonio/cargarGrilla', 'ControladorTestimonio@cargarGrilla')->name('testimonio.cargarGrilla');
+    Route::get('/admin/testimonio/nuevo{id}', 'ControladorTestimonio@editar');
+    Route::post('/admin/testimonio/nuevo/{id}', 'ControladorTestimonio@guardar');
+    Route::get('/admin/testimonio/eliminar', 'ControladorTestimonio@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR ALUMNOS                           */
@@ -142,4 +145,5 @@ Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
 /* --------------------------------------------- */
 Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
 Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+
 });
