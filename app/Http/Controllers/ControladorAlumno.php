@@ -139,12 +139,8 @@
                     $entidad = new Alumno();
                     $entidad->cargarDesdeRequest($request);
 
-                    if ($entidad->nombre != "") {
-                        $entidad->eliminar();
-                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
-                    } else {
-                        $aResultado["err"] = MSG_ERROR;
-                    }
+                    $entidad->eliminar();
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
     
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
