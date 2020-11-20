@@ -4,18 +4,69 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Testimonio;
 use Illuminate\Http\Request;
+use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Menu;
 
 require app_path() . '/start/constants.php';
 
 class ControladorTestimonio extends Controller
 {
+    public function index()
+    {
+        $titulo = "Testimonio";
+        if (Usuario::autenticado() == true) {
+            /*if (!Patente::autorizarOperacion("MENUCONSULTA")) {
+                $codigo = "MENUCONSULTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {*/
+                return view('testimonio.testimonio-listado', compact('titulo'));
+            //}
+        } else {
+            return redirect('admin/login');
+        }
+    }
+
+    public function cargarGrilla()
+        {
+            $request = $_REQUEST;
+    
+            $entidadTestimonio = new Testimonio();
+            $aTestimonios = $entidadTestimonio->obtenerFiltrado();
+    
+            $data = array();
+    
+            $inicio = $request['start'];
+            $registros_por_pagina = $request['length'];
+    
+            if (count($aTestimonios) > 0) {
+                $cont = 0;
+            }
+    
+            for ($i = $inicio; $i < count($aTestimonios) && $cont < $registros_por_pagina; $i++) {
+                $row = array();
+                $row[] = $aTestimonios[$i]->nombre;
+                $row[] = $aTestimonios[$i]->descripcion;
+                $row[] = $aTestimonios[$i]->video;
+                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idtestimonio."'><i class='fas fa-search'></i></a>";
+                $cont++;
+                $data[] = $row;
+            }
+    
+            $json_data = array(
+                "draw" => intval($request['draw']),
+                "recordsTotal" => count($aTestimonios), //cantidad total de registros sin paginar
+                "recordsFiltered" => count($aTestimonios), //cantidad total de registros en la paginacion
+                "data" => $data,
+            );
+            return json_encode($json_data);
+        }
+
+
     public function nuevo()
     {
         $titulo = "Nuevo Testimonio";
-        $entidad = new Menu();
-        $array_menu = $entidad->obtenerMenuPadre();
-        return view('testimonio.testimonio-nuevo', compact('titulo','array_menu'));
+        return view('testimonio.testimonio-nuevo', compact('titulo'));
 
     }
 
@@ -47,7 +98,7 @@ class ControladorTestimonio extends Controller
                 }
             
                 $_POST["id"] = $entidad->idtestimonio;
-                return view('sistema.testimonio-listar', compact('titulo', 'msg'));
+                return view('testimonio.testimonio-listado', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -58,7 +109,7 @@ class ControladorTestimonio extends Controller
         $testimonio = new Testimonio();
         $testimonio->obtenerPorId($id);
 
-        return view('sistema.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
+        return view('testimonio.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
 
     }
 }

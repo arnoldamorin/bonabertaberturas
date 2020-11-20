@@ -20,7 +20,7 @@ class Curso extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idmenu = $request->input('id')!="0" ? $request->input('id') : $this->idcurso;
+        $this->idcurso = $request->input('id')!="0" ? $request->input('id') : $this->idcurso;
         $this->nombre = $request->input('txtNombre');
         $this->categoria = $request->input('lstCategoria');
         $this->precio = $request->input('txtPrecio') != "" ? $request->input('txtPrecio') : 0;
@@ -54,10 +54,9 @@ class Curso extends Model
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
             $sql.=" AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR C.descripcion LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR C.precio LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR C.precio LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR C.cupo LIKE '%" . $request['search']['value'] . "%' ";
             $sql.=" OR C.horario LIKE '%" . $request['search']['value'] . "%' )";
-            $sql.=" OR C.cupo LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
@@ -99,7 +98,7 @@ class Curso extends Model
             $this->precio = $lstRetorno[0]->precio;
             $this->cupo = $lstRetorno[0]->cupo;
             $this->horario = $lstRetorno[0]->horario;
-            $this->categoria = $lstRetorno[0]->categoria;
+            $this->categoria = $lstRetorno[0]->fk_idcategoria;
             return $this;
         }
         return null;
@@ -112,7 +111,7 @@ class Curso extends Model
             precio=$this->precio,
             cupo= $this->cupo,
             horario='$this->horario',
-            fk_idcategoria= $this->categoria
+            fk_idcategoria= '$this->categoria'
             WHERE idcurso=?";
         $affected = DB::update($sql, [$this->idcurso]);
     }

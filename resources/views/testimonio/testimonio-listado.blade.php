@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de cursos")
+@section('titulo', "Listado de testimonios")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -9,11 +9,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
-    <li class="breadcrumb-item active">Men&uacute;</a></li>
+    <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/cursos");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/testimonio/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fa fa-refresh" aria-hidden="true" onclick='window.location.replace("/admin/testimonios");'><span>Recargar</span></a></li>
     <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
@@ -33,10 +33,9 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cupo</th>
-            <th>Horario</th>
-            <th>Acciones</th>
+            <th>Descripcion</th>
+            <th>Video</th>
+            <th>Edición</th>
         </tr>
     </thead>
 </table> 
@@ -49,7 +48,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('curso.cargarGrilla') }}"
+	    "ajax": "{{ route('testimonio.cargarGrilla') }}"
 	});
 </script>
 @endsection

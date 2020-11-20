@@ -47,7 +47,7 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value = "{{$curso->nombre or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Categoría:</label>
@@ -64,19 +64,19 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Precio: *</label>
-                    <input class = "form-control" type="text" name = "txtPrecio" id = "txtPrecio" required>
+                    <input class = "form-control" type="text" name = "txtPrecio" id = "txtPrecio" required value = "{{$curso->precio or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Cupo: *</label>
-                    <input type="number" id="nbCupo" name="nbCupo" class="form-control">
+                    <input type="number" id="nbCupo" name="nbCupo" class="form-control " value = "{{$curso->cupo or ''}}">
                 </div>
                  <div class="form-group col-lg-6">
                     <label>Horario *:</label>
-                    <input type="text" id="txtHorario" name="txtHorario" class="form-control">
+                    <input type="text" id="txtHorario" name="txtHorario" class="form-control" value = "{{$curso->horario or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
-                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10">{{$curso->descripcion or ''}}</textarea>
                 </div>
             </div>
 			
