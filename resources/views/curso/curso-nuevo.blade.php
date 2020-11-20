@@ -34,7 +34,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-<div class="panel-body">
+<div class="panel-body">    
         <div id = "msg"></div>
         <?php
         if (isset($msg)) {

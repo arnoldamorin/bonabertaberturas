@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Testimonio;
+use App\Entidades\Alumno;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Menu;
+use App\Entidades\Sistema\Patente;
 
 require app_path() . '/start/constants.php';
 
@@ -70,6 +72,25 @@ class ControladorTestimonio extends Controller
 
     }
 
+    public function editar($id)
+        {
+            $titulo = "Modificar Testimonio";
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                    $codigo = "MENUMODIFICACION";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    $testimonio = new Testimonio();
+                    $testimonio->obtenerPorId($id);
+    
+                    return view('testimonio.testimonio-nuevo', compact('testimonio', 'titulo'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
+        }
+
     public function guardar(Request $request)
     {
         try {
@@ -112,6 +133,32 @@ class ControladorTestimonio extends Controller
         return view('testimonio.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
 
     }
+
+    public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+            if (Usuario::autenticado() == true) {
+                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                    $entidad = new Testimonio();
+                    $entidad->cargarDesdeRequest($request);
+
+                    if ($entidad->nombre != "") {
+                        $entidad->eliminar();
+                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                    } else {
+                        $aResultado["err"] = MSG_ERROR;
+                    }
+    
+                } else {
+                    $codigo = "ELIMINARPROFESIONAL";
+                    $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
+                }
+                echo json_encode($aResultado);
+            } else {
+                return redirect('admin/login');
+            }
+        }
 }
 
 ?>
