@@ -93,6 +93,7 @@ Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')
 Route::get('/admin/cursos', 'ControladorCurso@index');
 Route::get('/admin/curso/nuevo/{id}', 'ControladorCurso@editar');
 Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
+Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
 
 
 /* --------------------------------------------- */

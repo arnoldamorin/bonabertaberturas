@@ -84,6 +84,32 @@ class ControladorCurso extends Controller
 
     }
 
+    public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+            if (Usuario::autenticado() == true) {
+                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                    $entidad = new Curso();
+                    $entidad->cargarDesdeRequest($request);
+
+                    if ($entidad->idcurso > 0) {
+                        $entidad->eliminar();
+                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+                    } else {
+                        $aResultado["err"] = MSG_ERROR;
+                    }
+    
+                } else {
+                    $codigo = "ELIMINARPROFESIONAL";
+                    $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
+                }
+                echo json_encode($aResultado);
+            } else {
+                return redirect('admin/login');
+            }
+        }
+
     public function cargarGrilla()
         {
             $request = $_REQUEST;
