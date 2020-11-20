@@ -6,6 +6,7 @@ use App\Entidades\Testimonio;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Menu;
+use App\Entidades\Sistema\Patente;
 
 require app_path() . '/start/constants.php';
 
@@ -69,6 +70,26 @@ class ControladorTestimonio extends Controller
         return view('testimonio.testimonio-nuevo', compact('titulo'));
 
     }
+
+    public function editar($id)
+        {
+            $titulo = "Modificar testimonio";
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                    $codigo = "MENUMODIFICACION";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    $testimonio = new Testimonio();
+                    $testimonio->obtenerPorId($id);
+    
+                    return view('testimonio.testimonio-nuevo', compact('testimonio', 'titulo'));
+                }
+            } else {
+                return redirect('admin/login');
+            }
+        }
+
 
     public function guardar(Request $request)
     {

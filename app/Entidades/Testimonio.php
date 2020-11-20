@@ -89,7 +89,7 @@ class Testimonio extends Model
         $sql = "UPDATE testimonios SET
             nombre='$this->nombre',
             descripcion='$this->descripcion',
-            video='$this->orden',
+            video='$this->video',
             WHERE idtestimonio=?";
         $affected = DB::update($sql, [$this->idtestimonio]);
     }
@@ -108,7 +108,7 @@ class Testimonio extends Model
             ) VALUES (?, ?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
-            $this->idescripcion, 
+            $this->descripcion, 
             $this->video, 
         ]);
        return $this->idtestimonio = DB::getPdo()->lastInsertId();
