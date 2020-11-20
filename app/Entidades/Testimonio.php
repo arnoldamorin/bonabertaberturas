@@ -43,7 +43,7 @@ class Testimonio extends Model
                 nombre,
                 descripcion,
                 video
-                FROM testimonios WHERE idtestimonio = $idtestimonio";
+                FROM testimonios WHERE idtestimonio = '$idtestimonio'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
