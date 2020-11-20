@@ -29,37 +29,42 @@ class Curso extends Model
         $this->descripcion = $request->input('txtDescripcion');
     }
 
-    // public function obtenerFiltrado() {
-    //     $request = $_REQUEST;
-    //     $columns = array(
-    //        0 => 'A.nombre',
-    //        1 => 'B.nombre',
-    //        2 => 'A.url',
-    //        3 => 'A.activo'
-    //         );
-    //     $sql = "SELECT DISTINCT
-    //                 A.idmenu,
-    //                 A.nombre,
-    //                 B.nombre as padre,
-    //                 A.url,
-    //                 A.activo
-    //                 FROM sistema_menues A
-    //                 LEFT JOIN sistema_menues B ON A.id_padre = B.idmenu
-    //             WHERE 1=1
-    //             ";
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
+        $columns = array(
+           0 => 'C.nombre',
+           1 => 'C.descripcion',
+           2 => 'C.precio',
+           3 => 'C.cupo,',
+           4 => 'C.horario',
+           5 => 'C.fk_idcategoria'
+            );
+        $sql = "SELECT DISTINCT
+                    C.idcurso,
+                    C.nombre,
+                    C.descripcion,
+                    C.precio,
+                    C.cupo,
+                    C.horario,
+                    C.fk_idcategoria
+                    FROM cursos C
+                WHERE 1=1
+                ";
 
-    //     //Realiza el filtrado
-    //     if (!empty($request['search']['value'])) { 
-    //         $sql.=" AND ( A.nombre LIKE '%" . $request['search']['value'] . "%' ";
-    //         $sql.=" OR B.nombre LIKE '%" . $request['search']['value'] . "%' ";
-    //         $sql.=" OR A.url LIKE '%" . $request['search']['value'] . "%' )";
-    //     }
-    //     $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) { 
+            $sql.=" AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR C.descripcion LIKE '%" . $request['search']['value'] . "%' ";
+            $sql.=" OR C.precio LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR C.horario LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" OR C.cupo LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
-    //     $lstRetorno = DB::select($sql);
+        $lstRetorno = DB::select($sql);
 
-    //     return $lstRetorno;
-    // }
+        return $lstRetorno;
+    }
 
     public function obtenerTodos() {
         $sql = "SELECT 

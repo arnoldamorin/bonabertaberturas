@@ -86,7 +86,17 @@
 /* --------------------------------------------- */
 /* CONTROLADOR CURSOS                             */
 /* --------------------------------------------- */
+<<<<<<< HEAD
     Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
+=======
+Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
+Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
+Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')->name('curso.cargarGrilla');
+Route::get('/admin/cursos', 'ControladorCurso@index');
+
+
+
+>>>>>>> 27e2b051ed440443a53be62c103e7525af1317b1
 /* --------------------------------------------- */
 /* CONTROLADOR TESTIMONIO                             */
 /* --------------------------------------------- */
@@ -135,5 +145,10 @@
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
 /* --------------------------------------------- */
+<<<<<<< HEAD
     Route::get('admin/venta/nueva', 'ControladorVenta@nuevo');
+=======
+Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
+Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+>>>>>>> 27e2b051ed440443a53be62c103e7525af1317b1
 });
