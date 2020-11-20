@@ -132,7 +132,8 @@
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->nombre != "") {                       
+                    if ($entidad->nombre != "") {     
+                        print_r("LLEGARA?");                  
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {
