@@ -88,8 +88,7 @@ if (isset($msg)) {
         }
     }
 
-    function eliminar() {
-        print_r("LLEGO TETON!");
+    function eliminar() {       
         $.ajax({
             type: "GET",
             url: "{{ asset('admin/cursos/categoria/nuevo/eliminar') }}",
