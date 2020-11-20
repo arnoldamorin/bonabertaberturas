@@ -9,7 +9,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
-    <li class="breadcrumb-item active">Men&uacute;</a></li>
+    <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
     <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
