@@ -27,12 +27,12 @@ class Venta extends Model
         $this->fk_idalumno = $request->input('lstAlumno');   
     }
 
-  /*public function obtenerFiltrado() {
+  public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.fecha',
-           1 => 'C.importe'
-           2 => 'C.fk_idcurso'
+           1 => 'C.importe',
+           2 => 'C.fk_idcurso',
            3 => 'C.fk_idalumno'     
             );
         $sql = "SELECT DISTINCT
@@ -49,7 +49,7 @@ class Venta extends Model
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
-    }*/
+    }
 
     public function obtenerTodos() {
         $sql = "SELECT 

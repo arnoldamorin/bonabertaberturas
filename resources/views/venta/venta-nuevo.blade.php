@@ -10,7 +10,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/venta/nueva">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/admin/venta/nueva">Venta</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -54,13 +54,25 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Curso:</label>
                     <select id="lstCurso" name="lstCurso" class="form-control">
-                        
+                        @for ($i = 0; $i < count($array_curso); $i++)
+                            @if (isset($curso))
+                                <option selected value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
+                            @else
+                                <option value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
+                            @endif
+                        @endfor
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Alumno:</label>
                     <select id="lstAlumno" name="lstAlumno" class="form-control">
-                        
+                        @for ($i = 0; $i < count($array_curso); $i++)
+                            @if (isset($curso))
+                                <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
+                            @else
+                                <option value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
+                            @endif
+                        @endfor
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
