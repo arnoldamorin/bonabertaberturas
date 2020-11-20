@@ -125,7 +125,7 @@
         public function eliminar(Request $request)
         {
             $id = $request->input('id');
-    
+            print_r("LLEGARA?",$id); 
             if (Usuario::autenticado() == true) {
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
                     
