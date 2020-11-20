@@ -64,7 +64,7 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Alumno:</label>
                     <select id="lstAlumno" name="lstAlumno" class="form-control">
-                        @for ($i = 0; $i < count($array_curso); $i++)
+                        @for ($i = 0; $i < count($array_alumno); $i++)
                             @if (isset($curso))
                                 <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
                             @else
