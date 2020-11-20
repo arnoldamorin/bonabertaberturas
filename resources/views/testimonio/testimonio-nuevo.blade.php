@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($menu->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($testimonio->idtestimonio) && $testimonio->idtestimonio > 0 ? $testimonio->idtestimonio : 0; ?>';
+    <?php $globalId = isset($testimonio->idtestimonio) ? $testimonio->idtestimonio : "0"; ?>
 
 </script>
 @endsection
@@ -14,11 +14,11 @@
 </ol>
 <ol class="toolbar">
     <li class="btn-item"><a title="Nuevo" href="/admin/testimonio/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
+    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
+    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
-    <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
+    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
 function fsalir(){
@@ -53,8 +53,8 @@ if (isset($msg)) {
                     <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{ $testimonio->descripcion or '' }}">
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Video:</label>
-                    <input type="file" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
+                    <label>Video (iframe YouTube):</label>
+                    <input type="text" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
                 </div>
             </div>
 		</form>

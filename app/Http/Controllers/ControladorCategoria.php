@@ -125,19 +125,15 @@
         public function eliminar(Request $request)
         {
             $id = $request->input('id');
-    
+            print_r("LLEGARA?",$id); 
             if (Usuario::autenticado() == true) {
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
                     
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
-                   
-                    if ($entidad->nombre != "") {                       
-                        $entidad->eliminar();
-                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
-                    } else {
-                        $aResultado["err"] = MSG_ERROR;
-                    }    
+                                                          
+                    $entidad->eliminar();
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente                         
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";

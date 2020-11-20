@@ -140,7 +140,7 @@
                     $entidad = new Conferencia();
                     $entidad->cargarDesdeRequest($request);
 
-                    if ($entidad->nombre != "") {
+                    if ($entidad->idconferencia > 0) {
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {

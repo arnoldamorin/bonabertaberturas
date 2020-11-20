@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Testimonio;
-use App\Entidades\Alumno;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Menu;
@@ -47,10 +46,9 @@ class ControladorTestimonio extends Controller
     
             for ($i = $inicio; $i < count($aTestimonios) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aTestimonios[$i]->nombre;
+                $row[] = '<a href="/admin/testimonio/nuevo/' . $aTestimonios[$i]->idtestimonio . '">' . $aTestimonios[$i]->nombre . '</a>';
                 $row[] = $aTestimonios[$i]->descripcion;
                 $row[] = $aTestimonios[$i]->video;
-                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idtestimonio."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
@@ -74,7 +72,7 @@ class ControladorTestimonio extends Controller
 
     public function editar($id)
         {
-            $titulo = "Modificar Testimonio";
+            $titulo = "Modificar testimonio";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
                     $codigo = "MENUMODIFICACION";
@@ -90,6 +88,7 @@ class ControladorTestimonio extends Controller
                 return redirect('admin/login');
             }
         }
+
 
     public function guardar(Request $request)
     {
@@ -143,12 +142,8 @@ class ControladorTestimonio extends Controller
                     $entidad = new Testimonio();
                     $entidad->cargarDesdeRequest($request);
 
-                    if ($entidad->nombre != "") {
-                        $entidad->eliminar();
-                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
-                    } else {
-                        $aResultado["err"] = MSG_ERROR;
-                    }
+                    $entidad->eliminar();
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
     
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
