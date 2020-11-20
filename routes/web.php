@@ -138,4 +138,5 @@ Route::get('/admin/cursos', 'ControladorCurso@index');
 /* --------------------------------------------- */
 Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
 Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+
 });
