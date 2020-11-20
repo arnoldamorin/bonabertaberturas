@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($conferencia->idmenu) && $menu->idmenu > 0 ? $menu->idmenu : 0; ?>';
-    <?php $globalId = isset($menu->idmenu) ? $menu->idmenu : "0"; ?>
+    globalId = '<?php echo isset($conferencia->idconferencia) && $conferencia->idconferencia > 0 ? $conferencia->idconferencia : 0; ?>';
+    <?php $globalId = isset($conferencia->idconferencia) ? $conferencia->idconferencia : "0"; ?>
 
 </script>
 @endsection
