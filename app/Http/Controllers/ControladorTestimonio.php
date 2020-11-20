@@ -46,10 +46,9 @@ class ControladorTestimonio extends Controller
     
             for ($i = $inicio; $i < count($aTestimonios) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aTestimonios[$i]->nombre;
+                $row[] = '<a href="/admin/testimonio/nuevo/' . $aTestimonios[$i]->idtestimonio . '">' . $aTestimonios[$i]->nombre . '</a>';
                 $row[] = $aTestimonios[$i]->descripcion;
                 $row[] = $aTestimonios[$i]->video;
-                $row[] = "<a href='/admin/testimonio/nuevo/".$aTestimonios[$i]->idtestimonio."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
@@ -133,6 +132,28 @@ class ControladorTestimonio extends Controller
         return view('testimonio.testimonio-nuevo', compact('msg', 'testimonio', 'titulo')) . '?id=' . $testimonio->idtestimonio;
 
     }
+
+    public function eliminar(Request $request)
+        {
+            $id = $request->input('id');
+    
+            if (Usuario::autenticado() == true) {
+                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                    $entidad = new Testimonio();
+                    $entidad->cargarDesdeRequest($request);
+
+                    $entidad->eliminar();
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
+    
+                } else {
+                    $codigo = "ELIMINARPROFESIONAL";
+                    $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
+                }
+                echo json_encode($aResultado);
+            } else {
+                return redirect('admin/login');
+            }
+        }
 }
 
 ?>

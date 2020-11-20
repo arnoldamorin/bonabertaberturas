@@ -89,7 +89,7 @@ class Testimonio extends Model
         $sql = "UPDATE testimonios SET
             nombre='$this->nombre',
             descripcion='$this->descripcion',
-            video='$this->video',
+            video='$this->video'
             WHERE idtestimonio=?";
         $affected = DB::update($sql, [$this->idtestimonio]);
     }
