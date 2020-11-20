@@ -132,12 +132,13 @@
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->nombre != "") {     
+                    if ($entidad->idcategoria != "") {     
                         print_r("LLEGARA?");                  
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {
                         $aResultado["err"] = MSG_ERROR;
+                        print_r("NO LLEGO?"); 
                     }    
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
