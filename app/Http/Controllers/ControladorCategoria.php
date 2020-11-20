@@ -131,15 +131,9 @@
                     
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
-                    $entidad->idcategoria = $id;
-                    if ($entidad->idcategoria != "") {     
-                        print_r("LLEGARA?");                  
-                        $entidad->eliminar();
-                        $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
-                    } else {
-                        $aResultado["err"] = MSG_ERROR;
-                        print_r("NO LLEGO?"); 
-                    }    
+                                                          
+                    $entidad->eliminar();
+                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente                         
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
