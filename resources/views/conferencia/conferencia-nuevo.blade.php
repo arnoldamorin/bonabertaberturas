@@ -10,7 +10,7 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/admin/conferencias">Listado</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
@@ -46,18 +46,18 @@ if (isset($msg)) {
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
-                    <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
+                    <label for="txtNombre">Nombre: *</label>
+                    <input value="<?php  echo isset($_GET["id"]) ? $conferencia->nombre : ""; ?>" type="text" id="txtNombre" name="txtNombre" class="form-control" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Descripción:</label>
-                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
+                    <label for="txtDescripcion">Descripción:</label>
+                    <textarea value="<?php  echo isset($_GET["id"]) ? $conferencia->descripcion : ""; ?>" class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
                 </div>
             </div>
             <div class="row">
             <div class="col-6 form-group">
-                      <label for="fileImagen">Imagen:</label>
-                      <input type="file" class="form-control-file" name="imagen" id="imagen">
+                      <label for="imagen">Imagen:</label>
+                      <input value="<?php  echo isset($_GET["id"]) ? $conferencia->imagen : ""; ?>" type="file" class="form-control-file" name="imagen" id="imagen">
                       <img src="files/" class="img-thumbnail">
                   </div>
             </div>
