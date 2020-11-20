@@ -51,7 +51,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtDescripcion">Descripción:</label>
-                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10" value="{{ $conferencia->descripcion or '' }}" ></textarea>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10" >{{$conferencia->descripcion or '' }}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -98,7 +98,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/sistema/menu/eliminar') }}",
+            url: "{{ asset('admin/conferencia/nuevo') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",
