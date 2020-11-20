@@ -93,6 +93,7 @@ Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')
 Route::get('/admin/cursos', 'ControladorCurso@index');
 Route::get('/admin/curso/nuevo/{id}', 'ControladorCurso@editar');
 Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
+Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
 
 
 /* --------------------------------------------- */
@@ -138,7 +139,7 @@ Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
     Route::get('/admin/cursos/categorias/cargarGrilla', 'ControladorCategoria@cargarGrilla')->name('categoria.cargarGrilla');
     Route::get('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@editar');
     Route::post('/admin/cursos/categoria/nuevo/{id}', 'ControladorCategoria@guardar');
-    Route::get('/admin/cursos/categorias/eliminar', 'ControladorCategoria@eliminar');
+    Route::get('/admin/cursos/categoria/eliminar', 'ControladorCategoria@eliminar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
