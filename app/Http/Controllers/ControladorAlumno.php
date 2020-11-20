@@ -71,7 +71,7 @@
         }
 
         public function editar($id)
-        {
+        { 
             $titulo = "Modificar Alumno";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
