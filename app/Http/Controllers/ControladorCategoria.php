@@ -128,10 +128,11 @@
     
             if (Usuario::autenticado() == true) {
                 if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                    
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->nombre != "") {
+                    if ($entidad->nombre != "") {                       
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {
@@ -145,7 +146,7 @@
             } else {
                 return redirect('admin/login');
             }
-        }
+        }        
     }
 
 ?>

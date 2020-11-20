@@ -11,11 +11,11 @@
   <link href="{{ asset('css/normalize.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css">
-  <link href="{{ asset('css/fontawesome/all.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('css/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/estilos.css') }}" rel="stylesheet" type="text/css">
-  <link href="{{ asset('css/fontawesome/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('css/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
