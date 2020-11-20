@@ -53,8 +53,8 @@ if (isset($msg)) {
                     <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{ $testimonio->descripcion or '' }}">
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Video:</label>
-                    <input type="file" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
+                    <label>Video (iframe YouTube):</label>
+                    <input type="text" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
                 </div>
             </div>
 		</form>
