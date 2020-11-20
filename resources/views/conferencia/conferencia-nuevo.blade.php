@@ -10,16 +10,16 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/sistema/menu">Men&uacute;</a></li>
+    <li class="breadcrumb-item"><a href="/admin/conferencias">Listado</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/conferencia/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
-    <li class="btn-item"><a title="Salir" href="#" class="fa fa-arrow-circle-o-left" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
+    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
 function fsalir(){
@@ -46,18 +46,18 @@ if (isset($msg)) {
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
-                    <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required>
+                    <label for="txtNombre">Nombre: *</label>
+                    <input  type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $conferencia->nombre or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Descripción:</label>
-                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
+                    <label for="txtDescripcion">Descripción:</label>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10" value="{{ $conferencia->descripcion or '' }}" ></textarea>
                 </div>
             </div>
             <div class="row">
             <div class="col-6 form-group">
-                      <label for="fileImagen">Imagen:</label>
-                      <input type="file" class="form-control-file" name="imagen" id="imagen">
+                      <label for="imagen">Imagen:</label>
+                      <input  type="file" class="form-control-file" name="imagen" id="imagen" value="{{ $conferencia->imagen or '' }}">
                       <img src="files/" class="img-thumbnail">
                   </div>
             </div>

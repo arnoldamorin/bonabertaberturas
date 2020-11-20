@@ -132,13 +132,13 @@
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->nombre != "") {
-                        print_r($entidad);
-                        //$entidad->idcategoria = $id;
+                    if ($entidad->idcategoria != "") {     
+                        print_r("LLEGARA?");                  
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {
                         $aResultado["err"] = MSG_ERROR;
+                        print_r("NO LLEGO?"); 
                     }    
                 } else {
                     $codigo = "ELIMINARPROFESIONAL";
@@ -148,32 +148,7 @@
             } else {
                 return redirect('admin/login');
             }
-        }
-        public function eliminard(Request $request)
-        {
-            $id = $request->input('id');
-    
-            if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
-    
-                    $menu_grupo = new MenuArea();
-                    $menu_grupo->fk_idmenu = $id;
-                    $menu_grupo->eliminarPorMenu();
-    
-                    $entidad = new Menu();
-                    $entidad->cargarDesdeRequest($request);
-                    $entidad->eliminar();
-    
-                    $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
-                } else {
-                    $codigo = "ELIMINARPROFESIONAL";
-                    $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
-                }
-                echo json_encode($aResultado);
-            } else {
-                return redirect('admin/login');
-            }
-        }
+        }        
     }
 
 ?>

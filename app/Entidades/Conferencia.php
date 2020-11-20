@@ -68,19 +68,19 @@ class Conferencia extends Model
     }
 
 
-    public function obtenerPorId($idmenu) {
+    public function obtenerPorId($idconferencia) {
         $sql = "SELECT
                     idconferencia,
                     nombre,
                     descripcion,
                     imagen
-                FROM conferencias WHERE idconferencias = '$idconferencias'";
+                FROM conferencias WHERE idconferencia = '$idconferencia'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
             $this->idconferencia = $lstRetorno[0]->idconferencia;
             $this->nombre = $lstRetorno[0]->nombre;
-            $this->decripcion = $lstRetorno[0]->decripcion;
+            $this->descripcion = $lstRetorno[0]->descripcion;
             $this->imagen = $lstRetorno[0]->imagen;
             return $this;
         }

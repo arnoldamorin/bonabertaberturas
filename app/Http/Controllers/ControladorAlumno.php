@@ -49,7 +49,7 @@
                 $row[] = $aAlumnos[$i]->apellido;
                 $row[] = $aAlumnos[$i]->dni;
                 $row[] = $aAlumnos[$i]->mail;
-                $row[] = $aAlumnos[$i]->telefono;
+                $row[] = "<a class='fab fa-whatsapp' aria-hidden='true' target='blank' href='https://web.whatsapp.com/send?phone=".$aAlumnos[$i]->telefono."'></a>".$aAlumnos[$i]->telefono;
                 $row[] = "<a href='/admin/alumno/nuevo/".$aAlumnos[$i]->idalumno."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
