@@ -131,7 +131,7 @@
                     
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
-                   
+                    $entidad->idcategoria = $id;
                     if ($entidad->idcategoria != "") {     
                         print_r("LLEGARA?");                  
                         $entidad->eliminar();
