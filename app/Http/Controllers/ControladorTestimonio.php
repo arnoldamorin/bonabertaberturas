@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Testimonio;
-use App\Entidades\Alumno;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
-use App\Entidades\Sistema\Menu;
 use App\Entidades\Sistema\Patente;
 
 require app_path() . '/start/constants.php';
