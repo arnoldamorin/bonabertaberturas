@@ -14,7 +14,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/conferencia/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-trash-o" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -47,17 +47,17 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label for="txtNombre">Nombre: *</label>
-                    <input value="<?php  echo isset($_GET["id"]) ? $conferencia->nombre : ""; ?>" type="text" id="txtNombre" name="txtNombre" class="form-control" required>
+                    <input  type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $conferencia->nombre or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
                     <label for="txtDescripcion">Descripción:</label>
-                    <textarea value="<?php  echo isset($_GET["id"]) ? $conferencia->descripcion : ""; ?>" class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10"></textarea>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10" value="{{ $conferencia->descripcion or '' }}" ></textarea>
                 </div>
             </div>
             <div class="row">
             <div class="col-6 form-group">
                       <label for="imagen">Imagen:</label>
-                      <input value="<?php  echo isset($_GET["id"]) ? $conferencia->imagen : ""; ?>" type="file" class="form-control-file" name="imagen" id="imagen">
+                      <input  type="file" class="form-control-file" name="imagen" id="imagen" value="{{ $conferencia->imagen or '' }}">
                       <img src="files/" class="img-thumbnail">
                   </div>
             </div>
