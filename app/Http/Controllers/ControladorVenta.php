@@ -49,7 +49,9 @@ class ControladorVenta extends Controller
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aVenta[$i]->fecha;
-                $row[] = $aVenta[$i]->importe;                
+                $row[] = $aVenta[$i]->importe;
+                $row[] = $aVenta[$i]->fk_idcurso;
+                $row[] = $aVenta[$i]->fk_idalumno;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
@@ -86,7 +88,7 @@ class ControladorVenta extends Controller
 
             $titulo = "Modificar Venta";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                if (!Patente::autorizarOperacion("INSCRIPCIONMODIFICACION")) {
                     $codigo = "MENUMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
@@ -142,12 +144,12 @@ class ControladorVenta extends Controller
             return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno')) . '?id=' . $venta->idisncripcion;
         }
 
-/*public function eliminar(Request $request)
+public function eliminar(Request $request)
         {
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("INSCRIPCIONBAJA")) {
                     $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
@@ -165,7 +167,7 @@ class ControladorVenta extends Controller
             } else {
                 return redirect('admin/login');
             }
-        }*/
+        }
     }
 
 ?>

@@ -36,6 +36,7 @@ if (isset($msg)) {
             <th>Importe</th>
             <th>Curso</th>
             <th>Alumno</th>
+            <th>Modificar</th>
         </tr>
     </thead>
 </table> 
