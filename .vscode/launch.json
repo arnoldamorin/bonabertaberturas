@@ -5,18 +5,11 @@
     "version": "0.2.0",
     "configurations": [
     {
-        "name": "Launch Chrome",
-        "request": "launch",
         "type": "pwa-chrome",
-        "url": "http://localhost:8080",
+        "request": "launch",
+        "name": "Launch",
+        "url": "http://127.0.0.1:8000/admin",
         "webRoot": "${workspaceFolder}"
-    },
-        {
-            "type": "pwa-chrome",
-            "request": "launch",
-            "name": "Launch",
-            "url": "http://127.0.0.1:8000/admin",
-            "webRoot": "${workspaceFolder}"
-        }
+    }
     ]
 }
