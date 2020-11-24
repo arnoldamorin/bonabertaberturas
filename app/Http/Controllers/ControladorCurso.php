@@ -16,13 +16,13 @@ class ControladorCurso extends Controller
         {
             $titulo = "Cursos";
             if (Usuario::autenticado() == true) {
-                /*if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                    $codigo = "MENUCONSULTA";
+                if (!Patente::autorizarOperacion("CURSOSCONSULTA")) {
+                    $codigo = "CURSOSCONSULTA";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-                } else {*/
+                } else {
                     return view('curso.curso-listar', compact('titulo'));
-                //}
+                }
             } else {
                 return redirect('admin/login');
             }
@@ -34,40 +34,66 @@ class ControladorCurso extends Controller
         $array_categorias = $entidad->obtenerTodos();
 
         $titulo = "Nuevo Curso";
-        return view('curso.curso-nuevo', compact('titulo', 'array_categorias'));
+
+        if(Usuario::autenticado() == true){
+            if(!Patente::autorizarOperacion("CURSOSALTA")){
+                $codigo = "CURSOSALTA";
+                $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else{
+                return view('curso.curso-nuevo', compact('titulo', 'array_categorias'));
+
+            }
+        } else{
+            return redirect("admin/login");
+        }
+
 
     }
 
     public function guardar(Request $request)
     {
         try {
+
             //Define la entidad curso
             $titulo = "Modificar Curso";
             $entidad = new Curso();
             $entidad->cargarDesdeRequest($request);
 
-            //validaciones
-            if ($entidad->nombre == "") {
-                $msg["ESTADO"] = MSG_ERROR;
-                $msg["MSG"] = "Complete todos los datos";
-            } else {
-                if ($_POST["id"] > 0) {
-                    //Es actualizacion
-                    $entidad->guardar();
-
-                    $msg["ESTADO"] = MSG_SUCCESS;
-                    $msg["MSG"] = OKINSERT;
+            if (Usuario::autenticado() == true) {
+                if (!Patente::autorizarOperacion("CURSOSMODIFICACION")) {
+                    $codigo = "CURSOSMODIFICACION";
+                    $mensaje = "No tiene permisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    //Es nuevo
-                    $entidad->insertar();
-
-                    $msg["ESTADO"] = MSG_SUCCESS;
-                    $msg["MSG"] = OKINSERT;
+                    if ($entidad->nombre == "") {
+                        $msg["ESTADO"] = MSG_ERROR;
+                        $msg["MSG"] = "Complete todos los datos";
+                    } else {
+                        if ($_POST["id"] > 0) {
+                            //Es actualizacion
+                            $entidad->guardar();
+        
+                            $msg["ESTADO"] = MSG_SUCCESS;
+                            $msg["MSG"] = OKINSERT;
+                        } else {
+                            //Es nuevo
+                            $entidad->insertar();
+        
+                            $msg["ESTADO"] = MSG_SUCCESS;
+                            $msg["MSG"] = OKINSERT;
+                        }
+                    
+                        $_POST["id"] = $entidad->idcurso;
+                        return view('curso.curso-listar', compact('titulo', 'msg'));
+                    }
                 }
-            
-                $_POST["id"] = $entidad->idcurso;
-                return view('curso.curso-listar', compact('titulo', 'msg'));
+            } else {
+                return redirect('admin/login');
             }
+
+            //validaciones
+            
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
@@ -89,7 +115,7 @@ class ControladorCurso extends Controller
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("CURSOSELIMINAR")) {
                     $entidad = new Curso();
                     $entidad->cargarDesdeRequest($request);
 
@@ -101,8 +127,9 @@ class ControladorCurso extends Controller
                     }
     
                 } else {
-                    $codigo = "ELIMINARPROFESIONAL";
-                    $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
+                    $codigo = "CURSOSELIMINAR";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('codigo', 'mensaje'));
                 }
                 echo json_encode($aResultado);
             } else {

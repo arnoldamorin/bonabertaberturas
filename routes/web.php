@@ -144,7 +144,10 @@ Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
 /* --------------------------------------------- */
 /* CONTROLADOR VENTAS                          */
 /* --------------------------------------------- */
-Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
-Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+    Route::get('/admin/venta/nueva', 'ControladorVenta@nuevo');
+    Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+    Route::get('/admin/ventas', 'ControladorVenta@index');
+    Route::get('/admin/ventas/nuevo/{id}', 'ControladorVenta@editar');
+    Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
 
 });

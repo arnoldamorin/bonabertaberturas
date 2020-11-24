@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Entidades\Venta;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
+use App\Entidades\Alumno;
+use App\Entidades\Curso;
 use Illuminate\Http\Request;
 
 
@@ -28,12 +30,12 @@ class ControladorVenta extends Controller
         }
     }
 
-    /*public function cargarGrilla()
+    public function cargarGrilla()
         {
             $request = $_REQUEST;
-    
+
             $entidadVenta = new Venta();
-            $aCategorias = $entidadVenta->obtenerFiltrado();
+            $aVenta = $entidadVenta->obtenerFiltrado();
     
             $data = array();
     
@@ -46,8 +48,10 @@ class ControladorVenta extends Controller
     
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aCategorias[$i]->fecha;
-                $row[] = $aCategorias[$i]->importe;                
+                $row[] = $aVenta[$i]->fecha;
+                $row[] = $aVenta[$i]->importe;
+                $row[] = $aVenta[$i]->fk_idcurso;
+                $row[] = $aVenta[$i]->fk_idalumno;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
@@ -61,26 +65,38 @@ class ControladorVenta extends Controller
             );
             return json_encode($json_data);
         }
-*/
+
         public function nuevo()
         {
-            $titulo = "Nuevo Venta";
-            return view('venta.venta-nuevo', compact('titulo'));
+            $curso = new Curso();
+            $array_curso = $curso->obtenerTodos();
+
+            $alumnos = new Alumno();
+            $array_alumno = $alumnos->obtenerTodos();
+
+            $titulo = "Nueva Venta";
+            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_alumno'));
         }
 
         public function editar($id)
         {
-            $titulo = "Modificar Categoria";
+            $entidad = new Curso();
+            $array_curso = $entidad->obtenerTodos();
+            
+            $entidad2 = new Alumnos();
+            $array_alumno = $entidad2->obtenerTodos();
+
+            $titulo = "Modificar Venta";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
+                if (!Patente::autorizarOperacion("INSCRIPCIONMODIFICACION")) {
                     $codigo = "MENUMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    $categoria = new Venta();
-                    $categoria->obtenerPorId($id);
+                    $venta = new Venta();
+                    $venta->obtenerPorId($id);
     
-                    return view('categoria.categoria-nuevo', compact('categoria', 'titulo'));
+                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_alumno'));
                 }
             } else {
                 return redirect('admin/login');
@@ -128,12 +144,12 @@ class ControladorVenta extends Controller
             return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno')) . '?id=' . $venta->idisncripcion;
         }
 
-/*public function eliminar(Request $request)
+public function eliminar(Request $request)
         {
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("INSCRIPCIONBAJA")) {
                     $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
@@ -151,7 +167,7 @@ class ControladorVenta extends Controller
             } else {
                 return redirect('admin/login');
             }
-        }*/
+        }
     }
 
 ?>

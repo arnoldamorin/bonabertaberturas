@@ -15,13 +15,13 @@
         {
             $titulo = "Alumnos";
             if (Usuario::autenticado() == true) {
-                /*if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                    $codigo = "MENUCONSULTA";
+                if (!Patente::autorizarOperacion("ALUMNOSCONSULTA")) {
+                    $codigo = "ALUMNOSCONSULTA";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-                } else {*/
+                } else {
                     return view('alumno.alumno-listar', compact('titulo'));
-                //}
+                }
             } else {
                 return redirect('admin/login');
             }
@@ -74,8 +74,8 @@
         {
             $titulo = "Modificar Alumno";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                    $codigo = "MENUMODIFICACION";
+                if (!Patente::autorizarOperacion("ALUMNOSMODIFICACION")) {
+                    $codigo = "ALUMNOSMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
@@ -135,7 +135,7 @@
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("ALUMNOSELIMINAR")) {
                     $entidad = new Alumno();
                     $entidad->cargarDesdeRequest($request);
 
@@ -143,7 +143,7 @@
                     $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
     
                 } else {
-                    $codigo = "ELIMINARPROFESIONAL";
+                    $codigo = "ALUMNOSELIMINAR";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
                 }
                 echo json_encode($aResultado);
