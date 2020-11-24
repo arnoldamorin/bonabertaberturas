@@ -24,6 +24,10 @@
 
     Route::get('/admin/home', 'ControladorHome@index');
 
+    Route::get('/', 'ControladorWebCoachingEquipo@index');
+
+    Route::get('/', 'ControladorWebCoachingEjecutivo@index');
+
 /* --------------------------------------------- */
 /* CONTROLADOR LOGIN                           */
 /* --------------------------------------------- */
