@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('web.plantilla')
 <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
