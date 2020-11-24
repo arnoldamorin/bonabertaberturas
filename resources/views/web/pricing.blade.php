@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-
+@extends('plantilla')
+@section('web.contenido')
 <body>
 
   <!-- ======= Header ======= -->
@@ -114,5 +114,4 @@
   <!-- End Footer -->
 
 </body>
-
-</html>
+@endsection
