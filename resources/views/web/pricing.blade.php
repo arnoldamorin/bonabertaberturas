@@ -92,16 +92,19 @@
           <div class="col">
             <div class="card">
               <h5>Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
           <div class="col">
             <div class="card">
               <h5>Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
           <div class="col mb-4">
             <div class="card">
               <h5>Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
 
