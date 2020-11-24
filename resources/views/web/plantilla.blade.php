@@ -29,32 +29,32 @@
     <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-        <h1 class="logo mr-auto"><a href="index.html">Emilce Charras</a></h1>
+        <h1 class="logo mr-auto"><a href="/">Emilce Charras</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav class="nav-menu d-none d-lg-block">
         <ul>
-            <li class="active"><a href="index.html">Inicio</a></li>
-            <li><a href="about.html">Sobre Mi</a></li>
-            <li><a href="courses.html">Cursos</a></li>
-            <li><a href="Conferencias.html">Conferencias</a></li>
-            <li><a href="pricing.html">Testimonios</a></li>
+            <li class="active"><a href="/">Inicio</a></li>
+            <li><a href="/sobre-mi">Sobre Mi</a></li>
+            <li><a href="/cursos">Cursos</a></li>
+            <li><a href="/conferencias">Conferencias</a></li>
+            <li><a href="/testimonios">Testimonios</a></li>
             <li class="drop-down"><a href="">Coaching</a>
             <ul>
                 <li><a href="#">Sesión Personal</a></li>
-                <li><a href="equipo.html">De Equipos</a></li>
+                <li><a href="/coaching/equipo">De Equipos</a></li>
                 <li><a href="#">Empresarial</a></li>
                 <li><a href="#">Deportivo</a></li>
-                <li><a href="ejecutivo.html">Ejecutivo</a></li>
+                <li><a href="/coaching/ejecutivo">Ejecutivo</a></li>
             </ul>
             </li>
-            <li><a href="contact.html">Contacto</a></li>
+            <li><a href="/contacto">Contacto</a></li>
 
         </ul>
         </nav><!-- .nav-menu -->
 
-        <a href="courses.html" class="get-started-btn">Get Started</a>
+        <a href="/cursos" class="get-started-btn">Get Started</a>
 
     </div>
     </header><!-- End Header -->
@@ -143,17 +143,17 @@
 <div id="preloader"></div>
 
 <!-- Vendor JS Files -->
-<script src="assets/vendor/jquery/jquery.min.js"></script>
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-<script src="assets/vendor/counterup/counterup.min.js"></script>
-<script src="assets/vendor/owl.carousel/owl.carousel.min.js"></script>
-<script src="assets/vendor/aos/aos.js"></script>
+<script src="{{ asset('web/vendor/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('web/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+<script src="{{ asset('web/vendor/php-email-form/validate.js') }}"></script>
+<script src="{{ asset('web/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('web/vendor/counterup/counterup.min.js') }}"></script>
+<script src="{{ asset('web/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('web/vendor/aos/aos.js') }}"></script>
 
 <!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="{{ asset('web/js/main.js') }}"></script>
 
 </body>
 </html>
