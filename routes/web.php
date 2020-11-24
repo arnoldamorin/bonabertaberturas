@@ -17,6 +17,9 @@
 
     Route::get('/', 'ControladorConferencias@conferencias');
 
+    Route::get('/', 'ControladorWebSobreMi@sobre-mi');
+
+
     Route::get('/', 'ControladorTestimonios@testimonios');
   
     Route::get('/admin', 'ControladorHome@index');
