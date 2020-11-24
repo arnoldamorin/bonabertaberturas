@@ -1,3 +1,5 @@
+@extends('web.plantilla')
+@section("contenido")
 <!DOCTYPE html>
 <html lang="es">
 
@@ -39,13 +41,6 @@
 <body>
 
   <main id="main">
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs" data-aos="fade-in">
-      <div class="container">
-        <h2>Sobre mí</h2>
-      </div>
-    </div><!-- End Breadcrumbs -->
-
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">

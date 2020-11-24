@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-
+@extends('web.plantilla')
+@section('web.contenido')
 <body>
-
-  <!-- ======= Header ======= -->
-  
-  <!-- End Header -->
-
   <main id="main">
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
@@ -114,5 +109,4 @@
   <!-- End Footer -->
 
 </body>
-
-</html>
+@endsection
