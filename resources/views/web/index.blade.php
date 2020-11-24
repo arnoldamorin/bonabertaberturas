@@ -56,10 +56,10 @@
           <li class="drop-down"><a href="">Coaching</a>
             <ul>
               <li><a href="#">Sesión Personal</a></li>
-              <li><a href="#">De Equipos</a></li>
+              <li><a href="equipo.html">De Equipos</a></li>
               <li><a href="#">Empresarial</a></li>
               <li><a href="#">Deportivo</a></li>
-              <li><a href="#">Ejecutivo</a></li>
+              <li><a href="ejecutivo.html">Ejecutivo</a></li>
             </ul>
           </li>
           <li><a href="contact.html">Contacto</a></li>
