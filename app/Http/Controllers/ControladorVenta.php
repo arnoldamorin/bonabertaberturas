@@ -18,13 +18,13 @@ class ControladorVenta extends Controller
     {
         $titulo = "Nuevo Venta";
         if (Usuario::autenticado() == true) {
-            /*if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                $codigo = "MENUCONSULTA";
+            if (!Patente::autorizarOperacion("INSCRIPCIONCONSULTA")) {
+                $codigo = "INSCRIPCIONCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-            } else {*/
+            } else {
                 return view('venta.venta-listar', compact('titulo'));
-            //}
+            }
         } else {
             return redirect('admin/login');
         }
@@ -89,7 +89,7 @@ class ControladorVenta extends Controller
             $titulo = "Modificar Venta";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("INSCRIPCIONMODIFICACION")) {
-                    $codigo = "MENUMODIFICACION";
+                    $codigo = "INSCRIPCIONMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
