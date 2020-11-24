@@ -11,7 +11,7 @@ class ControladorWebHome extends Controller
 {
     public function index()
     {
-        return view('web.index');
+        return view('web.testimonios');
     }
 
 }
