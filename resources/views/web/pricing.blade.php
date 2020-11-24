@@ -1,4 +1,4 @@
-@extends('plantilla')
+@extends('web.plantilla')
 @section('web.contenido')
 <body>
   <main id="main">
