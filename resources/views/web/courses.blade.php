@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>About - Mentor Bootstrap Template</title>
+  <title>Cursos | Emilce Charras</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
@@ -42,15 +42,15 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo mr-auto"><a href="index.html">Mentor</a></h1>
+      <h1 class="logo mr-auto"><a href="index.html">Emilce Charras</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li class="active"><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
+          <li class="active"><a href="index.html">Inicio</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Cursos</a></li>
           <li><a href="trainers.html">Trainers</a></li>
           <li><a href="Conferencias.html">Conferencias</a></li>
           <li><a href="pricing.html">Pricing</a></li>
@@ -81,47 +81,91 @@
     </div>
   </header><!-- End Header -->
 
-  <main id="main">
+  <main id="main" data-aos="fade-in">
+
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs" data-aos="fade-in">
+    <div class="breadcrumbs">
       <div class="container">
-        <h2>Sobre mí</h2>
+        <h2>Cursos</h2>
+        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab officiis, facilis ad quas laudantium quae praesentium accusantium, doloremque corrupti in tempore! Eaque saepe non nihil veritatis nisi fuga quidem minima!</p>
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <!-- ======= Courses Section ======= -->
+    <section id="courses" class="courses">
       <div class="container" data-aos="fade-up">
 
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="https://www.webretail.com.ar/v2/wp-content/uploads/2020/10/Mujeres-Liderazgo.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3 class="ml-5 mb-3">Mi nombre es Emilce Charras</h3>
-            <p class="font-italic">Hace varios años soy Senior Coach ontológico profesional, avalada por la AACOP y la FICOP.</p>
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
 
-            <p class="font-italic">Mi pasión es inspirar a las personas a disfrutar la vida, lo que eligen y hacen día a día y creer en la posibilidad de cambios personales para alcanzar resultados extraordinarios, motivándolos a conquistar las oportunidades para su crecimiento y bienestar.</p>
-                      
-            <ul>
-              <li><i class="icofont-check-circled"></i> Especialista en Coaching Deportivo.</li>
-              <li><i class="icofont-check-circled"></i> Postítulo en Coaching Organizacional y Ejecutivo.</li>
-              <li><i class="icofont-check-circled"></i> Coach de Equipos en diferentes Clubes como Poeta Lugones - Club Deportivo Atalaya - Club Universitario. </li>              
-              <li><i class="icofont-check-circled"></i> Intervenciones específicas en Jugadores de Fútbol Argentinos para el Exterior: Club Atlético Capitalino de México. </li>
-              <li><i class="icofont-check-circled"></i> Coaching Individual de Jugadores en diferentes disciplinas como Squash, Voley, Fútbol, Básquet, Handball, Jockey.</li>
-              <li><i class="icofont-check-circled"></i> Entrenadora de Profesionales en la Carrera de Coaching Ontológico Profesional Sede Marcos Juárez. </li>
-              <li><i class="icofont-check-circled"></i> ECOA Escuela de Coaching Ontológico Americano.</li>
-              <li><i class="icofont-check-circled"></i> Coaching Organizacional en Empresas.</li>
-              <li><i class="icofont-check-circled"></i> Fundadora y Directora de EC, Emilce Charras Coaching Deportivo.</li>
-            </ul>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
+            <div class="course-item">
+              <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <a href=""><h4>Comprar curso</h4></a>
+                  <p class="price">$17.000</p>
+                </div>
+                <h3><a href="course-details.html">Formación Integral en Coaching Deportivo</a></h3>
+                <p>En busca de la excelencia.<br>Brindar diferentes técnicas, procesos y metodologías de Coaching Deportivo que permitan el logro de resultados óptimos y/o extraordinarios.</p>
+                <p><strong>Horario:</strong> A definir con el alumno<br>
+                <strong>Modalidad:</strong> En vivo</p>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
 
-          </div>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
+            <div class="course-item">
+              <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <a href=""><h4>Comprar curso</h4></a>
+                  <p class="price">$17.000</p>
+                </div>
+                <h3><a href="course-details.html">Formación Integral en Coaching Deportivo</a></h3>
+                <p>En busca de la excelencia.<br>Brindar diferentes técnicas, procesos y metodologías de Coaching Deportivo que permitan el logro de resultados óptimos y/o extraordinarios.</p>
+                <p><strong>Horario:</strong> A definir con el alumno<br>
+                <strong>Modalidad:</strong> En vivo</p>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
+            <div class="course-item">
+              <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <a href=""><h4>Comprar curso</h4></a>
+                  <p class="price">$17.000</p>
+                </div>
+                <h3><a href="course-details.html">Formación Integral en Coaching Deportivo</a></h3>
+                <p>En busca de la excelencia.<br>Brindar diferentes técnicas, procesos y metodologías de Coaching Deportivo que permitan el logro de resultados óptimos y/o extraordinarios.</p>
+                <p><strong>Horario:</strong> A definir con el alumno<br>
+                <strong>Modalidad:</strong> En vivo</p>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
+            <div class="course-item">
+              <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <a href=""><h4>Comprar curso</h4></a>
+                  <p class="price">$17.000</p>
+                </div>
+                <h3><a href="course-details.html">Formación Integral en Coaching Deportivo</a></h3>
+                <p>En busca de la excelencia.<br>Brindar diferentes técnicas, procesos y metodologías de Coaching Deportivo que permitan el logro de resultados óptimos y/o extraordinarios.</p>
+                <p><strong>Horario:</strong> A definir con el alumno<br>
+                <strong>Modalidad:</strong> En vivo</p>
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+
         </div>
 
       </div>
-    </section><!-- End About Section -->
+    </section><!-- End Courses Section -->
 
-   
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
