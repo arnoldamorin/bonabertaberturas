@@ -87,7 +87,7 @@
           <!--<h2>Testimonials</h2>-->
           <p>Que dicen de nosotros</p>
         </div>
-        <h4>Testimonios en video</h4>
+        <h4 class="mb-3">Testimonios en video</h4>
         <div class="row">
           <div class="col">
             <div class="card">
@@ -99,7 +99,7 @@
               <h5>Titulo</h5>
             </div>
           </div>
-          <div class="col">
+          <div class="col mb-4">
             <div class="card">
               <h5>Titulo</h5>
             </div>
