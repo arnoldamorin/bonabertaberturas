@@ -15,14 +15,20 @@
 
     Route::get('/', 'ControladorWebHome@index');
 
-    Route::get('/', 'ControladorWebConferencias@conferencias');
+    Route::get('/cursos', 'ControladorWebCurso@index');
 
-    Route::get('/', 'ControladorWebTestimonios@testimonios');
+    Route::get('/conferencias', 'ControladorWebConferencias@index');
+
+    Route::get('/testimonios', 'ControladorWebTestimonios@index');
   
     Route::get('/admin', 'ControladorHome@index');
     Route::get('/admin/legajo', 'ControladorLegajo@index');
 
     Route::get('/admin/home', 'ControladorHome@index');
+
+    Route::get('/coaching/equipo', 'ControladorWebCoachingEquipo@index');
+
+    Route::get('/coaching/ejecutivo', 'ControladorWebCoachingEjecutivo@index');
 
 /* --------------------------------------------- */
 /* CONTROLADOR LOGIN                           */
