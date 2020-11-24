@@ -15,7 +15,7 @@
 
     Route::get('/', 'ControladorWebHome@index');
 
-    Route::get('/', 'ControladorWebContacto@contacto');
+    Route::get('/contacto', 'ControladorWebContacto@contacto');
 
     Route::get('/admin', 'ControladorHome@index');
     Route::get('/admin/legajo', 'ControladorLegajo@index');
