@@ -17,14 +17,13 @@
 
     Route::get('/cursos', 'ControladorWebCurso@index');
 
+    Route::get('/sobre-mi', 'ControladorWebSobreMi@index');
+
     Route::get('/conferencias', 'ControladorWebConferencias@index');
 
     Route::get('/testimonios', 'ControladorWebTestimonios@index');
   
     Route::get('/admin', 'ControladorHome@index');
-    Route::get('/admin/legajo', 'ControladorLegajo@index');
-
-    Route::get('/admin/home', 'ControladorHome@index');
 
     Route::get('/coaching/equipo', 'ControladorWebCoachingEquipo@index');
 
