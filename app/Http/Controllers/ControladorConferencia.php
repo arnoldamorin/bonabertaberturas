@@ -15,8 +15,8 @@
         {
             $titulo = "Conferencias";
             if (Usuario::autenticado() == true) {
-                /*if (!Patente::autorizarOperacion("MENUCONSULTA")) {
-                    $codigo = "MENUCONSULTA";
+                /*if (!Patente::autorizarOperacion("CONFERENCIASCONSULTA")) {
+                    $codigo = "CONFERENCIASCONSULTA";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {*/
@@ -72,8 +72,8 @@
         {
             $titulo = "Modificar Conferencia";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                    $codigo = "MENUMODIFICACION";
+                if (!Patente::autorizarOperacion("CONFERENCIASMODIFICACION")) {
+                    $codigo = "CONFERENCIASMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
@@ -136,7 +136,7 @@
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("CONFERENCIASELIMINAR")) {
                     $entidad = new Conferencia();
                     $entidad->cargarDesdeRequest($request);
 
