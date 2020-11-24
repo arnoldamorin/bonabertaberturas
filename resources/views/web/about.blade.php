@@ -1,3 +1,5 @@
+@extends('web.plantilla')
+
 <!DOCTYPE html>
 <html lang="es">
 
