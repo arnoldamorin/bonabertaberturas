@@ -14,7 +14,7 @@
     Route::group(array('domain' => '127.0.0.1'), function () {
 
     Route::get('/', 'ControladorWebHome@index');
-
+    Route::get('/', 'ControladorConferencias@conferencias');
   
     Route::get('/admin', 'ControladorHome@index');
     Route::get('/admin/legajo', 'ControladorLegajo@index');
