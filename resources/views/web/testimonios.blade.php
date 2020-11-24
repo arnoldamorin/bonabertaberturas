@@ -1,4 +1,5 @@
 @extends('web.plantilla')
+
 @section('web.contenido')
 
     <!-- ======= Breadcrumbs ======= -->
