@@ -1,5 +1,5 @@
 @extends('web.plantilla')
-
+@section("contenido")
 <!DOCTYPE html>
 <html lang="es">
 

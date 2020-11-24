@@ -15,6 +15,9 @@
 
     Route::get('/', 'ControladorWebHome@index');
 
+    Route::get('/', 'ControladorConferencias@conferencias');
+
+    Route::get('/', 'ControladorTestimonios@testimonios');
   
     Route::get('/admin', 'ControladorHome@index');
     Route::get('/admin/legajo', 'ControladorLegajo@index');
