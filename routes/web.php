@@ -25,8 +25,6 @@
   
     Route::get('/admin', 'ControladorHome@index');
 
-    Route::get('/admin/home', 'ControladorHome@index');
-
     Route::get('/coaching/equipo', 'ControladorWebCoachingEquipo@index');
 
     Route::get('/coaching/ejecutivo', 'ControladorWebCoachingEjecutivo@index');
