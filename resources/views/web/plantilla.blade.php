@@ -57,7 +57,7 @@
         </ul>
       </nav><!-- .nav-menu -->
 
-      <a href="/cursos" class="get-started-btn">Get Started</a>
+      <a href="/cursos" class="get-started-btn">Comienza ahora</a>
 
     </div>
   </header><!-- End Header -->
