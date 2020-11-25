@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>@yield('titulo') - {{ env('APP_NAME') }}</title>
+  <title>@yield('titulo') | {{ env('APP_NAME') }}</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
