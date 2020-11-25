@@ -7,12 +7,12 @@ use App\Entidades\Sistema\Usuario;
 
 require app_path() . '/start/constants.php';
 
-class ControladorWebHome extends Controller
+class ControladorWebSobreMi extends Controller
 {
     public function index()
     {
-        $seccion = "Inicio";
-        return view('web.index', compact('seccion'));
+        $seccion = "Sobre Mi";
+        return view('web.sobre-mi', compact('seccion'));
     }
 
 }
