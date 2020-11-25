@@ -13,33 +13,11 @@
     <!-- ======= Pricing Section ======= -->
     <section id="testimonials" class="testimonials">
       <div class="container" data-aos="fade-up">
-        <div class="section-title">
-          <!--<h2>Testimonials</h2>-->
-          <p>Que dicen de nosotros</p>
-        </div>
-        <h4 class="mb-3">Testimonios en video</h4>
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col mb-4">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-
-        </div>
-        <h4>Testimonios escritos</h4>
+        <!-- <div class="section-title">
+          <p>OPINIONES SOBRE MI TRABAJO</p>
+        </div> -->
+        
+        <h4 class = "text-center mt-1">Testimonios escritos</h4>
         <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
 
           <div class="testimonial-wrap">
@@ -94,6 +72,29 @@
                 Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
+            </div>
+          </div>
+      
+        </div>
+
+        <h4 class="mb-3 text-center mt-5">Testimonios grabados</h4>
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h5 class="mt-2 text-center">Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <h5 class="mt-2 text-center">Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
+            </div>
+          </div>
+          <div class="col mb-4">
+            <div class="card">
+              <h5 class="mt-2 text-center">Titulo</h5>
+              <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
 

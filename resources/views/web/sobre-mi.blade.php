@@ -47,7 +47,7 @@
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
-        <div class="row">
+        <div class="row mt-5">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
             <img src="https://www.webretail.com.ar/v2/wp-content/uploads/2020/10/Mujeres-Liderazgo.jpg" class="img-fluid" alt="">
           </div>
