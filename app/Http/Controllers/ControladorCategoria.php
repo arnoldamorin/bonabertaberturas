@@ -70,8 +70,8 @@
         {
             $titulo = "Modificar Categoria";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                    $codigo = "MENUMODIFICACION";
+                if (!Patente::autorizarOperacion("CATEGORIAMODIFICACION")) {
+                    $codigo = "CATEGORIAMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
@@ -124,10 +124,9 @@
 
         public function eliminar(Request $request)
         {
-            $id = $request->input('id');
-            print_r("LLEGARA?",$id); 
+            $id = $request->input('id');            
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("MENUELIMINAR")) {
+                if (Patente::autorizarOperacion("CATEGORIABAJA")) {
                     
                     $entidad = new Categoria();
                     $entidad->cargarDesdeRequest($request);
