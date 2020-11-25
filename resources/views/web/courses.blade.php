@@ -20,7 +20,7 @@
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
           <div class="course-item">
-            <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+            <img src="../web/img/course-1.jpg" class="img-fluid text-center" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href=""><h4>Comprar curso</h4></a>
@@ -36,7 +36,7 @@
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
           <div class="course-item">
-            <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+            <img src="../web/img/course-1.jpg" class="img-fluid text-center" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href=""><h4>Comprar curso</h4></a>
@@ -52,7 +52,7 @@
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
           <div class="course-item">
-            <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+            <img src="../web/img/course-1.jpg" class="img-fluid text-center" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href=""><h4>Comprar curso</h4></a>
@@ -68,7 +68,7 @@
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-3"> <!-- Course Item -->
           <div class="course-item">
-            <img src="assets/img/course-1.jpg" class="img-fluid text-center" alt="...">
+            <img src="../web/img/course-1.jpg" class="img-fluid text-center" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href=""><h4>Comprar curso</h4></a>
