@@ -2,7 +2,6 @@
 
 @section('titulo', "Cursos")
 
-
 @section('contenido')
 <body>
   <!-- ======= Breadcrumbs ======= -->
