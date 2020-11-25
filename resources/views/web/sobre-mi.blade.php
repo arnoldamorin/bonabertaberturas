@@ -73,7 +73,7 @@
         </div>
         <div clas="row">
           <div class="col-12 ml-5">
-            <a href="courses.html" class="get-started-btn">¡Quiero una sesión con vos!</a>
+            <a href="/coaching/sesion-personal" class="get-started-btn">¡Quiero una sesión con vos!</a>
           </div>
 
         </div>
