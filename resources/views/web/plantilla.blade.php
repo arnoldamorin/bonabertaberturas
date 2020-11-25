@@ -42,10 +42,10 @@
             <li><a href="/testimonios">Testimonios</a></li>
             <li class="drop-down"><a href="">Coaching</a>
             <ul>
-                <li><a href="#">Sesión Personal</a></li>
+                <li><a href="/coaching/sesion-personal">Sesión Personal</a></li>
                 <li><a href="/coaching/equipo">De Equipos</a></li>
-                <li><a href="#">Empresarial</a></li>
-                <li><a href="#">Deportivo</a></li>
+                <li><a href="/coaching/empresarial">Empresarial</a></li>
+                <li><a href="/coaching/deportivo">Deportivo</a></li>
                 <li><a href="/coaching/ejecutivo">Ejecutivo</a></li>
             </ul>
             </li>
