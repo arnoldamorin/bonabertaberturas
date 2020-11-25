@@ -1,6 +1,6 @@
 @extends('web.plantilla')
 
-@section('web.contenido')
+@section('contenido')
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
