@@ -11,7 +11,8 @@ class ControladorWebHome extends Controller
 {
     public function index()
     {
-        return view('web.index');
+        $seccion = "Inicio";
+        return view('web.index', compact('seccion'));
     }
 
 }

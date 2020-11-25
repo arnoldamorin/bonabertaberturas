@@ -8,7 +8,8 @@ class ControladorWebConferencias extends Controller
 {
     public function index()
     {
-        return view('web.conferencias');
+        $seccion = "Conferencias";
+        return view('web.conferencias', compact('seccion'));
     }
 
 }

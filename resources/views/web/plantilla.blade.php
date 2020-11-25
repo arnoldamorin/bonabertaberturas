@@ -38,11 +38,11 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Inicio</a></li>
-          <li><a href="/sobre-mi">Sobre Mi</a></li>
-          <li><a href="/cursos">Cursos</a></li>
-          <li><a href="/conferencias">Conferencias</a></li>
-          <li><a href="/testimonios">Testimonios</a></li>
+          <li class=@if ($seccion == "Inicio") active @endif><a href="/">Inicio</a></li>
+          <li class=@if ($seccion == "Sobre Mi") active @endif><a href="/sobre-mi">Sobre Mi</a></li>
+          <li class=@if ($seccion == "Cursos") active @endif><a href="/cursos">Cursos</a></li>
+          <li class=@if ($seccion == "Conferencias") active @endif><a href="/conferencias">Conferencias</a></li>
+          <li class=@if ($seccion == "Testimonios") active @endif><a href="/testimonios">Testimonios</a></li>
           <li class="drop-down"><a href="">Coaching</a>
             <ul>
               <li><a href="/coaching/sesion-personal">Sesión Personal</a></li>
@@ -52,7 +52,7 @@
               <li><a href="/coaching/ejecutivo">Ejecutivo</a></li>
             </ul>
           </li>
-          <li><a href="/contacto">Contacto</a></li>
+          <li class=@if ($seccion == "Contacto") active @endif><a href="/contacto">Contacto</a></li>
 
         </ul>
       </nav><!-- .nav-menu -->

@@ -11,7 +11,8 @@ class ControladorWebSobreMi extends Controller
 {
     public function index()
     {
-        return view('web.sobre-mi');
+        $seccion = "Sobre Mi";
+        return view('web.sobre-mi', compact('seccion'));
     }
 
 }

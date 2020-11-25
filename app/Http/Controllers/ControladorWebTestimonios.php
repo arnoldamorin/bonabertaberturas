@@ -11,7 +11,8 @@ class ControladorWebTestimonios extends Controller
 {
     public function index()
     {
-        return view('web.testimonios');
+        $seccion = "Testimonios";
+        return view('web.testimonios', compact('seccion'));
     }
 
 }
