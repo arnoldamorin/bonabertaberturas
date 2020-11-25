@@ -22,6 +22,8 @@
   <link href="{{ asset('web/vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
   <link href="{{ asset('web/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
   <link href="{{ asset('web/vendor/aos/aos.css') }}" rel="stylesheet">
+  
+  <link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body>
