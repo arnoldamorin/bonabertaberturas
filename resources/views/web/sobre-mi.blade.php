@@ -1,5 +1,8 @@
-@extends('web.plantilla')
-@section("contenido")
+@extends('plantilla')
+
+@section('titulo', "sobre-mi")
+
+@section('contenido')
 <!DOCTYPE html>
 <html lang="es">
 
