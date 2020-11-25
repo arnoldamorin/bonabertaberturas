@@ -40,8 +40,7 @@
 
 <body>
 
-  <main id="main">
-    <!-- ======= About Section ======= -->
+ <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
@@ -79,10 +78,6 @@
       </div>
     </section>
     <!-- End About Section -->
-
-   
-  </main><!-- End #main -->
-
 </body>
 
 </html>
