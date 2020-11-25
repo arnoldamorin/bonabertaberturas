@@ -21,19 +21,19 @@
         <div class="row">
           <div class="col">
             <div class="card">
-              <h5 class="mt-2">Titulo</h5>
+              <h5 class="mt-2 text-center">Titulo</h5>
               <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
           <div class="col">
             <div class="card">
-              <h5 class="mt-2">Titulo</h5>
+              <h5 class="mt-2 text-center">Titulo</h5>
               <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
           <div class="col mb-4">
             <div class="card">
-              <h5 class="mt-2">Titulo</h5>
+              <h5 class="mt-2 text-center">Titulo</h5>
               <video src="#" width=320  height=240 controls poster="#">
             </div>
           </div>
