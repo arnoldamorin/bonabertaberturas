@@ -1,5 +1,7 @@
 @extends("web.plantilla")
+@section('titulo', "Inicio")
 @section("contenido")
+
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
