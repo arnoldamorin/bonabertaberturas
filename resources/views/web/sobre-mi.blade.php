@@ -1,6 +1,6 @@
-@extends('plantilla')
+@extends('web.plantilla')
 
-@section('titulo', "sobre-mi")
+@section('titulo', "Sobre mí")
 
 @section('contenido')
 <!DOCTYPE html>
@@ -84,3 +84,5 @@
 </body>
 
 </html>
+
+@endsection
