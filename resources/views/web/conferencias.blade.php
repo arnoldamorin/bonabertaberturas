@@ -1,5 +1,7 @@
 @extends('web.plantilla')
+@section('titulo', "Conferencias")
 
+@section('contenido')
 <!-- ======= Breadcrumbs ======= -->
 <div class="breadcrumbs" data-aos="fade-in">
   <div class="container">
@@ -16,7 +18,7 @@
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="card">
           <div class="card-img">
-            <img src="assets/img/events-1.jpg" alt="...">
+            <img src="../web/img/events-1.jpg" alt="...">
           </div>
           <div class="card-body">
             <h5 class="card-title"><a href="">Conferencia 1</a></h5>
@@ -28,7 +30,7 @@
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="card">
           <div class="card-img">
-            <img src="assets/img/events-2.jpg" alt="...">
+            <img src="../web/img/events-2.jpg" alt="...">
           </div>
           <div class="card-body">
             <h5 class="card-title"><a href="">Conferencia 2</a></h5>
@@ -36,14 +38,13 @@
             <p class="card-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
           </div>
         </div>
-
       </div>
     </div>
     <div class="row">
       <div class="col-md-6 d-flex align-items-stretch">
         <div class="card">
           <div class="card-img">
-            <img src="assets/img/events-3.jpg" alt="...">
+            <img src="../web/img/events-3.jpg" alt="...">
           </div>
           <div class="card-body">
             <h5 class="card-title"><a href="">Conferencia 3</a></h5>
@@ -57,3 +58,5 @@
 
   </div>
 </section><!-- End Events Section -->
+
+@endsection
