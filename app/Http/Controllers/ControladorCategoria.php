@@ -59,11 +59,20 @@
             );
             return json_encode($json_data);
         }
-
-        public function nuevo()
-        {
+       
+        public function nuevo(){
             $titulo = "Nuevo Categoria";
-            return view('categoria.categoria-nuevo', compact('titulo'));
+            if(Usuario::autenticado() == true){
+                if (!Patente::autorizarOperacion("CATEGORIAALTA")) {
+                    $codigo = "CATEGORIAALTA";
+                    $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                    return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+                } else {
+                    return view('categoria.categoria-nuevo', compact('titulo'));
+                }
+            } else {
+               return redirect('admin/login');
+            }           
         }
 
         public function editar($id)
