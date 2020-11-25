@@ -7,11 +7,11 @@ use App\Entidades\Sistema\Usuario;
 
 require app_path() . '/start/constants.php';
 
-class ControladorWebTestimonios extends Controller
+class ControladorWebCoachingEjecutivo extends Controller
 {
     public function index()
     {
-        return view('web.testimonios');
+        return view('web.ejecutivo');
     }
 
 }

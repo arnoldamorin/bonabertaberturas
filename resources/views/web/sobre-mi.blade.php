@@ -1,5 +1,8 @@
 @extends('web.plantilla')
-@section("contenido")
+
+@section('titulo', "Sobre mí")
+
+@section('contenido')
 <!DOCTYPE html>
 <html lang="es">
 
@@ -40,8 +43,7 @@
 
 <body>
 
-  <main id="main">
-    <!-- ======= About Section ======= -->
+ <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
@@ -79,10 +81,8 @@
       </div>
     </section>
     <!-- End About Section -->
-
-   
-  </main><!-- End #main -->
-
 </body>
 
 </html>
+
+@endsection
