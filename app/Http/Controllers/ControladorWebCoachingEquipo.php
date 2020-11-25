@@ -11,7 +11,8 @@ class ControladorWebCoachingEquipo extends Controller
 {
     public function index()
     {
-        return view('web.equipo');
+        $seccion = "";
+        return view('web.equipo', compact('seccion'));
     }
 
 }

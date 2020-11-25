@@ -11,7 +11,8 @@ class ControladorWebCoachingEjecutivo extends Controller
 {
     public function index()
     {
-        return view('web.ejecutivo');
+        $seccion = "";        
+        return view('web.ejecutivo', compact('seccion'));
     }
 
 }
