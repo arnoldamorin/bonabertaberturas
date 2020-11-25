@@ -1,5 +1,6 @@
 @extends('web.plantilla')
 @section('contenido')
+<body>
   <!-- ======= Contact Section ======= -->
 
       <!-- ======= Breadcrumbs ======= -->
@@ -78,5 +79,7 @@
 
       </div>
     </section><!-- End Contact Section -->
+  </body>
 @endsection
+</html>
    
