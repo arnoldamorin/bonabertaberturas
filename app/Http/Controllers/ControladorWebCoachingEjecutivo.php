@@ -11,7 +11,7 @@ class ControladorWebCoachingEjecutivo extends Controller
 {
     public function index()
     {
-        return view('web.coachingejecutivo');
+        return view('web.ejecutivo');
     }
 
 }
