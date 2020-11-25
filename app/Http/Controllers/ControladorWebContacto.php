@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 require app_path() . '/start/constants.php';
 
-class ControladorWebConferencias extends Controller
+class ControladorWebContacto extends Controller
 {
     public function index()
     {
-        return view('web.conferencias');
+        return view('web.contacto');
     }
 
 }
