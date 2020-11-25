@@ -8,7 +8,7 @@ class ControladorWebCurso extends Controller
 {
     public function index()
     {
-        return view('web.courses');
+        return view('web.cursos');
     }
 
 }
