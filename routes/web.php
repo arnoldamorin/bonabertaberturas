@@ -26,11 +26,8 @@
 
     Route::get('/testimonios', 'ControladorWebTestimonios@index');
   
-<<<<<<< HEAD
     Route::get('/admin/home', 'ControladorHome@index');
-=======
     Route::get('/admin', 'ControladorHome@index');
->>>>>>> 6ea2186c003d58bed3c8cbfe8af103b0858efc06
 
     Route::get('/coaching/equipo', 'ControladorWebCoachingEquipo@index');
 
