@@ -53,7 +53,7 @@
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3 class="ml-5 mb-3">Mi nombre es Emilce Charras</h3>
-            <p class="font-italic">Hace varios años soy Senior Coach ontológico profesional, avalada por la AACOP y la FICOP.</p>
+            <p class="font-italic text-sm-left text-center">Hace varios años soy Senior Coach ontológico profesional, avalada por la AACOP y la FICOP.</p>
 
             <div class="row mb-3 ">
               <div class="col-sm-6 col-12 text-sm-left text-center">
@@ -64,7 +64,7 @@
               </div>
             </div>
 
-            <p class="font-italic">Mi pasión es inspirar a las personas a disfrutar la vida, lo que eligen y hacen día a día y creer en la posibilidad de cambios personales para alcanzar resultados extraordinarios, motivándolos a conquistar las oportunidades para su crecimiento y bienestar.</p>
+            <p class="font-italic text-sm-left text-center">Mi pasión es inspirar a las personas a disfrutar la vida, lo que eligen y hacen día a día y creer en la posibilidad de cambios personales para alcanzar resultados extraordinarios, motivándolos a conquistar las oportunidades para su crecimiento y bienestar.</p>
                       
             <ul>
               <li><i class="icofont-check-circled"></i> Especialista en Coaching Deportivo.</li>
@@ -77,6 +77,11 @@
               <li><i class="icofont-check-circled"></i> Coaching Organizacional en Empresas.</li>
               <li><i class="icofont-check-circled"></i> Fundadora y Directora de EC, Emilce Charras Coaching Deportivo.</li>
             </ul>
+
+            <p class ="font-italic text-sm-left text-center"><strong>¿Para qué puedes elegirme como tu Coach?</strong><br>Para ser escuchado y acompañarte a lograr superar lo que te limita a expandirte, a crecer y a vivir tu vida como lo deseás. 
+              <br>Para lograr los objetivos profesionales y los de tu equipo.
+              <br>Para un nuevo liderazgo intrapersonal e Interpersonal, sea el escenario donde te encuentres.
+            </p>
 
           </div>
         </div>
