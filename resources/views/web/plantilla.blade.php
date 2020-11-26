@@ -71,9 +71,9 @@
 
     <div class="footer-top">
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
 
-          <div class="col-lg-3 col-md-6 footer-contact">
+          <div class="col-lg-3 col-md-6 footer-contact text-center">
             <h3>Información útil</h3>
             <p>
               A108 Adam Street <br>
