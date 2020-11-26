@@ -20,4 +20,9 @@ class ControladorWebCurso extends Controller
         return view('web.compra-curso');
     }
 
+    public function detalleCurso() {
+        print_r($_GET["id"]);
+        return view('web.detalle-curso');
+    }
+
 }
