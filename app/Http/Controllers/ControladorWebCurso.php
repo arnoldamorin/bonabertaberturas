@@ -16,4 +16,8 @@ class ControladorWebCurso extends Controller
         return view('web.cursos', compact('seccion', 'aCursos'));
     }
 
+    public function compraCurso() {
+        return view('web.compra-curso');
+    }
+
 }

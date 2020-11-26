@@ -18,7 +18,7 @@
     Route::get('/contacto', 'ControladorWebContacto@index');
 
     Route::get('/cursos', 'ControladorWebCurso@index');
-    /*Route::get('/cursos/{id}', 'ControladorWebCurso@info');*/
+    /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');*/
 
     Route::get('/contacto', 'ControladorWebContacto@index');
 

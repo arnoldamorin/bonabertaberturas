@@ -25,7 +25,7 @@
             <img src="../web/img/course-{{ $i+1 }}.jpg" class="img-fluid text-center" alt="...">
             <div class="course-content">
               <div class="d-flex justify-content-between align-items-center mb-3">
-                <a href="">
+                <a href="/cursos/compra{{ $aCursos[$i]->idcurso }}">
                   <h4>Comprar curso</h4>
                 </a>
                 <p class="price">${{ number_format($aCursos[$i]->precio, 2, ",", ".") }}</p>
@@ -33,7 +33,7 @@
               <h3><a href="course-details.html">{{ $aCursos[$i]->nombre }}</a></h3>
               <p>{{ $aCursos[$i]->descripcion }}</p>
               <p><strong>Horario:</strong> {{ $aCursos[$i]->horario }}<br>
-                <strong>Modalidad:</strong> {{ $aCursos[$i]->categoria }}</p>
+              <strong>Modalidad:</strong> {{ $aCursos[$i]->categoria }}</p>
             </div>
           </div>
         </div> <!-- End Course Item-->
