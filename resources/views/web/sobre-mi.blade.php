@@ -49,7 +49,7 @@
 
         <div class="row mt-5">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src="https://www.webretail.com.ar/v2/wp-content/uploads/2020/10/Mujeres-Liderazgo.jpg" class="img-fluid" alt="">
+            <img src="../web/img/emilce-sobre-mi.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
             <h3 class="ml-5 mb-3">Mi nombre es Emilce Charras</h3>
