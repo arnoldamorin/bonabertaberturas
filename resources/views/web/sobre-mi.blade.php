@@ -55,6 +55,15 @@
             <h3 class="ml-5 mb-3">Mi nombre es Emilce Charras</h3>
             <p class="font-italic">Hace varios años soy Senior Coach ontológico profesional, avalada por la AACOP y la FICOP.</p>
 
+            <div class="row mb-3 ">
+              <div class="col-sm-6 col-12 text-sm-left text-center">
+                <img src="../web/img/logos/ficop.jpg" style="height: 80px;" alt="">
+              </div>
+              <div class="col-sm-6 col-12 text-sm-left text-center pl-sm-0 pl-5">
+                <img src="../web/img/logos/scop.jpg" style="height: 80px;" alt="">
+              </div>
+            </div>
+
             <p class="font-italic">Mi pasión es inspirar a las personas a disfrutar la vida, lo que eligen y hacen día a día y creer en la posibilidad de cambios personales para alcanzar resultados extraordinarios, motivándolos a conquistar las oportunidades para su crecimiento y bienestar.</p>
                       
             <ul>

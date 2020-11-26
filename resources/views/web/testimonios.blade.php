@@ -1,5 +1,5 @@
 @extends('web.plantilla')
-
+@section('titulo', "Testimonios")
 @section('contenido')
 
     <!-- ======= Breadcrumbs ======= -->

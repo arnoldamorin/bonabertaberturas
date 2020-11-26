@@ -1,6 +1,6 @@
 @extends('web.plantilla')
 
-@section('titulo', "Listado de testimonios")
+@section('titulo', "Coaching De Equipos")
 
 @section('contenido')
     <section id="trainers" class="trainers mt-5">

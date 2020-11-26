@@ -1,4 +1,5 @@
 @extends('web.plantilla')
+@section('titulo', "Contacto")
 @section('contenido')
 <body>
   <!-- ======= Contact Section ======= -->
