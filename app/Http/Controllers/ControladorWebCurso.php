@@ -21,7 +21,6 @@ class ControladorWebCurso extends Controller
     }
 
     public function detalleCurso() {
-        print_r($_GET["id"]);
         return view('web.detalle-curso');
     }
 
