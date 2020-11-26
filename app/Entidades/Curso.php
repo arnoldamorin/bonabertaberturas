@@ -73,8 +73,11 @@ class Curso extends Model
                   C.precio,
                   C.cupo,
                   C.horario,
-                  C.fk_idcategoria
-                FROM cursos C ORDER BY C.nombre";
+                  C.fk_idcategoria,
+                  CA.nombre AS categoria
+                FROM cursos C
+                INNER JOIN categorias CA ON C.fk_idcategoria = CA.idcategoria
+                ORDER BY C.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }

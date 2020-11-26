@@ -8,7 +8,7 @@
         "type": "pwa-chrome",
         "request": "launch",
         "name": "Launch",
-        "url": "http://127.0.0.1:8000/admin",
+        "url": "http://127.0.0.1:8000/",
         "webRoot": "${workspaceFolder}"
     }
     ]
