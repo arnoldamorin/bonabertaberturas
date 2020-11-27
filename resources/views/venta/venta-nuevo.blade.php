@@ -77,6 +77,18 @@ if (isset($msg)) {
                     <label>Importe: *</label>
                     <input class = "form-control" type="text" name = "txtImporte" id = "txtImporte" required>
                 </div>
+                <div class="form-group col-lg-6">
+                    <label>Estado:</label>
+                    <select id="lstEstado" name="lstEstado" class="form-control">
+                        @for ($i = 0; $i < count($array_estado); $i++)
+                            @if (isset($curso))
+                                <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                            @else
+                                <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                            @endif
+                        @endfor
+                    </select>
+                </div>
             </div>
 			
             </div>

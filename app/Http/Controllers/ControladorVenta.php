@@ -88,7 +88,7 @@ class ControladorVenta extends Controller
             $entidad = new Curso();
             $array_curso = $entidad->obtenerTodos();
             
-            $entidad2 = new Alumnos();
+            $entidad2 = new Alumno();
             $array_alumno = $entidad2->obtenerTodos();
 
             $venta_estado = new Venta_estado();
