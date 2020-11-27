@@ -99,7 +99,7 @@
                 if($_FILES["imagen"]["error"] === UPLOAD_ERR_OK){
                     $nombre = date("Ymdhmsi") . ".jpg"; 
                     $archivo = $_FILES["imagen"]["tmp_name"];
-                    move_uploaded_file($archivo, env('APP_PATH') . "../web/img/$nombre");//guardaelarchivo
+                    move_uploaded_file($archivo, env('APP_PATH') . "/public/web/img/$nombre");//guardaelarchivo
                     $entidad->imagen =$nombre;
                 }
     
@@ -115,7 +115,7 @@
                         if(isset($_FILES["imagen"]) && $_FILES["imagen"]["name"] != ""){
                             $archivoAnterior =$_FILES["imagen"]["name"];
                             if($archivoAnterior !=""){
-                                @unlink (env('APP_PATH') . "../web/img/$archivoAnterior");
+                                @unlink (env('APP_PATH') . "/public/web/img/$archivoAnterior");
                             }
                         } else {
                             $entidad->imagen = $conferenciaAnt->imagen;
