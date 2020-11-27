@@ -36,7 +36,9 @@
 
     Route::get('/coaching/ejecutivo', 'ControladorWebCoachingEjecutivo@index');
 
-    Route::get('/coaching/sesion-personal', 'ControladorWebCoachingSesionPersonal@index');
+    Route::get('/coaching/sesion-personal', 'ControladorWebSesionPersonal@index');
+
+    Route::get('/coaching/empresarial', 'ControladorWebCoachingEmpresarial@index');
 
 /* --------------------------------------------- */
 /* CONTROLADOR LOGIN                           */
