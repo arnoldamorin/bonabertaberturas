@@ -7,7 +7,7 @@
 <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>Course Details</h2>
+        <h2>Detalle del curso</h2>
         <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
       </div>
     </div><!-- End Breadcrumbs -->
@@ -28,7 +28,7 @@
 
             <div class="course-info d-flex justify-content-between align-items-center">
               <h5>Precio</h5>
-              <p>{{ number_format($curso->precio, 2, ",", ".") }}</p>
+              <p>$ {{ number_format($curso->precio, 2, ",", ".") }}</p>
             </div>
 
             <div class="course-info d-flex justify-content-between align-items-center">

@@ -41,7 +41,7 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form1" method="POST">
+        <form id="form1" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
@@ -70,13 +70,17 @@ if (isset($msg)) {
                     <label>Cupo: *</label>
                     <input type="number" id="nbCupo" name="nbCupo" class="form-control " value = "{{$curso->cupo or ''}}">
                 </div>
-                 <div class="form-group col-lg-6">
+                <div class="form-group col-lg-6">
                     <label>Horario *:</label>
                     <input type="text" id="txtHorario" name="txtHorario" class="form-control" value = "{{$curso->horario or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
                     <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10">{{$curso->descripcion or ''}}</textarea>
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Imagen *:</label>
+                    <input class="form-control-file" type="file" name="imagenCurso" id="imagenCurso">
                 </div>
             </div>
 			
