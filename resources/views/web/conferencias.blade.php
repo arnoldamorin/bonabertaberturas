@@ -20,7 +20,7 @@
           <div class="col-md-6 d-flex align-items-stretch">
             <div class="card">
               <div class="card-img">
-                <img src=":/web/img/{{ $aConferencias[$i]->imagen }}" alt="...">
+                <img src="../web/img/{{ $aConferencias[$i]->imagen }}" alt="...">
               </div>
               <div class="card-body">
                 <h5 class="card-title"><a href="">{{ $aConferencias[$i]->nombre }}</a></h5>
