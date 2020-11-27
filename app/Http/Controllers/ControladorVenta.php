@@ -121,6 +121,14 @@ class ControladorVenta extends Controller
                 $titulo = "Modificar Venta";
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
+                
+                $alumno = new Alumno();
+                $alumno->obtenerPorId($entidad->fk_idalumno);
+                $entidad->telefono = $alumno->telefono;
+
+                $curso = new Curso();
+                $curso->obtenerPorId($entidad->fk_idcurso);
+                $entidad->importe = $curso->importe;
     
                 //validaciones
                 if ($entidad->fecha == "") {
