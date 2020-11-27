@@ -20,8 +20,14 @@ class ControladorWebCurso extends Controller
         return view('web.compra-curso');
     }
 
-    public function detalleCurso() {
-        return view('web.detalle-curso');
+    public function detalleCurso($id) {
+        $curso = new Curso();
+        $curso->obtenerPorId($id);
+        return view('web.detalle-curso', compact('curso'));
+    }
+
+    public function subirDatosCompra($request){
+        
     }
 
 }
