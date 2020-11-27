@@ -7,8 +7,7 @@
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2>Contactá con Nosotros</h2>
-        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. </p>
+        <h2 class ="pt-3">Escribime tu consulta</h2>
       </div>
     </div><!-- End Breadcrumbs -->
 

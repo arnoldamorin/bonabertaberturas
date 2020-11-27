@@ -8,7 +8,8 @@
 <div class="breadcrumbs">
   <div class="container">
     <h2>Cursos</h2>
-    <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab officiis, facilis ad quas laudantium quae praesentium accusantium, doloremque corrupti in tempore! Eaque saepe non nihil veritatis nisi fuga quidem minima!</p>
+    <p class = "font-italic">En la actualidad es necesario un aprendizaje integral de la persona, en su manera de ser, en sus habilidades y potencialidades para lograr impactar sobre su entorno de manera eficaz. Para ello es fundamental incorporar nuevas competencias conversacionales y de gestión de procesos.</p>
+    <p class = "mt-3">¡Inscribite ahora mismo!</p>
   </div>
 </div><!-- End Breadcrumbs -->
 
