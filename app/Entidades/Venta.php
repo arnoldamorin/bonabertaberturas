@@ -129,7 +129,7 @@ class Venta extends Model
                 telefono,
                 correo,
                 fk_idestado             
-            ) VALUES (?, ?, ?, ?, ?)";
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fecha, 
             $this->importe,

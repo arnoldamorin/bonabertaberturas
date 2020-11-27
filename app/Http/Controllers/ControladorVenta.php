@@ -50,6 +50,7 @@ class ControladorVenta extends Controller
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aVenta[$i]->fecha;
+                $alumno = new Alumno();
                 $row[] = $aVenta[$i]->importe;
                 $row[] = $aVenta[$i]->fk_idcurso;
                 $row[] = $aVenta[$i]->telefono;
