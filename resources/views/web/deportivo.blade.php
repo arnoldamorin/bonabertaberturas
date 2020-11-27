@@ -52,7 +52,7 @@
                     <p class="font-italic text-sm-left text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet a perferendis labore quaerat eaque provident minus accusantium aperiam laboriosam! Obcaecati ad autem error eveniet cumque voluptates odit aliquam optio amet..</p>
 
                     <div class="col-12 pl-0">
-                        <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">Agendar Sesión</a>
+                        <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn ml-0">Agendar Sesión</a>
                     </div>
                 </div>
             </div>
