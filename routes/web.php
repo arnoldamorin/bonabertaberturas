@@ -170,5 +170,7 @@ Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
     Route::get('/admin/ventas', 'ControladorVenta@index');
     Route::get('/admin/ventas/nuevo/{id}', 'ControladorVenta@editar');
     Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
+    Route::post('/admin/ventas/nuevo/{id}', 'ControladorVenta@guardar');
+    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');
 
 });
