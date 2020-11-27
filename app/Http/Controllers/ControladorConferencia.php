@@ -94,6 +94,15 @@
                 $titulo = "Modificar conferencia";
                 $entidad = new Conferencia();
                 $entidad->cargarDesdeRequest($request);
+
+                $idconferencia=$_REQUEST['id'];
+                if($_FILES["imagen"]["error"] === UPLOAD_ERR_OK)
+                {
+                    $nombre = date("Ymdhmsi") . ".jpg"; 
+                    $archivo = $_FILES["imagen"]["tmp_name"];
+                    move_uploaded_file($archivo, env('APP_PATH') . "../web/img/$nombre");//guardaelarchivo
+                    $entidad->imagen =$nombre;
+                }
     
                 //validaciones
                 if ($entidad->nombre == "") {
@@ -101,7 +110,17 @@
                     $msg["MSG"] = "Complete todos los datos";
                 } else {
                     if ($_POST["id"] > 0) {
-                        //Es actualizacion
+                        $conferenciaAnt = new Conferencia();
+                        $conferenciaAnt->obtenerPorId($entidad->idconferencia);
+                   
+                        if(isset($_FILES["imagen"]) && $_FILES["imagen"]["name"] != ""){
+                            $archivoAnterior =$_FILES["imagen"]["name"];
+                            if($archivoAnterior !=""){
+                                @unlink (env('APP_PATH') . "../web/img/$archivoAnterior");
+                            }
+                        } else {
+                            $entidad->imagen = $conferenciaAnt->imagen;
+                        }
                         $entidad->guardar();
     
                         $msg["ESTADO"] = MSG_SUCCESS;

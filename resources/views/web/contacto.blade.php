@@ -10,7 +10,7 @@ $pg = "contacto";
 if($_POST){ /* es postback */
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
-    //$asunto = $_POST["txtAsunto"];
+    $asunto = $_POST["txtAsunto"];
     $mensaje = $_POST["txtMensaje"];
 
     if($nombre != "" && $correo != ""){
@@ -18,11 +18,11 @@ if($_POST){ /* es postback */
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
         $mail->Host = "mail.dominio.com"; // SMTP a utilizar
-        $mail->Username = "info@dominio.com.ar"; // Correo completo a utilizar
-        $mail->Password = "aqui va la clave de tu correo";
+        $mail->Username = "info@emilcecharras.com.ar"; // Correo completo a utilizar
+        $mail->Password = "emilcecharras@gmail.com";
         $mail->Port = 25;
-        $mail->From = "info@dominio.com.ar"; //Desde la cuenta donde enviamos
-        $mail->FromName = "Jose Hidalgo";
+        $mail->From = "info@emilcecharras.com.ar"; //Desde la cuenta donde enviamos
+        $mail->FromName = "Emilce Charras";
         $mail->IsHTML(true);
         $mail->SMTPOptions = array(
                     'ssl' => array(
@@ -34,16 +34,16 @@ if($_POST){ /* es postback */
 
          //Destinatarios
          $mail->addAddress($correo);
-         $mail->addBCC("jhidalgomez@gmail.com"); //Copia oculta
+         $mail->addBCC("emilcecharras@gmail.com"); //Copia oculta
          $mail->Subject = utf8_decode("Contacto página Web");
-         $mail->Body = "Recibimos tu consulta, te responderemos a la brevedad.";
+         $mail->Body = "Recibi tu consulta, te respondere a la brevedad.";
          /*if(!$mail->Send()){ //cuando este en el servidor descomentar
              $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
          }*/
          $mail->ClearAllRecipients(); //Borra los destinatarios
  
          //Envía ahora un correo a nosotros con los datos de la persona
-         $mail->addAddress("info@dominio.com.ar");
+         $mail->addAddress("emilcecharras@gmail.com");
          $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
          $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
         
