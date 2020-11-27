@@ -27,6 +27,7 @@ class Curso extends Model
         $this->cupo = $request->input('nbCupo');
         $this->horario = $request->input('txtHorario');
         $this->descripcion = $request->input('txtDescripcion');
+        $this->imagen = $request->input('imagenCurso');
     }
 
     public function obtenerFiltrado() {
@@ -37,7 +38,8 @@ class Curso extends Model
            2 => 'C.precio',
            3 => 'C.cupo,',
            4 => 'C.horario',
-           5 => 'C.fk_idcategoria'
+           5 => 'C.imagen',
+           6 => 'C.fk_idcategoria'
             );
         $sql = "SELECT DISTINCT
                     C.idcurso,
@@ -46,6 +48,7 @@ class Curso extends Model
                     C.precio,
                     C.cupo,
                     C.horario,
+                    C.imagen,
                     C.fk_idcategoria
                     FROM cursos C
                 WHERE 1=1
@@ -73,6 +76,7 @@ class Curso extends Model
                   C.precio,
                   C.cupo,
                   C.horario,
+                  C.imagen,
                   C.fk_idcategoria,
                   CA.nombre AS categoria
                 FROM cursos C
@@ -90,6 +94,7 @@ class Curso extends Model
                 precio,
                 cupo,
                 horario,
+                imagen,
                 fk_idcategoria
                 FROM cursos WHERE idcurso = $idcurso";
         $lstRetorno = DB::select($sql);
@@ -101,6 +106,7 @@ class Curso extends Model
             $this->precio = $lstRetorno[0]->precio;
             $this->cupo = $lstRetorno[0]->cupo;
             $this->horario = $lstRetorno[0]->horario;
+            $this->imagen = $lstRetorno[0]->imagen;
             $this->categoria = $lstRetorno[0]->fk_idcategoria;
             return $this;
         }
@@ -114,6 +120,7 @@ class Curso extends Model
             precio=$this->precio,
             cupo= $this->cupo,
             horario='$this->horario',
+            imagen='$this->imagen',
             fk_idcategoria= '$this->categoria'
             WHERE idcurso=?";
         $affected = DB::update($sql, [$this->idcurso]);
@@ -132,6 +139,7 @@ class Curso extends Model
                 precio,
                 cupo,
                 horario,
+                imagen,
                 fk_idcategoria
             ) VALUES (?, ?, ?, ?, ?, ?);";
        $result = DB::insert($sql, [
@@ -140,6 +148,7 @@ class Curso extends Model
             $this->precio, 
             $this->cupo, 
             $this->horario,
+            $this->imagen,
             $this->categoria
         ]);
        return $this->idcurso = DB::getPdo()->lastInsertId();
