@@ -1,5 +1,5 @@
 @extends('web.plantilla')
-@section('titulo', "Coaching Empresarial")
+@section('titulo', "Coaching Deportivo")
 @section('contenido')
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +35,7 @@
 <!-- ======= Breadcrumbs ======= -->
 <div class="breadcrumbs">
     <div class="container">
-      <h2>Empresarial</h2>
+      <h2>Deportivo</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 
@@ -55,7 +55,7 @@
         </div>
         <div clas="row">
           <div class="col-12 pl-0">
-            <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">Agendar sesión</a>
+            <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">¡Quiero una sesión con vos!</a>
           </div>
 
         </div>

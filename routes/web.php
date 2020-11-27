@@ -40,6 +40,8 @@
 
     Route::get('/coaching/empresarial', 'ControladorWebCoachingEmpresarial@index');
 
+    Route::get('/coaching/deportivo', 'ControladorWebCoachingDeportivo@index');
+
 /* --------------------------------------------- */
 /* CONTROLADOR LOGIN                           */
 /* --------------------------------------------- */

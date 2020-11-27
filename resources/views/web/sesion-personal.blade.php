@@ -45,7 +45,7 @@
 
         <div class="row mt-5">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src=" {{ asset('web/img/diferencia-tu.conferencia.jpg') }}" class="img-fluid" alt="">
+            <img src=" {{ asset('web/img/diferencia-tu-conferencia.jpg') }}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
 
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div clas="row">
-          <div class="col-12 ml-5">
+          <div class="col-12 col-12 pl-0">
             <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">¡Quiero una sesión con vos!</a>
           </div>
 
