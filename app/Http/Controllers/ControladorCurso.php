@@ -60,6 +60,15 @@ class ControladorCurso extends Controller
             $entidad = new Curso();
             $entidad->cargarDesdeRequest($request);
 
+            $idcurso=$_REQUEST['id'];
+            if($_FILES["imagenCurso"]["error"] === UPLOAD_ERR_OK)
+            {
+                $nombre = date("Ymdhmsi") . ".jpg"; 
+                $archivo = $_FILES["imagenCurso"]["tmp_name"];
+                move_uploaded_file($archivo, env('APP_PATH') . "../web/img/$nombre");//guardaelarchivo
+                $entidad->imagen =$nombre;
+            }
+
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("CURSOSMODIFICACION")) {
                     $codigo = "CURSOSMODIFICACION";
@@ -71,6 +80,18 @@ class ControladorCurso extends Controller
                         $msg["MSG"] = "Complete todos los datos";
                     } else {
                         if ($_POST["id"] > 0) {
+                            $cursoAnt = new Curso();
+                            $cursoAnt->obtenerPorId($entidad->idcurso);
+                       
+                            if(isset($_FILES["imagenCurso"]) && $_FILES["imagenCurso"]["name"] != ""){
+                                $archivoAnterior =$_FILES["imagenCurso"]["name"];
+                                if($archivoAnterior !=""){
+                                    @unlink (env('APP_PATH') . "../web/img/$archivoAnterior");
+                                }
+                            } else {
+                                $entidad->imagen = $cursoAnt->imagen;
+                            }
+            
                             //Es actualizacion
                             $entidad->guardar();
         
