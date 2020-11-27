@@ -6,7 +6,7 @@
 <div class="breadcrumbs" data-aos="fade-in">
   <div class="container">
     <h2>Conferencias</h2>
-    <p>Algunas de las conferencias que he realizado.</p>
+    <p class = "font-italic">Cada espacio compartido con ustedes, es un momento maravilloso. Mi misión, es lograr transmitirles mi pasión, que es comunicar a través de la palabra, aquello que pueda ser una semilla para el mundo. Para vivir una vida plena y en bienestar </p>
   </div>
 </div><!-- End Breadcrumbs -->
 
