@@ -65,7 +65,7 @@ class ControladorCurso extends Controller
             {
                 $nombre = date("Ymdhmsi") . ".jpg"; 
                 $archivo = $_FILES["imagenCurso"]["tmp_name"];
-                move_uploaded_file($archivo, env('APP_PATH') . "../web/img/$nombre");//guardaelarchivo
+                move_uploaded_file($archivo, env('APP_PATH') . "/public/web/img/$nombre");//guardaelarchivo
                 $entidad->imagen =$nombre;
             }
 
@@ -86,7 +86,7 @@ class ControladorCurso extends Controller
                             if(isset($_FILES["imagenCurso"]) && $_FILES["imagenCurso"]["name"] != ""){
                                 $archivoAnterior =$_FILES["imagenCurso"]["name"];
                                 if($archivoAnterior !=""){
-                                    @unlink (env('APP_PATH') . "../web/img/$archivoAnterior");
+                                    @unlink (env('APP_PATH') . "/public/web/img/$archivoAnterior");
                                 }
                             } else {
                                 $entidad->imagen = $cursoAnt->imagen;

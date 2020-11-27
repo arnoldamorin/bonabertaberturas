@@ -18,7 +18,7 @@
 
         <div class="row">
           <div class="col-lg-8">
-            <img src="../web/img/course-details.jpg" class="img-fluid" alt="">
+            <img src="../web/img/{{ $curso->imagen }}" class="img-fluid" alt="">
             <h3>{{ $curso->nombre }}</h3>
             <p>
               {{ $curso->descripcion }}

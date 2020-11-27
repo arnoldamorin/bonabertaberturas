@@ -20,6 +20,7 @@
     Route::get('/cursos', 'ControladorWebCurso@index');
     /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');*/
     Route::get('/cursos/curso-detalle{id}', 'ControladorWebCurso@detalleCurso');
+    Route::post('/cursos/curso-detalle{id}', 'ControladorWebCurso@subirDatosCompra');
 
     Route::get('/contacto', 'ControladorWebContacto@index');
 

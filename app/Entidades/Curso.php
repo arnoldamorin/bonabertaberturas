@@ -141,7 +141,7 @@ class Curso extends Model
                 horario,
                 imagen,
                 fk_idcategoria
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?, ?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
             $this->descripcion, 
