@@ -26,4 +26,8 @@ class ControladorWebCurso extends Controller
         return view('web.detalle-curso', compact('curso'));
     }
 
+    public function subirDatosCompra($request){
+        
+    }
+
 }
