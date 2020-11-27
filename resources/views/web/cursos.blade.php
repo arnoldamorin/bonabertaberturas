@@ -31,7 +31,7 @@
                 </a>
                 <p class="price">${{ number_format($aCursos[$i]->precio, 2, ",", ".") }}</p>
               </div>
-              <h3><a href="">{{ $aCursos[$i]->nombre }}</a></h3>
+              <h3><a href="/cursos/curso-detalle{{ $aCursos[$i]->idcurso }}">{{ $aCursos[$i]->nombre }}</a></h3>
               <p>{{ $aCursos[$i]->descripcion }}</p>
               <p><strong>Horario:</strong> {{ $aCursos[$i]->horario }}<br>
               <strong>Modalidad:</strong> {{ $aCursos[$i]->categoria }}</p>
