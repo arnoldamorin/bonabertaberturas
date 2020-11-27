@@ -45,28 +45,17 @@
 
         <div class="row mt-5">
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-            <img src=" {{ asset('web/img/emilce-sobre-mi.jpg') }}" class="img-fluid" alt="">
+            <img src=" {{ asset('web/img/diferencia-tu.conferencia.jpg') }}" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3 class="ml-5 mb-3">Mi nombre es Emilce Charras</h3>
-            <p class="font-italic text-sm-left text-center">Hace varios años soy Senior Coach Ontológico Profesional, avalada por la AACOP y la FICOP.</p>
 
-            <div class="row mb-3 ">
-              <div class="col-sm-6 col-12 text-sm-left text-center">
-                <img src=" {{ asset('web/img/logos/ficop.jpg') }}" style="height: 80px;" alt="">
-              </div>
-              <div class="col-sm-6 col-12 text-sm-left text-center pl-sm-0 pl-5">
-                <img src="{{ asset('web/img/logos/scop.jpg') }}" style="height: 80px;" alt="">
-              </div>
-            </div>
-
-            <p class="font-italic text-sm-left text-center">Mi pasión es inspirar a las personas a disfrutar la vida, lo que eligen y hacen día a día y creer en la posibilidad de cambios personales para alcanzar resultados extraordinarios, motivándolos a conquistar las oportunidades para su crecimiento y bienestar.</p>
+            <p class="font-italic text-sm-left text-center">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet a perferendis labore quaerat eaque provident minus accusantium aperiam laboriosam! Obcaecati ad autem error eveniet cumque voluptates odit aliquam optio amet..</p>
 
           </div>
         </div>
         <div clas="row">
           <div class="col-12 ml-5">
-            <a href="/coaching/sesion-personal" class="get-started-btn">¡Quiero una sesión con vos!</a>
+            <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">¡Quiero una sesión con vos!</a>
           </div>
 
         </div>
