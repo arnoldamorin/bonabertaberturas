@@ -35,7 +35,7 @@
 <!-- ======= Breadcrumbs ======= -->
 <div class="breadcrumbs">
     <div class="container">
-      <h2>Coaching</h2>
+      <h2>Empresarial</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 
@@ -54,7 +54,7 @@
           </div>
         </div>
         <div clas="row">
-          <div class="col-12 ml-5">
+          <div class="col-12 ml-5 text-left">
             <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn">Agendar sesión</a>
           </div>
 

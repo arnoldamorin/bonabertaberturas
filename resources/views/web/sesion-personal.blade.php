@@ -35,7 +35,7 @@
 <!-- ======= Breadcrumbs ======= -->
 <div class="breadcrumbs">
     <div class="container">
-      <h2>Coaching</h2>
+      <h2>Sesión Personal</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 
