@@ -20,7 +20,7 @@
         </div>
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
 
-          <p class="font-italic text-sm-left text-center" style="line-height: 26px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet a perferendis labore quaerat eaque provident minus accusantium aperiam laboriosam! Obcaecati ad autem error eveniet cumque voluptates odit aliquam optio amet..</p>
+          <p class="font-italic text-sm-left text-center" style="line-height: 26px;">Una sesión se desarrolla en un ámbito privado y de confidencialidad, donde a través de una dinámica conversacional, se enfocará en alguna meta u objetivo que declares para tu vida. Se pueden referir a múltiples aspectos tanto de tu vida personal como profesional y de mejorar tu calidad de vida.</p>
 
           <div class="col-12 col-12 pl-0">
             <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn ml-0">¡Quiero una sesión con vos!</a>
