@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="col-12">
-        <img src="https://www.freepik.es/fotos/fondo" alt="">
+        <img src="{{ asset('web/img/equipos.jpg') }}" alt="">
       </div>
     </div>
   </div> 
