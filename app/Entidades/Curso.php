@@ -12,7 +12,7 @@ class Curso extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idcurso', 'nombre', 'descripcion', 'precio', 'cupo', 'horario', 'fk_idcategoria'
+        'idcurso', 'nombre', 'descripcion', 'precio', 'cupo', 'horario', 'imagen', 'fk_idcategoria'
     ];
 
     protected $hidden = [
