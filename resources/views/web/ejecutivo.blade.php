@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="col-12">
-          <img src="" alt="">
+          <img src="img/ejecutivo.jpg" alt="">
         </div>
       </div> 
   </div>
