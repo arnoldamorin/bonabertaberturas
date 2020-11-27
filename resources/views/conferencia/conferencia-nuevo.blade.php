@@ -55,11 +55,11 @@ if (isset($msg)) {
                 </div>
             </div>
             <div class="row">
-            <div class="col-6 form-group">
-                      <label for="imagen">Imagen:</label>
-                      <input  type="file" class="form-control-file" name="imagen" id="imagen" value="{{ $conferencia->imagen or '' }}">
-                      <img src="files/" class="img-thumbnail">
-                  </div>
+                <div class="col-6 form-group">
+                    <label for="imagen">Imagen:</label>
+                    <input  type="file" class="form-control-file" name="imagen" id="imagen" value="{{ $conferencia->imagen or '' }}">
+                    <img src="files/" class="img-thumbnail">
+                </div>
             </div>
         </form>
 </div>

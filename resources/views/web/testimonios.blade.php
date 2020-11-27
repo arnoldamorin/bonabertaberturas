@@ -19,7 +19,7 @@
         
         <h4 class = "text-center mt-1">Testimonios escritos</h4>
         <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
-          @for ($i = 0; $i < count($aTestimonios); $i++)
+        @for ($i = 0; $i < count($aTestimonios); $i++)
             <div class="testimonial-wrap">
               <div class="testimonial-item">
                 <h3> {{ $aTestimonios[$i]->nombre }}</h3>
@@ -30,30 +30,21 @@
                 </p>
               </div>
             </div>
-          @endfor
+            @endfor
         </div>
-
+  
         <h4 class="mb-3 text-center mt-5">Testimonios grabados</h4>
         <div class="row">
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col mb-4">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-
+          @for ($i = 0; $i < count($aTestimonios); $i++)
+            @if (!$aTestimonios[$i]->video == 0 )
+              <div class="col">
+                <div class="card">
+                  <h5 class="mt-2 text-center">Titulo</h5>
+                  <iframe width="100%" height="200" src="{{ $aTestimonios[$i]->video}}" frameborder="0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>></iframe>
+                </div>
+              </div>
+            @endif
+          @endfor
         </div>
 
       </div>
