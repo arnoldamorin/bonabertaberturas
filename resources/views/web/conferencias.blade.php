@@ -14,24 +14,24 @@
 <section id="events" class="events">
   <div class="container" data-aos="fade-up">
 
-      <div class="row">
-      
-    @for ($i = 0; $i < count($aConferencias); $i++)
-        <div class="col-md-6 d-flex align-items-stretch">
-          <div class="card">
-            <div class="card-img">
-              <img src="../web/img/events-1.jpg" alt="...">
-            </div>
-            <div class="card-body">
-              <h5 class="card-title"><a href="">{{ $aConferencias[$i]->nombre }}</a></h5>
-              <p class="card-text">{{ $aConferencias[$i]->descripcion }}</p>
+    <div class="row">
+
+      @for ($i = 0; $i < count($aConferencias); $i++)
+          <div class="col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-img">
+                <img src="../web/img/events-1.jpg" alt="...">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title"><a href="">{{ $aConferencias[$i]->nombre }}</a></h5>
+                <p class="card-text">{{ $aConferencias[$i]->descripcion }}</p>
+              </div>
             </div>
           </div>
-        </div>
-       
+      @endfor
+    </div> 
   </div>
-  @endfor
-  </div>
+
 </section><!-- End Events Section -->
 
 @endsection
