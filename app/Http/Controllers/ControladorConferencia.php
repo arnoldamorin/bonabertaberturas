@@ -96,8 +96,7 @@
                 $entidad->cargarDesdeRequest($request);
 
                 $idconferencia=$_REQUEST['id'];
-                if($_FILES["imagen"]["error"] === UPLOAD_ERR_OK)
-                {
+                if($_FILES["imagen"]["error"] === UPLOAD_ERR_OK){
                     $nombre = date("Ymdhmsi") . ".jpg"; 
                     $archivo = $_FILES["imagen"]["tmp_name"];
                     move_uploaded_file($archivo, env('APP_PATH') . "../web/img/$nombre");//guardaelarchivo
