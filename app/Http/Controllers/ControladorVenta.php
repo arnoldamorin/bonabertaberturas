@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Venta;
+use App\Entidades\Venta_estado;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Alumno;
@@ -75,8 +76,11 @@ class ControladorVenta extends Controller
             $alumnos = new Alumno();
             $array_alumno = $alumnos->obtenerTodos();
 
+            $venta_estado = new Venta_estado();
+            $array_estado = $venta_estado->obtenerTodos();
+
             $titulo = "Nueva Venta";
-            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_alumno'));
+            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_alumno', 'array_estado'));
         }
 
         public function editar($id)
@@ -86,6 +90,9 @@ class ControladorVenta extends Controller
             
             $entidad2 = new Alumnos();
             $array_alumno = $entidad2->obtenerTodos();
+
+            $venta_estado = new Venta_estado();
+            $array_estado = $venta_estado->obtenerTodos();
 
             $titulo = "Modificar Venta";
             if (Usuario::autenticado() == true) {
@@ -97,7 +104,7 @@ class ControladorVenta extends Controller
                     $venta = new Venta();
                     $venta->obtenerPorId($id);
     
-                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_alumno'));
+                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_alumno', 'array_estado'));
                 }
             } else {
                 return redirect('admin/login');
@@ -142,7 +149,7 @@ class ControladorVenta extends Controller
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno')) . '?id=' . $venta->idisncripcion;
+            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno', 'array_estado')) . '?id=' . $venta->idisncripcion;
         }
 
 public function eliminar(Request $request)
