@@ -8,7 +8,7 @@
 <div class="breadcrumbs">
   <div class="container">
     <h2>Cursos</h2>
-    <p class = "font-italic">En la actualidad es necesario un aprendizaje integral de la persona, en su manera de ser, en sus habilidades y potencialidades para lograr impactar sobre su entorno de manera eficaz. Para ello es fundamental incorporar nuevas competencias conversacionales y de gestión de procesos.</p>
+    <p class = "font-italic">En la actualidad, es necesario un desarrollo integral de la persona. Para eso, es primordial un aprendizaje continuo en la manera de ser, en las habilidades y potencialidades para lograr impactar en el entorno de manera eficaz. Para ello, es fundamental incorporar nuevas competencias que desde la disciplina del Coaching Ontológico logra aportar nuevas competencias en los diseños conversacionales y la gestión de procesos.</p>
     <p class = "mt-3">¡Inscribite ahora mismo!</p>
   </div>
 </div><!-- End Breadcrumbs -->

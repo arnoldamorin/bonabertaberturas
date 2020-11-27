@@ -74,7 +74,8 @@ if($_POST){ /* es postback */
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2 class ="pt-3">Escribime tu consulta</h2>
+        <h2 class ="pt-3">Escribime</h2>
+        <p class = "font-italic">Si querés conocer más acerca de cómo puedo acompañarte</p>
       </div>
     </div><!-- End Breadcrumbs -->
 

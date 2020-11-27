@@ -57,10 +57,10 @@
 
             <div class="row mb-3 ">
               <div class="col-sm-6 col-12 text-sm-left text-center">
-                <img src=" {{ asset('web/img/logos/ficop.jpg') }}" style="height: 80px;" alt="">
+                <!--<a href="https://www.ficop.org/" target="__blank">--><img src=" {{ asset('web/img/logos/ficop.jpg') }}" style="height: 80px;" alt=""><!--</a>-->
               </div>
               <div class="col-sm-6 col-12 text-sm-left text-center pl-sm-0 pl-5">
-                <img src="{{ asset('web/img/logos/scop.jpg') }}" style="height: 80px;" alt="">
+                <!--<a href="https://www.aacop.org.ar/" target="__blank">--><img src="{{ asset('web/img/logos/scop.jpg') }}" style="height: 80px;" alt=""><!--</a>-->
               </div>
             </div>
 
@@ -71,7 +71,7 @@
               <li><i class="icofont-check-circled"></i> Postítulo en Coaching Organizacional y Ejecutivo.</li>
               <li><i class="icofont-check-circled"></i> Coach de Equipos en diferentes Clubes como Poeta Lugones - Club Deportivo Atalaya - Club Universitario. </li>              
               <li><i class="icofont-check-circled"></i> Intervenciones específicas en Jugadores de Fútbol Argentinos para el Exterior: Club Atlético Capitalino de México. </li>
-              <li><i class="icofont-check-circled"></i> Coaching Individual de Jugadores en diferentes disciplinas como Squash, Voley, Fútbol, Básquet, Handball, Jockey.</li>
+              <li><i class="icofont-check-circled"></i> Coaching Individual de Jugadores en diferentes disciplinas como Squash, Voley, Fútbol, Básquet, Handball, Hockey.</li>
               <li><i class="icofont-check-circled"></i> Entrenadora de Profesionales en la Carrera de Coaching Ontológico Profesional Sede Marcos Juárez. </li>
               <li><i class="icofont-check-circled"></i> ECOA Escuela de Coaching Ontológico Americano.</li>
               <li><i class="icofont-check-circled"></i> Coaching Organizacional en Empresas.</li>
