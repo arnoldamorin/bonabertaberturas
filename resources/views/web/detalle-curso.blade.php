@@ -61,7 +61,7 @@
             <input class = "form-control text-center mt-2" type="tel" name = "txtTelefonoComprador" id = "txtTelefonoComprador" placeholder = "Teléfono" required >
           </div>
           <div class="col-12 text-center mt-3">
-            <a href="/cursos/compra-realizada" class = "get-started-btn">Comprar</a>
+            <button type="submit" class = "btn get-started-btn">Comprar</a>
           </div>
         </div>
       </div>
