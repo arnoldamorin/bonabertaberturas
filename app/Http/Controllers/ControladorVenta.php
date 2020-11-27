@@ -52,6 +52,8 @@ class ControladorVenta extends Controller
                 $row[] = $aVenta[$i]->fecha;
                 $row[] = $aVenta[$i]->importe;
                 $row[] = $aVenta[$i]->fk_idcurso;
+                $row[] = $aVenta[$i]->telefono;
+                $row[] = $aVenta[$i]->correo;
                 $row[] = $aVenta[$i]->fk_idalumno;
                 $row[] = $aVenta[$i]->fk_idestado;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
