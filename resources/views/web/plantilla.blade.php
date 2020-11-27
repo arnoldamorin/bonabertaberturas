@@ -43,7 +43,7 @@
           <li class=@if (isset($seccion) && ($seccion == "Cursos")) active @endif><a href="/cursos">Cursos</a></li>
           <li class=@if (isset($seccion) && ($seccion == "Conferencias")) active @endif><a href="/conferencias">Conferencias</a></li>
           <li class=@if (isset($seccion) && ($seccion == "Testimonios")) active @endif><a href="/testimonios">Testimonios</a></li>
-          <li class="drop-down"><a href="">Coaching</a>
+          <li class="drop-down"><a href="#">Coaching</a>
             <ul>
               <li><a href="/coaching/sesion-personal">Sesión Personal</a></li>
               <li><a href="/coaching/equipo">De Equipos</a></li>

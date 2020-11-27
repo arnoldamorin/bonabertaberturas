@@ -5,14 +5,14 @@
 @section('contenido')
 <div class="breadcrumbs">
         <div class="container">
-          <h2 class="text-center">De equipo</h2>
+          <h2 class="text-center pt-3">Coaching De Equipos</h2>
         </div>
 </div>
 <section id="trainers" class="trainers mt-5">
   <div class="container" data-aos="fade-up"> 
     <div class="row">
-      <div class="col-6">
-        <p class="font-italic text-sm-left text-center">Lorem ipsum, dolor sit amet consectetur adipisicing elit. In tempore, dignissimos dolores nobis mollitia vitae asperiores expedita error numquam, fugit qui velit nemo harum exercitationem sapiente! Dolorum obcaecati eligendi optio.</p>
+      <div class="col-sm-6 col-12">
+        <p class="font-italic text-sm-left text-center" style="line-height: 26px;">En cada organización, existen diferentes equipos de trabajos. Para alcanzar una coordinación de acciones efectivas, es indispensable capacitar a los equipos con competencias dirigidas a la comunicación y al liderazgo. Un equipo al máximo de sus capacidades, funciona colaborativamente para un fin en común y con un enfoque claro.</p>
         <div class="col-12 pl-0">
           <a href="https://api.whatsapp.com/send?phone=" target="_blank" title="Whatsapp" class="get-started-btn ml-0">Agendar entrevista</a>
         </div>
