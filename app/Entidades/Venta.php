@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'importe','fk_idcurso','fk_idalumno','fk_idestado'
+        'idinscripcion', 'fecha', 'importe','fk_idcurso','fk_idalumno','telefono','correo','fk_idestado'
     ];
 
     protected $hidden = [
@@ -24,7 +24,9 @@ class Venta extends Model
         $this->fecha = $request->input('txtFecha');
         $this->importe = $request->input('txtImporte');
         $this->fk_idcurso = $request->input('lstCurso');
-        $this->fk_idalumno = $request->input('lstAlumno');  
+        $this->fk_idalumno = $request->input('lstAlumno'); 
+        $this->telefono = $request->input('txtTelefono');
+        $this->correo = $request->input('txtCorreo'); 
         $this->fk_idestado = $request->input('lstEstado');  
     }
 
@@ -35,12 +37,16 @@ class Venta extends Model
            1 => 'C.importe',
            2 => 'C.fk_idcurso',
            3 => 'C.fk_idalumno',
-           4 => 'C.fk_idestado'     
+           4 => 'C.telefono',
+           5 => 'C.correo',
+           6 => 'C.fk_idestado'     
             );
         $sql = "SELECT DISTINCT
                     C.idinscripcion,
                     C.fecha,
-                    C.importe                   
+                    C.importe,
+                    C.telefono,
+                    C.correo                   
                     FROM inscripciones C
                 WHERE 1=1
                 ";
@@ -60,6 +66,8 @@ class Venta extends Model
                   C.importe,
                   C.fk_idcurso,
                   C.fk_idalumno,
+                  C.telefono,
+                  C.correo,
                   C.fk_idestado
                 FROM inscripciones C ORDER BY C.fecha";
         $lstRetorno = DB::select($sql);
@@ -73,6 +81,8 @@ class Venta extends Model
                 importe,
                 fk_idcurso,
                 fk_idalumno,
+                telefono,
+                correo,
                 fk_idestado
                 FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
         $lstRetorno = DB::select($sql);
@@ -83,6 +93,8 @@ class Venta extends Model
             $this->importe = $lstRetorno[0]->importe;
             $this->fk_idcurso = $lstRetorno[0]->fk_idcurso;
             $this->fk_idalumno = $lstRetorno[0]->fk_idalumno; 
+            $this->telefono = $lstRetorno[0]->telefono;
+            $this->correo = $lstRetorno[0]->correo;
             $this->fk_idestado = $lstRetorno[0]->fk_idestado;     
             return $this;
         }
@@ -95,6 +107,8 @@ class Venta extends Model
             importe = '$this->importe',
             curso = '$this->fk_idcurso',
             alumno = '$this->fk_idalumno',
+            telefono = '$this->telefono',
+            correo = '$this->correo',
             estado = '$this->fk_idestado'
             WHERE idinscripcion=?";
         $affected = DB::update($sql, [$this->idinscripcion]);
@@ -112,6 +126,8 @@ class Venta extends Model
                 importe,
                 fk_idcurso,
                 fk_idalumno,
+                telefono,
+                correo,
                 fk_idestado             
             ) VALUES (?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
@@ -119,6 +135,8 @@ class Venta extends Model
             $this->importe,
             $this->fk_idcurso,
             $this->fk_idalumno,
+            $this->telefono,
+            $this->correo,
             $this->fk_idestado           
         ]);
        return $this->idinscripcion = DB::getPdo()->lastInsertId();
