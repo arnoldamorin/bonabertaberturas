@@ -52,13 +52,13 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <input type="text" name = "txtNombreComprador" id = "txtNombreComprador" placeholder = "Nombre y apellido" class = "form-control text-center">
+            <input type="text" name = "txtNombreComprador" id = "txtNombreComprador" placeholder = "Nombre y apellido" class = "form-control text-center" required>
           </div>
           <div class="col-12">
-            <input class = "form-control text-center mt-2" type="text" name = "txtCorreoComprador" id = "txtCorreoComprador" placeholder = "Correo">
+            <input class = "form-control text-center mt-2" type="text" name = "txtCorreoComprador" id = "txtCorreoComprador" placeholder = "Correo" required>
           </div>
           <div class="col-12">
-            <input class = "form-control text-center mt-2" type="tel" name = "txtTelefonoComprador" id = "txtTelefonoComprador" placeholder = "Teléfono">
+            <input class = "form-control text-center mt-2" type="tel" name = "txtTelefonoComprador" id = "txtTelefonoComprador" placeholder = "Teléfono" required >
           </div>
           <div class="col-12 text-center mt-3">
             <a href="#" class = "get-started-btn">Comprar</a>
