@@ -18,8 +18,8 @@
     Route::get('/contacto', 'ControladorWebContacto@index');
 
     Route::get('/cursos', 'ControladorWebCurso@index');
-    /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');
-    Route::get('/cursos/idcurso{id}', 'ControladorWebCurso@detalleCurso');*/
+    /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');*/
+    Route::get('/cursos/curso-detalle{id}', 'ControladorWebCurso@detalleCurso');
 
     Route::get('/contacto', 'ControladorWebContacto@index');
 
@@ -107,7 +107,6 @@
 /* --------------------------------------------- */
 /* CONTROLADOR CURSOS                             */
 /* --------------------------------------------- */
-Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
 Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
 Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')->name('curso.cargarGrilla');
