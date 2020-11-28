@@ -36,7 +36,11 @@ class ControladorVenta extends Controller
             $request = $_REQUEST;
 
             $entidadVenta = new Venta();
-            $aVenta = $entidadVenta->obtenerFiltrado();
+            $aVenta = $entidadVenta->obtenerTodos();
+
+            $entidadAlumno = new Alumno();
+            $entidadCurso = new Curso();
+            $entidadEstado = new Venta_estado();
     
             $data = array();
     
@@ -50,13 +54,18 @@ class ControladorVenta extends Controller
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aVenta[$i]->fecha;
-                $alumno = new Alumno();
-                $row[] = $aVenta[$i]->importe;
-                $row[] = $aVenta[$i]->fk_idcurso;
+                $row[] = "$" . number_format($aVenta[$i]->importe, 2, ",", ".");
+                /*$row[] = $aVenta[$i]->fk_idcurso;
+                $row[] = $aVenta[$i]->fk_idalumno;*/
+                $entidadCurso->obtenerPorId($aVenta[$i]->fk_idcurso);
+                $row[] = $entidadCurso->nombre;
+                $entidadAlumno->obtenerPorId($aVenta[$i]->fk_idalumno);
+                $row[] = $entidadAlumno->nombre;
                 $row[] = $aVenta[$i]->telefono;
                 $row[] = $aVenta[$i]->correo;
-                $row[] = $aVenta[$i]->fk_idalumno;
-                $row[] = $aVenta[$i]->fk_idestado;
+                /*$row[] = $aVenta[$i]->fk_idestado;*/
+                $entidadEstado->obtenerPorID($aVenta[$i]->fk_idestado);
+                $row[] = $entidadEstado->nombre;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
@@ -125,11 +134,12 @@ class ControladorVenta extends Controller
                 $alumno = new Alumno();
                 $alumno->obtenerPorId($entidad->fk_idalumno);
                 $entidad->telefono = $alumno->telefono;
-                $entidad->correo = $alumno->correo;
+                $entidad->correo = $alumno->mail;
 
                 $curso = new Curso();
                 $curso->obtenerPorId($entidad->fk_idcurso);
-                $entidad->importe = $curso->importe;
+                $entidad->importe = $curso->precio;
+ 
     
                 //validaciones
                 if ($entidad->fecha == "") {

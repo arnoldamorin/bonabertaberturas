@@ -2,7 +2,7 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinstripcion : 0; ?>';
+    globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinscripcion : 0; ?>';
     <?php $globalId = isset($venta->idinscripcion) ? $venta->idinscripcion : "0"; ?>
 
 </script>
@@ -65,7 +65,7 @@ if (isset($msg)) {
                     <label>Alumno:</label>
                     <select id="lstAlumno" name="lstAlumno" class="form-control">
                         @for ($i = 0; $i < count($array_alumno); $i++)
-                            @if (isset($curso))
+                            @if (isset($alumno))
                                 <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
                             @else
                                 <option value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
@@ -81,10 +81,14 @@ if (isset($msg)) {
                     <label>Estado:</label>
                     <select id="lstEstado" name="lstEstado" class="form-control">
                         @for ($i = 0; $i < count($array_estado); $i++)
-                            @if (isset($curso))
+                            @if (isset($venta))
                                 <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
                             @else
-                                <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                                @if ($array_estado[$i]->idestado == 1)
+                                    <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                                @else  
+                                    <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                                @endif    
                             @endif
                         @endfor
                     </select>

@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'importe','fk_idcurso','fk_idalumno','fk_idestado','telefono','correo'
+        'idinscripcion', 'fecha', 'importe', 'fk_idcurso', 'fk_idalumno', 'fk_idestado', 'telefono', 'correo'
     ];
 
     protected $hidden = [
