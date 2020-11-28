@@ -19,85 +19,32 @@
         
         <h4 class = "text-center mt-1">Testimonios escritos</h4>
         <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
-
-          <div class="testimonial-wrap">
-            <div class="testimonial-item">
-              <h3>Saul Goodman</h3>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
+        @for ($i = 0; $i < count($aTestimonios); $i++)
+            <div class="testimonial-wrap">
+              <div class="testimonial-item">
+                <h3> {{ $aTestimonios[$i]->nombre }}</h3>
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  {{ $aTestimonios[$i]->descripcion }}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
             </div>
-          </div>
-
-          <div class="testimonial-wrap">
-            <div class="testimonial-item">
-              <h3>Sara Wilsson</h3>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div>
-
-          <div class="testimonial-wrap">
-            <div class="testimonial-item">
-              <h3>Jena Karlis</h3>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div>
-
-          <div class="testimonial-wrap">
-            <div class="testimonial-item">
-              <h3>Matt Brandon</h3>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div>
-
-          <div class="testimonial-wrap">
-            <div class="testimonial-item">
-              <h3>John Larson</h3>
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-            </div>
-          </div>
-      
+            @endfor
         </div>
-
+  
         <h4 class="mb-3 text-center mt-5">Testimonios grabados</h4>
         <div class="row">
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-          <div class="col mb-4">
-            <div class="card">
-              <h5 class="mt-2 text-center">Titulo</h5>
-              <video src="#" width=320  height=240 controls poster="#">
-            </div>
-          </div>
-
+          @for ($i = 0; $i < count($aTestimonios); $i++)
+            @if (!$aTestimonios[$i]->video == 0 )
+              <div class="col">
+                <div class="card">
+                  <h5 class="mt-2 text-center">Titulo</h5>
+                  <iframe width="100%" height="200" src="{{ $aTestimonios[$i]->video}}" frameborder="0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>></iframe>
+                </div>
+              </div>
+            @endif
+          @endfor
         </div>
 
       </div>
