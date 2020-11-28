@@ -126,9 +126,9 @@ class Venta extends Model
                 importe,
                 fk_idcurso,
                 fk_idalumno,
+                fk_idestado,
                 telefono,
-                correo,
-                fk_idestado             
+                correo             
             ) VALUES (?, ?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fecha, 

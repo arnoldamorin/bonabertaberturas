@@ -74,8 +74,8 @@ if (isset($msg)) {
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Importe: *</label>
-                    <input class = "form-control" type="text" name = "txtImporte" id = "txtImporte">
+                    <label>Importe:</label>
+                    <input class="form-control" type="number" name="txtImporte" id="txtImporte">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado:</label>
