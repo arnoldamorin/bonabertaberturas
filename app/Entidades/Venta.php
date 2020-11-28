@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'importe','fk_idcurso','fk_idalumno','telefono','correo','fk_idestado'
+        'idinscripcion', 'fecha', 'importe','fk_idcurso','fk_idalumno','fk_idestado','telefono','correo'
     ];
 
     protected $hidden = [
@@ -37,9 +37,9 @@ class Venta extends Model
            1 => 'C.importe',
            2 => 'C.fk_idcurso',
            3 => 'C.fk_idalumno',
-           4 => 'C.telefono',
-           5 => 'C.correo',
-           6 => 'C.fk_idestado'     
+           4 => 'C.fk_idestado',
+           5 => 'C.telefono',
+           6 => 'C.correo'    
             );
         $sql = "SELECT DISTINCT
                     C.idinscripcion,
@@ -66,9 +66,9 @@ class Venta extends Model
                   C.importe,
                   C.fk_idcurso,
                   C.fk_idalumno,
+                  C.fk_idestado,
                   C.telefono,
-                  C.correo,
-                  C.fk_idestado
+                  C.correo
                 FROM inscripciones C ORDER BY C.fecha";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -81,9 +81,9 @@ class Venta extends Model
                 importe,
                 fk_idcurso,
                 fk_idalumno,
+                fk_idestado,
                 telefono,
-                correo,
-                fk_idestado
+                correo
                 FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
         $lstRetorno = DB::select($sql);
 
@@ -107,9 +107,9 @@ class Venta extends Model
             importe = '$this->importe',
             curso = '$this->fk_idcurso',
             alumno = '$this->fk_idalumno',
+            estado = '$this->fk_idestado',
             telefono = '$this->telefono',
-            correo = '$this->correo',
-            estado = '$this->fk_idestado'
+            correo = '$this->correo'
             WHERE idinscripcion=?";
         $affected = DB::update($sql, [$this->idinscripcion]);
     }
@@ -135,9 +135,9 @@ class Venta extends Model
             $this->importe,
             $this->fk_idcurso,
             $this->fk_idalumno,
+            $this->fk_idestado,
             $this->telefono,
-            $this->correo,
-            $this->fk_idestado           
+            $this->correo          
         ]);
        return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
