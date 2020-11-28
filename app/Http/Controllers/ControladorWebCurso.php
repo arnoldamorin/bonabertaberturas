@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Curso;
+use Illuminate\Http\Request;
+use App\Entidades\Venta;
+
+
 
 require app_path() . '/start/constants.php';
 
@@ -26,8 +30,16 @@ class ControladorWebCurso extends Controller
         return view('web.detalle-curso', compact('curso'));
     }
 
-    public function subirDatosCompra($request){
-        
+    public function subirDatosCompra($id, Request $request){
+        $venta = new Venta();
+        $venta->nombreComprador = $request->input("txtNombreComprador");
+        $venta->correoComprador = $request->input("txtCorreoComprador");
+        $venta->telefonoComprador = $request->input("txtTelefonoComprador");
+
+        print_r($venta->nombreComprador);
+        print_r($venta->telefonoComprador);
+        print_r($venta->correoComprador);
+        exit;
     }
 
 }

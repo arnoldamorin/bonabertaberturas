@@ -49,6 +49,7 @@
 
     <!-- ======= Formulario de Compra ======= -->
     <form action="" method = "post">
+      <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
       <div class="container">
         <div class="row">
           <div class="col-12">
