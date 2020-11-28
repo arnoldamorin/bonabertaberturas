@@ -121,11 +121,11 @@ class ControladorVenta extends Controller
                 $titulo = "Modificar Venta";
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
-                print_r($entidad);
-                
+            
                 $alumno = new Alumno();
                 $alumno->obtenerPorId($entidad->fk_idalumno);
                 $entidad->telefono = $alumno->telefono;
+                $entidad->correo = $alumno->correo;
 
                 $curso = new Curso();
                 $curso->obtenerPorId($entidad->fk_idcurso);

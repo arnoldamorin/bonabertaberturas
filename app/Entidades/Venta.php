@@ -104,7 +104,7 @@ class Venta extends Model
     public function guardar() {
         $sql = "UPDATE inscripciones SET
             fecha = '$this->fecha',
-            importe = '$this->importe',
+            importe = $this->importe,
             curso = '$this->fk_idcurso',
             alumno = '$this->fk_idalumno',
             estado = '$this->fk_idestado',

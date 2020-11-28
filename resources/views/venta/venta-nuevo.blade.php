@@ -75,7 +75,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Importe:</label>
-                    <input class="form-control" type="number" name="txtImporte" id="txtImporte">
+                    <input class="form-control" type="number" id="txtImporte" name="txtImporte">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado:</label>
