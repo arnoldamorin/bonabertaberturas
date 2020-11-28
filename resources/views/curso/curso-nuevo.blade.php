@@ -79,7 +79,7 @@ if (isset($msg)) {
                     <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10">{{$curso->descripcion or ''}}</textarea>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Imagen *:</label>
+                    <label>Imagen curso*:</label>
                     <input class="form-control-file" type="file" name="imagenCurso" id="imagenCurso">
                 </div>
             </div>
