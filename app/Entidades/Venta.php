@@ -76,7 +76,7 @@ class Venta extends Model
                 fecha,
                 fk_idcurso,
                 telefono,
-                correo
+                correo,
                 nombre_comprador,
                 fk_idestado                
                 FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
