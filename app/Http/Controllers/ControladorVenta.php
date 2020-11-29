@@ -38,7 +38,6 @@ class ControladorVenta extends Controller
             $entidadVenta = new Venta();
             $aVenta = $entidadVenta->obtenerTodos();
 
-            $entidadAlumno = new Alumno();
             $entidadCurso = new Curso();
             $entidadEstado = new Venta_estado();
     
@@ -54,16 +53,11 @@ class ControladorVenta extends Controller
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $row[] = $aVenta[$i]->fecha;
-                $row[] = "$" . number_format($aVenta[$i]->importe, 2, ",", ".");
-                /*$row[] = $aVenta[$i]->fk_idcurso;
-                $row[] = $aVenta[$i]->fk_idalumno;*/
                 $entidadCurso->obtenerPorId($aVenta[$i]->fk_idcurso);
                 $row[] = $entidadCurso->nombre;
-                $entidadAlumno->obtenerPorId($aVenta[$i]->fk_idalumno);
-                $row[] = $entidadAlumno->nombre;
                 $row[] = $aVenta[$i]->telefono;
                 $row[] = $aVenta[$i]->correo;
-                /*$row[] = $aVenta[$i]->fk_idestado;*/
+                $row[] = $aVenta[$i]->nombre_comprador;
                 $entidadEstado->obtenerPorID($aVenta[$i]->fk_idestado);
                 $row[] = $entidadEstado->nombre;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
@@ -85,14 +79,11 @@ class ControladorVenta extends Controller
             $curso = new Curso();
             $array_curso = $curso->obtenerTodos();
 
-            $alumnos = new Alumno();
-            $array_alumno = $alumnos->obtenerTodos();
-
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
 
             $titulo = "Nueva Venta";
-            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_alumno', 'array_estado'));
+            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_estado'));
         }
 
         public function editar($id)
@@ -100,9 +91,6 @@ class ControladorVenta extends Controller
             $entidad = new Curso();
             $array_curso = $entidad->obtenerTodos();
             
-            $entidad2 = new Alumno();
-            $array_alumno = $entidad2->obtenerTodos();
-
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
 
@@ -116,7 +104,7 @@ class ControladorVenta extends Controller
                     $venta = new Venta();
                     $venta->obtenerPorId($id);
     
-                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_alumno', 'array_estado'));
+                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_estado'));
                 }
             } else {
                 return redirect('admin/login');
@@ -131,16 +119,6 @@ class ControladorVenta extends Controller
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
             
-                $alumno = new Alumno();
-                $alumno->obtenerPorId($entidad->fk_idalumno);
-                $entidad->telefono = $alumno->telefono;
-                $entidad->correo = $alumno->mail;
-
-                $curso = new Curso();
-                $curso->obtenerPorId($entidad->fk_idcurso);
-                $entidad->importe = $curso->precio;
- 
-    
                 //validaciones
                 if ($entidad->fecha == "") {
                     $msg["ESTADO"] = MSG_ERROR;
@@ -171,7 +149,7 @@ class ControladorVenta extends Controller
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno', 'array_estado')) . '?id=' . $venta->idinscripcion;
+            return view('venta.venta-nuevo', compact('msg', 'fecha', 'array_curso', 'array_estado')) . '?id=' . $venta->idinscripcion;
         }
 
 public function eliminar(Request $request)

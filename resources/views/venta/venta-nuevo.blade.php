@@ -62,20 +62,16 @@ if (isset($msg)) {
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Alumno:</label>
-                    <select id="lstAlumno" name="lstAlumno" class="form-control">
-                        @for ($i = 0; $i < count($array_alumno); $i++)
-                            @if (isset($venta) and $array_alumno[$i]->idalumno == $venta->fk_idalumno)
-                                <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                    </select>
+                    <label>Telefono:</label>
+                    <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono">
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Importe:</label>
-                    <input class="form-control" type="number" id="txtImporte" name="txtImporte">
+                    <label>Correo:</label>
+                    <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Nombre del Comprador:</label>
+                    <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado:</label>
