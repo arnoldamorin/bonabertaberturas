@@ -6,7 +6,7 @@
   <!-- ======= Breadcrumbs ======= -->
   <div class="breadcrumbs">
     <div class="container">
-      <h2 class = "pt-5">Sesión Personal</h2>
+      <h2 class = "pt-3">Sesión Personal</h2>
     </div>
   </div><!-- End Breadcrumbs -->
 

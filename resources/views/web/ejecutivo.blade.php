@@ -5,7 +5,7 @@
 @section('contenido')
 <div class="breadcrumbs">
         <div class="container">
-          <h2 class="text-center pt-5">Ejecutivo</h2>
+          <h2 class="text-center pt-3">Ejecutivo</h2>
         </div>
 </div>
 <section id="trainers" class="trainers mt-5">
