@@ -161,7 +161,7 @@ class ControladorVenta extends Controller
                         $msg["MSG"] = OKINSERT;
                     }
                     $_POST["id"] = $entidad->idinscripcion;
-                    return view('venta.venta-nuevo', compact('titulo', 'msg'));
+                    return view('venta.venta-listar', compact('titulo', 'msg'));
                 }
             } catch (Exception $e) {
                 $msg["ESTADO"] = MSG_ERROR;
@@ -171,7 +171,7 @@ class ControladorVenta extends Controller
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno', 'array_estado')) . '?id=' . $venta->idisncripcion;
+            return view('venta.venta-nuevo', compact('msg', 'fecha', 'importe','array_curso', 'array_alumno', 'array_estado')) . '?id=' . $venta->idinscripcion;
         }
 
 public function eliminar(Request $request)
