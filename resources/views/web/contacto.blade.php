@@ -2,8 +2,8 @@
 @section('titulo', "Contacto")
 @section('contenido')
 <?php
-    include_once("PHPMailer/src/PHPMailer.php");
-    include_once("PHPMailer/src/SMTP.php");
+    //include_once("PHPMailer/src/PHPMailer.php");
+    //include_once("PHPMailer/src/SMTP.php");
 
 $pg = "contacto";
 
