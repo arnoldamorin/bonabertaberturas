@@ -98,11 +98,11 @@ class Venta extends Model
     public function guardar() {
         $sql = "UPDATE inscripciones SET
             fecha = '$this->fecha',
-            curso = '$this->fk_idcurso',
+            fk_idcurso = '$this->fk_idcurso',
             telefono = $this->telefono,
             correo = '$this->correo',
             nombre_comprador = '$this->nombre_comprador',
-            estado = '$this->fk_idestado'
+            fk_idestado = '$this->fk_idestado'
             WHERE idinscripcion=?";
         $affected = DB::update($sql, [$this->idinscripcion]);
     }

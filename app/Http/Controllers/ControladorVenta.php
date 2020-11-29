@@ -149,7 +149,7 @@ class ControladorVenta extends Controller
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'fecha', 'array_curso', 'array_estado')) . '?id=' . $venta->idinscripcion;
+            return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_curso', 'array_estado')) . '?id=' . $venta->idinscripcion;
         }
 
 public function eliminar(Request $request)
