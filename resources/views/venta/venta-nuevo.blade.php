@@ -129,7 +129,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/sistema/venta/nueva/eliminar') }}",
+            url: "{{ asset('admin/ventas/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",

@@ -161,7 +161,7 @@ public function eliminar(Request $request)
                     $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->nombre != "") {
+                    if ($entidad->idinscripcion > 0) {
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {
