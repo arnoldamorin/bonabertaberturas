@@ -78,8 +78,8 @@
             <p>
               Córdoba Capital <br>
               Argentina <br><br>
-              <strong>Teléfono:</strong> +54 9 3512452331<br>
-              <strong>Email:</strong> info@emilcecharras.com.ar<br>
+              <strong>Teléfono:</strong><a href="https://web.whatsapp.com/send?phone=5493512452331" target="__blank"> +54 9 3512452331</a><br>
+              <strong>Email:</strong><a href="mailto:info@emilcecharras.com.ar"> info@emilcecharras.com.ar</a><br>
             </p>
           </div>
 
