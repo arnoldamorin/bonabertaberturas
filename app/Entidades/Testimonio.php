@@ -37,6 +37,32 @@ class Testimonio extends Model
         return $lstRetorno;
     }
 
+    public function obtenerTestimoniosEscritos() {
+        $sql = "SELECT 
+                  T.idtestimonio,
+                  T.nombre,
+                  T.descripcion,
+                  T.video
+                FROM testimonios T
+                WHERE T.video = '0'
+                ORDER BY T.nombre";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
+
+    public function obtenerTestimoniosGrabados() {
+        $sql = "SELECT 
+                  T.idtestimonio,
+                  T.nombre,
+                  T.descripcion,
+                  T.video
+                FROM testimonios T
+                WHERE T.video <> '0'
+                ORDER BY T.nombre";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
+
     public function obtenerPorId($idtestimonio) {
         $sql = "SELECT
                 idtestimonio,
