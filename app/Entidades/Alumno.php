@@ -129,7 +129,7 @@ class Alumno extends Model
             $this->apellido, 
             $this->dni, 
             $this->mail, 
-            $this->telefono,
+            $this->telefono
         ]);
        return $this->idalumno = DB::getPdo()->lastInsertId();
     }

@@ -21,6 +21,16 @@ class Patente extends Model
         'tipo',
         'log_operacion'
     ];
+
+    function cargarDesdeRequest($request) {
+        $this->idpatente = $request->input('id')!="0" ? $request->input('id') : $this->idpatente;
+        $this->nombre = $request->input('txtNombre');
+        $this->descripcion = $request->input('txtDescripcion');
+        $this->modulo = $request->input('txtModulo');
+        $this->submodulo = $request->input('txtSubmodulo');
+        $this->tipo = $request->input('txtTipo');
+        $this->log_operacion = $request->input('txtOperacion');
+    }
     
      public function obtenerTodosPorFamilia($familiaID) {
         $sql = "SELECT 
@@ -34,6 +44,41 @@ class Patente extends Model
                 INNER JOIN sistema_patente_familia B ON B.fk_idpatente = A.idpatente AND B.fk_idfamilia = ? ";
         $sql .= " ORDER BY nombre";
         $lstRetorno = DB::select($sql, [$familiaID]);
+        return $lstRetorno;
+    }
+
+    public function obtenerFiltrado() {
+        $request = $_REQUEST;
+        $columns = array(
+           0 => 'P.tipo',
+           1 => 'P.submodulo',
+           2 => 'P.nombre',
+           3 => 'P.modulo',
+           4 => 'P.log_operacion',
+           5 => 'P.descripcion'
+            );
+        $sql = "SELECT DISTINCT
+                    P.idpatente,
+                    P.tipo,
+                    P.submodulo,
+                    P.nombre,
+                    P.modulo,
+                    P.log_operacion,
+                    P.descripcion
+                    FROM sistema_patentes P
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) { 
+            $sql.= " AND ( P.nombre LIKE '%" .$request['search']['value']. "%'";
+            $sql.= " OR P.modulo LIKE '%" .$request['search']['value']. "%'";
+            $sql.= " OR P.descripcion LIKE '%" .$request['search']['value']. "%')";
+        }
+        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
         return $lstRetorno;
     }
 
@@ -83,7 +128,7 @@ class Patente extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idpatente) {
+    /*public function obtenerPorId($idpatente) {
         $sql = "SELECT
                     idpatente,
                     nombre,
@@ -98,6 +143,31 @@ class Patente extends Model
                     FROM sistema_patentes WHERE idpatente = ?";
         $lstRetorno = DB::select($sql, [$idpatente]);
         return $lstRetorno[0];
+    }*/
+
+    public function obtenerPorId($idpatente) {
+        $sql = "SELECT
+                    idpatente,
+                    nombre,
+                    descripcion,
+                    tipo,
+                    modulo,
+                    submodulo,
+                    log_operacion
+                    FROM sistema_patentes WHERE idpatente = ?";
+        $lstRetorno = DB::select($sql, [$idpatente]);
+
+        if(count($lstRetorno)>0){
+            $this->idpatente = $lstRetorno[0]->idpatente;
+            $this->nombre = $lstRetorno[0]->nombre;
+            $this->descripcion = $lstRetorno[0]->descripcion;
+            $this->tipo = $lstRetorno[0]->tipo;
+            $this->modulo = $lstRetorno[0]->modulo;
+            $this->submodulo = $lstRetorno[0]->submodulo;
+            $this->log_operacion = $lstRetorno[0]->log_operacion;
+            return $this;
+        }
+        return null;
     }
 
     public function obtenerPatentesDelUsuario() {
@@ -164,6 +234,44 @@ class Patente extends Model
             </div>
         </div>
         <?php
+    }
+
+    public function guardar() {
+        $sql = "UPDATE sistema_patentes SET
+            nombre = '$this->nombre',
+            tipo = '$this->tipo',
+            modulo = '$this->modulo',
+            submodulo = '$this->submodulo',
+            log_operacion = $this->log_operacion,
+            descripcion = '$this->descripcion'
+            WHERE idpatente=?";
+        DB::update($sql, [$this->idpatente]);
+    }
+
+    public  function eliminar() {
+        $sql = "DELETE FROM sistema_patentes WHERE 
+            idpatente=?";
+        DB::delete($sql, [$this->idpatente]);
+    }
+
+    public function insertar() {
+        $sql = "INSERT INTO sistema_patentes (
+                nombre,
+                tipo,
+                modulo,
+                submodulo,
+                descripcion,
+                log_operacion
+            ) VALUES (?, ?, ?, ?, ?, ?);";
+       $result = DB::insert($sql, [
+            $this->nombre, 
+            $this->tipo, 
+            $this->modulo, 
+            $this->submodulo, 
+            $this->descripcion,
+            $this->log_operacion
+        ]);
+       return $this->idpatente = DB::getPdo()->lastInsertId();
     }
 
 

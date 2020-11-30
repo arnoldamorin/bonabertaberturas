@@ -139,6 +139,30 @@ Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
     Route::get('/admin/alumno/nuevo/{id}', 'ControladorAlumno@editar');
     Route::post('/admin/alumno/nuevo/{id}', 'ControladorAlumno@guardar');
 
+    /* --------------------------------------------- */
+    /* CONTROLADOR ALUMNOS                           */
+    /* --------------------------------------------- */
+        Route::get('/admin/alumno/nuevo', 'ControladorAlumno@nuevo');
+        Route::post('/admin/alumno/nuevo', 'ControladorAlumno@guardar');
+        Route::get('/admin/alumno/eliminar', 'ControladorAlumno@eliminar');
+        Route::get('/admin/alumnos', 'ControladorAlumno@index');
+        Route::get('/admin/alumnos/cargarGrilla', 'ControladorAlumno@cargarGrilla')->name('alumno.cargarGrilla');
+        Route::get('/admin/alumno/nuevo/{id}', 'ControladorAlumno@editar');
+        Route::post('/admin/alumno/nuevo/{id}', 'ControladorAlumno@guardar');
+    
+
+
+    /* --------------------------------------------- */
+    /* CONTROLADOR PATENTES                          */
+    /* --------------------------------------------- */
+    Route::get('/admin/patentes', 'ControladorPatente@index');
+    Route::get('/admin/patente/nuevo', 'ControladorPatente@nuevo');
+    Route::post('/admin/patente/nuevo', 'ControladorPatente@guardar');
+    Route::get('/admin/patente/cargarGrilla', 'ControladorPatente@cargarGrilla')->name('patente.cargarGrilla');
+    Route::get('/admin/patente/eliminar', 'ControladorPatente@eliminar');
+    Route::get('/admin/patente/nuevo/{id}', 'ControladorPatente@editar');
+    Route::post('/admin/patente/nuevo/{id}', 'ControladorPatente@guardar');
+
 /* --------------------------------------------- */
 /* CONTROLADOR CONFERENCIAS                          */
 /* --------------------------------------------- */
