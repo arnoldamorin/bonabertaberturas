@@ -2,14 +2,14 @@
 @section('titulo', "Contacto")
 @section('contenido')
 <?php
-    include_once("PHPMailer/src/PHPMailer.php");
-    include_once("PHPMailer/src/SMTP.php");
+    //include_once("PHPMailer/src/PHPMailer.php");
+    //include_once("PHPMailer/src/SMTP.php");
 
 $pg = "contacto";
 
 if($_POST){ /* es postback */
     $nombre = $_POST["txtNombre"];
-    $correo = $_POST["txtCorreo"];
+    $email = $_POST["txtEmail"];
     $asunto = $_POST["txtAsunto"];
     $mensaje = $_POST["txtMensaje"];
 
@@ -48,7 +48,7 @@ if($_POST){ /* es postback */
          $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
         
          //if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
-             header('Location: confirmacion-envio.php');
+             header('Location: .php');
          //} else {
              $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
          //}    
@@ -57,17 +57,7 @@ if($_POST){ /* es postback */
      }
 
 }
-
-
-
-
 ?>
-
-
-
-
-
-
 <body>
   <!-- ======= Contact Section ======= -->
 
@@ -117,20 +107,20 @@ if($_POST){ /* es postback */
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:3" data-msg="Por favor ingresa al menos 3 caracteres" />
+                  <input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Nombre" data-rule="minlen:3" data-msg="Por favor ingresa al menos 3 caracteres" />
                   <div class="validate"></div>
                 </div>
                 <div class="col-md-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Por favor ingresa un mail valido" />
+                  <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Email" data-rule="email" data-msg="Por favor ingresa un mail valido" />
                   <div class="validate"></div>
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Por favor ingresa al menos 8 caracteres para el Asunto" />
+                <input type="text" class="form-control" name="txtAsunto" id="txtAsunto" placeholder="Asunto" data-rule="minlen:4" data-msg="Por favor ingresa al menos 8 caracteres para el Asunto" />
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros" placeholder="Mensaje"></textarea>
+                <textarea class="form-control" name="txtMensage" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros" placeholder="Mensaje"></textarea>
                 <div class="validate"></div>
               </div>
               <div class="mb-3">

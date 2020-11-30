@@ -18,7 +18,7 @@
 
         <div class="row">
           <div class="col-lg-8">
-            <img src="../web/img/{{ $curso->imagen }}" class="img-fluid" alt="">
+            <img src="../../web/img/{{ $curso->imagen }}" class="img-fluid" alt="">
             <h3>{{ $curso->nombre }}</h3>
             <p>
               {{ $curso->descripcion }}
@@ -49,6 +49,7 @@
 
     <!-- ======= Formulario de Compra ======= -->
     <form action="" method = "post">
+      <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
       <div class="container">
         <div class="row">
           <div class="col-12">
@@ -61,7 +62,7 @@
             <input class = "form-control text-center mt-2" type="tel" name = "txtTelefonoComprador" id = "txtTelefonoComprador" placeholder = "Teléfono" required >
           </div>
           <div class="col-12 text-center mt-3">
-            <a href="/cursos/compra-realizada" class = "get-started-btn">Comprar</a>
+            <button type="submit" class = "btn get-started-btn">Comprar</a>
           </div>
         </div>
       </div>

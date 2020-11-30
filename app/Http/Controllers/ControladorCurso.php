@@ -202,8 +202,8 @@ class ControladorCurso extends Controller
         
             $titulo = "Modificar Curso";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("MENUMODIFICACION")) {
-                    $codigo = "MENUMODIFICACION";
+                if (!Patente::autorizarOperacion("CURSOSMODIFICACION")) {
+                    $codigo = "CURSOSMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {

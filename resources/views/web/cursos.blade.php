@@ -27,7 +27,7 @@
               <img src="../web/img/{{ $aCursos[$i]->imagen }}" class="img-fluid text-center" alt="...">
               <div class="course-content">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <a href="/cursos/curso-detalle{{ $aCursos[$i]->idcurso }}">
+                  <a href="/cursos/curso-detalle/{{ $aCursos[$i]->idcurso }}">
                     <h4>Comprar curso</h4>
                   </a>
                   <p class="price">${{ number_format($aCursos[$i]->precio, 2, ",", ".") }}</p>
