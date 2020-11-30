@@ -1,68 +1,9 @@
 @extends('web.plantilla')
 @section('titulo', "Contacto")
 @section('contenido')
-<?php
-    //include_once("PHPMailer/src/PHPMailer.php");
-    //include_once("PHPMailer/src/SMTP.php");
-
-$pg = "contacto";
-
-if($_POST){ /* es postback */
-    $nombre = $_POST["txtNombre"];
-    $email = $_POST["txtEmail"];
-    $asunto = $_POST["txtAsunto"];
-    $mensaje = $_POST["txtMensaje"];
-
-    if($nombre != "" && $correo != ""){
-        $mail = new PHPMailer();
-        $mail->IsSMTP();
-        $mail->SMTPAuth = true;
-        $mail->Host = "mail.dominio.com"; // SMTP a utilizar
-        $mail->Username = "info@emilcecharras.com.ar"; // Correo completo a utilizar
-        $mail->Password = "emilcecharras@gmail.com";
-        $mail->Port = 25;
-        $mail->From = "info@emilcecharras.com.ar"; //Desde la cuenta donde enviamos
-        $mail->FromName = "Emilce Charras";
-        $mail->IsHTML(true);
-        $mail->SMTPOptions = array(
-                    'ssl' => array(
-                        'verify_peer' => false,
-                        'verify_peer_name' => false,
-                        'allow_self_signed' => true
-                    )
-                );
-
-         //Destinatarios
-         $mail->addAddress($correo);
-         $mail->addBCC("emilcecharras@gmail.com"); //Copia oculta
-         $mail->Subject = utf8_decode("Contacto página Web");
-         $mail->Body = "Recibi tu consulta, te respondere a la brevedad.";
-         /*if(!$mail->Send()){ //cuando este en el servidor descomentar
-             $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
-         }*/
-         $mail->ClearAllRecipients(); //Borra los destinatarios
- 
-         //Envía ahora un correo a nosotros con los datos de la persona
-         $mail->addAddress("emilcecharras@gmail.com");
-         $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
-         $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
-        
-         //if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
-             header('Location: .php');
-         //} else {
-             $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
-         //}    
-     } else {
-         $msg = "Completa todos los campos";
-     }
-
-}
-?>
-<body>
-  <!-- ======= Contact Section ======= -->
 
       <!-- ======= Breadcrumbs ======= -->
-      <div class="breadcrumbs" data-aos="fade-in">
+    <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
         <h2 class ="pt-3">Escribime</h2>
         <p class = "font-italic">Si querés conocer más acerca de cómo puedo acompañarte</p>
@@ -104,7 +45,7 @@ if($_POST){ /* es postback */
 
           <div class="col-lg-12 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="/mensaje-enviado" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Nombre" data-rule="minlen:3" data-msg="Por favor ingresa al menos 3 caracteres" />
@@ -120,7 +61,7 @@ if($_POST){ /* es postback */
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="txtMensage" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros" placeholder="Mensaje"></textarea>
+                <textarea class="form-control" name="txtMensaje" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros" placeholder="Mensaje"></textarea>
                 <div class="validate"></div>
               </div>
               <div class="mb-3">
@@ -137,7 +78,4 @@ if($_POST){ /* es postback */
 
       </div>
     </section><!-- End Contact Section -->
-  </body>
 @endsection
-</html>
-   
