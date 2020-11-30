@@ -17,9 +17,9 @@
     <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
-function fsalir(){
-    location.href ="/admin";
-}
+    function fsalir() {
+        location.href = "/admin";
+    }
 </script>
 @endsection
 @section('contenido')
@@ -38,17 +38,19 @@ if (isset($msg)) {
             <th>Edición</th>
         </tr>
     </thead>
-</table> 
+</table>
 <script>
-	var dataTable = $('#grilla').DataTable({
-	    "processing": true,
+    var dataTable = $('#grilla').DataTable({
+        "processing": true,
         "serverSide": true,
-	    "bFilter": true,
-	    "bInfo": true,
-	    "bSearchable": true,
+        "bFilter": true,
+        "bInfo": true,
+        "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 1, "asc" ]],
-	    "ajax": "{{ route('patente.cargarGrilla') }}"
-	});
+        "order": [
+            [1, "asc"]
+        ],
+        "ajax": "{{ route('patente.cargarGrilla') }}"
+    });
 </script>
 @endsection
