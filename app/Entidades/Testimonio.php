@@ -41,8 +41,7 @@ class Testimonio extends Model
         $sql = "SELECT 
                   T.idtestimonio,
                   T.nombre,
-                  T.descripcion,
-                  T.video
+                  T.descripcion
                 FROM testimonios T
                 WHERE T.video = '0'
                 ORDER BY T.nombre";
@@ -54,7 +53,6 @@ class Testimonio extends Model
         $sql = "SELECT 
                   T.idtestimonio,
                   T.nombre,
-                  T.descripcion,
                   T.video
                 FROM testimonios T
                 WHERE T.video <> '0'
