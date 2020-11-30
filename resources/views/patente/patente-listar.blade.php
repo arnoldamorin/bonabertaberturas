@@ -34,6 +34,7 @@ if (isset($msg)) {
         <tr>
             <th>Nombre</th>
             <th>Módulo</th>
+            <th>Submódulo</th>
             <th>Descripción</th>
             <th>Edición</th>
         </tr>

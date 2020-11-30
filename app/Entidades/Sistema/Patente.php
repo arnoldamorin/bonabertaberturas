@@ -77,6 +77,7 @@ class Patente extends Model
         if (!empty($request['search']['value'])) {
             $sql .= " AND ( P.nombre LIKE '%" . $request['search']['value'] . "%'";
             $sql .= " OR P.modulo LIKE '%" . $request['search']['value'] . "%'";
+            $sql .= " OR P.submodulo LIKE '%" . $request['search']['value'] . "%'";
             $sql .= " OR P.descripcion LIKE '%" . $request['search']['value'] . "%')";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];

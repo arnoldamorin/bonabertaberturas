@@ -46,6 +46,7 @@
                 $row = array();
                 $row[] = $aPatentes[$i]->nombre;
                 $row[] = $aPatentes[$i]->modulo;
+                $row[] = $aPatentes[$i]->submodulo;
                 $row[] = $aPatentes[$i]->descripcion;
                 $row[] = "<a href='/admin/patente/nuevo/".$aPatentes[$i]->idpatente."'><i class='fas fa-search'></i></a>";
                 $cont++;
