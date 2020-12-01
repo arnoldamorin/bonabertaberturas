@@ -18,6 +18,25 @@ require app_path() . '/start/constants.php';
 
 class ControladorWebCurso extends Controller
 {
+    public function mercadoPago(){
+        $curso = new Curso();
+        
+        SDK::setClientId(
+            config("payment-methods.mercadopago.client")
+        );
+        SDK::setClientSecret(
+            config("payment-methods.mercadopago.secret")
+        );
+        SDK::setAccessToken("$mercadoPago->token_acceso");
+        $aCursos = $curso->obtenerPorId();
+        $item = new Item();
+        $item->id = $aCursos->idcurso;
+        $item->title =  $aCursos->nombre;
+        $item->category_id = "services";
+        $item->quantity = 1;
+        $item->currency_id = "ARS";
+        $item->unit_price = $aCursos->precio;
+    }
     public function index()
     {
         $seccion = "Cursos";
