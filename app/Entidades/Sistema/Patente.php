@@ -54,12 +54,12 @@ class Patente extends Model
     {
         $request = $_REQUEST;
         $columns = array(
-            0 => 'P.tipo',
-            1 => 'P.submodulo',
-            2 => 'P.nombre',
-            3 => 'P.modulo',
+            0 => 'P.nombre',
+            1 => 'P.modulo',
+            2 => 'P.submodulo',
+            3 => 'P.descripcion',
             4 => 'P.log_operacion',
-            5 => 'P.descripcion'
+            5 => 'P.tipo'
         );
         $sql = "SELECT DISTINCT
                     P.idpatente,
