@@ -78,8 +78,8 @@
             <p>
               Córdoba Capital <br>
               Argentina <br><br>
-              <strong>Teléfono:</strong> +54 9 3512452331<br>
-              <strong>Email:</strong> info@emilcecharras.com.ar<br>
+              <strong>Teléfono:</strong><a href="https://web.whatsapp.com/send?phone=5493512452331" target="_blank"> +54 9 3512452331</a><br>
+              <strong>Email:</strong><a href="mailto:info@emilcecharras.com.ar"> info@emilcecharras.com.ar</a><br>
             </p>
           </div>
 
@@ -120,15 +120,15 @@
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/ -->
-          Template diseñada por <a href="https://bootstrapmade.com/" target="__blank">BootstrapMade</a>
+          Template diseñada por <a href="https://bootstrapmade.com/" target="_blank">BootstrapMade</a>
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
         <!-- <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> -->
-        <a href="https://www.facebook.com/emilce.charras" class="facebook" target="__blank"><i class="bx bxl-facebook"></i></a>
-        <a href="https://www.instagram.com/charrasemilce/" class="instagram" target="__blank"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.facebook.com/emilce.charras" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
+        <a href="https://www.instagram.com/charrasemilce/" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
         <!-- <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a> -->
-        <a href="https://www.linkedin.com/in/emilce-charras-a45911103/" class="linkedin" target="__blank"><i class="bx bxl-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/emilce-charras-a45911103/" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->

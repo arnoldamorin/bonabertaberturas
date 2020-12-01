@@ -133,4 +133,11 @@ class Venta extends Model
        return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
 
+    public function insertarDatosCompra(){
+        $sql = "INSERT INTO inscripciones (fecha, fk_idcurso, telefono, correo, nombre_comprador, fk_idestado)
+        VALUES (?,?,?,?,?,?)";
+        $result = DB::insert($sql, [$this->fecha, $this->fk_idcurso, $this->telefono_comprador,$this->correo_comprador,$this->nombre_comprador ,$this->estado]);
+        return $this->idinscripcion = DB::getPdo()->lastInsertId();
+    }
+
 }

@@ -57,10 +57,10 @@
 
             <div class="row mb-3 ">
               <div class="col-sm-6 col-12 text-sm-left text-center">
-                <!--<a href="https://www.ficop.org/" target="__blank">--><img src=" {{ asset('web/img/logos/ficop.jpg') }}" style="height: 80px;" alt=""><!--</a>-->
+                <a href="https://www.ficop.org/" target="__blank"><img src=" {{ asset('web/img/logos/ficop.jpg') }}" style="height: 80px;" alt=""></a>
               </div>
               <div class="col-sm-6 col-12 text-sm-left text-center pl-sm-0 pl-5">
-                <!--<a href="https://www.aacop.org.ar/" target="__blank">--><img src="{{ asset('web/img/logos/scop.jpg') }}" style="height: 80px;" alt=""><!--</a>-->
+                <a href="https://www.aacop.org.ar/" target="__blank"><img src="{{ asset('web/img/logos/scop.jpg') }}" style="height: 80px;" alt=""></a>
               </div>
             </div>
 
