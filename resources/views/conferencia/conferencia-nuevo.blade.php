@@ -45,11 +45,13 @@ if (isset($msg)) {
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-12">
                     <label for="txtNombre">Nombre: *</label>
                     <input  type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $conferencia->nombre or '' }}" required>
                 </div>
-                <div class="form-group col-lg-6">
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-12">
                     <label for="txtDescripcion">Descripción:</label>
                     <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10" >{{$conferencia->descripcion or '' }}</textarea>
                 </div>
@@ -58,7 +60,7 @@ if (isset($msg)) {
                 <div class="col-6 form-group">
                     <label for="imagen">Imagen:</label>
                     <input  type="file" class="form-control-file" name="imagen" id="imagen" value="{{ $conferencia->imagen or '' }}">
-                    <img src="files/" class="img-thumbnail">
+                    <img src="files/" class="thumbnail">
                 </div>
             </div>
         </form>
