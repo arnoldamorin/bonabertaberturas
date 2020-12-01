@@ -45,7 +45,7 @@
 
           <div class="col-lg-12 mt-5 mt-lg-0">
 
-            <form action="/" method="post" role="form" class="php-email-form">
+            <form action="" method="get" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Nombre" data-rule="minlen:3" data-msg="Por favor ingresa al menos 3 caracteres" />
