@@ -24,7 +24,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 
     Route::get('/contacto', 'ControladorWebContacto@index');
     Route::post('/contacto', 'ControladorWebContacto@enviarCorreo');
-
+    Route::get("/cursos/compra-realizada", "ControladorWebCurso@index");
+    Route::get("/cursos/compra-pendiente", "ControladorWebCurso@index");
+    Route::get("/cursos/compra-error", "ControladorWebCurso@index");
     Route::get('/sobre-mi', 'ControladorWebSobreMi@index');
 
     Route::get('/conferencias', 'ControladorWebConferencias@index');

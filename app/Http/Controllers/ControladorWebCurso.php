@@ -65,7 +65,7 @@ class ControladorWebCurso extends Controller
         $venta->telefono_comprador = $request->input("txtTelefonoComprador");
 
         $venta->insertarDatosCompra();
-        echo "Datos insertados";
+        return view("web.compra-realizada");
     }
 
 }
