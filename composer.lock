@@ -2572,6 +2572,12 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "support": {
+                "source": "https://github.com/symfony/css-selector/tree/v5.2.0"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2717,6 +2723,12 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v4.4.17"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5159,6 +5171,13 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues",
+                "source": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/1.0.2"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5398,6 +5417,13 @@
                 "export",
                 "exporter"
             ],
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/exporter/issues",
+                "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.3"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5502,6 +5528,13 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/object-enumerator/issues",
+                "source": "https://github.com/sebastianbergmann/object-enumerator/tree/3.0.4"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5553,6 +5586,13 @@
             ],
             "description": "Allows reflection of object attributes, including inherited and non-public ones",
             "homepage": "https://github.com/sebastianbergmann/object-reflector/",
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/object-reflector/issues",
+                "source": "https://github.com/sebastianbergmann/object-reflector/tree/1.1.2"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5612,6 +5652,13 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+<<<<<<< HEAD
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/3.0.1"
+            },
+=======
+>>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
