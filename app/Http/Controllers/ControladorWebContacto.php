@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-require_once("../PHPMailer/src/PHPMailer.php");
-require_once("../PHPMailer/src/SMTP.php");
+use PHPMailer\PHPMailer\PHPMailer;
+
 
 
 require app_path() . '/start/constants.php';
@@ -41,7 +41,7 @@ class ControladorWebContacto extends Controller{
                     );
     
              //Destinatarios
-             $mail->addAddress($correo);
+             $mail->addAddress($email);
              $mail->addBCC("emilcecharras@gmail.com"); //Copia oculta
              $mail->Subject = utf8_decode("Contacto página Web");
              $mail->Body = "Recibi tu consulta, te respondere a la brevedad.";
@@ -53,7 +53,7 @@ class ControladorWebContacto extends Controller{
              //Envía ahora un correo a nosotros con los datos de la persona
              $mail->addAddress("emilcecharras@gmail.com");
              $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
-             $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
+             $mail->Body = "Te escribio $nombre cuyo correo es $email, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
             
              //if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
                  return view("web.contacto-exitoso");

@@ -47,7 +47,7 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Fecha: *</label>
-                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required>
+                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{$venta->fecha or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Curso:</label>
@@ -62,20 +62,16 @@ if (isset($msg)) {
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Alumno:</label>
-                    <select id="lstAlumno" name="lstAlumno" class="form-control">
-                        @for ($i = 0; $i < count($array_alumno); $i++)
-                            @if (isset($venta) and $array_alumno[$i]->idalumno == $venta->fk_idalumno)
-                                <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                    </select>
+                    <label>Telefono:</label>
+                    <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono" value="{{$venta->telefono or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Importe:</label>
-                    <input class="form-control" type="number" id="txtImporte" name="txtImporte">
+                    <label>Correo:</label>
+                    <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo" value="{{$venta->correo or ''}}">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Nombre del Comprador:</label>
+                    <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador" value="{{$venta->nombre_comprador or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado:</label>
@@ -133,7 +129,7 @@ if (isset($msg)) {
     function eliminar() {
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/sistema/venta/nueva/eliminar') }}",
+            url: "{{ asset('admin/ventas/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",
