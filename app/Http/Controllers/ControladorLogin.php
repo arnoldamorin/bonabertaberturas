@@ -39,26 +39,22 @@ class ControladorLogin extends Controller
 
     public function entrar(Request $request)
     {
-        $usuario = $request->input('txtUsuario');
-        $clave = $request->input('txtClave');
+        $usuarioIngresado = $request->input('txtUsuario');
+        $claveIngresada = $request->input('txtClave');
 
-        if ($usuario == "admin" && $clave == "") {
+        $usuario = new Usuario();
+        $lstUsuario = $usuario->validarUsuario($usuarioIngresado);
 
-            $entidad = new Usuario();
-            // llamo al modelo
-            $lstUsuario = $entidad->validarUsuario($usuario);
-            // si el usuario y la contraseña ingresado es igual a lo obtenido del modelo redirect al form usuarios, sino from login
-
-
-            if (count($lstUsuario) > 0) {
+        if (count($lstUsuario) > 0){
+            if ($usuario->validarClave($claveIngresada, $lstUsuario[0]->clave)){
                 $titulo = 'Inicio';
                 $request->session()->put('usuario_id', $lstUsuario[0]->idusuario);
                 $request->session()->put('usuario', $lstUsuario[0]->usuario);
                 $request->session()->put('usuario_root', $lstUsuario[0]->root);
                 $request->session()->put('usuario_nombre', $lstUsuario[0]->nombre . " " . $lstUsuario[0]->apellido);
 
-                $entidad->idusuario = $lstUsuario[0]->idusuario;
-                $entidad->actualizarFechaIngreso();
+                $usuario->idusuario = $lstUsuario[0]->idusuario;
+                $usuario->actualizarFechaIngreso();
 
                 //Carga los grupos de cuentas de usuario
                 $grupo = new Area();
@@ -85,15 +81,14 @@ class ControladorLogin extends Controller
                     $request->session()->put('array_menu', $aMenu);
                 }
                 return view('sistema.index', compact('titulo'));
-            } else {
-                $titulo = 'Acceso';
-                return view('sistema.login', compact('titulo'));
-            }
         } else {
             $titulo = 'Acceso denegado';
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = "Credenciales incorrectas";
             return view('sistema.login', compact('titulo', 'msg'));
         }
+            
+            
+    } 
     }
 }
