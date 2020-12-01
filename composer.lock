@@ -5176,8 +5176,11 @@
                 "issues": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/issues",
                 "source": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/tree/1.0.2"
             },
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
+>>>>>>> 828aba401abcc96bab74da106ab280f152cca25f
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5422,8 +5425,11 @@
                 "issues": "https://github.com/sebastianbergmann/exporter/issues",
                 "source": "https://github.com/sebastianbergmann/exporter/tree/3.1.3"
             },
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
+>>>>>>> 828aba401abcc96bab74da106ab280f152cca25f
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5533,8 +5539,11 @@
                 "issues": "https://github.com/sebastianbergmann/object-enumerator/issues",
                 "source": "https://github.com/sebastianbergmann/object-enumerator/tree/3.0.4"
             },
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
+>>>>>>> 828aba401abcc96bab74da106ab280f152cca25f
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5591,8 +5600,11 @@
                 "issues": "https://github.com/sebastianbergmann/object-reflector/issues",
                 "source": "https://github.com/sebastianbergmann/object-reflector/tree/1.1.2"
             },
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
+>>>>>>> 828aba401abcc96bab74da106ab280f152cca25f
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
@@ -5657,8 +5669,11 @@
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
                 "source": "https://github.com/sebastianbergmann/recursion-context/tree/3.0.1"
             },
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> a858928fa9cd211efddb821ea590b3e95c5f9e1e
+>>>>>>> 828aba401abcc96bab74da106ab280f152cca25f
             "funding": [
                 {
                     "url": "https://github.com/sebastianbergmann",
