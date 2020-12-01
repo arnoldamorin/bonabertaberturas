@@ -14,7 +14,7 @@ require app_path() . '/start/constants.php';
 
 class ControladorWebCurso extends Controller
 {
-    public function mercadoPago($id, Request $request)
+    public function comprar($id, Request $request)
     {
         $curso = new Curso();
 
