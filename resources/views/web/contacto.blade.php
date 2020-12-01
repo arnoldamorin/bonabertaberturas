@@ -45,7 +45,8 @@
 
           <div class="col-lg-12 mt-5 mt-lg-0">
 
-            <form action="" method="get" class="php-email-form">
+            <form action="" method="post" class="form-group">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
               <div class="form-row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="txtNombre" class="form-control" id="txtNombre" placeholder="Nombre" data-rule="minlen:3" data-msg="Por favor ingresa al menos 3 caracteres" />
@@ -64,12 +65,7 @@
                 <textarea class="form-control" name="txtMensaje" rows="5" data-rule="required" data-msg="Por favor escribe algo para nosotros" placeholder="Mensaje"></textarea>
                 <div class="validate"></div>
               </div>
-              <div class="mb-3">
-                <div class="loading">Cargando</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Tu mensaje ha sido enviado. ¡Muchas gracias!</div>
-              </div>
-              <div class="text-center"><button type="submit">Enviar Mensaje</button></div>
+              <div class="text-center"><button class="btn get-started-btn" type="submit">Enviar Mensaje</button></div>
             </form>
 
           </div>
