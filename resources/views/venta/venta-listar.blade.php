@@ -12,7 +12,7 @@
     <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/ventas/nueva" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/ventas");'><span>Recargar</span></a></li>
     <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
@@ -36,6 +36,9 @@ if (isset($msg)) {
             <th>Importe</th>
             <th>Curso</th>
             <th>Alumno</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Estado</th>
             <th>Modificar</th>
         </tr>
     </thead>

@@ -2,7 +2,7 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinstripcion : 0; ?>';
+    globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinscripcion : 0; ?>';
     <?php $globalId = isset($venta->idinscripcion) ? $venta->idinscripcion : "0"; ?>
 
 </script>
@@ -53,7 +53,7 @@ if (isset($msg)) {
                     <label>Curso:</label>
                     <select id="lstCurso" name="lstCurso" class="form-control">
                         @for ($i = 0; $i < count($array_curso); $i++)
-                            @if (isset($curso))
+                            @if (isset($venta) and $array_curso[$i]->idcurso == $venta->fk_idcurso)
                                 <option selected value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
                             @else
                                 <option value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
@@ -65,7 +65,7 @@ if (isset($msg)) {
                     <label>Alumno:</label>
                     <select id="lstAlumno" name="lstAlumno" class="form-control">
                         @for ($i = 0; $i < count($array_alumno); $i++)
-                            @if (isset($curso))
+                            @if (isset($venta) and $array_alumno[$i]->idalumno == $venta->fk_idalumno)
                                 <option selected value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
                             @else
                                 <option value="{{ $array_alumno[$i]->idalumno }}">{{ $array_alumno[$i]->nombre }}</option>
@@ -74,8 +74,24 @@ if (isset($msg)) {
                     </select>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Importe: *</label>
-                    <input class = "form-control" type="text" name = "txtImporte" id = "txtImporte" required>
+                    <label>Importe:</label>
+                    <input class="form-control" type="number" id="txtImporte" name="txtImporte">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Estado:</label>
+                    <select id="lstEstado" name="lstEstado" class="form-control">
+                        @for ($i = 0; $i < count($array_estado); $i++)
+                            @if (isset($venta) and $array_estado[$i]->idestado == $venta->fk_idestado)
+                                <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                            @else
+                                @if ($array_estado[$i]->idestado == 1 and !isset($venta))
+                                    <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                                @else  
+                                    <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                                @endif    
+                            @endif
+                        @endfor
+                    </select>
                 </div>
             </div>
 			

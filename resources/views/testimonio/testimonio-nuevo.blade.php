@@ -50,12 +50,12 @@ if (isset($msg)) {
                     <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $testimonio->nombre or '' }}" required>
                 </div>
                 <div class="form-group col-lg-6">
-                    <label>Descripci&oacute;n:</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{ $testimonio->descripcion or '' }}">
-                </div>
-                <div class="form-group col-lg-6">
                     <label>Video (YouTube iframe):</label>
                     <input type="text" id="txtVideo" name="txtVideo" class="form-control" value="{{$testimonio->video or ''}}">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Descripci&oacute;n:</label>
+                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:180px !important;" rows="10">{{$testimonio->descripcion or ''}}</textarea>
                 </div>
             </div>
 		</form>

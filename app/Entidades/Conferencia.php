@@ -91,7 +91,7 @@ class Conferencia extends Model
         $sql = "UPDATE conferencias SET
             nombre='$this->nombre',
             descripcion='$this->descripcion',
-            imagen=$this->imagen,
+            imagen='$this->imagen'
             WHERE idconferencia=?";
         $affected = DB::update($sql, [$this->idconferencia]);
     }

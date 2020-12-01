@@ -13,9 +13,10 @@ class ControladorWebTestimonios extends Controller
     public function index()
     {
         $testimonio = new Testimonio();
-        $aTestimonios = $testimonio->obtenerTodos();
+        $aTestimoniosEscritos = $testimonio->obtenerTestimoniosEscritos();
+        $aTestimoniosGrabados = $testimonio->obtenerTestimoniosGrabados();
         $seccion = "Testimonios";
-        return view('web.testimonios', compact('seccion','aTestimonios'));
+        return view('web.testimonios', compact('seccion', 'aTestimoniosEscritos', 'aTestimoniosGrabados'));
     }
 
 }
