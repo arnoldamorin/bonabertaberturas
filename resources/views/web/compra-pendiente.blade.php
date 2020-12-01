@@ -1,10 +1,10 @@
 @extends("web.plantilla")
-@section("titulo", "Compra realizada")
+@section("titulo", "Compra pendiente")
 @section("contenido")
 
 <div class="breadcrumbs" data-aos="fade-in">
       <div class="container">
-        <h2 class ="pt-3">Compra realizada!</h2>
+        <h2 class ="pt-3">Compra pendiente!</h2>
       </div>
     </div><!-- End Breadcrumbs -->
 
