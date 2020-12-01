@@ -28,6 +28,7 @@ class ControladorWebCurso extends Controller
             config("payment-methods.mercadopago.secret")
         );
         SDK::setAccessToken("$mercadoPago->token_acceso");
+        
         $aCursos = $curso->obtenerPorId();
         $item = new Item();
         $item->id = $aCursos->idcurso;
