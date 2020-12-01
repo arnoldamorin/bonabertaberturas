@@ -27,9 +27,10 @@ class ControladorWebCurso extends Controller
         SDK::setClientSecret(
             config("payment-methods.mercadopago.secret")
         );
-        SDK::setAccessToken("$mercadoPago->token_acceso");
-        
-        $aCursos = $curso->obtenerPorId();
+        SDK::setAccessToken("APP_USR-6762967140461719-120122-448806452e0e0b2ca0efc854dd9c8452-166554415
+        ");
+
+        $aCursos = $curso->obtenerPorId($id);
         $item = new Item();
         $item->id = $aCursos->idcurso;
         $item->title =  $aCursos->nombre;
@@ -37,6 +38,24 @@ class ControladorWebCurso extends Controller
         $item->quantity = 1;
         $item->currency_id = "ARS";
         $item->unit_price = $aCursos->precio;
+
+        $preference = new Preference();
+        $preference->items = array($item);
+        
+        $venta = new Venta();
+        $aVenta = $venta->obtenerPorId($id);
+        if($_REQUEST){
+            $payer = new Payer();
+            $payer->name = $aVenta->nombre_comprador;
+            $payer->surname = $array_usuario[0]->apellido;
+            $payer->email = $aVenta->correo_comprador;
+            $payer->date_created = date('Y-m-d H:m');
+            //$payer->identification = array(
+            //    "type" => "CUIT",
+            //    "number" => $cliente->cuit
+            //);
+            $preference->payer = $payer;
+        }
     }
     public function index()
     {
