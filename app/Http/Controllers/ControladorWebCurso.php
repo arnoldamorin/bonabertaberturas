@@ -3,21 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Curso;
-use Illuminate\Http\Request;
 use App\Entidades\Venta;
-
+use Illuminate\Http\Request;
 use MercadoPago\Item;
-use MercadoPago\MerchantOrder;
 use MercadoPago\Payer;
-use MercadoPago\Payment;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
-
 
 require app_path() . '/start/constants.php';
 
 class ControladorWebCurso extends Controller
 {
+    public function comprar($id, Request $request)
+    {
+        $curso = new Curso();
+
+        SDK::setClientId(
+            config("payment-methods.mercadopago.client")
+        );
+        SDK::setClientSecret(
+            config("payment-methods.mercadopago.secret")
+        );
+        SDK::setAccessToken("APP_USR-6762967140461719-120122-448806452e0e0b2ca0efc854dd9c8452-166554415
+        ");
+
+        $curso->obtenerPorId($id);
+
+        $item = new Item();
+        $item->id = $curso->idcurso;
+        $item->title = $curso->nombre;
+        $item->category_id = "services";
+        $item->quantity = 1;
+        $item->currency_id = "ARS";
+        $item->unit_price = $curso->precio;
+
+        $preference = new Preference();
+        $preference->items = array($item);
+
+        $payer = new Payer();
+        $payer->name = $request->input("txtNombreComprador");
+        $payer->surname = $request->input("txtApellidoComprador");
+        $payer->email = $request->input("txtCorreoComprador");
+        $payer->date_created = date('Y-m-d H:m');
+        //$payer->identification = array(
+        //    "type" => "CUIT",
+        //    "number" => $cliente->cuit
+        //);
+        $preference->payer = $payer;
+
+        $preference->back_urls = [
+<<<<<<< HEAD
+            "success" => "https://emilcecharras.com.ar/cursos/compra-realizada",
+            "pending" => "https: //emilcecharras.com.ar/venta_pendiente/$idVenta",
+            "failure" => "https: //emilcecharras.com.ar/venta_error/$idVenta",
+=======
+            "success" => "https://emilcecharras.com.ar/venta_aprobada/$idVenta",
+            "pending" => "https://emilcecharras.com.ar/venta_pendiente/$idVenta",
+            "failure" => "https://emilcecharras.com.ar/venta_error/$idVenta",
+>>>>>>> cdb720380759d81356f9dee1c9f7d2ce6be8a69b
+        ];
+        
+        $preference->payment_methods = array(
+            "installments" => 6,
+        );
+        $preference->auto_return = "all";
+
+        $preference->notification_url = '';
+
+        $preference->save();
+
+        header("Location: " . $preference->init_point);
+
+    }
     public function index()
     {
         $seccion = "Cursos";
@@ -26,17 +83,20 @@ class ControladorWebCurso extends Controller
         return view('web.cursos', compact('seccion', 'aCursos'));
     }
 
-    public function compraCurso() {
+    public function compraCurso()
+    {
         return view('web.compra-curso');
     }
 
-    public function detalleCurso($id) {
+    public function detalleCurso($id)
+    {
         $curso = new Curso();
         $curso->obtenerPorId($id);
         return view('web.detalle-curso', compact('curso'));
     }
 
-    public function subirDatosCompra($id, Request $request){
+    public function subirDatosCompra($id, Request $request)
+    {
         $venta = new Venta();
         $venta->fecha = date("Y-m-d");
         $venta->fk_idcurso = $id;
@@ -47,6 +107,18 @@ class ControladorWebCurso extends Controller
 
         $venta->insertarDatosCompra();
         return view("web.compra-realizada");
+    }
+    public function compraRealizada()
+    {
+        return view('web.compra-realizada');
+    }
+    public function compraPendiente()
+    {
+        return view('web.compra-pendiente');
+    }
+    public function compraError()
+    {
+        return view('web.compra-error');
     }
 
 }

@@ -52,7 +52,8 @@ class ControladorVenta extends Controller
     
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aVenta[$i]->fecha;
+                $fecha_formateada = date("d/m/Y H:i:s", strtotime($aVenta[$i]->fecha));
+                $row[] = $fecha_formateada;
                 $entidadCurso->obtenerPorId($aVenta[$i]->fk_idcurso);
                 $row[] = $entidadCurso->nombre;
                 $row[] = $aVenta[$i]->telefono;
