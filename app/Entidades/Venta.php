@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'importe', 'fk_idcurso', 'fk_idalumno', 'fk_idestado', 'telefono', 'correo'
+        'idinscripcion', 'fecha', 'fk_idcurso', 'telefono', 'correo', 'nombre_comprador', 'fk_idestado'
     ];
 
     protected $hidden = [
@@ -22,11 +22,10 @@ class Venta extends Model
     function cargarDesdeRequest($request) {
         $this->idinscripcion = $request->input('id')!="0" ? $request->input('id') : $this->idinscripcion;
         $this->fecha = $request->input('txtFecha');
-        $this->importe = $request->input('txtImporte');
         $this->fk_idcurso = $request->input('lstCurso');
-        $this->fk_idalumno = $request->input('lstAlumno'); 
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo'); 
+        $this->nombre_comprador = $request->input('txtNombreComprador');
         $this->fk_idestado = $request->input('lstEstado');  
     }
 
@@ -34,17 +33,15 @@ class Venta extends Model
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.fecha',
-           1 => 'C.importe',
-           2 => 'C.fk_idcurso',
-           3 => 'C.fk_idalumno',
-           4 => 'C.fk_idestado',
-           5 => 'C.telefono',
-           6 => 'C.correo'    
+           1 => 'C.fk_idcurso',
+           2 => 'C.telefono',
+           3 => 'C.correo',
+           4 => 'C.nombre_comprador', 
+           5 => 'C.fk_idestado'
             );
         $sql = "SELECT DISTINCT
                     C.idinscripcion,
                     C.fecha,
-                    C.importe,
                     C.telefono,
                     C.correo                   
                     FROM inscripciones C
@@ -63,12 +60,11 @@ class Venta extends Model
         $sql = "SELECT 
                   C.idinscripcion,
                   C.fecha,
-                  C.importe,
                   C.fk_idcurso,
-                  C.fk_idalumno,
-                  C.fk_idestado,
                   C.telefono,
-                  C.correo
+                  C.correo,
+                  C.nombre_comprador,
+                  C.fk_idestado
                 FROM inscripciones C ORDER BY C.fecha";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -78,23 +74,21 @@ class Venta extends Model
         $sql = "SELECT
                 idinscripcion,
                 fecha,
-                importe,
                 fk_idcurso,
-                fk_idalumno,
-                fk_idestado,
                 telefono,
-                correo
+                correo,
+                nombre_comprador,
+                fk_idestado                
                 FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
             $this->idinscripcion = $lstRetorno[0]->idinscripcion;
             $this->fecha = $lstRetorno[0]->fecha;
-            $this->importe = $lstRetorno[0]->importe;
             $this->fk_idcurso = $lstRetorno[0]->fk_idcurso;
-            $this->fk_idalumno = $lstRetorno[0]->fk_idalumno; 
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
+            $this->nombre_comprador = $lstRetorno[0]->nombre_comprador;
             $this->fk_idestado = $lstRetorno[0]->fk_idestado;     
             return $this;
         }
@@ -104,12 +98,11 @@ class Venta extends Model
     public function guardar() {
         $sql = "UPDATE inscripciones SET
             fecha = '$this->fecha',
-            importe = $this->importe,
-            curso = '$this->fk_idcurso',
-            alumno = '$this->fk_idalumno',
-            estado = '$this->fk_idestado',
-            telefono = '$this->telefono',
-            correo = '$this->correo'
+            fk_idcurso = '$this->fk_idcurso',
+            telefono = $this->telefono,
+            correo = '$this->correo',
+            nombre_comprador = '$this->nombre_comprador',
+            fk_idestado = '$this->fk_idestado'
             WHERE idinscripcion=?";
         $affected = DB::update($sql, [$this->idinscripcion]);
     }
@@ -123,21 +116,19 @@ class Venta extends Model
     public function insertar() {
         $sql = "INSERT INTO inscripciones (
                 fecha,
-                importe,
                 fk_idcurso,
-                fk_idalumno,
-                fk_idestado,
                 telefono,
-                correo             
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                correo, 
+                nombre_comprador,                
+                fk_idestado                        
+            ) VALUES (?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fecha, 
-            $this->importe,
             $this->fk_idcurso,
-            $this->fk_idalumno,
-            $this->fk_idestado,
             $this->telefono,
-            $this->correo          
+            $this->correo,
+            $this->nombre_comprador,
+            $this->fk_idestado                      
         ]);
        return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
