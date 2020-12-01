@@ -52,7 +52,7 @@ class ControladorWebCurso extends Controller
         $preference->payer = $payer;
 
         $preference->back_urls = [
-            "success" => "https://emilcecharras.com.ar/venta_aprobada/$idVenta",
+            "success" => "https://emilcecharras.com.ar/cursos/compra-realizada",
             "pending" => "https: //emilcecharras.com.ar/venta_pendiente/$idVenta",
             "failure" => "https: //emilcecharras.com.ar/venta_error/$idVenta",
         ];

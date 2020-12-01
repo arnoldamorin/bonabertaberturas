@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'fk_idcurso', 'telefono', 'correo', 'nombre_comprador', 'fk_idestado'
+        'idinscripcion', 'fecha', 'fk_idcurso', 'telefono', 'correo', 'nombre_comprador', 'apellido_comprador', 'fk_idestado'
     ];
 
     protected $hidden = [
@@ -26,6 +26,7 @@ class Venta extends Model
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo'); 
         $this->nombre_comprador = $request->input('txtNombreComprador');
+        $this->apellido_comprador = $request->input('txtApellidoComprador');
         $this->fk_idestado = $request->input('lstEstado');  
     }
 
@@ -36,8 +37,9 @@ class Venta extends Model
            1 => 'C.fk_idcurso',
            2 => 'C.telefono',
            3 => 'C.correo',
-           4 => 'C.nombre_comprador', 
-           5 => 'C.fk_idestado'
+           4 => 'C.nombre_comprador',
+           5 => 'C.apellido_comprador',
+           6 => 'C.fk_idestado'
             );
         $sql = "SELECT DISTINCT
                     C.idinscripcion,
@@ -64,6 +66,7 @@ class Venta extends Model
                   C.telefono,
                   C.correo,
                   C.nombre_comprador,
+                  C.apellido_comprador,
                   C.fk_idestado
                 FROM inscripciones C ORDER BY C.fecha";
         $lstRetorno = DB::select($sql);
@@ -78,6 +81,7 @@ class Venta extends Model
                 telefono,
                 correo,
                 nombre_comprador,
+                apellido_comprador,
                 fk_idestado                
                 FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
         $lstRetorno = DB::select($sql);
@@ -89,6 +93,7 @@ class Venta extends Model
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
             $this->nombre_comprador = $lstRetorno[0]->nombre_comprador;
+            $this->apellido_comprador = $lstRetorno[0]->apellido_comprador;
             $this->fk_idestado = $lstRetorno[0]->fk_idestado;     
             return $this;
         }
@@ -102,6 +107,7 @@ class Venta extends Model
             telefono = $this->telefono,
             correo = '$this->correo',
             nombre_comprador = '$this->nombre_comprador',
+            apellido_comprador = '$this->apellido_comprador',
             fk_idestado = '$this->fk_idestado'
             WHERE idinscripcion=?";
         $affected = DB::update($sql, [$this->idinscripcion]);
@@ -119,24 +125,26 @@ class Venta extends Model
                 fk_idcurso,
                 telefono,
                 correo, 
-                nombre_comprador,                
+                nombre_comprador,
+                apellido_comprador,                
                 fk_idestado                        
-            ) VALUES (?, ?, ?, ?, ?, ?)";
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fecha, 
             $this->fk_idcurso,
             $this->telefono,
             $this->correo,
             $this->nombre_comprador,
+            $this->apellido_comprador,
             $this->fk_idestado                      
         ]);
        return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
 
     public function insertarDatosCompra(){
-        $sql = "INSERT INTO inscripciones (fecha, fk_idcurso, telefono, correo, nombre_comprador, fk_idestado)
-        VALUES (?,?,?,?,?,?)";
-        $result = DB::insert($sql, [$this->fecha, $this->fk_idcurso, $this->telefono_comprador,$this->correo_comprador,$this->nombre_comprador ,$this->estado]);
+        $sql = "INSERT INTO inscripciones (fecha, fk_idcurso, telefono, correo, nombre_comprador, apellido_comprador, fk_idestado)
+        VALUES (?,?,?,?,?,?,?)";
+        $result = DB::insert($sql, [$this->fecha, $this->fk_idcurso, $this->telefono_comprador,$this->correo_comprador,$this->nombre_comprador, $this->apellido_comprador ,$this->estado]);
         return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
 
