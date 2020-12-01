@@ -70,6 +70,14 @@ class Venta extends Model
         return $lstRetorno;
     }
 
+    public function __get($atributo) {
+        return $this->$atributo;
+    }
+
+    public function __set($atributo, $valor) {
+        $this->$atributo = $valor;
+    }
+
     public function obtenerPorId($idinscripcion) {
         $sql = "SELECT
                 idinscripcion,
@@ -99,7 +107,7 @@ class Venta extends Model
         $sql = "UPDATE inscripciones SET
             fecha = '$this->fecha',
             fk_idcurso = '$this->fk_idcurso',
-            telefono = $this->telefono,
+            telefono = '$this->telefono',
             correo = '$this->correo',
             nombre_comprador = '$this->nombre_comprador',
             fk_idestado = '$this->fk_idestado'

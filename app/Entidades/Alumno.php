@@ -19,6 +19,14 @@ class Alumno extends Model
 
     ];
 
+    public function __get($atributo) {
+        return $this->$atributo;
+    }
+
+    public function __set($atributo, $valor) {
+        $this->$atributo = $valor;
+    }
+
     function cargarDesdeRequest($request) {
         $this->idalumno = $request->input('id')!="0" ? $request->input('id') : $this->idalumno;
         $this->nombre = $request->input('txtNombre');
@@ -97,6 +105,19 @@ class Alumno extends Model
             return $this;
         }
         return null;
+    }
+
+    public function obtenerPorCorreo($correo) {
+        $sql = "SELECT
+                idalumno,
+                nombre,
+                apellido,
+                dni,
+                mail,
+                telefono
+                FROM alumnos WHERE mail = '$correo'";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
     }
 
     public function guardar() {
