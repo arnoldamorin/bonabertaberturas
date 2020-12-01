@@ -47,7 +47,7 @@
                 $row = array();
                 $row[] = $aConferencias[$i]->nombre;
                 $row[] = $aConferencias[$i]->descripcion;
-                $row[] = $aConferencias[$i]->imagen;
+                $row[] = "<img src=../web/img/".$aConferencias[$i]->imagen." class='img-thumbnail'>";
                 $row[] = "<a href='/admin/conferencia/nuevo/".$aConferencias[$i]->idconferencia."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;

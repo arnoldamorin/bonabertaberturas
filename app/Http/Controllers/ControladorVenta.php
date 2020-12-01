@@ -119,6 +119,7 @@ class ControladorVenta extends Controller
                 $titulo = "Modificar Venta";
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
+                $entidadAnt = $entidad->obtenerPorId($entidad->idventa);
             
                 //validaciones
                 if ($entidad->fecha == "") {
@@ -127,6 +128,14 @@ class ControladorVenta extends Controller
                 } else {
                     if ($_POST["id"] > 0) {
                         //Es actualizacion
+
+                        if ($entidadAnt->fk_idestado == 1 && $entidad->fk_idestado == 2) {
+                            $alumno = new Alumno();
+                            $alumno->nombre = $entidad->nombre_comprador;
+                            $alumno->mail = $entidad->correo;
+                            $alumno->telefono = $entidad->telefono;
+                        }
+
                         $entidad->guardar();
     
                         $msg["ESTADO"] = MSG_SUCCESS;
