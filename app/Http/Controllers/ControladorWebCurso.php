@@ -6,6 +6,12 @@ use App\Entidades\Curso;
 use Illuminate\Http\Request;
 use App\Entidades\Venta;
 
+use MercadoPago\Item;
+use MercadoPago\MerchantOrder;
+use MercadoPago\Payer;
+use MercadoPago\Payment;
+use MercadoPago\Preference;
+use MercadoPago\SDK;
 
 
 require app_path() . '/start/constants.php';
