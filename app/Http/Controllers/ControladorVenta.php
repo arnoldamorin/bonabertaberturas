@@ -135,12 +135,13 @@ class ControladorVenta extends Controller
                             $alumnos = $alumno->obtenerPorCorreo($entidad->correo);
                             if (count($alumnos) > 0) {
                                 $alumnos[0]->nombre = $entidad->nombre_comprador;
+                                $alumnos[0]->apellido = $entidad->apellido_comprador;
                                 $alumnos[0]->mail = $entidad->correo;
                                 $alumnos[0]->telefono = $entidad->telefono;
                                 $alumnos[0]->guardar();
                             } else {
                                 $alumno->nombre = $entidad->nombre_comprador;
-                                $alumno->apellido = "";
+                                $alumno->apellido = $entidad->apellido_comprador;
                                 $alumno->dni = "";
                                 $alumno->mail = $entidad->correo;
                                 $alumno->telefono = $entidad->telefono;
