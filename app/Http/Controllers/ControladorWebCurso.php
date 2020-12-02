@@ -112,11 +112,12 @@ class ControladorWebCurso extends Controller
         $venta->insertarDatosCompra();
         return view("web.compra-realizada");
     }
-    
+
     public function compraRealizada($idVenta)
     {
         $venta = new Venta();
         $venta->estado($idVenta, VENTA_APROBADO);
+        //cambiar el cupo de la venta
 
         return view('web.compra-realizada');
     }
