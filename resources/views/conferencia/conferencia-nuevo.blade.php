@@ -60,11 +60,7 @@ if (isset($msg)) {
                 <div class="col-6 form-group">
                     <label for="imagen">Imagen:</label>
                     <input  type="file" class="form-control-file" name="imagen" id="imagen" >
-<<<<<<< HEAD
-                    <img src="../../../web/img/{{ $conferencia->imagen or '' }}" class="img-thumbnail" width="250px">
-=======
                     <img src="../../../web/img/{{ $conferencia->imagen or '' }}" class="img-thumbnail" width="150px">
->>>>>>> 4f0e04c7535c3a50f70c18eb5d6c265a93c803c3
                 </div>
             </div>
         </form>
