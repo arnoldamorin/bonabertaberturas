@@ -19,7 +19,7 @@
       @for ($i = 0; $i < count($aConferencias); $i++)
           <div class="col-md-6 d-flex align-items-stretch">
             <div class="card">
-              <div class="card-img">
+              <div class="card-img ">
                 <img src="../web/img/{{ $aConferencias[$i]->imagen }}" alt="...">
               </div>
               <div class="card-body">
