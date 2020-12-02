@@ -112,16 +112,27 @@ class ControladorWebCurso extends Controller
         $venta->insertarDatosCompra();
         return view("web.compra-realizada");
     }
-    public function compraRealizada()
+    
+    public function compraRealizada($idVenta)
     {
+        $venta = new Venta();
+        $venta->estado($idVenta, VENTA_APROBADO);
+
         return view('web.compra-realizada');
     }
-    public function compraPendiente()
+
+    public function compraPendiente($idVenta)
     {
+        $venta = new Venta();
+        $venta->estado($idVenta, VENTA_PENDIENTE);
+
         return view('web.compra-pendiente');
     }
-    public function compraError()
+
+    public function compraError($idVenta)
     {
+        $venta = new Venta();
+        $venta->estado($idVenta, VENTA_RECHAZADO);
         return view('web.compra-error');
     }
 
