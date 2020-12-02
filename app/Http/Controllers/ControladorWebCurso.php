@@ -117,6 +117,7 @@ class ControladorWebCurso extends Controller
     {
         $venta = new Venta();
         $venta->estado($idVenta, VENTA_APROBADO);
+        //cambiar el cupo de la venta
 
         return view('web.compra-realizada');
     }
