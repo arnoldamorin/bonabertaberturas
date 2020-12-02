@@ -106,6 +106,7 @@ class ControladorWebCurso extends Controller
         $venta->fk_idcurso = $id;
         $venta->estado = 1;
         $venta->nombre_comprador = $request->input("txtNombreComprador");
+        $venta->apellido_comprador = $request->input("txtApellidoComprador");
         $venta->correo_comprador = $request->input("txtCorreoComprador");
         $venta->telefono_comprador = $request->input("txtTelefonoComprador");
 
