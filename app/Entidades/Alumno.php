@@ -109,7 +109,17 @@ class Alumno extends Model
                 telefono
                 FROM alumnos WHERE mail = '$correo'";
         $lstRetorno = DB::select($sql);
-        return $lstRetorno;
+
+        if(count($lstRetorno)>0){
+            $this->idalumno = $lstRetorno[0]->idalumno;
+            $this->nombre = $lstRetorno[0]->nombre;
+            $this->apellido = $lstRetorno[0]->apellido;
+            $this->dni = $lstRetorno[0]->dni;
+            $this->mail = $lstRetorno[0]->mail;
+            $this->telefono = $lstRetorno[0]->telefono;
+            return $this;
+        }
+        return null;
     }
 
     public function guardar() {

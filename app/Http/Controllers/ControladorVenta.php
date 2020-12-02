@@ -59,6 +59,7 @@ class ControladorVenta extends Controller
                 $row[] = $aVenta[$i]->telefono;
                 $row[] = $aVenta[$i]->correo;
                 $row[] = $aVenta[$i]->nombre_comprador;
+                $row[] = $aVenta[$i]->apellido_comprador;
                 $entidadEstado->obtenerPorID($aVenta[$i]->fk_idestado);
                 $row[] = $entidadEstado->nombre;
                 $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
@@ -132,16 +133,14 @@ class ControladorVenta extends Controller
 
                         if (($entidadAnt->fk_idestado == 1) && ($entidad->fk_idestado == 2)) {
                             $alumno = new Alumno();
-                            $alumnos = $alumno->obtenerPorCorreo($entidad->correo);
-                            if (count($alumnos) > 0) {
-                                $alumno = $alumnos[0];
+                            $alumno = $alumno->obtenerPorCorreo($entidad->correo);
+                            if (isset($alumno) && ($alumno->idalumno != "")) {
                                 $alumno->nombre = $entidad->nombre_comprador;
                                 $alumno->apellido = $entidad->apellido_comprador;
-                                $alumno->mail = $entidad->correo;
                                 $alumno->telefono = $entidad->telefono;
-                                printf($alumno->apellido);
                                 $alumno->guardar();
                             } else {
+                                $alumno = new Alumno();
                                 $alumno->nombre = $entidad->nombre_comprador;
                                 $alumno->apellido = $entidad->apellido_comprador;
                                 $alumno->dni = "";

@@ -36,7 +36,8 @@ if (isset($msg)) {
             <th>Curso</th>
             <th>Telefono</th>
             <th>Correo</th>
-            <th>Nombre del Comprador</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
             <th>Estado</th>
             <th>Modificar</th>
         </tr>

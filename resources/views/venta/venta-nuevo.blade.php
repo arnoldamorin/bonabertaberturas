@@ -47,7 +47,7 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Fecha: *</label>
-                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ date('yy-m-d', strtotime($venta->fecha)) or ''}}">
+                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $venta->fecha or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Curso:</label>
@@ -72,6 +72,10 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Nombre del Comprador:</label>
                     <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador" value="{{$venta->nombre_comprador or ''}}">
+                </div>
+                <div class="form-group col-lg-6">
+                    <label>Apellido del Comprador:</label>
+                    <input class="form-control" type="text" id="txtApellidoComprador" name="txtApellidoComprador" value="{{$venta->apellido_comprador or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Estado:</label>
