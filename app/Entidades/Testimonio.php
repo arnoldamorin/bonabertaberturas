@@ -43,7 +43,7 @@ class Testimonio extends Model
                   T.nombre,
                   T.descripcion
                 FROM testimonios T
-                WHERE T.video = '0'
+                WHERE T.video = ''
                 ORDER BY T.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -55,7 +55,7 @@ class Testimonio extends Model
                   T.nombre,
                   T.video
                 FROM testimonios T
-                WHERE T.video <> '0'
+                WHERE T.video <> ''
                 ORDER BY T.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;

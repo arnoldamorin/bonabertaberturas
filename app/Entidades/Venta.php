@@ -22,6 +22,7 @@ class Venta extends Model
     function cargarDesdeRequest($request) {
         $this->idinscripcion = $request->input('id')!="0" ? $request->input('id') : $this->idinscripcion;
         $this->fecha = $request->input('txtFecha');
+        $this->hora = $request->input('txtHora');
         $this->fk_idcurso = $request->input('lstCurso');
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo'); 
@@ -77,6 +78,7 @@ class Venta extends Model
         $sql = "SELECT
                 idinscripcion,
                 DATE(fecha) AS fecha,
+                TIME(fecha) AS hora,
                 fk_idcurso,
                 telefono,
                 correo,
@@ -89,6 +91,7 @@ class Venta extends Model
         if(count($lstRetorno)>0){
             $this->idinscripcion = $lstRetorno[0]->idinscripcion;
             $this->fecha = $lstRetorno[0]->fecha;
+            $this->hora = $lstRetorno[0]->hora;
             $this->fk_idcurso = $lstRetorno[0]->fk_idcurso;
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
@@ -102,7 +105,7 @@ class Venta extends Model
 
     public function guardar() {
         $sql = "UPDATE inscripciones SET
-            fecha = '$this->fecha',
+            fecha = '".$this->fecha. " ". $this->hora ."',
             fk_idcurso = '$this->fk_idcurso',
             telefono = '$this->telefono',
             correo = '$this->correo',

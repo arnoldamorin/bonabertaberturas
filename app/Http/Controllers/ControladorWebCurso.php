@@ -102,7 +102,7 @@ class ControladorWebCurso extends Controller
     public function subirDatosCompra($id, Request $request)
     {
         $venta = new Venta();
-        $venta->fecha = date("Y-m-d");
+        $venta->fecha = date("Y-m-d H:i");
         $venta->fk_idcurso = $id;
         $venta->estado = 1;
         $venta->nombre_comprador = $request->input("txtNombreComprador");
