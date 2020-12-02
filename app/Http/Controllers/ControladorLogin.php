@@ -81,12 +81,18 @@ class ControladorLogin extends Controller
                     $request->session()->put('array_menu', $aMenu);
                 }
                 return view('sistema.index', compact('titulo'));
-        } else {
+            }
+            else {
+                    $titulo = 'Acceso denegado';
+                    $msg["ESTADO"] = MSG_ERROR;
+                    $msg["MSG"] = "Credenciales incorrectas";
+                    return view('sistema.login', compact('titulo', 'msg'));
+                }
+        }else {
             $titulo = 'Acceso denegado';
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = "Credenciales incorrectas";
             return view('sistema.login', compact('titulo', 'msg'));
-        }
             
             
     } 
