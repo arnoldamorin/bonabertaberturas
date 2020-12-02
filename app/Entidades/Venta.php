@@ -76,7 +76,7 @@ class Venta extends Model
     public function obtenerPorId($idinscripcion) {
         $sql = "SELECT
                 idinscripcion,
-                fecha,
+                DATE(fecha) AS fecha,
                 fk_idcurso,
                 telefono,
                 correo,
