@@ -3,24 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Curso;
-use Illuminate\Http\Request;
 use App\Entidades\Venta;
-
+use Illuminate\Http\Request;
 use MercadoPago\Item;
-use MercadoPago\MerchantOrder;
 use MercadoPago\Payer;
-use MercadoPago\Payment;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
-
 
 require app_path() . '/start/constants.php';
 
 class ControladorWebCurso extends Controller
 {
-    public function mercadoPago(){
+    public function comprar($id, Request $request)
+    {
         $curso = new Curso();
-        
+
         SDK::setClientId(
             config("payment-methods.mercadopago.client")
         );
@@ -30,32 +27,47 @@ class ControladorWebCurso extends Controller
         SDK::setAccessToken("APP_USR-6762967140461719-120122-448806452e0e0b2ca0efc854dd9c8452-166554415
         ");
 
-        $aCursos = $curso->obtenerPorId($id);
+        $curso->obtenerPorId($id);
+
         $item = new Item();
-        $item->id = $aCursos->idcurso;
-        $item->title =  $aCursos->nombre;
+        $item->id = $curso->idcurso;
+        $item->title = $curso->nombre;
         $item->category_id = "services";
         $item->quantity = 1;
         $item->currency_id = "ARS";
-        $item->unit_price = $aCursos->precio;
+        $item->unit_price = $curso->precio;
 
         $preference = new Preference();
         $preference->items = array($item);
+
+        $payer = new Payer();
+        $payer->name = $request->input("txtNombreComprador");
+        $payer->surname = $request->input("txtApellidoComprador");
+        $payer->email = $request->input("txtCorreoComprador");
+        $payer->date_created = date('Y-m-d H:m');
+        //$payer->identification = array(
+        //    "type" => "CUIT",
+        //    "number" => $cliente->cuit
+        //);
+        $preference->payer = $payer;
+
+        $preference->back_urls = [
+            "success" => "https://emilcecharras.com.ar/compra-realizada/$idVenta",
+            "pending" => "https://emilcecharras.com.ar/compre-pendiente/$idVenta",
+            "failure" => "https://emilcecharras.com.ar/compra-error/$idVenta",
+        ];
         
-        $venta = new Venta();
-        $aVenta = $venta->obtenerPorId($id);
-        if($_REQUEST){
-            $payer = new Payer();
-            $payer->name = $aVenta->nombre_comprador;
-            $payer->surname = $array_usuario[0]->apellido;
-            $payer->email = $aVenta->correo_comprador;
-            $payer->date_created = date('Y-m-d H:m');
-            //$payer->identification = array(
-            //    "type" => "CUIT",
-            //    "number" => $cliente->cuit
-            //);
-            $preference->payer = $payer;
-        }
+        $preference->payment_methods = array(
+            "installments" => 6,
+        );
+        $preference->auto_return = "all";
+
+        $preference->notification_url = '';
+
+        $preference->save();
+
+        header("Location: " . $preference->init_point);
+
     }
     public function index()
     {
@@ -65,17 +77,20 @@ class ControladorWebCurso extends Controller
         return view('web.cursos', compact('seccion', 'aCursos'));
     }
 
-    public function compraCurso() {
+    public function compraCurso()
+    {
         return view('web.compra-curso');
     }
 
-    public function detalleCurso($id) {
+    public function detalleCurso($id)
+    {
         $curso = new Curso();
         $curso->obtenerPorId($id);
         return view('web.detalle-curso', compact('curso'));
     }
 
-    public function subirDatosCompra($id, Request $request){
+    public function subirDatosCompra($id, Request $request)
+    {
         $venta = new Venta();
         $venta->fecha = date("Y-m-d");
         $venta->fk_idcurso = $id;
@@ -87,16 +102,17 @@ class ControladorWebCurso extends Controller
         $venta->insertarDatosCompra();
         return view("web.compra-realizada");
     }
-    public function compraRealizada() {
+    public function compraRealizada()
+    {
         return view('web.compra-realizada');
     }
-    public function compraPendiente() {
+    public function compraPendiente()
+    {
         return view('web.compra-pendiente');
     }
-    public function compraError() {
+    public function compraError()
+    {
         return view('web.compra-error');
     }
-
-
 
 }

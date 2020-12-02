@@ -119,7 +119,8 @@ class ControladorVenta extends Controller
                 $titulo = "Modificar Venta";
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
-                $entidadAnt = $entidad->obtenerPorId($entidad->idventa);
+                $entidadAnt = new Venta();
+                $entidadAnt = $entidadAnt->obtenerPorId($entidad->idinscripcion);
             
                 //validaciones
                 if ($entidad->fecha == "") {
@@ -129,11 +130,23 @@ class ControladorVenta extends Controller
                     if ($_POST["id"] > 0) {
                         //Es actualizacion
 
-                        if ($entidadAnt->fk_idestado == 1 && $entidad->fk_idestado == 2) {
+                        if (($entidadAnt->fk_idestado == 1) && ($entidad->fk_idestado == 2)) {
                             $alumno = new Alumno();
-                            $alumno->nombre = $entidad->nombre_comprador;
-                            $alumno->mail = $entidad->correo;
-                            $alumno->telefono = $entidad->telefono;
+                            $alumnos = $alumno->obtenerPorCorreo($entidad->correo);
+                            if (count($alumnos) > 0) {
+                                $alumnos[0]->nombre = $entidad->nombre_comprador;
+                                $alumnos[0]->mail = $entidad->correo;
+                                $alumnos[0]->telefono = $entidad->telefono;
+                                $alumnos[0]->guardar();
+                            } else {
+                                $alumno->nombre = $entidad->nombre_comprador;
+                                $alumno->apellido = "";
+                                $alumno->dni = "";
+                                $alumno->mail = $entidad->correo;
+                                $alumno->telefono = $entidad->telefono;
+                                $alumno->insertar();
+                            }
+                            
                         }
 
                         $entidad->guardar();
