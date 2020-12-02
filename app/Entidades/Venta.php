@@ -164,4 +164,9 @@ class Venta extends Model
         return $this->idinscripcion = DB::getPdo()->lastInsertId();
     }
 
+    /*public function estado($idventa,$estado){
+        $sql = "UPDATE inscripciones SET 
+        estado = ";
+        $result = DB::in
+    }*/
 }
