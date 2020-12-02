@@ -19,14 +19,6 @@ class Alumno extends Model
 
     ];
 
-    public function __get($atributo) {
-        return $this->$atributo;
-    }
-
-    public function __set($atributo, $valor) {
-        $this->$atributo = $valor;
-    }
-
     function cargarDesdeRequest($request) {
         $this->idalumno = $request->input('id')!="0" ? $request->input('id') : $this->idalumno;
         $this->nombre = $request->input('txtNombre');

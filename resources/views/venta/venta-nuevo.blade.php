@@ -47,8 +47,7 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Fecha: *</label>
-                    {{ date('Y-m-d', strtotime($venta->fecha)) }}
-                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ date('Y-m-d', strtotime($venta->fecha)) or ''}}">
+                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ date('yy-m-d', strtotime($venta->fecha)) or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Curso:</label>
