@@ -14,7 +14,7 @@ require app_path() . '/start/constants.php';
 
 class ControladorWebCurso extends Controller
 {
-    public function comprar($id, Request $request)
+    public function comprar($idCurso, Request $request)
     {
         $curso = new Curso();
 
@@ -27,7 +27,7 @@ class ControladorWebCurso extends Controller
         SDK::setAccessToken("APP_USR-6762967140461719-120122-448806452e0e0b2ca0efc854dd9c8452-166554415
         ");
 
-        $curso->obtenerPorId($id);
+        $curso->obtenerPorId($idCurso);
 
         $item = new Item();
         $item->id = $curso->idcurso;
@@ -51,18 +51,22 @@ class ControladorWebCurso extends Controller
         //);
         $preference->payer = $payer;
 
+        $venta = new Venta();
+        $venta->fecha = date('Y-m-d H:m');
+        $venta->fk_idcurso = $idCurso;
+        $venta->telefono = $request->input("txtTelefonoComprador");
+        $venta->correo = $request->input("txtCorreoComprador");
+        $venta->nombre_comprador = $request->input("txtNombreComprador");
+        $venta->apellido_comprador = $request->input("txtApellidoComprador");
+        $venta->fk_idestado = VENTA_PENDIENTE;
+        $idVenta = $venta->insertar();
+
         $preference->back_urls = [
-<<<<<<< HEAD
-            "success" => "https://emilcecharras.com.ar/cursos/compra-realizada",
-            "pending" => "https: //emilcecharras.com.ar/venta_pendiente/$idVenta",
-            "failure" => "https: //emilcecharras.com.ar/venta_error/$idVenta",
-=======
-            "success" => "https://emilcecharras.com.ar/venta_aprobada/$idVenta",
-            "pending" => "https://emilcecharras.com.ar/venta_pendiente/$idVenta",
-            "failure" => "https://emilcecharras.com.ar/venta_error/$idVenta",
->>>>>>> cdb720380759d81356f9dee1c9f7d2ce6be8a69b
+            "success" => "https://emilcecharras.com.ar/cursos/compra-realizada/$idVenta",
+            "pending" => "https: //emilcecharras.com.ar/cursos/compra-pendiente/$idVenta",
+            "failure" => "https: //emilcecharras.com.ar/cursos/compra-error/$idVenta",
         ];
-        
+
         $preference->payment_methods = array(
             "installments" => 6,
         );

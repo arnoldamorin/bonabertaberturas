@@ -33,4 +33,10 @@ if (!defined('USURIONOEXISTEENLDAP')) define("USURIONOEXISTEENLDAP", "Usuario o 
 if (!defined('USUARIOBLOQUEADO')) define("USUARIOBLOQUEADO", "Usuario bloqueado. Comun&iacute;quese con el administrador");
 if (!defined('USUARIOINCORRECTO')) define("USUARIOINCORRECTO", "El usuario no est&aacute; autorizado a usar el sistema. Comun&iacute;quese con el administrador");
 
+
+if (!defined('VENTA_PENDIENTE')) define("VENTA_PENDIENTE", "1");
+if (!defined('VENTA_APROBADO')) define("VENTA_APROBADO", "2");
+if (!defined('VENTA_RECHAZADO')) define("VENTA_RECHAZADO", "3");
+if (!defined('VENTA_ANULADO')) define("VENTA_ANULADO", "4");
+
 ?>
