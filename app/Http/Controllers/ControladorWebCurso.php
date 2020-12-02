@@ -52,15 +52,9 @@ class ControladorWebCurso extends Controller
         $preference->payer = $payer;
 
         $preference->back_urls = [
-<<<<<<< HEAD
             "success" => "https://emilcecharras.com.ar/cursos/compra-realizada",
             "pending" => "https: //emilcecharras.com.ar/venta_pendiente/$idVenta",
             "failure" => "https: //emilcecharras.com.ar/venta_error/$idVenta",
-=======
-            "success" => "https://emilcecharras.com.ar/venta_aprobada/$idVenta",
-            "pending" => "https://emilcecharras.com.ar/venta_pendiente/$idVenta",
-            "failure" => "https://emilcecharras.com.ar/venta_error/$idVenta",
->>>>>>> cdb720380759d81356f9dee1c9f7d2ce6be8a69b
         ];
         
         $preference->payment_methods = array(
