@@ -30,8 +30,8 @@ class Patente extends Model
         $this->descripcion = $request->input('txtDescripcion');
         $this->modulo = $request->input('txtModulo');
         $this->submodulo = $request->input('txtSubmodulo');
-        $this->tipo = $request->input('txtTipo');
-        $this->log_operacion = $request->input('txtOperacion');
+        $this->tipo = $request->input('lstTipo');
+        $this->log_operacion = $request->input('rdbtnLogOperacion');
     }
 
     public function obtenerTodosPorFamilia($familiaID)
