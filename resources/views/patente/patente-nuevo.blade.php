@@ -48,7 +48,13 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Tipo: *</label>
-                <input type="text" maxlength="50" id="txtTipo" name="txtTipo" class="form-control" value="{{ $patente->tipo or '' }}" required>
+                <select id="lstTipo" name="lstTipo" class="form-control">
+                    <option disabled selected value="{{ $patente->tipo or '' }}">{{ $patente->tipo or 'Seleccionar' }}</option>
+                    <option value="ALTA">ALTA</option>
+                    <option value="BAJA">BAJA</option>
+                    <option value="MODIFICACIÓN">MODIFICACIÓN</option>
+                    <option value="CONSULTA">CONSULTA</option>
+                </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Módulo: *</label>
@@ -63,8 +69,16 @@ if (isset($msg)) {
                 <input type="text" maxlength="50" id="txtNombre" name="txtNombre" class="form-control" value="{{ $patente->nombre or '' }}" required>
             </div>
             <div class="form-group col-lg-6">
-                <label>Log Operación: *</label>
-                <input type="text" id="txtOperacion" name="txtOperacion" class="form-control" value="{{ $patente->log_operacion or '' }}" maxlength="6" required>
+                <div><label>Log Operación: *</label></div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" @if (isset($patente) && ($patente->log_operacion = 0)) {{ checked }} @endif>
+                    <label class="form-check-label" for="inlineRadio1">0</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" @if (isset($patente) && ($patente->log_operacion = 1)) {{ checked }} @endif>
+                    <label class="form-check-label" for="inlineRadio2">1</label>
+                </div>
+                <!-- <input type="text" id="txtOperacion" name="txtOperacion" class="form-control" value="{{ $patente->log_operacion or '' }}" maxlength="6" required> -->
             </div>
             <div class="form-group col-lg-6">
                 <label>Descripción: *</label>
