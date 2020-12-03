@@ -49,11 +49,15 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label>Tipo: *</label>
                 <select id="lstTipo" name="lstTipo" class="form-control">
-                    <option disabled selected value="{{ $patente->tipo or '' }}">{{ $patente->tipo or 'Seleccionar' }}</option> <!-- arreglar esto -->
-                    <option value="ALTA">ALTA</option>
-                    <option value="BAJA">BAJA</option>
-                    <option value="EDITAR">MODIFICACIÓN</option>
-                    <option value="CONSULTA">CONSULTA</option>
+                    @if (isset($patente->tipo))
+                        <option selected value="{{ $patente->tipo or '' }}">{{ $patente->tipo or 'Seleccionar' }}</option>
+                    @else
+                        <option disabled selected value="">Seleccionar</option>
+                    @endif <!-- arreglar esto -->
+                    <option class=@if (isset($patente->tipo) && ($patente->tipo == "ALTA")) d-none @endif value="ALTA">ALTA</option>
+                    <option class=@if (isset($patente->tipo) && ($patente->tipo == "BAJA")) d-none @endif value="BAJA">BAJA</option>
+                    <option class=@if (isset($patente->tipo) && ($patente->tipo == "EDITAR")) d-none @endif value="EDITAR">MODIFICACIÓN</option>
+                    <option class=@if (isset($patente->tipo) && ($patente->tipo == "CONSULTA")) d-none @endif value="CONSULTA">CONSULTA</option>
                 </select>
             </div>
             <div class="form-group col-lg-6">
