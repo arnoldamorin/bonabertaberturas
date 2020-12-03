@@ -48,6 +48,9 @@ if (isset($msg)) {
                 <div class="form-group col-lg-6">
                     <label>Fecha: *</label>
                     <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $venta->fecha or ''}}">
+                    <!-- LO HICE PARA NO PERDER LA HORA DE LA COMPRA, DE LO CONTRARIO SE COMPLICABA MUCHO PODER GUARDARLA -->
+                        <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required value="{{ $venta->hora or date('H:i:s')}}">
+                    <!-- ================================================================================================ -->
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Curso:</label>
