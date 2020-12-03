@@ -53,7 +53,7 @@ if (isset($msg)) {
                         <option selected value="{{ $patente->tipo or '' }}">{{ $patente->tipo or 'Seleccionar' }}</option>
                     @else
                         <option disabled selected value="">Seleccionar</option>
-                    @endif <!-- arreglar esto -->
+                    @endif
                     <option class=@if (isset($patente->tipo) && ($patente->tipo == "ALTA")) d-none @endif value="ALTA">ALTA</option>
                     <option class=@if (isset($patente->tipo) && ($patente->tipo == "BAJA")) d-none @endif value="BAJA">BAJA</option>
                     <option class=@if (isset($patente->tipo) && ($patente->tipo == "EDITAR")) d-none @endif value="EDITAR">MODIFICACIÓN</option>
