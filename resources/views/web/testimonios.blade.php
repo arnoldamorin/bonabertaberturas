@@ -33,7 +33,7 @@
       @endfor
     </div>
 
-    <h4 class="mb-3 text-center mt-5">Testimonios grabados</h4>
+    <!-- <h4 class="mb-3 text-center mt-5">Testimonios grabados</h4>
     <div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
       @for ($i = 0; $i < count($aTestimoniosGrabados); $i++)
         <div class="testimonial-wrap">
@@ -43,7 +43,7 @@
           </div>
         </div>
       @endfor
-    </div>
+    </div> -->
   </div>
 </section><!-- End Testimonials Section -->
 @endsection
