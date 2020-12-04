@@ -20,7 +20,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/cursos', 'ControladorWebCurso@index');
     /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');*/
     Route::get('/cursos/curso-detalle/{id}', 'ControladorWebCurso@detalleCurso');
-    Route::post('/cursos/curso-detalle/{id}', 'ControladorWebCurso@subirDatosCompra');
+    Route::post('/cursos/curso-detalle/{id}', 'ControladorWebCurso@comprar');
 
     Route::get('/contacto', 'ControladorWebContacto@index');
     Route::post('/contacto', 'ControladorWebContacto@enviarCorreo');
