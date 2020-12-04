@@ -133,7 +133,7 @@ class Venta extends Model
                 fk_idestado                        
             ) VALUES (?, ?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
-            $this->fecha, 
+            $this->fecha . " " . date("H:i:s"), 
             $this->fk_idcurso,
             $this->telefono,
             $this->correo,
@@ -148,7 +148,7 @@ class Venta extends Model
         $sql = "INSERT INTO inscripciones (fecha, fk_idcurso, telefono, correo, nombre_comprador, apellido_comprador, fk_idestado)
         VALUES (?,?,?,?,?,?,?)";
         $result = DB::insert($sql, [
-            $this->fecha,
+            $this->fecha . " " . date("H:i:s"),
             $this->fk_idcurso,
             $this->telefono_comprador,
             $this->correo_comprador,
