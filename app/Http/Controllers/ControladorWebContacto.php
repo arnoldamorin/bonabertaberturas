@@ -25,9 +25,9 @@ class ControladorWebContacto extends Controller{
             $mail = new PHPMailer();
             $mail->IsSMTP();
             $mail->SMTPAuth = true;
-            $mail->Host = "mail.dominio.com"; // SMTP a utilizar
+            $mail->Host = "mail.depcsuite.com"; // SMTP a utilizar
             $mail->Username = "info@emilcecharras.com.ar"; // Correo completo a utilizar
-            $mail->Password = "emilcecharras@gmail.com";
+            $mail->Password = "3M1LC3CH4RR45.32352";
             $mail->Port = 25;
             $mail->From = "info@emilcecharras.com.ar"; //Desde la cuenta donde enviamos
             $mail->FromName = "Emilce Charras";
@@ -42,24 +42,24 @@ class ControladorWebContacto extends Controller{
     
              //Destinatarios
              $mail->addAddress($email);
-             $mail->addBCC("emilcecharras@gmail.com"); //Copia oculta
+             $mail->addBCC("emilcecharras@hotmail.com"); //Copia oculta
              $mail->Subject = utf8_decode("Contacto página Web");
              $mail->Body = "Recibi tu consulta, te respondere a la brevedad.";
-             /*if(!$mail->Send()){ //cuando este en el servidor descomentar
+             if(!$mail->Send()){ //cuando este en el servidor descomentar
                  $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
-             }*/
+             }
              $mail->ClearAllRecipients(); //Borra los destinatarios
      
              //Envía ahora un correo a nosotros con los datos de la persona
-             $mail->addAddress("emilcecharras@gmail.com");
+             $mail->addAddress("info@emilcecharras.com.ar");
              $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
              $mail->Body = "Te escribio $nombre cuyo correo es $email, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
             
-             //if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
+             if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
                  return view("web.contacto-exitoso");
-             //} else {
+             } else {
                  $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
-             //}    
+             }    
          } else {
              $msg = "Completa todos los campos";
          }
