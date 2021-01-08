@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '167.114.86.211'),
-            'port' => env('DB_PORT', '3310'),
-            'database' => env('DB_DATABASE', 'emilcecharras'),
-            'username' => env('DB_USERNAME', 'emilcecharras'),
-            'password' => env('DB_PASSWORD', '3M1L.8768'),
+            'host' => env('DB_HOST', '54.39.143.244'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'abertur6_aberturasbonabert'),
+            'username' => env('DB_USERNAME', 'abertur6_admin'),
+            'password' => env('DB_PASSWORD', 'puedeserpa666'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
