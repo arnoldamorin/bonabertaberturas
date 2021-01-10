@@ -93,8 +93,6 @@ class ControladorLogin extends Controller
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = "Credenciales incorrectas";
             return view('sistema.login', compact('titulo', 'msg'));
-            
-            
-    } 
+        } 
     }
 }
