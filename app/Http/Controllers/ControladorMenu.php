@@ -15,17 +15,17 @@ class ControladorMenu extends Controller
     public function index()
     {
         $titulo = "Menú";
-        if (Usuario::autenticado() == true) {
+        /*if (Usuario::autenticado() == true) {
             if (!Patente::autorizarOperacion("MENUCONSULTA")) {
                 $codigo = "MENUCONSULTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-            } else {
+            } else {*/
                 return view('sistema.menu-listar', compact('titulo'));
-            }
+          /*  }
         } else {
             return redirect('admin/login');
-        }
+        }*/
     }
 
     public function cargarGrilla()
