@@ -33,7 +33,7 @@ class ControladorCurso extends Controller
         $entidad = new Categoria();
         $array_categorias = $entidad->obtenerTodos();
 
-        $titulo = "Nuevo Curso";
+        $titulo = "Nuevo Producto";
 
         if(Usuario::autenticado() == true){
             if(!Patente::autorizarOperacion("CURSOSALTA")){
@@ -56,22 +56,22 @@ class ControladorCurso extends Controller
         try {
 
             //Define la entidad curso
-            $titulo = "Modificar Curso";
-            $entidad = new Curso();
+            $titulo = "Modificar Producto";
+            $entidad = new Producto();
             $entidad->cargarDesdeRequest($request);
 
-            $idcurso=$_REQUEST['id'];
-            if($_FILES["imagenCurso"]["error"] === UPLOAD_ERR_OK)
+            $idproducto=$_REQUEST['id'];
+            if($_FILES["imagenProducto"]["error"] === UPLOAD_ERR_OK)
             {
                 $nombre = date("Ymdhmsi") . ".jpg"; 
-                $archivo = $_FILES["imagenCurso"]["tmp_name"];
+                $archivo = $_FILES["imagenProducto"]["tmp_name"];
                 move_uploaded_file($archivo, env('APP_PATH') . "/public/web/img/$nombre");//guardaelarchivo
                 $entidad->imagen =$nombre;
             }
 
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("CURSOSMODIFICACION")) {
-                    $codigo = "CURSOSMODIFICACION";
+                if (!Patente::autorizarOperacion("PRODUCTOSMODIFICACION")) {
+                    $codigo = "PRODUCTOSMODIFICACION";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
@@ -80,16 +80,16 @@ class ControladorCurso extends Controller
                         $msg["MSG"] = "Complete todos los datos";
                     } else {
                         if ($_POST["id"] > 0) {
-                            $cursoAnt = new Curso();
-                            $cursoAnt->obtenerPorId($entidad->idcurso);
+                            $ProductoAnt = new Producto();
+                            $ProductoAnt->obtenerPorId($entidad->idcurso);
                        
-                            if(isset($_FILES["imagenCurso"]) && $_FILES["imagenCurso"]["name"] != ""){
-                                $archivoAnterior =$_FILES["imagenCurso"]["name"];
+                            if(isset($_FILES["imagenProducto"]) && $_FILES["imagenProducto"]["name"] != ""){
+                                $archivoAnterior =$_FILES["imagenProducto"]["name"];
                                 if($archivoAnterior !=""){
                                     @unlink (env('APP_PATH') . "/public/web/img/$archivoAnterior");
                                 }
                             } else {
-                                $entidad->imagen = $cursoAnt->imagen;
+                                $entidad->imagen = $ProductoAnt->imagen;
                             }
             
                             //Es actualizacion
@@ -106,7 +106,7 @@ class ControladorCurso extends Controller
                         }
                     
                         $_POST["id"] = $entidad->idcurso;
-                        return view('curso.curso-listar', compact('titulo', 'msg'));
+                        return view('producto.producto-listar', compact('titulo', 'msg'));
                     }
                 }
             } else {
@@ -120,14 +120,14 @@ class ControladorCurso extends Controller
             $msg["MSG"] = ERRORINSERT;
         }
 
-        $id = $entidad->idcurso;
-        $curso = new Curso();
-        $curso->obtenerPorId($id);
+        $id = $entidad->idproducto;
+        $producto = new Producto();
+        $producto->obtenerPorId($id);
 
-        $entidad = new Categoria();
+        $entidad = new Categoria(); //cambiar por tipo producto
         $array_categorias = $entidad->obtenerTodos();
 
-        return view('curso.curso-nuevo', compact('msg', 'curso', 'titulo', 'array_categorias')) . '?id=' . $curso->idcurso;
+        return view('producto.producto-nuevo', compact('msg', 'producto', 'titulo', 'array_categorias')) . '?id=' . $producto->idproducto;
 
     }
 
@@ -200,17 +200,17 @@ class ControladorCurso extends Controller
             $entidad = new Categoria();
             $array_categorias = $entidad->obtenerTodos();
         
-            $titulo = "Modificar Curso";
+            $titulo = "Modificar producto";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("CURSOSMODIFICACION")) {
+                if (!Patente::autorizarOperacion("PRODUCTOSMODIFICACION")) {
                     $codigo = "CURSOSMODIFICACION";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    $curso = new Curso();
-                    $curso->obtenerPorId($id);
+                    $producto = new Producto();
+                    $producto->obtenerPorId($id);
     
-                    return view('curso.curso-nuevo', compact('curso', 'titulo', 'array_categorias'));
+                    return view('producto.producto-nuevo', compact('producto', 'titulo', 'array_categorias'));
                 }
             } else {
                 return redirect('admin/login');
