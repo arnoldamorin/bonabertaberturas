@@ -17,16 +17,16 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 
     Route::get('/contacto', 'ControladorWebContacto@index');
 
-    Route::get('/cursos', 'ControladorWebCurso@index');
-    /*Route::get('/cursos/compra{id}', 'ControladorWebCurso@compraCurso');*/
-    Route::get('/cursos/curso-detalle/{id}', 'ControladorWebCurso@detalleCurso');
-    Route::post('/cursos/curso-detalle/{id}', 'ControladorWebCurso@comprar');
+    Route::get('/Productoss', 'ControladorWebProductos@index');
+    /*Route::get('/Productoss/compra{id}', 'ControladorWebProductos@compraProductos');*/
+    Route::get('/Productoss/Productos-detalle/{id}', 'ControladorWebProductos@detalleProductos');
+    Route::post('/Productoss/Productos-detalle/{id}', 'ControladorWebProductos@comprar');
 
     Route::get('/contacto', 'ControladorWebContacto@index');
     Route::post('/contacto', 'ControladorWebContacto@enviarCorreo');
-    Route::get("/cursos/compra-realizada/{id}", "ControladorWebCurso@CompraRealizada");
-    Route::get("/cursos/compra-pendiente/{id}", "ControladorWebCurso@compraPendiente");
-    Route::get("/cursos/compra-error/{id}", "ControladorWebCurso@compraError");
+    Route::get("/Productoss/compra-realizada/{id}", "ControladorWebProductos@CompraRealizada");
+    Route::get("/Productoss/compra-pendiente/{id}", "ControladorWebProductos@compraPendiente");
+    Route::get("/Productoss/compra-error/{id}", "ControladorWebProductos@compraError");
 
 
     Route::get('/admin/home', 'ControladorHome@index');
@@ -96,15 +96,15 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/sistema/menu/{id}', 'ControladorMenu@guardar');
 
     /* --------------------------------------------- */
-    /* CONTROLADOR CURSOS                             */
+    /* CONTROLADOR PPRODUCTOS                        */
     /* --------------------------------------------- */
-    Route::get('/admin/curso/nuevo', 'ControladorCurso@nuevo');
-    Route::post('/admin/curso/nuevo', 'ControladorCurso@guardar');
-    Route::get('/admin/sistema/curso/cargarGrilla', 'ControladorCurso@cargarGrilla')->name('curso.cargarGrilla');
-    Route::get('/admin/cursos', 'ControladorCurso@index');
-    Route::get('/admin/curso/nuevo/{id}', 'ControladorCurso@editar');
-    Route::post('/admin/curso/nuevo/{id}', 'ControladorCurso@guardar');
-    Route::get('/admin/curso/eliminar', 'ControladorCurso@eliminar');
+    Route::get('/admin/productos/nuevo', 'ControladorProductos@nuevo');
+    Route::post('/admin/productos/nuevo', 'ControladorProductos@guardar');
+    Route::get('/admin/sistema/productos/cargarGrilla', 'ControladorProductos@cargarGrilla')->name('productos.cargarGrilla');
+    Route::get('/admin/productos', 'ControladorProductos@index');
+    Route::get('/admin/productos/nuevo/{id}', 'ControladorProductos@editar');
+    Route::post('/admin/productos/nuevo/{id}', 'ControladorProductos@guardar');
+    Route::get('/admin/productos/eliminar', 'ControladorProductos@eliminar');
 
     /* --------------------------------------------- */
     /* CONTROLADOR PATENTES                          */

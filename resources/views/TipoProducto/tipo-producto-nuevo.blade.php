@@ -2,28 +2,28 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($curso->idcurso) && $curso->idcurso > 0 ? $curso->idcurso : 0; ?>';
-    <?php $globalId = isset($curso->idcurso) ? $curso->idcurso : "0"; ?>
+    globalId = '<?php echo isset($categoria->idcategoria) && $categoria->idcategoria > 0 ? $categoria->idcategoria : 0; ?>';
+    <?php $globalId = isset($categoria->idcategoria) ? $categoria->idcategoria : "0"; ?>
 
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/cursos">Listado de cursos</a></li>
+    <li class="breadcrumb-item"><a href="/admin/cursos/categorias">Categorias</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/curso/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/cursos/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
+    <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
     <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
 function fsalir(){
-    location.href ="/admin";
+    location.href ="/admin/home";
 }
 </script>
 @endsection
@@ -41,50 +41,19 @@ if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form1" method="POST" enctype="multipart/form-data">
+        <form id="form1" method="POST">
             <div class="row">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" required value = "{{$curso->nombre or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Categoría:</label>
-                    <select id="lstCategoria" name="lstCategoria" class="form-control">
-                        <option disabled selected value="">Seleccionar</option>
-                        @for ($i = 0; $i < count($array_categorias); $i++)
-                            @if (isset($curso) and $array_categorias[$i]->idcategoria == $curso->categoria)
-                                <option selected value="{{ $array_categorias[$i]->idcategoria }}">{{ $array_categorias[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_categorias[$i]->idcategoria }}">{{ $array_categorias[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Precio: *</label>
-                    <input class = "form-control" type="text" name = "txtPrecio" id = "txtPrecio" required value = "{{$curso->precio or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Cupo: *</label>
-                    <input type="number" id="nbCupo" name="nbCupo" class="form-control " value = "{{$curso->cupo or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Horario *:</label>
-                    <input type="text" id="txtHorario" name="txtHorario" class="form-control" value = "{{$curso->horario or ''}}">
-                </div>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $categoria->nombre or '' }}" required>
+                </div>                
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
-                    <textarea class = "form-control" name="txtDescripcion" id="txtDescripcion" cols="30" style = "height:70px !important;" rows="10">{{$curso->descripcion or ''}}</textarea>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Imagen curso*:</label>
-                    <input class="form-control-file" type="file" name="imagenCurso" id="imagenCurso">
-                </div>
-            </div>
-			
-            </div>
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$categoria->descripcion or ''}}">
+                </div>                
+            </div>			
         </form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,10 +88,10 @@ if (isset($msg)) {
         }
     }
 
-    function eliminar() {
+    function eliminar() {       
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/curso/eliminar') }}",
+            url: "{{ asset('admin/cursos/categoria/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",
