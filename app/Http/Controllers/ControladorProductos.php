@@ -121,7 +121,7 @@ class ControladorProductos extends Controller
         }
 
         $id = $entidad->idproducto;
-        $producto = new Producto();
+        $producto = new Productos();
         $producto->obtenerPorId($id);
 
         $entidad = new TipoProducto(); 

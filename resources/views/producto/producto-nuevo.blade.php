@@ -10,8 +10,8 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/productos">Listado de productos</a></li>
-    <li class="breadcrumb-item active">Modificar</li>
+    <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
+    <li class="breadcrumb-item active">Nuevo</li>
 </ol>
 <ol class="toolbar">
     <li class="btn-item"><a title="Nuevo" href="/admin/productos/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
@@ -55,7 +55,7 @@ if (isset($msg)) {
                         <option disabled selected value="">Seleccionar</option>
                         @for ($i = 0; $i < count($array_TipoProductos); $i++)
                             @if (isset($producto) and $array_TipoProductos[$i]->idtipoproducto == $producto->fk_idtipo_producto)
-                                <option selected value="{{ $array_TipoProductos[$i]->idproducto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
+                                <option selected value="{{ $array_TipoProductos[$i]->idtipoproducto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
                             @else
                                 <option value="{{ $array_TipoProductos[$i]->idtipoproducto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
                             @endif

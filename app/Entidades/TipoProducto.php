@@ -62,7 +62,7 @@ class TipoProducto extends Model
                 idtipo_producto,
                 nombre,
                 descripcion
-                FROM tipos_productos WHERE idtipoproducto = $idtipoproducto";
+                FROM tipos_productos WHERE idtipo_producto = $idtipoproducto";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
