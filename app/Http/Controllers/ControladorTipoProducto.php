@@ -33,6 +33,7 @@
     
             $entidadTipoProducto = new TipoProducto();
             $aTipoProducto = $entidadTipoProducto->obtenerFiltrado();
+
     
             $data = array();
     
@@ -45,7 +46,7 @@
     
             for ($i = $inicio; $i < count($aTipoProducto) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="/admin/productos/tipoproductos/nuevo/' . $aTipoProducto[$i]->idtipoproducto . '">' . $aTipoProducto[$i]->nombre . '</a>';
+                $row[] = '<a href="/admin/productos/tipodeproductos/nuevo/' . $aTipoProducto[$i]->idtipo_producto . '">' . $aTipoProducto[$i]->nombre . '</a>';
                 $row[] = $aTipoProducto[$i]->descripcion;                     
                 $cont++;
                 $data[] = $row;
@@ -84,10 +85,10 @@
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    $tipoproducto = new TipoProducto();
-                    $tipoproducto->obtenerPorId($id);
+                    $tipodeproducto = new TipoProducto();
+                    $tipodeproducto->obtenerPorId($id);
     
-                    return view('tipoproducto.tipo-producto-nuevo', compact('tipoproducto', 'titulo'));
+                    return view('tipoproducto.tipo-producto-nuevo', compact('tipodeproducto', 'titulo'));
                 }
             } else {
                 return redirect('admin/login');

@@ -12,7 +12,7 @@ class TipoProducto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idtipoproducto', 'nombre', 'descripcion'
+        'idtipo_producto', 'nombre', 'descripcion'
     ];
 
     protected $hidden = [
@@ -20,7 +20,7 @@ class TipoProducto extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idtipoproducto = $request->input('id')!="0" ? $request->input('id') : $this->idtipoproducto;
+        $this->idtipo_producto = $request->input('id')!="0" ? $request->input('id') : $this->idtipo_producto;
         $this->nombre = $request->input('txtNombre');
         $this->descripcion = $request->input('txtDescripcion');   
     }
@@ -57,16 +57,16 @@ class TipoProducto extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idtipoproducto) {
+    public function obtenerPorId($idtipo_producto) {
         $sql = "SELECT
                 idtipo_producto,
                 nombre,
                 descripcion
-                FROM tipos_productos WHERE idtipo_producto = $idtipoproducto";
+                FROM tipos_productos WHERE idtipo_producto = $idtipo_producto";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
-            $this->idtipoproducto = $lstRetorno[0]->idtipoproducto;
+            $this->idtipo_producto = $lstRetorno[0]->idtipo_producto;
             $this->nombre = $lstRetorno[0]->nombre;
             $this->descripcion = $lstRetorno[0]->descripcion;      
             return $this;
@@ -79,13 +79,13 @@ class TipoProducto extends Model
             nombre = '$this->nombre',
             descripcion = '$this->descripcion'
             WHERE idtipo_producto=?";
-        $affected = DB::update($sql, [$this->idtipoproducto]);
+        $affected = DB::update($sql, [$this->idtipo_producto]);
     }
 
     public  function eliminar() {
         $sql = "DELETE FROM tipos_productos WHERE 
             idtipo_producto=?";
-        $affected = DB::delete($sql, [$this->idtipoproducto]);
+        $affected = DB::delete($sql, [$this->idtipo_producto]);
     }
 
     public function insertar() {
@@ -97,7 +97,7 @@ class TipoProducto extends Model
             $this->nombre, 
             $this->descripcion           
         ]);
-       return $this->idtipoproducto = DB::getPdo()->lastInsertId();
+       return $this->idtipo_producto = DB::getPdo()->lastInsertId();
     }
 
 }

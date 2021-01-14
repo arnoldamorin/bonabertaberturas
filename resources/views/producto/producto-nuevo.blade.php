@@ -46,6 +46,10 @@ if (isset($msg)) {
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
+                    <label>Código: *</label>
+                    <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" required value = "{{$producto->codigo or ''}}">
+                </div>
+                <div class="form-group col-lg-6">
                     <label>Descripcion: *</label>
                     <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" required value = "{{$producto->descripcion or ''}}">
                 </div>
@@ -54,10 +58,10 @@ if (isset($msg)) {
                     <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
                         <option disabled selected value="">Seleccionar</option>
                         @for ($i = 0; $i < count($array_TipoProductos); $i++)
-                            @if (isset($producto) and $array_TipoProductos[$i]->idtipoproducto == $producto->fk_idtipo_producto)
-                                <option selected value="{{ $array_TipoProductos[$i]->idtipoproducto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
+                            @if (isset($producto) and $array_TipoProductos[$i]->idtipo_producto == $producto->fk_idtipo_producto)
+                                <option selected value="{{ $array_TipoProductos[$i]->idtipo_producto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
                             @else
-                                <option value="{{ $array_TipoProductos[$i]->idtipoproducto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
+                                <option value="{{ $array_TipoProductos[$i]->idtipo_producto }}">{{ $array_TipoProductos[$i]->nombre }}</option>
                             @endif
                         @endfor
                     </select>
