@@ -40,7 +40,7 @@ class TipoProducto extends Model
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" AND ( TP.nombre LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);

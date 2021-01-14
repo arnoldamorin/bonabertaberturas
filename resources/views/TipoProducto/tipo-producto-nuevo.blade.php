@@ -2,19 +2,19 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($categoria->idcategoria) && $categoria->idcategoria > 0 ? $categoria->idcategoria : 0; ?>';
-    <?php $globalId = isset($categoria->idcategoria) ? $categoria->idcategoria : "0"; ?>
+    globalId = '<?php echo isset($tipodeproducto->idtipodeproducto) && $tipodeproducto->idtipodeproducto > 0 ? $tipodeproducto->idtipodeproducto : 0; ?>';
+    <?php $globalId = isset($tipodeproducto->idtipodeproducto) ? $tipodeproducto->idtipodeproducto : "0"; ?>
 
 </script>
 @endsection
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin/home">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="/admin/cursos/categorias">Categorias</a></li>
+    <li class="breadcrumb-item"><a href="/admin/productos/tipodeproductos">Tipo de Productos</a></li>
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/cursos/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/productos/tipodeproductos/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
@@ -47,11 +47,11 @@ if (isset($msg)) {
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="form-group col-lg-6">
                     <label>Nombre: *</label>
-                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $categoria->nombre or '' }}" required>
+                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{ $tipodeproducto->nombre or '' }}" required>
                 </div>                
                 <div class="form-group col-lg-6">
                     <label>Descripcion:</label>
-                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$categoria->descripcion or ''}}">
+                    <input type="text" id="txtDescripcion" name="txtDescripcion" class="form-control" value="{{$tipodeproducto->descripcion or ''}}">
                 </div>                
             </div>			
         </form>
@@ -91,7 +91,7 @@ if (isset($msg)) {
     function eliminar() {       
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/cursos/categoria/eliminar') }}",
+            url: "{{ asset('admin/productos/tipodeproductos/eliminar') }}",
             data: { id:globalId },
             async: true,
             dataType: "json",

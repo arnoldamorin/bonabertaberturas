@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de categorias")
+@section('titulo', "Listado de Tipos de Productos")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -12,8 +12,8 @@
     <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/cursos/categoria/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/cursos/categorias");'><span>Recargar</span></a></li>  
+    <li class="btn-item"><a title="Nuevo" href="/admin/productos/tipoproductos/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/productos/tiposdeproductos");'><span>Recargar</span></a></li>  
 </ol>
 <script>
 function fsalir(){
@@ -45,7 +45,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('categoria.cargarGrilla') }}"
+	    "ajax": "{{ route('tipodeproductos.cargarGrilla') }}"
 	});
 </script>
 @endsection

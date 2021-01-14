@@ -20,7 +20,7 @@
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    return view('tipoproducto.tipoproducto-listar', compact('titulo'));
+                    return view('tipoproducto.tipo-producto-listar', compact('titulo'));
                 }
             } else {
                 return redirect('admin/login');
@@ -45,7 +45,7 @@
     
             for ($i = $inicio; $i < count($aTipoProducto) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="/admin/productos/tipoproducto/nuevo/' . $aTipoProducto[$i]->idtipoproducto . '">' . $aTipoProducto[$i]->nombre . '</a>';
+                $row[] = '<a href="/admin/productos/tipoproductos/nuevo/' . $aTipoProducto[$i]->idtipoproducto . '">' . $aTipoProducto[$i]->nombre . '</a>';
                 $row[] = $aTipoProducto[$i]->descripcion;                     
                 $cont++;
                 $data[] = $row;
@@ -68,7 +68,7 @@
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    return view('tipoproducto.tipoproducto-nuevo', compact('titulo'));
+                    return view('tipoproducto.tipo-producto-nuevo', compact('titulo'));
                 }
             } else {
                return redirect('admin/login');
@@ -87,7 +87,7 @@
                     $tipoproducto = new TipoProducto();
                     $tipoproducto->obtenerPorId($id);
     
-                    return view('tipoproducto.tipoproducto-nuevo', compact('tipoproducto', 'titulo'));
+                    return view('tipoproducto.tipo-producto-nuevo', compact('tipoproducto', 'titulo'));
                 }
             } else {
                 return redirect('admin/login');
@@ -123,7 +123,7 @@
                         $msg["MSG"] = OKINSERT;
                     }
                     $_POST["id"] = $tipoproducto->idtipo_producto;
-                    return view('tipoproducto.tipoproducto-nuevo', compact('titulo', 'msg'));
+                    return view('tipoproducto.tipo-producto-nuevo', compact('titulo', 'msg'));
                 }
             } catch (Exception $e) {
                 $msg["ESTADO"] = MSG_ERROR;

@@ -96,15 +96,25 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/sistema/menu/{id}', 'ControladorMenu@guardar');
 
     /* --------------------------------------------- */
-    /* CONTROLADOR PPRODUCTOS                        */
+    /* CONTROLADOR PRODUCTOS                        */
     /* --------------------------------------------- */
     Route::get('/admin/productos/nuevo', 'ControladorProductos@nuevo');
     Route::post('/admin/productos/nuevo', 'ControladorProductos@guardar');
-    Route::get('/admin/sistema/productos/cargarGrilla', 'ControladorProductos@cargarGrilla')->name('productos.cargarGrilla');
+    Route::get('/admin/productos/cargarGrilla', 'ControladorProductos@cargarGrilla')->name('productos.cargarGrilla');
     Route::get('/admin/productos', 'ControladorProductos@index');
     Route::get('/admin/productos/nuevo/{id}', 'ControladorProductos@editar');
     Route::post('/admin/productos/nuevo/{id}', 'ControladorProductos@guardar');
     Route::get('/admin/productos/eliminar', 'ControladorProductos@eliminar');
+    /* --------------------------------------------- */
+    /* CONTROLADOR TIPOPRODUCTOS                        */
+    /* --------------------------------------------- */
+    Route::get('/admin/productos/tipodeproductos/nuevo', 'ControladorTipoProducto@nuevo');
+    Route::post('/admin/productos/tipodeproductos/nuevo', 'ControladorTipoProducto@guardar');
+    Route::get('/admin/productos/tipodeproductos/cargarGrilla', 'ControladorTipoProducto@cargarGrilla')->name('tipodeproductos.cargarGrilla');
+    Route::get('/admin/productos/tipodeproductos', 'ControladorTipoProducto@index');
+    Route::get('/admin/productos/tipodeproductos/nuevo/{id}', 'ControladorTipoProducto@editar');
+    Route::post('/admin/productos/tipodeproductos/nuevo/{id}', 'ControladorTipoProducto@guardar');
+    Route::get('/admin/productos/tipodeproductos/eliminar', 'ControladorTipoProducto@eliminar');
 
     /* --------------------------------------------- */
     /* CONTROLADOR PATENTES                          */
