@@ -6,7 +6,7 @@ use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
 use App\Entidades\TipoProducto;
-use App\Entidades\Productos;
+use App\Entidades\Producto;
 require app_path() . '/start/constants.php';
 
 class ControladorProductos extends Controller
@@ -70,12 +70,12 @@ class ControladorProductos extends Controller
             }
 
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("PRODUCTOSMODIFICACION")) {
-                    $codigo = "PRODUCTOSMODIFICACION";
+                if (!Patente::autorizarOperacion("PRODUCTOSEDITAR")) {
+                    $codigo = "PRODUCTOSEDITAR";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    if ($entidad->nombre == "") {
+                    if ($entidad->descripcion == "") {
                         $msg["ESTADO"] = MSG_ERROR;
                         $msg["MSG"] = "Complete todos los datos";
                     } else {
@@ -121,7 +121,7 @@ class ControladorProductos extends Controller
         }
 
         $id = $entidad->idproducto;
-        $producto = new Productos();
+        $producto = new Producto();
         $producto->obtenerPorId($id);
 
         $entidad = new TipoProducto(); 
@@ -136,7 +136,7 @@ class ControladorProductos extends Controller
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("PRODUCTOSELIMINAR")) {
+                if (Patente::autorizarOperacion("PRODUCTOSBAJA")) {
                     $entidad = new Producto();
                     $entidad->cargarDesdeRequest($request);
 
@@ -148,7 +148,7 @@ class ControladorProductos extends Controller
                     }
     
                 } else {
-                    $codigo = "PRODUCTOSELIMINAR";
+                    $codigo = "PRODUCTOSBAJA";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('codigo', 'mensaje'));
                 }
@@ -176,16 +176,16 @@ class ControladorProductos extends Controller
     
             for ($i = $inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = $aProductos[$i]->imagen;
-                $row[] = $aProductos[$i]->descripcion;
+                
+                $row[] = "<img class='img-thumbnail' style='height: 70px' src='../../../web/img/".$aProductos[$i]->imagen."'>";               
+                $row[] = $aProductos[$i]->codigo;               
+                $row[] = $aProductos[$i]->descripcion;                
                 $row[] = $aProductos[$i]->medidas_externas;
                 $row[] = $aProductos[$i]->medidas_internas;
                 $row[] = $aProductos[$i]->peso;
                 $row[] = "$" . number_format($aProductos[$i]->precio_costo, 2, ",", ".");
                 $row[] = "$" . number_format($aProductos[$i]->precio_venta, 2, ",", ".");               
-                $row[] = $aProductos[$i]->marca;
-                $row[] = $aProductos[$i]->fk_idcoeficiente;
-                $row[] = $aProductos[$i]->fk_idtipo_producto;
+                $row[] = $aProductos[$i]->marca;               
                 $row[] = "<a href='/admin/productos/nuevo/".$aProductos[$i]->idproducto."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
@@ -207,8 +207,8 @@ class ControladorProductos extends Controller
         
             $titulo = "Modificar producto";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("PRODUCTOSMODIFICACION")) {
-                    $codigo = "PRODUCTOSMODIFICACION";
+                if (!Patente::autorizarOperacion("PRODUCTOSEDITAR")) {
+                    $codigo = "PRODUCTOSEDITAR";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {

@@ -76,7 +76,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Peso: *</label>
-                    <input type="number" id="nbPeso" name="nbPeso" class="form-control " value = "{{$producto->peso or ''}}">
+                    <input class = "form-control" type="text" name = "txtPeso" id = "txtPeso" required value = "{{$producto->peso or ''}}">
                 </div>  
                 <div class="form-group col-lg-6">
                     <label>Precio Costo: *</label>
@@ -84,7 +84,7 @@ if (isset($msg)) {
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Precio Venta: </label>// calculado hay que hacerlo con javascript
-                    <input class = "form-control" type="text" name = "txtPrecioCosto" id = "txtPrecioCosto" required value = "{{$producto->precio_venta or ''}}">
+                    <input class = "form-control" type="text" name = "txtPrecioVenta" id = "txtPrecioVenta" required value = "{{$producto->precio_venta or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Marca: *</label>
@@ -94,7 +94,7 @@ if (isset($msg)) {
             <div class="row">
                 <div class="col-6 form-group">
                     <label for="imagen">Imagen:</label>
-                    <input  type="file" class="form-control-file" name="imagen" id="imagen" >
+                    <input  type="file" class="form-control-file" name="imagenProducto" id="imagenProducto" >
                     <img src="../../../web/img/{{ $producto->imagen or '' }}" class="img-thumbnail" width="150px">
                 </div>
             </div>

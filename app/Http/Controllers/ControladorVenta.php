@@ -7,7 +7,7 @@ use App\Entidades\Venta_estado;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Alumno;
-use App\Entidades\Curso;
+use App\Entidades\Producto;
 use Illuminate\Http\Request;
 
 
@@ -19,8 +19,8 @@ class ControladorVenta extends Controller
     {
         $titulo = "Nuevo Venta";
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("INSCRIPCIONCONSULTA")) {
-                $codigo = "INSCRIPCIONCONSULTA";
+            if (!Patente::autorizarOperacion("VENTAALTA")) {
+                $codigo = "VENTAALTA";
                 $mensaje = "No tiene permisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -38,7 +38,7 @@ class ControladorVenta extends Controller
             $entidadVenta = new Venta();
             $aVenta = $entidadVenta->obtenerTodos();
 
-            $entidadCurso = new Curso();
+            $entidadProducto = new Producto();
             $entidadEstado = new Venta_estado();
     
             $data = array();
@@ -54,8 +54,8 @@ class ControladorVenta extends Controller
                 $row = array();
                 $fecha_formateada = date("d/m/Y H:i", strtotime($aVenta[$i]->fecha));
                 $row[] = $fecha_formateada;
-                $entidadCurso->obtenerPorId($aVenta[$i]->fk_idcurso);
-                $row[] = $entidadCurso->nombre;
+                $entidadProducto->obtenerPorId($aVenta[$i]->fk_idProducto);
+                $row[] = $entidadProducto->nombre;
                 $row[] = $aVenta[$i]->telefono;
                 $row[] = $aVenta[$i]->correo;
                 $row[] = $aVenta[$i]->nombre_comprador;
@@ -78,35 +78,35 @@ class ControladorVenta extends Controller
 
         public function nuevo()
         {
-            $curso = new Curso();
-            $array_curso = $curso->obtenerTodos();
+            $Producto = new Producto();
+            $array_Producto = $Producto->obtenerTodos();
 
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
 
             $titulo = "Nueva Venta";
-            return view('venta.venta-nuevo', compact('titulo', 'array_curso', 'array_estado'));
+            return view('venta.venta-nuevo', compact('titulo', 'array_Producto', 'array_estado'));
         }
 
         public function editar($id)
         {
-            $entidad = new Curso();
-            $array_curso = $entidad->obtenerTodos();
+            $entidad = new Producto();
+            $array_Producto = $entidad->obtenerTodos();
             
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
 
             $titulo = "Modificar Venta";
             if (Usuario::autenticado() == true) {
-                if (!Patente::autorizarOperacion("INSCRIPCIONMODIFICACION")) {
-                    $codigo = "INSCRIPCIONMODIFICACION";
+                if (!Patente::autorizarOperacion("VENTACONSULTA")) {
+                    $codigo = "VENTACONSULTA";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
                     $venta = new Venta();
                     $venta->obtenerPorId($id);
     
-                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_curso', 'array_estado'));
+                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Producto', 'array_estado'));
                 }
             } else {
                 return redirect('admin/login');
@@ -174,7 +174,7 @@ class ControladorVenta extends Controller
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_curso', 'array_estado')) . '?id=' . $venta->idinscripcion;
+            return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_Producto', 'array_estado')) . '?id=' . $venta->idinscripcion;
         }
 
 public function eliminar(Request $request)
@@ -182,7 +182,7 @@ public function eliminar(Request $request)
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("INSCRIPCIONBAJA")) {
+                if (Patente::autorizarOperacion("VENTABAJA")) {
                     $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
@@ -193,7 +193,7 @@ public function eliminar(Request $request)
                         $aResultado["err"] = MSG_ERROR;
                     }    
                 } else {
-                    $codigo = "ELIMINARPROFESIONAL";
+                    $codigo = "VENTABAJA";
                     $aResultado["err"] = "No tiene pemisos para la operaci&oacute;n.";
                 }
                 echo json_encode($aResultado);

@@ -8,11 +8,11 @@ use Session;
 
 class Venta extends Model
 {
-    protected $table = 'inscripciones';
+    protected $table = 'ventas';
     public $timestamps = false;
 
     protected $fillable = [
-        'idinscripcion', 'fecha', 'fk_idcurso', 'telefono', 'correo', 'nombre_comprador', 'apellido_comprador', 'fk_idestado'
+        'idventa', 'fecha', 'fk_iddetalle', 'telefono', 'correo', 'nombre_comprador', 'apellido_comprador', 'fk_idventas_estados'
     ];
 
     protected $hidden = [
@@ -20,34 +20,34 @@ class Venta extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idinscripcion = $request->input('id')!="0" ? $request->input('id') : $this->idinscripcion;
+        $this->idventa = $request->input('id')!="0" ? $request->input('id') : $this->idventa;
         $this->fecha = $request->input('txtFecha');
-        $this->hora = $request->input('txtHora');
-        $this->fk_idcurso = $request->input('lstCurso');
+        $this->hora = $request->input('txtHora');       
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo'); 
         $this->nombre_comprador = $request->input('txtNombreComprador');
         $this->apellido_comprador = $request->input('txtApellidoComprador');
-        $this->fk_idestado = $request->input('lstEstado');  
+        $this->fk_idventas_estados = $request->input('lstEstado');
+        $this->fk_iddetalle = $request->input('lstDetalle'); 
     }
 
   public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
            0 => 'C.fecha',
-           1 => 'C.fk_idcurso',
+           1 => 'C.fk_iddetalle',
            2 => 'C.telefono',
            3 => 'C.correo',
            4 => 'C.nombre_comprador',
            5 => 'C.apellido_comprador',
-           6 => 'C.fk_idestado'
+           6 => 'C.fk_idventas_estados'
             );
         $sql = "SELECT DISTINCT
-                    C.idinscripcion,
+                    C.idventa,
                     C.fecha,
                     C.telefono,
                     C.correo                   
-                    FROM inscripciones C
+                    FROM ventas C
                 WHERE 1=1
                 ";
         //Realiza el filtrado
@@ -61,108 +61,108 @@ class Venta extends Model
 
     public function obtenerTodos() {
         $sql = "SELECT 
-                  C.idinscripcion,
+                  C.idventa,
                   C.fecha,
-                  C.fk_idcurso,
+                  C.fk_iddetalle,
                   C.telefono,
                   C.correo,
                   C.nombre_comprador,
                   C.apellido_comprador,
-                  C.fk_idestado
-                FROM inscripciones C ORDER BY C.fecha";
+                  C.fk_idventas_estados
+                FROM ventas C ORDER BY C.fecha";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idinscripcion) {
+    public function obtenerPorId($idventa) {
         $sql = "SELECT
-                idinscripcion,
+                idventa,
                 DATE(fecha) AS fecha,
                 TIME(fecha) AS hora,
-                fk_idcurso,
+                fk_iddetalle,
                 telefono,
                 correo,
                 nombre_comprador,
                 apellido_comprador,
-                fk_idestado                
-                FROM inscripciones WHERE idinscripcion = '$idinscripcion'";
+                fk_idventas_estados                
+                FROM ventas WHERE idventa = '$idventa'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
-            $this->idinscripcion = $lstRetorno[0]->idinscripcion;
+            $this->idventa = $lstRetorno[0]->idventa;
             $this->fecha = $lstRetorno[0]->fecha;
             $this->hora = $lstRetorno[0]->hora;
-            $this->fk_idcurso = $lstRetorno[0]->fk_idcurso;
+            $this->fk_iddetalle = $lstRetorno[0]->fk_iddetalle;
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
             $this->nombre_comprador = $lstRetorno[0]->nombre_comprador;
             $this->apellido_comprador = $lstRetorno[0]->apellido_comprador;
-            $this->fk_idestado = $lstRetorno[0]->fk_idestado;     
+            $this->fk_idventas_estados = $lstRetorno[0]->fk_idventas_estados;     
             return $this;
         }
         return null;
     }
 
     public function guardar() {
-        $sql = "UPDATE inscripciones SET
+        $sql = "UPDATE ventas SET
             fecha = '".$this->fecha. " ". $this->hora ."',
-            fk_idcurso = '$this->fk_idcurso',
+            fk_iddetalle = '$this->fk_iddetalle',
             telefono = '$this->telefono',
             correo = '$this->correo',
             nombre_comprador = '$this->nombre_comprador',
             apellido_comprador = '$this->apellido_comprador',
-            fk_idestado = '$this->fk_idestado'
-            WHERE idinscripcion=?";
-        $affected = DB::update($sql, [$this->idinscripcion]);
+            fk_idventas_estados = '$this->fk_idventas_estados'
+            WHERE idventa=?";
+        $affected = DB::update($sql, [$this->idventa]);
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM inscripciones WHERE 
-            idinscripcion=?";
-        $affected = DB::delete($sql, [$this->idinscripcion]);
+        $sql = "DELETE FROM ventas WHERE 
+            idventa=?";
+        $affected = DB::delete($sql, [$this->idventa]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO inscripciones (
+        $sql = "INSERT INTO ventas (
                 fecha,
-                fk_idcurso,
+                fk_iddetalle,
                 telefono,
                 correo, 
                 nombre_comprador,
                 apellido_comprador,                
-                fk_idestado                        
+                fk_idventas_estados                        
             ) VALUES (?, ?, ?, ?, ?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fecha . " " . date("H:i:s"), 
-            $this->fk_idcurso,
+            $this->fk_iddetalle,
             $this->telefono,
             $this->correo,
             $this->nombre_comprador,
             $this->apellido_comprador,
-            $this->fk_idestado                      
+            $this->fk_idventas_estados                      
         ]);
-       return $this->idinscripcion = DB::getPdo()->lastInsertId();
+       return $this->idventa = DB::getPdo()->lastInsertId();
     }
 
     public function insertarDatosCompra(){
-        $sql = "INSERT INTO inscripciones (fecha, fk_idcurso, telefono, correo, nombre_comprador, apellido_comprador, fk_idestado)
+        $sql = "INSERT INTO ventas (fecha, fk_iddetalle, telefono, correo, nombre_comprador, apellido_comprador, fk_idventas_estados)
         VALUES (?,?,?,?,?,?,?)";
         $result = DB::insert($sql, [
             $this->fecha . " " . date("H:i:s"),
-            $this->fk_idcurso,
+            $this->fk_iddetalle,
             $this->telefono_comprador,
             $this->correo_comprador,
             $this->nombre_comprador,
             $this->apellido_comprador,
             $this->estado
         ]);
-        return $this->idinscripcion = DB::getPdo()->lastInsertId();
+        return $this->idventa = DB::getPdo()->lastInsertId();
     }
 
     public function estado($idventa,$estado){
-        $sql = "UPDATE inscripciones SET 
+        $sql = "UPDATE ventas SET 
         estado = $estado
-        WHERE idinscripcion = $idventa";
-        $affected = DB::update($sql, [$this->idinscripcion]);    
+        WHERE idventa = $idventa";
+        $affected = DB::update($sql, [$this->idventa]);    
     }
 }

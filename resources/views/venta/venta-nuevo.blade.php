@@ -2,9 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinscripcion : 0; ?>';
-    <?php $globalId = isset($venta->idinscripcion) ? $venta->idinscripcion : "0"; ?>
-
+globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinscripcion : 0; ?>';
+<?php $globalId = isset($venta->idinscripcion) ? $venta->idinscripcion : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -14,16 +13,20 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
+    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle"
+            aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true"
+            onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
-    <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
+    <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true"
+            onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
-    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
+    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true"
+            onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
-function fsalir(){
-    location.href ="/sistema/menu";
+function fsalir() {
+    location.href = "/sistema/menu";
 }
 </script>
 @endsection
@@ -35,123 +38,223 @@ if (isset($msg)) {
 }
 ?>
 <div class="panel-body">
-        <div id = "msg"></div>
-        <?php
+    <div id="msg"></div>
+    <?php
         if (isset($msg)) {
             echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
         }
         ?>
-        <form id="form1" method="POST">
-            <div class="row">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
-                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
-                <div class="form-group col-lg-6">
-                    <label>Fecha: *</label>
-                    <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $venta->fecha or ''}}">
-                    <!-- LO HICE PARA NO PERDER LA HORA DE LA COMPRA, DE LO CONTRARIO SE COMPLICABA MUCHO PODER GUARDARLA -->
-                        <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required value="{{ $venta->hora or date('H:i:s')}}">
-                    <!-- ================================================================================================ -->
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Curso:</label>
-                    <select id="lstCurso" name="lstCurso" class="form-control">
-                        @for ($i = 0; $i < count($array_curso); $i++)
-                            @if (isset($venta) and $array_curso[$i]->idcurso == $venta->fk_idcurso)
-                                <option selected value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
-                            @else
-                                <option value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
-                            @endif
-                        @endfor
-                    </select>
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Telefono:</label>
-                    <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono" value="{{$venta->telefono or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Correo:</label>
-                    <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo" value="{{$venta->correo or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Nombre del Comprador:</label>
-                    <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador" value="{{$venta->nombre_comprador or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Apellido del Comprador:</label>
-                    <input class="form-control" type="text" id="txtApellidoComprador" name="txtApellidoComprador" value="{{$venta->apellido_comprador or ''}}">
-                </div>
-                <div class="form-group col-lg-6">
-                    <label>Estado:</label>
-                    <select id="lstEstado" name="lstEstado" class="form-control">
-                        @for ($i = 0; $i < count($array_estado); $i++)
-                            @if (isset($venta) and $array_estado[$i]->idestado == $venta->fk_idestado)
-                                <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
-                            @else
-                                @if ($array_estado[$i]->idestado == 1 and !isset($venta))
-                                    <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
-                                @else  
-                                    <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
-                                @endif    
-                            @endif
-                        @endfor
-                    </select>
-                </div>
+    <form id="form1" method="POST">
+        <div class="row">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+            <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
+            <div class="form-group col-lg-6">
+                <label>Fecha: *</label>
+                <input type="date" id="txtFecha" name="txtFecha" class="form-control" required
+                    value="{{ $venta->fecha or ''}}">
+                <!-- LO HICE PARA NO PERDER LA HORA DE LA COMPRA, DE LO CONTRARIO SE COMPLICABA MUCHO PODER GUARDARLA -->
+                <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required
+                    value="{{ $venta->hora or date('H:i:s')}}">
+                <!-- ================================================================================================ -->
             </div>
-			
+            <!--<div class="form-group col-lg-6">
+                <label>Curso:</label>
+                <select id="lstCurso" name="lstCurso" class="form-control">
+                    @for ($i = 0; $i < count($array_curso); $i++) @if (isset($venta) and $array_curso[$i]->idcurso ==
+                        $venta->fk_idcurso)
+                        <option selected value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
+                        @else
+                        <option value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
+                        @endif
+                        @endfor
+                </select>
+            </div>-->
+            <div class="form-group col-lg-6">
+                <label>Telefono:</label>
+                <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono"
+                    value="{{$venta->telefono or ''}}">
             </div>
-        </form>
-</div>
-<div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Eliminar registro?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">¿Deseas eliminar el registro actual?</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary" onclick="eliminar();">Sí</button>
-          </div>
+            <div class="form-group col-lg-6">
+                <label>Correo:</label>
+                <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo"
+                    value="{{$venta->correo or ''}}">
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Nombre del Comprador:</label>
+                <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador"
+                    value="{{$venta->nombre_comprador or ''}}">
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Apellido del Comprador:</label>
+                <input class="form-control" type="text" id="txtApellidoComprador" name="txtApellidoComprador"
+                    value="{{$venta->apellido_comprador or ''}}">
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Estado:</label>
+                <select id="lstEstado" name="lstEstado" class="form-control">
+                    @for ($i = 0; $i < count($array_estado); $i++) @if (isset($venta) and $array_estado[$i]->idestado ==
+                        $venta->fk_idestado)
+                        <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}
+                        </option>
+                        @else
+                        @if ($array_estado[$i]->idestado == 1 and !isset($venta))
+                        <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}
+                        </option>
+                        @else
+                        <option value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}</option>
+                        @endif
+                        @endif
+                        @endfor
+                </select>
+            </div>
         </div>
-      </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> Detalle
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                            data-target="#modalDetalle">Agregar</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="grilla_wrapper" class="dataTables_wrapper no-footer">
+                        <div id="grilla_processing" class="dataTables_processing" style="display: none;">Processing...
+                        </div>
+                        <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid"
+                            aria-describedby="grilla_info">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1"
+                                        aria-label="Producto: activate to sort column descending" aria-sort="ascending"
+                                        style="width: 252px;">Producto</th>                                    
+                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1"
+                                        aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">
+                                        Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td valign="top" colspan="4" class="dataTables_empty">No data available in table
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="dataTables_info" id="grilla_info" role="status" aria-live="polite">Showing 0 to 0 of
+                            0 entries</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</form>
+</div>
+<div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar registro?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">¿Deseas eliminar el registro actual?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary" onclick="eliminar();">Sí</button>
+            </div>
+        </div>
     </div>
+</div>
 <script>
+$("#form1").validate();
 
-    $("#form1").validate();
-
-    function guardar() {
-        if ($("#form1").valid()) {
-            modificado = false;
-            form1.submit(); 
-        } else {
-            $("#modalGuardar").modal('toggle');
-            msgShow("Corrija los errores e intente nuevamente.", "danger");
-            return false;
-        }
+function guardar() {
+    if ($("#form1").valid()) {
+        modificado = false;
+        form1.submit();
+    } else {
+        $("#modalGuardar").modal('toggle');
+        msgShow("Corrija los errores e intente nuevamente.", "danger");
+        return false;
     }
+}
 
-    function eliminar() {
-        $.ajax({
-            type: "GET",
-            url: "{{ asset('admin/ventas/eliminar') }}",
-            data: { id:globalId },
-            async: true,
-            dataType: "json",
-            success: function (data) {
-                if (data.err = "0") {
-                    msgShow("Registro eliminado exitosamente.", "success");
-                    $("#btnEnviar").hide();
-                    $("#btnEliminar").hide();
-                    $('#mdlEliminar').modal('toggle');
-                } else {
-                    msgShow("Error al eliminar", "success");
-                }
+function eliminar() {
+    $.ajax({
+        type: "GET",
+        url: "{{ asset('admin/ventas/eliminar') }}",
+        data: {
+            id: globalId
+        },
+        async: true,
+        dataType: "json",
+        success: function(data) {
+            if (data.err = "0") {
+                msgShow("Registro eliminado exitosamente.", "success");
+                $("#btnEnviar").hide();
+                $("#btnEliminar").hide();
+                $('#mdlEliminar').modal('toggle');
+            } else {
+                msgShow("Error al eliminar", "success");
             }
-        });
-    }
+        }
+    });
+}
+</script>
+<script>
+$(document).ready( function () {
+    var idVenta = '0';
 
+   var dataTable = $('#grilla').DataTable({
+        "processing": true,
+        "serverSide": false,
+        "bFilter": false,
+        "bInfo": true,
+        "bSearchable": false,
+        "paging": false,
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],
+        "ajax": "venta-nuevo.php?do=cargarGrilla&idVenta=" + idVenta
+    });
+} );
+
+ function fBuscarProducto(){
+            idCategoria = $("#lstCategoria option:selected").val();
+            $.ajax({
+                type: "GET",
+                url: "cliente-formulario.php?do=buscarProducto",
+                data: { id:idCategoria },
+                async: true,
+                dataType: "json",
+                success: function (respuesta) {
+                  let opciones = "<option value='0' disabled selected>Seleccionar</option>";
+                  const resultado = respuesta.reduce(function(acumulador, valor){
+                  		const {detalle,idProducto} = valor;
+                  		return acumulador + `<option value="${idProducto}">${detalle}</option>`;
+                  }, opciones);
+                  $("#lstProducto").empty().append(resultado);
+                }
+            });
+        }
+
+        function fAgregarDetalle(){
+            var grilla = $('#grilla').DataTable();
+            grilla.row.add([
+                $("#lstCategoria option:selected").text() + "<input type='hidden' name='txtCategoria[]' value='"+ $("#lstCategoria option:selected").val() +"'>",               
+                $("#txtDireccion").val() + "<input type='hidden' name='txtDetalle[]' value='"+$("#txtDireccion").val()+"'>"
+            ]).draw();
+            $('#modalDetalle').modal('toggle');
+            limpiarFormulario();
+        }
+
+        function limpiarFormulario(){
+            $("#lstTipo").val("");
+            $("#lstCategoria").val("");
+            $("#lstProducto").val("");
+            $("#txtDireccion").val("");
+        }
 </script>
 @endsection

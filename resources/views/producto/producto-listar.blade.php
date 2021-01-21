@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de cursos")
+@section('titulo', "Listado de productos")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -13,7 +13,7 @@
 </ol>
 <ol class="toolbar">
     <li class="btn-item"><a title="Nuevo" href="/admin/productos/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/productoss");'><span>Recargar</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/productos");'><span>Recargar</span></a></li>
     <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
@@ -32,11 +32,16 @@ if (isset($msg)) {
 <table id="grilla" class="display">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Cupo</th>
-            <th>Horario</th>
-            <th>Acciones</th>
+            <th>imagen</th>
+            <th>Codigo</th>
+            <th>Descripcion</th>           
+            <th>Medidas Externas</th>
+            <th>Medidas Internas</th>
+            <th>Peso</th>
+            <th>Precio Costo</th>
+            <th>Precio Venta</th>
+            <th>Marca</th>  
+            <th>Acciones</th>                              
         </tr>
     </thead>
 </table> 
@@ -49,7 +54,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('producto.cargarGrilla') }}"
+	    "ajax": "{{ route('productos.cargarGrilla') }}"
 	});
 </script>
 @endsection
