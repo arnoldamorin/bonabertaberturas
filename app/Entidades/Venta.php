@@ -12,7 +12,7 @@ class Venta extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idventa', 'fecha', 'fk_iddetalle', 'telefono', 'correo', 'nombre_comprador', 'apellido_comprador', 'fk_idventas_estados'
+        'idventa', 'fecha', 'telefono', 'correo', 'nombre_comprador', 'apellido_comprador', 'fk_idventas_estados'
     ];
 
     protected $hidden = [
@@ -27,8 +27,7 @@ class Venta extends Model
         $this->correo = $request->input('txtCorreo'); 
         $this->nombre_comprador = $request->input('txtNombreComprador');
         $this->apellido_comprador = $request->input('txtApellidoComprador');
-        $this->fk_idventas_estados = $request->input('lstEstado');
-        $this->fk_iddetalle = $request->input('lstDetalle'); 
+        $this->fk_idventas_estados = $request->input('lstEstado');        
     }
 
   public function obtenerFiltrado() {

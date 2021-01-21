@@ -55,7 +55,7 @@ class Detalle extends Model
                   C.fk_idventa,
                   C.fk_idproducto,
                   C.cantidad                 
-                FROM detalles C ORDER BY C.fk_iddetalle";
+                FROM detalles C ORDER BY C.iddetalle";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -72,14 +72,9 @@ class Detalle extends Model
 
         if(count($lstRetorno)>0){
             $this->iddetalle = $lstRetorno[0]->iddetalle;
-            $this->fk_idventa = $lstRetorno[0]->fk_idventa;
-            $this->hora = $lstRetorno[0]->hora;
+            $this->fk_idventa = $lstRetorno[0]->fk_idventa;         
             $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
-            $this->cantidad = $lstRetorno[0]->cantidad;
-            $this->correo = $lstRetorno[0]->correo;
-            $this->nombre_comprador = $lstRetorno[0]->nombre_comprador;
-            $this->apellido_comprador = $lstRetorno[0]->apellido_comprador;
-            $this->fk_idproductos_estados = $lstRetorno[0]->fk_idproductos_estados;     
+            $this->cantidad = $lstRetorno[0]->cantidad;            
             return $this;
         }
         return null;
@@ -89,11 +84,7 @@ class Detalle extends Model
         $sql = "UPDATE detalles SET
             fk_idventa = '".$this->fk_idventa. " ". $this->hora ."',
             fk_idproducto = '$this->fk_idproducto',
-            cantidad = '$this->cantidad',
-            correo = '$this->correo',
-            nombre_comprador = '$this->nombre_comprador',
-            apellido_comprador = '$this->apellido_comprador',
-            fk_idproductos_estados = '$this->fk_idproductos_estados'
+            cantidad = '$this->cantidad',           
             WHERE iddetalle=?";
         $affected = DB::update($sql, [$this->iddetalle]);
     }
@@ -108,43 +99,15 @@ class Detalle extends Model
         $sql = "INSERT INTO detalles (
                 fk_idventa,
                 fk_idproducto,
-                cantidad,
-                correo, 
-                nombre_comprador,
-                apellido_comprador,                
-                fk_idproductos_estados                        
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                cantidad                                
+            ) VALUES (?, ?, ?)";
        $result = DB::insert($sql, [
             $this->fk_idventa . " " . date("H:i:s"), 
             $this->fk_idproducto,
-            $this->cantidad,
-            $this->correo,
-            $this->nombre_comprador,
-            $this->apellido_comprador,
-            $this->fk_idproductos_estados                      
+            $this->cantidad                          
         ]);
        return $this->iddetalle = DB::getPdo()->lastInsertId();
-    }
+    }  
 
-    public function insertarDatosCompra(){
-        $sql = "INSERT INTO detalles (fk_idventa, fk_idproducto, cantidad, correo, nombre_comprador, apellido_comprador, fk_idproductos_estados)
-        VALUES (?,?,?,?,?,?,?)";
-        $result = DB::insert($sql, [
-            $this->fk_idventa . " " . date("H:i:s"),
-            $this->fk_idproducto,
-            $this->cantidad_comprador,
-            $this->correo_comprador,
-            $this->nombre_comprador,
-            $this->apellido_comprador,
-            $this->estado
-        ]);
-        return $this->iddetalle = DB::getPdo()->lastInsertId();
-    }
-
-    public function estado($iddetalle,$estado){
-        $sql = "UPDATE detalles SET 
-        estado = $estado
-        WHERE iddetalle = $iddetalle";
-        $affected = DB::update($sql, [$this->iddetalle]);    
-    }
+    
 }

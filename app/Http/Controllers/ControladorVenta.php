@@ -6,8 +6,8 @@ use App\Entidades\Venta;
 use App\Entidades\Venta_estado;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
-use App\Entidades\Alumno;
-use App\Entidades\Producto;
+use App\Entidades\cliente;
+use App\Entidades\Detalle;
 use Illuminate\Http\Request;
 
 
@@ -38,7 +38,7 @@ class ControladorVenta extends Controller
             $entidadVenta = new Venta();
             $aVenta = $entidadVenta->obtenerTodos();
 
-            $entidadProducto = new Producto();
+            $entidadDetalle = new Detalle();
             $entidadEstado = new Venta_estado();
     
             $data = array();
@@ -53,16 +53,14 @@ class ControladorVenta extends Controller
             for ($i = $inicio; $i < count($aVenta) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 $fecha_formateada = date("d/m/Y H:i", strtotime($aVenta[$i]->fecha));
-                $row[] = $fecha_formateada;
-                $entidadProducto->obtenerPorId($aVenta[$i]->fk_idProducto);
-                $row[] = $entidadProducto->nombre;
+                $row[] = $fecha_formateada;                                
                 $row[] = $aVenta[$i]->telefono;
                 $row[] = $aVenta[$i]->correo;
                 $row[] = $aVenta[$i]->nombre_comprador;
                 $row[] = $aVenta[$i]->apellido_comprador;
                 $entidadEstado->obtenerPorID($aVenta[$i]->fk_idestado);
                 $row[] = $entidadEstado->nombre;
-                $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idinscripcion."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/venta/nueva/".$aVenta[$i]->idventa."'><i class='fas fa-search'></i></a>";
                 $cont++;
                 $data[] = $row;
             }
@@ -78,20 +76,20 @@ class ControladorVenta extends Controller
 
         public function nuevo()
         {
-            $Producto = new Producto();
-            $array_Producto = $Producto->obtenerTodos();
+            $Detalle = new Detalle();
+            $array_Detalle = $Detalle->obtenerTodos();
 
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
 
             $titulo = "Nueva Venta";
-            return view('venta.venta-nuevo', compact('titulo', 'array_Producto', 'array_estado'));
+            return view('venta.venta-nuevo', compact('titulo', 'array_Detalle', 'array_estado'));
         }
 
         public function editar($id)
         {
-            $entidad = new Producto();
-            $array_Producto = $entidad->obtenerTodos();
+            $entidad = new Detalle();
+            $array_Detalle = $entidad->obtenerTodos();
             
             $venta_estado = new Venta_estado();
             $array_estado = $venta_estado->obtenerTodos();
@@ -106,7 +104,7 @@ class ControladorVenta extends Controller
                     $venta = new Venta();
                     $venta->obtenerPorId($id);
     
-                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Producto', 'array_estado'));
+                    return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Detalle', 'array_estado'));
                 }
             } else {
                 return redirect('admin/login');
@@ -121,7 +119,7 @@ class ControladorVenta extends Controller
                 $entidad = new Venta();
                 $entidad->cargarDesdeRequest($request);
                 $entidadAnt = new Venta();
-                $entidadAnt = $entidadAnt->obtenerPorId($entidad->idinscripcion);
+                $entidadAnt = $entidadAnt->obtenerPorId($entidad->idventa);
             
                 //validaciones
                 if ($entidad->fecha == "") {
@@ -132,21 +130,21 @@ class ControladorVenta extends Controller
                         //Es actualizacion
 
                         if (($entidadAnt->fk_idestado == 1) && ($entidad->fk_idestado == 2)) {
-                            $alumno = new Alumno();
-                            $alumno = $alumno->obtenerPorCorreo($entidad->correo);
-                            if (isset($alumno) && ($alumno->idalumno != "")) {
-                                $alumno->nombre = $entidad->nombre_comprador;
-                                $alumno->apellido = $entidad->apellido_comprador;
-                                $alumno->telefono = $entidad->telefono;
-                                $alumno->guardar();
+                            $cliente = new Cliente();
+                            $cliente = $cliente->obtenerPorCorreo($entidad->correo);
+                            if (isset($cliente) && ($cliente->idcliente != "")) {
+                                $cliente->nombre = $entidad->nombre_comprador;
+                                $cliente->apellido = $entidad->apellido_comprador;
+                                $cliente->telefono = $entidad->telefono;
+                                $cliente->guardar();
                             } else {
-                                $alumno = new Alumno();
-                                $alumno->nombre = $entidad->nombre_comprador;
-                                $alumno->apellido = $entidad->apellido_comprador;
-                                $alumno->dni = "";
-                                $alumno->mail = $entidad->correo;
-                                $alumno->telefono = $entidad->telefono;
-                                $alumno->insertar();
+                                $cliente = new cliente();
+                                $cliente->nombre = $entidad->nombre_comprador;
+                                $cliente->apellido = $entidad->apellido_comprador;
+                                $cliente->dni = "";
+                                $cliente->mail = $entidad->correo;
+                                $cliente->telefono = $entidad->telefono;
+                                $cliente->insertar();
                             }
                             
                         }
@@ -163,18 +161,18 @@ class ControladorVenta extends Controller
                         $msg["ESTADO"] = MSG_SUCCESS;
                         $msg["MSG"] = OKINSERT;
                     }
-                    $_POST["id"] = $entidad->idinscripcion;
+                    $_POST["id"] = $entidad->idventa;
                     return view('venta.venta-listar', compact('titulo', 'msg'));
                 }
             } catch (Exception $e) {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = ERRORINSERT;
             }
-            $id = $entidad->idinscripcion;
+            $id = $entidad->idventa;
             $venta = new Venta();
             $venta->obtenerPorId($id);
     
-            return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_Producto', 'array_estado')) . '?id=' . $venta->idinscripcion;
+            return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_Detalle', 'array_estado')) . '?id=' . $venta->idventa;
         }
 
 public function eliminar(Request $request)
@@ -186,7 +184,7 @@ public function eliminar(Request $request)
                     $entidad = new Venta();
                     $entidad->cargarDesdeRequest($request);
                    
-                    if ($entidad->idinscripcion > 0) {
+                    if ($entidad->idventa > 0) {
                         $entidad->eliminar();
                         $aResultado["err"] = EXIT_SUCCESS; //eliminado correctamente
                     } else {

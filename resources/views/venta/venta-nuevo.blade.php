@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-globalId = '<?php echo isset($venta->idinscripcion) && $venta->idinscripcion > 0 ? $venta->idinscripcion : 0; ?>';
-<?php $globalId = isset($venta->idinscripcion) ? $venta->idinscripcion : "0"; ?>
+globalId = '<?php echo isset($venta->idventa) && $venta->idventa > 0 ? $venta->idventa : 0; ?>';
+<?php $globalId = isset($venta->idventa) ? $venta->idventa : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -56,19 +56,7 @@ if (isset($msg)) {
                 <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required
                     value="{{ $venta->hora or date('H:i:s')}}">
                 <!-- ================================================================================================ -->
-            </div>
-            <!--<div class="form-group col-lg-6">
-                <label>Curso:</label>
-                <select id="lstCurso" name="lstCurso" class="form-control">
-                    @for ($i = 0; $i < count($array_curso); $i++) @if (isset($venta) and $array_curso[$i]->idcurso ==
-                        $venta->fk_idcurso)
-                        <option selected value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
-                        @else
-                        <option value="{{ $array_curso[$i]->idcurso }}">{{ $array_curso[$i]->nombre }}</option>
-                        @endif
-                        @endfor
-                </select>
-            </div>-->
+            </div>            
             <div class="form-group col-lg-6">
                 <label>Telefono:</label>
                 <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono"
@@ -217,16 +205,16 @@ $(document).ready( function () {
         "paging": false,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-        "ajax": "venta-nuevo.php?do=cargarGrilla&idVenta=" + idVenta
+        "ajax": "{{ asset('admin/ventas/cargarDetalle') }}" + idVenta
     });
 } );
 
- function fBuscarProducto(){
-            idCategoria = $("#lstCategoria option:selected").val();
+   function fBuscarProducto(){
+            idDetalle = $("#lstDetalle option:selected").val();
             $.ajax({
                 type: "GET",
-                url: "cliente-formulario.php?do=buscarProducto",
-                data: { id:idCategoria },
+                url: "{{ asset('admin/Detalle/BuscarDetalle') }}",
+                data: { id:idDetalle },
                 async: true,
                 dataType: "json",
                 success: function (respuesta) {
@@ -243,7 +231,7 @@ $(document).ready( function () {
         function fAgregarDetalle(){
             var grilla = $('#grilla').DataTable();
             grilla.row.add([
-                $("#lstCategoria option:selected").text() + "<input type='hidden' name='txtCategoria[]' value='"+ $("#lstCategoria option:selected").val() +"'>",               
+                $("#lstDetalle option:selected").text() + "<input type='hidden' name='txtDetalle[]' value='"+ $("#lstDetalle option:selected").val() +"'>",               
                 $("#txtDireccion").val() + "<input type='hidden' name='txtDetalle[]' value='"+$("#txtDireccion").val()+"'>"
             ]).draw();
             $('#modalDetalle').modal('toggle');
@@ -252,7 +240,7 @@ $(document).ready( function () {
 
         function limpiarFormulario(){
             $("#lstTipo").val("");
-            $("#lstCategoria").val("");
+            $("#lstDetalle").val("");
             $("#lstProducto").val("");
             $("#txtDireccion").val("");
         }
