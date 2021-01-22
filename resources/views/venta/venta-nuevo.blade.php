@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-globalId = '<?php echo isset($venta->idventa) && $venta->idventa > 0 ? $venta->idventa : 0; ?>';
-<?php $globalId = isset($venta->idventa) ? $venta->idventa : "0"; ?>
+    globalId = '<?php echo isset($venta->idventa) && $venta->idventa > 0 ? $venta->idventa : 0; ?>';
+    <?php $globalId = isset($venta->idventa) ? $venta->idventa : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -13,69 +13,59 @@ globalId = '<?php echo isset($venta->idventa) && $venta->idventa > 0 ? $venta->i
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle"
-            aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true"
-            onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
+    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
-    <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true"
-            onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
+    <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
-    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true"
-            onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
+    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
 </ol>
 <script>
-function fsalir() {
-    location.href = "/sistema/menu";
-}
+    function fsalir() {
+        location.href = "/sistema/menu";
+    }
 </script>
 @endsection
 @section('contenido')
 <?php
 if (isset($msg)) {
     echo '<div id = "msg"></div>';
-    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["Producto"] . '")</script>';
 }
 ?>
 <div class="panel-body">
     <div id="msg"></div>
     <?php
-        if (isset($msg)) {
-            echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
-        }
-        ?>
+    if (isset($msg)) {
+        echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["Producto"] . '")</script>';
+    }
+    ?>
     <form id="form1" method="POST">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Fecha: *</label>
-                <input type="date" id="txtFecha" name="txtFecha" class="form-control" required
-                    value="{{ $venta->fecha or ''}}">
+                <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $venta->fecha or ''}}">
                 <!-- LO HICE PARA NO PERDER LA HORA DE LA COMPRA, DE LO CONTRARIO SE COMPLICABA MUCHO PODER GUARDARLA -->
-                <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required
-                    value="{{ $venta->hora or date('H:i:s')}}">
+                <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required value="{{ $venta->hora or date('H:i:s')}}">
                 <!-- ================================================================================================ -->
-            </div>            
+            </div>
             <div class="form-group col-lg-6">
                 <label>Telefono:</label>
-                <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono"
-                    value="{{$venta->telefono or ''}}">
+                <input class="form-control" type="tel" id="txtTelefono" name="txtTelefono" value="{{$venta->telefono or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Correo:</label>
-                <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo"
-                    value="{{$venta->correo or ''}}">
+                <input class="form-control" type="mail" id="txtCorreo" name="txtCorreo" value="{{$venta->correo or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Nombre del Comprador:</label>
-                <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador"
-                    value="{{$venta->nombre_comprador or ''}}">
+                <input class="form-control" type="text" id="txtNombreComprador" name="txtNombreComprador" value="{{$venta->nombre_comprador or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Apellido del Comprador:</label>
-                <input class="form-control" type="text" id="txtApellidoComprador" name="txtApellidoComprador"
-                    value="{{$venta->apellido_comprador or ''}}">
+                <input class="form-control" type="text" id="txtApellidoComprador" name="txtApellidoComprador" value="{{$venta->apellido_comprador or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Estado:</label>
@@ -95,29 +85,25 @@ if (isset($msg)) {
                         @endfor
                 </select>
             </div>
+
         </div>
         <div class="col-12">
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fa fa-table"></i> Detalle
                     <div class="pull-right">
-                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                            data-target="#modalDetalle">Agregar</button>
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalDetalle">Agregar</button>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div id="grilla_wrapper" class="dataTables_wrapper no-footer">
                         <div id="grilla_processing" class="dataTables_processing" style="display: none;">Processing...
                         </div>
-                        <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid"
-                            aria-describedby="grilla_info">
+                        <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid" aria-describedby="grilla_info">
                             <thead>
                                 <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1"
-                                        aria-label="Producto: activate to sort column descending" aria-sort="ascending"
-                                        style="width: 252px;">Producto</th>                                    
-                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1"
-                                        aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Producto: activate to sort column descending" aria-sort="ascending" style="width: 252px;">Producto</th>
+                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">
                                         Cantidad</th>
                                 </tr>
                             </thead>
@@ -134,12 +120,75 @@ if (isset($msg)) {
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="modalDomicilio" tabindex="-1" role="dialog" aria-labelledby="modalDomicilioLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDomicilioLabel">Domicilio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label>Tipo Producto:</label>
+                                <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
+                                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto ==
+                                        $detalle->fk_idtipo_producto)
+                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}
+                                        </option>
+                                        @else
+                                        @if ($array_TipoProducto[$i]->idtipo_producto == 1 and !isset($detalle))
+                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}
+                                        </option>
+                                        @else
+                                        <option value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}</option>
+                                        @endif
+                                        @endif
+                                        @endfor
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label for="lstProducto">Producto:</label>
+                                <select name="lstProducto" id="lstProducto" onchange="fBuscarProducto();" class="form-control">
+                                    @for ($i = 0; $i < count($array_Producto); $i++) @if (isset($detalle) and $array_Producto[$i]->idproducto ==
+                                        $detalle->fk_idproducto)
+                                        <option selected value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}
+                                        </option>
+                                        @else
+                                        @if ($array_Producto[$i]->idproducto == 1 and !isset($detalle))
+                                        <option selected value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}
+                                        </option>
+                                        @else
+                                        <option value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}</option>
+                                        @endif
+                                        @endif
+                                        @endfor
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <label for="txtCantidad">Cantidad:</label>
+                                <input type="text" name="" id="txtCantidad" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" onclick="fAgregarDetalle()">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 </div>
 </form>
 </div>
-<div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -157,92 +206,99 @@ if (isset($msg)) {
     </div>
 </div>
 <script>
-$("#form1").validate();
+    $("#form1").validate();
 
-function guardar() {
-    if ($("#form1").valid()) {
-        modificado = false;
-        form1.submit();
-    } else {
-        $("#modalGuardar").modal('toggle');
-        msgShow("Corrija los errores e intente nuevamente.", "danger");
-        return false;
-    }
-}
-
-function eliminar() {
-    $.ajax({
-        type: "GET",
-        url: "{{ asset('admin/ventas/eliminar') }}",
-        data: {
-            id: globalId
-        },
-        async: true,
-        dataType: "json",
-        success: function(data) {
-            if (data.err = "0") {
-                msgShow("Registro eliminado exitosamente.", "success");
-                $("#btnEnviar").hide();
-                $("#btnEliminar").hide();
-                $('#mdlEliminar').modal('toggle');
-            } else {
-                msgShow("Error al eliminar", "success");
-            }
+    function guardar() {
+        if ($("#form1").valid()) {
+            modificado = false;
+            form1.submit();
+        } else {
+            $("#modalGuardar").modal('toggle');
+            msgShow("Corrija los errores e intente nuevamente.", "danger");
+            return false;
         }
-    });
-}
+    }
+
+    function eliminar() {
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/ventas/eliminar') }}",
+            data: {
+                id: globalId
+            },
+            async: true,
+            dataType: "json",
+            success: function(data) {
+                if (data.err = "0") {
+                    msgShow("Registro eliminado exitosamente.", "success");
+                    $("#btnEnviar").hide();
+                    $("#btnEliminar").hide();
+                    $('#mdlEliminar').modal('toggle');
+                } else {
+                    msgShow("Error al eliminar", "success");
+                }
+            }
+        });
+    }
 </script>
 <script>
-$(document).ready( function () {
-    var idVenta = '0';
+   /* $(document).ready(function() {
+        var idVenta = '0';
 
-   var dataTable = $('#grilla').DataTable({
-        "processing": true,
-        "serverSide": false,
-        "bFilter": false,
-        "bInfo": true,
-        "bSearchable": false,
-        "paging": false,
-        "pageLength": 25,
-        "order": [[ 0, "asc" ]],
-        "ajax": "{{ asset('admin/ventas/cargarDetalle') }}" + idVenta
-    });
-} );
+        var dataTable = $('#grilla').DataTable({
+            "processing": true,
+            "serverSide": false,
+            "bFilter": false,
+            "bInfo": true,
+            "bSearchable": false,
+            "paging": false,
+            "pageLength": 25,
+            "order": [
+                [0, "asc"]
+            ],
+            "ajax": "{{ asset('admin/ventas/cargarDetalle') }}" + idVenta
+        });
+    });*/
 
-   function fBuscarProducto(){
-            idDetalle = $("#lstDetalle option:selected").val();
-            $.ajax({
-                type: "GET",
-                url: "{{ asset('admin/Detalle/BuscarDetalle') }}",
-                data: { id:idDetalle },
-                async: true,
-                dataType: "json",
-                success: function (respuesta) {
-                  let opciones = "<option value='0' disabled selected>Seleccionar</option>";
-                  const resultado = respuesta.reduce(function(acumulador, valor){
-                  		const {detalle,idProducto} = valor;
-                  		return acumulador + `<option value="${idProducto}">${detalle}</option>`;
-                  }, opciones);
-                  $("#lstProducto").empty().append(resultado);
-                }
-            });
-        }
+    function fBuscarProducto() {
+        idTipoProducto = $("#lstTipoProducto option:selected").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/Detalle/BuscarProducto') }}",
+            data: {
+                id: idtipo_producto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                let opciones = "<option value='0' disabled selected>Seleccionar</option>";
+                const resultado = respuesta.reduce(function(acumulador, valor) {
+                    const {
+                        descripcion,
+                        idProducto
+                    } = valor;
+                    return acumulador + `<option value="${idproducto}">${descripcion}</option>`;
+                }, opciones);
+                $("#lstProducto").empty().append(resultado);
+            }
+        });
+    }
 
-        function fAgregarDetalle(){
-            var grilla = $('#grilla').DataTable();
-            grilla.row.add([
-                $("#lstDetalle option:selected").text() + "<input type='hidden' name='txtDetalle[]' value='"+ $("#lstDetalle option:selected").val() +"'>",               
-                $("#txtDireccion").val() + "<input type='hidden' name='txtDetalle[]' value='"+$("#txtDireccion").val()+"'>"
-            ]).draw();
-            $('#modalDetalle').modal('toggle');
-            limpiarFormulario();
-        }
+    function fAgregarDetalle() {
+        var grilla = $('#grilla').DataTable();
+        grilla.row.add([
+            $("#lstDetalle option:selected").text() + "<input type='hidden' name='txtDetalle[]' value='" + $("#lstDetalle option:selected").val() + "'>",
+            $("#txtCantidad").val() + "<input type='hidden' name='txtDetalle[]' value='" + $("#txtCantidad").val() + "'>"
+        ]).draw();
+        $('#modalDetalle').modal('toggle');
+        limpiarFormulario();
+    }
 
-        function limpiarFormulario(){
-            $("#lstTipo").val("");
-            $("#lstDetalle").val("");
-            $("#lstProducto").val("");
-            $("#txtDireccion").val("");
-        }
+    function limpiarFormulario() {
+        $("#lstTipo").val("");
+        $("#lstDetalle").val("");
+        $("#lstProducto").val("");
+        $("#txtCantidad").val("");
+    }
 </script>
 @endsection

@@ -79,6 +79,7 @@ class Producto extends Model
 
     public function obtenerTodos() {
         $sql = "SELECT 
+                    P.idproducto,
                     P.codigo,
                     P.descripcion,
                     TP.idtipo_producto, 
@@ -91,7 +92,7 @@ class Producto extends Model
                     P.imagen
                     
                 FROM productos P
-                INNER JOIN tipo_productos TP ON P.fk_idtipo_producto = TP.idtipo_producto
+                INNER JOIN tipos_productos TP ON P.fk_idtipo_producto = TP.idtipo_producto
                 ORDER BY P.descripcion";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
