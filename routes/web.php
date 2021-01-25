@@ -138,6 +138,21 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
     Route::post('/admin/venta/nueva/{id}', 'ControladorVenta@guardar');
     Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');
-    Route::get('/admin/Detalle/buscarProducto', 'ControladorVenta@buscarProducto');
-    //Route::get('/admin/Detalle/cargarDetalle/{id}', 'ControladorVenta@cargarDetalle')->name('ventas.cargarDetalle');
+    Route::get('/admin/detalle/buscarProducto', 'ControladorVenta@buscarProducto');
+    Route::get('/admin/detalle/cargarDetalle/{id}', 'ControladorVenta@cargarDetalle')->name('ventas.cargarDetalle');
+    Route::get('/admin/detalle/editar', 'ControladorVenta@editarDetalle');
+    Route::get('/admin/detalle/eliminar', 'ControladorVenta@eliminarDetalle');
+    /* --------------------------------------------- */
+    /* CONTROLADOR CLIENTES                          */
+    /* --------------------------------------------- */
+    Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
+    Route::post('/admin/cliente/nuevo', 'ControladorCliente@guardar');
+    Route::get('/admin/cliente/eliminar', 'ControladorCliente@eliminar');
+    Route::get('/admin/clientes', 'ControladorCliente@index');
+    Route::get('/admin/clientes/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
+    Route::get('/admin/cliente/nuevo/{id}', 'ControladorCliente@editar');
+    Route::post('/admin/cliente/nuevo/{id}', 'ControladorCliente@guardar');
+
+
+    
 });

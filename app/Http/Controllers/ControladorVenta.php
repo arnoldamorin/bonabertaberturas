@@ -6,7 +6,7 @@ use App\Entidades\Venta;
 use App\Entidades\Venta_estado;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
-use App\Entidades\cliente;
+use App\Entidades\Cliente;
 use App\Entidades\Detalle;
 use App\Entidades\Producto;
 use App\Entidades\TipoProducto;
@@ -87,12 +87,12 @@ class ControladorVenta extends Controller
 
         $producto = new Producto();
         $array_Producto = $producto->obtenerTodos();
-        
+
         $tipoProducto = new TipoProducto();
         $array_TipoProducto = $tipoProducto->obtenerTodos();
 
         $titulo = "Nueva Venta";
-        return view('venta.venta-nuevo', compact('titulo', 'array_Detalle', 'array_estado','array_Producto','array_TipoProducto'));
+        return view('venta.venta-nuevo', compact('titulo', 'array_Detalle', 'array_estado', 'array_Producto', 'array_TipoProducto'));
     }
 
     public function editar($id)
@@ -105,9 +105,9 @@ class ControladorVenta extends Controller
 
         $producto = new Producto();
         $array_Producto = $producto->obtenerTodos();
-        
+
         $tipoProducto = new TipoProducto();
-        $array_TipoProducto = $tipoProducto->obtenerTodos();        
+        $array_TipoProducto = $tipoProducto->obtenerTodos();
 
 
         $titulo = "Modificar Venta";
@@ -120,7 +120,7 @@ class ControladorVenta extends Controller
                 $venta = new Venta();
                 $venta->obtenerPorId($id);
 
-                return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Detalle', 'array_estado','array_Producto','array_TipoProducto'));
+                return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Detalle', 'array_estado', 'array_Producto', 'array_TipoProducto'));
             }
         } else {
             return redirect('admin/login');
@@ -214,15 +214,48 @@ class ControladorVenta extends Controller
             return redirect('admin/login');
         }
     }
-    public function buscarProducto(Request $request){        
-       $id = $request->input('id');
-       $producto = new Producto;
-       $array_Producto = $producto->obtenerTodosPorTipo($id);
-       echo json_encode($array_Producto);
-       exit;
+    public function buscarProducto(Request $request)
+    {
+        $id = $request->input('id');
+        $producto = new Producto;
+        $array_Producto = $producto->obtenerTodosPorTipo($id);
+        echo json_encode($array_Producto);
+        exit;
     }
-    public function cargarDetalle($id){
-       print_r("hasta aca llego xd");
-       exit;
-     }
+    public function cargarDetalle()
+    {
+        $request = $_REQUEST;     
+
+        $entidadDetalle = new Detalle();
+        $aDetalle = $entidadDetalle->obtenerTodos();
+
+            
+
+        $data = array();
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+        if (count($aDetalle) > 0) {
+            $cont = 0;
+        }
+
+        for ($i = $inicio; $i < count($aDetalle) && $cont < $registros_por_pagina; $i++) {
+            $row = array();          
+            $row[] = $aDetalle[$i]->fk_idtipo_producto;
+            $row[] = $aDetalle[$i]->obtenerDescrProducto($aDetalle[$i]->fk_idproducto);
+            $row[] = $aDetalle[$i]->cantidad;          
+            $row[] = "<a href='/admin/detalle/editar/" . $aDetalle[$i]->iddetalle . "'><i class='fas fa-search'></i></a>";
+            $cont++;
+            $data[] = $row;
+        }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aDetalle), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aDetalle), //cantidad total de registros en la paginacion
+            "data" => $data,
+        );
+        return json_encode($json_data);
+    }
 }

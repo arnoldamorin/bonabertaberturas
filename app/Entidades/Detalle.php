@@ -79,6 +79,21 @@ class Detalle extends Model
         }
         return null;
     }
+    public function obtenerDescrProducto($idproducto) {
+        $sql = "SELECT
+                P.descripcion                                                            
+                FROM productos P inner join detalles D on D.fk_idproducto = P.idproducto WHERE D.fk_idproducto = '$idproducto'";
+        $lstRetorno = DB::select($sql);
+
+        if(count($lstRetorno)>0){
+            $this->iddetalle = $lstRetorno[0]->iddetalle;
+            $this->fk_idventa = $lstRetorno[0]->fk_idventa;         
+            $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
+            $this->cantidad = $lstRetorno[0]->cantidad;            
+            return $this;
+        }
+        return null;
+    }
 
     public function guardar() {
         $sql = "UPDATE detalles SET

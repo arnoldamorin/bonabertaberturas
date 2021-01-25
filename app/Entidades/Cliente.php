@@ -34,11 +34,10 @@ class Cliente extends Model
         $columns = array(
            0 => 'A.nombre',
            1 => 'A.apellido',
-           2 => 'A.telefono',
-           3 => 'A.direccion',
-           4 => 'A.mail',
-           5 => 'A.dni'
-           
+           2 => 'A.dni',
+           3 => 'A.mail',
+           4 => 'A.telefono',
+           5 => 'A.direccion'           
             );
         $sql = "SELECT DISTINCT
                     A.idcliente,
@@ -81,7 +80,7 @@ class Cliente extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idalumno) {
+    public function obtenerPorId($idcliente) {
         $sql = "SELECT
                 idcliente,
                 nombre,
@@ -90,7 +89,7 @@ class Cliente extends Model
                 mail,
                 telefono,
                 direccion
-                FROM clientes WHERE idalumno = $idalumno";
+                FROM clientes WHERE idcliente = $idcliente";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
@@ -146,7 +145,7 @@ class Cliente extends Model
     public  function eliminar() {
         $sql = "DELETE FROM cliente WHERE 
             idcliente=?";
-        DB::delete($sql, [$this->idalumno]);
+        DB::delete($sql, [$this->idcliente]);
     }
 
     public function insertar() {
