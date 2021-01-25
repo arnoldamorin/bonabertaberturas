@@ -138,5 +138,6 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
     Route::post('/admin/venta/nueva/{id}', 'ControladorVenta@guardar');
     Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');
-    Route::get('/admin/Detalle/BuscarProducto/{id}', 'ControladorVenta@BuscarProducto');
+    Route::get('/admin/Detalle/buscarProducto', 'ControladorVenta@buscarProducto');
+    //Route::get('/admin/Detalle/cargarDetalle/{id}', 'ControladorVenta@cargarDetalle')->name('ventas.cargarDetalle');
 });

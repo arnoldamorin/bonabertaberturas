@@ -102,9 +102,9 @@ if (isset($msg)) {
                         <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid" aria-describedby="grilla_info">
                             <thead>
                                 <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Producto: activate to sort column descending" aria-sort="ascending" style="width: 252px;">Producto</th>
-                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">
-                                        Cantidad</th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="TipoProducto: activate to sort column descending" aria-sort="ascending" style="width: 252px;">Tipo Producto</th>                                   
+                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Producto: activate to sort column ascending" style="width: 398px;">Producto</th>
+                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">Cantidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -120,11 +120,11 @@ if (isset($msg)) {
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modalDomicilio" tabindex="-1" role="dialog" aria-labelledby="modalDomicilioLabel" aria-hidden="true" style="display: none;">
+        <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalDomicilioLabel">Domicilio</h5>
+                        <h5 class="modal-title" id="modalDetalleLabel">Detalle</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -132,48 +132,30 @@ if (isset($msg)) {
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 form-group">
-                                <label>Tipo Producto:</label>
-                                <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
-                                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto ==
-                                        $detalle->fk_idtipo_producto)
-                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}
-                                        </option>
-                                        @else
-                                        @if ($array_TipoProducto[$i]->idtipo_producto == 1 and !isset($detalle))
-                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}
-                                        </option>
+                                <label>Tipo Producto:</label>                                
+                                <select id="lstTipoProducto" name="lstTipoProducto" onchange="fBuscarProducto();" class="form-control">
+                                <option disabled selected value="">Seleccionar</option>
+                                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto == $detalle->fk_idtipo_producto)
+                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}</option>
                                         @else
                                         <option value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}</option>
-                                        @endif
                                         @endif
                                         @endfor
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 form-group">
-                                <label for="lstProducto">Producto:</label>
-                                <select name="lstProducto" id="lstProducto" onchange="fBuscarProducto();" class="form-control">
-                                    @for ($i = 0; $i < count($array_Producto); $i++) @if (isset($detalle) and $array_Producto[$i]->idproducto ==
-                                        $detalle->fk_idproducto)
-                                        <option selected value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}
-                                        </option>
-                                        @else
-                                        @if ($array_Producto[$i]->idproducto == 1 and !isset($detalle))
-                                        <option selected value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}
-                                        </option>
-                                        @else
-                                        <option value="{{ $array_Producto[$i]->idproducto }}">{{ $array_Producto[$i]->descripcion }}</option>
-                                        @endif
-                                        @endif
-                                        @endfor
+                            <div class="col-12 form-group">                             
+                                <label for="lstroducto">Producto:</label>
+                                <select name="lstProducto" id="lstProducto" class="form-control">
+                                    <option value="" disabled selected>Seleccionar</option>
                                 </select>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="row">
                             <div class="col-12 form-group">
                                 <label for="txtCantidad">Cantidad:</label>
-                                <input type="text" name="" id="txtCantidad" class="form-control">
+                                <input type="text" name="txtCantidad" id="txtCantidad" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -242,29 +224,11 @@ if (isset($msg)) {
     }
 </script>
 <script>
-   /* $(document).ready(function() {
-        var idVenta = '0';
-
-        var dataTable = $('#grilla').DataTable({
-            "processing": true,
-            "serverSide": false,
-            "bFilter": false,
-            "bInfo": true,
-            "bSearchable": false,
-            "paging": false,
-            "pageLength": 25,
-            "order": [
-                [0, "asc"]
-            ],
-            "ajax": "{{ asset('admin/ventas/cargarDetalle') }}" + idVenta
-        });
-    });*/
-
     function fBuscarProducto() {
-        idTipoProducto = $("#lstTipoProducto option:selected").val();
+        idtipo_producto = $("#lstTipoProducto option:selected").val();
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/Detalle/BuscarProducto') }}",
+            url: "{{ asset('admin/Detalle/buscarProducto') }}",
             data: {
                 id: idtipo_producto
             },
@@ -275,7 +239,7 @@ if (isset($msg)) {
                 const resultado = respuesta.reduce(function(acumulador, valor) {
                     const {
                         descripcion,
-                        idProducto
+                        idproducto
                     } = valor;
                     return acumulador + `<option value="${idproducto}">${descripcion}</option>`;
                 }, opciones);
@@ -284,21 +248,21 @@ if (isset($msg)) {
         });
     }
 
-    function fAgregarDetalle() {
-        var grilla = $('#grilla').DataTable();
-        grilla.row.add([
-            $("#lstDetalle option:selected").text() + "<input type='hidden' name='txtDetalle[]' value='" + $("#lstDetalle option:selected").val() + "'>",
-            $("#txtCantidad").val() + "<input type='hidden' name='txtDetalle[]' value='" + $("#txtCantidad").val() + "'>"
-        ]).draw();
-        $('#modalDetalle').modal('toggle');
-        limpiarFormulario();
-    }
+    function fAgregarDetalle(){
+            var grilla = $('#grilla').DataTable();
+            grilla.row.add([
+                $("#lstTipoProducto option:selected").text() + "<input type='hidden' name='txtTipoProducto[]' value='"+ $("#lstTipoProducto option:selected").val() +"'>",
+                $("#lstProducto option:selected").text() + "<input type='hidden' name='txtProducto[]' value='"+ $("#lstProducto option:selected").val() +"'>",                
+                $("#txtCantidad").val() + "<input type='hidden' name='txtCantidad[]' value='"+$("#txtCantidad").val()+"'>"
+            ]).draw();
+            $('#modalDetalle').modal('toggle');
+            limpiarFormulario();
+        }
 
-    function limpiarFormulario() {
-        $("#lstTipo").val("");
-        $("#lstDetalle").val("");
-        $("#lstProducto").val("");
-        $("#txtCantidad").val("");
-    }
+        function limpiarFormulario(){
+            $("#lstTipoProducto").val("");
+            $("#lstProducto").val("");            
+            $("#txtCantidad").val("");
+        }
 </script>
 @endsection

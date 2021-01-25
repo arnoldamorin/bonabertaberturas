@@ -97,6 +97,16 @@ class Producto extends Model
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
+    public function obtenerTodosPorTipo($idTipoProducto) {
+        $sql = "SELECT 
+                    P.descripcion, 
+                    P.idproducto                                                      
+                FROM productos P
+                INNER JOIN tipos_productos TP ON P.fk_idtipo_producto = TP.idtipo_producto and $idTipoProducto = TP.idtipo_producto
+                ORDER BY P.descripcion";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
 
     public function obtenerPorId($idproducto) {
         $sql = "SELECT

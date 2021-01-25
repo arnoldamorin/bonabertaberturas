@@ -41,6 +41,7 @@ class ControladorVenta extends Controller
         $aVenta = $entidadVenta->obtenerTodos();
 
         $entidadDetalle = new Detalle();
+        $aDetalle = $entidadDetalle->obtenerTodos();
         $entidadEstado = new Venta_estado();
 
         $data = array();
@@ -213,8 +214,15 @@ class ControladorVenta extends Controller
             return redirect('admin/login');
         }
     }
-    public function BuscarProducto($id){
-        print_r($id);
-        exit;
+    public function buscarProducto(Request $request){        
+       $id = $request->input('id');
+       $producto = new Producto;
+       $array_Producto = $producto->obtenerTodosPorTipo($id);
+       echo json_encode($array_Producto);
+       exit;
     }
+    public function cargarDetalle($id){
+       print_r("hasta aca llego xd");
+       exit;
+     }
 }
