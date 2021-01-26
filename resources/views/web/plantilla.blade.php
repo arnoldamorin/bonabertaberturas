@@ -27,6 +27,7 @@
     <link href="{{ asset('web/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/fontawesome/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,40;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,40;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -170,7 +171,7 @@
     </footer>
 
     <!-- Vendor JS Files -->
-    
+    <script src="js/codigo.js"></script>
     <script src="{{ asset('web/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('web/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
@@ -181,7 +182,7 @@
     <script src="{{ asset('web/vendor/aos/aos.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="js/codigo.js"></script>
+    
     <script src="{{ asset('web/js/main.js') }}"></script>
     
 

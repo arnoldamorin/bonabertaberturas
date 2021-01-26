@@ -1,6 +1,6 @@
 window.onload = function(){ /* Funcion para quitar pantalla de carga */
-    $('#onload').fadeOut();
-    $('body').removeClass('hidden');
+    /*$('#onload').fadeOut();
+    $('body').removeClass('hidden');*/
     $('.carousel-control-next-icon').css('background-image','url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23000\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z\'/%3E%3C/svg%3E")');
     $('.carousel-control-prev-icon').css('background-image','url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'%23000\' viewBox=\'0 0 8 8\'%3E%3Cpath d=\'M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z\'/%3E%3C/svg%3E")');
     $('.carousel-control-next,.carousel-control-prev').css('width','5%');
