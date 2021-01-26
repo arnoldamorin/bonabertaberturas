@@ -16,6 +16,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/', 'ControladorWebHome@index');
 
     Route::get('/contacto', 'ControladorWebContacto@index');
+    Route::get('/empresa', 'ControladorWebEmpresa@index');
+    Route::get('/producto', 'ControladorWebProducto@index');
+    Route::get('/productos', 'ControladorWebProductosss@index');
 
     Route::get('/Productoss', 'ControladorWebProductos@index');
     /*Route::get('/Productoss/compra{id}', 'ControladorWebProductos@compraProductos');*/
