@@ -85,90 +85,45 @@ if (isset($msg)) {
                         @endfor
                 </select>
             </div>
-
         </div>
-        <div class="col-12">
-            <div class="card mb-3">
-                <div class="card-header">
-                    <i class="fa fa-table"></i> Detalle
-                    <div class="pull-right">
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalDetalle">Agregar</button>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div id="grilla_wrapper" class="dataTables_wrapper no-footer">
-                        <div id="grilla_processing" class="dataTables_processing" style="display: none;">Processing...
+         <!-- <div class="row">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <i class="fa fa-table"></i> Detalle
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modalDetalle">Agregar</button>
                         </div>
-                        <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid" aria-describedby="grilla_info">
-                            <thead>
-                                <tr role="row">
-                                    <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="TipoProducto: activate to sort column descending" aria-sort="ascending" style="width: 252px;">Tipo Producto</th>                                   
-                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Producto: activate to sort column ascending" style="width: 398px;">Producto</th>
-                                    <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">Cantidad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="odd">
-                                    <td valign="top" colspan="4" class="dataTables_empty">No data available in table
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="dataTables_info" id="grilla_info" role="status" aria-live="polite">Showing 0 to 0 of
-                            0 entries</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalDetalleLabel">Detalle</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12 form-group">
-                                <label>Tipo Producto:</label>                                
-                                <select id="lstTipoProducto" name="lstTipoProducto" onchange="fBuscarProducto();" class="form-control">
-                                <option disabled selected value="">Seleccionar</option>
-                                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto == $detalle->fk_idtipo_producto)
-                                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}</option>
-                                        @else
-                                        <option value="{{ $array_TipoProducto[$i]->idtipo_producto }}">{{ $array_TipoProducto[$i]->nombre }}</option>
-                                        @endif
-                                        @endfor
-                                </select>
+                    <div class="panel-body">
+                        <div id="grilla_wrapper" class="dataTables_wrapper no-footer">
+                            <div id="grilla_processing" class="dataTables_processing" style="display: none;">Processing...
                             </div>
+                            <table id="grilla" class="display dataTable no-footer" style="width: 98%;" role="grid" aria-describedby="grilla_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="TipoProducto: activate to sort column descending" aria-sort="ascending" style="width: 252px;">Tipo Producto</th>
+                                        <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Producto: activate to sort column ascending" style="width: 398px;">Producto</th>
+                                        <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">Cantidad</th>
+                                        <th class="sorting" tabindex="0" aria-controls="grilla" rowspan="1" colspan="1" aria-label="Cantidad: activate to sort column ascending" style="width: 398px;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd">
+                                        <td valign="top" colspan="4" class="dataTables_empty">No data available in table
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="dataTables_info" id="grilla_info" role="status" aria-live="polite">Showing 0 to 0 of
+                                0 entries</div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 form-group">                             
-                                <label for="lstroducto">Producto:</label>
-                                <select name="lstProducto" id="lstProducto" class="form-control">
-                                    <option value="" disabled selected>Seleccionar</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 form-group">
-                                <label for="txtCantidad">Cantidad:</label>
-                                <input type="text" name="txtCantidad" id="txtCantidad" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" onclick="fAgregarDetalle()">Agregar</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
-</div>
-</form>
+    </form>
 </div>
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -222,18 +177,22 @@ if (isset($msg)) {
             }
         });
     }
-</script>
-<script>
-var dataTable = $('#grilla').DataTable({
-	    "processing": true,
-        "serverSide": true,
-	    "bFilter": true,
-	    "bInfo": true,
-	    "bSearchable": true,
-        "pageLength": 25,
-        "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('ventas.cargarGrilla') }}"
-	});
+   /* if (globalId > 0) {
+        var dataTable = $('#grilla').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bSearchable": true,
+            "pageLength": 25,
+            "order": [
+                [0, "asc"]
+            ],
+            "ajax": "{{ route('ventas.cargarGrilla') }}"
+        });
+    }
+
+
     function fBuscarProducto() {
         idtipo_producto = $("#lstTipoProducto option:selected").val();
         $.ajax({
@@ -256,23 +215,6 @@ var dataTable = $('#grilla').DataTable({
                 $("#lstProducto").empty().append(resultado);
             }
         });
-    }
-
-    function fAgregarDetalle(){
-            var grilla = $('#grilla').DataTable();
-            grilla.row.add([
-                $("#lstTipoProducto option:selected").text() + "<input type='hidden' name='txtTipoProducto[]' value='"+ $("#lstTipoProducto option:selected").val() +"'>",
-                $("#lstProducto option:selected").text() + "<input type='hidden' name='txtProducto[]' value='"+ $("#lstProducto option:selected").val() +"'>",                
-                $("#txtCantidad").val() + "<input type='hidden' name='txtCantidad[]' value='"+$("#txtCantidad").val()+"'>"
-            ]).draw();
-            $('#modalDetalle').modal('toggle');
-            limpiarFormulario();
-        }
-
-        function limpiarFormulario(){
-            $("#lstTipoProducto").val("");
-            $("#lstProducto").val("");            
-            $("#txtCantidad").val("");
-        }
+    }*/
 </script>
 @endsection

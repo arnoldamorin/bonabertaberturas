@@ -62,19 +62,19 @@ class Detalle extends Model
 
     public function obtenerPorId($iddetalle) {
         $sql = "SELECT
-                iddetalle,
-                DATE(fk_idventa) AS fk_idventa,
-                TIME(fk_idventa) AS hora,
-                fk_idproducto,
-                cantidad                            
-                FROM detalles WHERE iddetalle = '$iddetalle'";
+                d.iddetalle,
+                d.fk_idtipo_producto,                
+                d.fk_idproducto,
+                d.cantidad,
+                (p.precio_venta * d.cantidad) as total                            
+                FROM detalles d inner join productos p on d.fk_idproducto=p.idproducto WHERE iddetalle = '$iddetalle'";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
             $this->iddetalle = $lstRetorno[0]->iddetalle;
             $this->fk_idventa = $lstRetorno[0]->fk_idventa;         
             $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
-            $this->cantidad = $lstRetorno[0]->cantidad;            
+            $this->cantidad = $lstRetorno[0]->cantidad;                        
             return $this;
         }
         return null;

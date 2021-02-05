@@ -163,7 +163,6 @@ class ControladorVenta extends Controller
                             $cliente->insertar();
                         }
                     }
-
                     $entidad->guardar();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
@@ -177,7 +176,7 @@ class ControladorVenta extends Controller
                     $msg["MSG"] = OKINSERT;
                 }
                 $_POST["id"] = $entidad->idventa;
-                return view('venta.venta-listar', compact('titulo', 'msg'));
+                return view('venta.detalle-nuevo', compact('titulo', 'msg', 'id','entidad'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -186,8 +185,7 @@ class ControladorVenta extends Controller
         $id = $entidad->idventa;
         $venta = new Venta();
         $venta->obtenerPorId($id);
-
-        return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_Detalle', 'array_estado')) . '?id=' . $venta->idventa;
+        return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_estado')) . '?id=' . $venta->idventa;
     }
 
     public function eliminar(Request $request)
@@ -222,17 +220,13 @@ class ControladorVenta extends Controller
         echo json_encode($array_Producto);
         exit;
     }
-    public function cargarDetalle()
+    /*public function cargarDetalle()
     {
         $request = $_REQUEST;     
 
         $entidadDetalle = new Detalle();
-        $aDetalle = $entidadDetalle->obtenerTodos();
-
-            
-
+        $aDetalle = $entidadDetalle->obtenerPorId($_POST["id"]);           
         $data = array();
-
         $inicio = $request['start'];
         $registros_por_pagina = $request['length'];
 
@@ -245,6 +239,7 @@ class ControladorVenta extends Controller
             $row[] = $aDetalle[$i]->fk_idtipo_producto;
             $row[] = $aDetalle[$i]->obtenerDescrProducto($aDetalle[$i]->fk_idproducto);
             $row[] = $aDetalle[$i]->cantidad;          
+            $row[] = $aDetalle[$i]->total;      
             $row[] = "<a href='/admin/detalle/editar/" . $aDetalle[$i]->iddetalle . "'><i class='fas fa-search'></i></a>";
             $cont++;
             $data[] = $row;
@@ -257,5 +252,5 @@ class ControladorVenta extends Controller
             "data" => $data,
         );
         return json_encode($json_data);
-    }
+    }*/
 }

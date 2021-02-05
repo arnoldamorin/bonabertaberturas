@@ -138,13 +138,24 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
     Route::get('/admin/ventas', 'ControladorVenta@index');
     Route::get('/admin/venta/nueva/{id}', 'ControladorVenta@editar');
-    Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
-    Route::post('/admin/venta/nueva/{id}', 'ControladorVenta@guardar');
-    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');
-    Route::get('/admin/detalle/buscarProducto', 'ControladorVenta@buscarProducto');
-    Route::get('/admin/detalle/cargarDetalle/{id}', 'ControladorVenta@cargarDetalle')->name('ventas.cargarDetalle');
-    Route::get('/admin/detalle/editar', 'ControladorVenta@editarDetalle');
-    Route::get('/admin/detalle/eliminar', 'ControladorVenta@eliminarDetalle');
+    //Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
+    Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
+    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');    
+    //Route::get('/admin/ventas/cargarDetalle/{id}', 'ControladorVenta@cargarDetalle')->name('ventas.cargarDetalle');
+        /* --------------------------------------------- */
+    /* CONTROLADOR DETALLES                          */
+    /* --------------------------------------------- */
+
+    Route::get('/admin/detalle/nuevo', 'ControladorDetalle@nuevo');
+    Route::post('/admin/detalle/nuevo', 'ControladorDetalle@guardar');
+    Route::get('/admin/detalle/eliminar', 'ControladorDetalle@eliminar');
+    Route::get('/admin/detalle', 'ControladorDetalle@index');
+    Route::get('/admin/detalle/cargarGrilla', 'ControladorDetalle@cargarGrilla')->name('cliente.cargarGrilla');
+    Route::get('/admin/detalle/nuevo/{id}', 'ControladorDetalle@editar');
+    Route::post('/admin/detalle/nuevo/{id}', 'ControladorDetalle@guardar');
+
+});
+
     /* --------------------------------------------- */
     /* CONTROLADOR CLIENTES                          */
     /* --------------------------------------------- */
@@ -156,6 +167,3 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/cliente/nuevo/{id}', 'ControladorCliente@editar');
     Route::post('/admin/cliente/nuevo/{id}', 'ControladorCliente@guardar');
 
-
-    
-});
