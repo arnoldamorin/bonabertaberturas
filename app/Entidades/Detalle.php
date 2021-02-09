@@ -12,117 +12,134 @@ class Detalle extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'iddetalle', 'fk_idventa', 'fk_idproducto', 'cantidad'
+        'iddetalle', 'fk_idventa', 'fk_idtipo_producto','fk_idproducto','descrprod','cantidad','total'
     ];
 
-    protected $hidden = [
+    protected $hidden = [];
 
-    ];
-
-    function cargarDesdeRequest($request) {
-        $this->iddetalle = $request->input('id')!="0" ? $request->input('id') : $this->iddetalle;
-        $this->fk_idventa = $request->input('txtfk_idventa');                             
-        $this->fk_idproducto = $request->input('lstDetalle'); 
-        $this->cantidad = $request->input('txtcantidad');   
+    function cargarDesdeRequest($request)
+    {
+        $this->iddetalle = $request->input('id') != "0" ? $request->input('id') : $this->iddetalle;
+        $this->fk_idventa = $request->input('txtfk_idventa');
+        $this->fk_idtipo_producto = $request->input('lstTipoProducto');
+        $this->fk_idproducto = $request->input('lstProducto');
+        $this->descrprod = $request->input('txtDescrProd');
+        $this->cantidad = $request->input('txtCantidad');
+        $this->total = $request->input('txtTotal');
     }
 
-  public function obtenerFiltrado() {
+    public function obtenerFiltrado()
+    {
         $request = $_REQUEST;
         $columns = array(
-           0 => 'C.fk_idventa',
-           1 => 'C.fk_idproducto',
-           2 => 'C.cantidad'
-            );
+            0 => 'C.fk_idventa',
+            1 => 'C.fk_idtipo_producto',
+            2 => 'C.fk_idproducto',
+            3 => 'C.descrprod',
+            4 => 'C.cantidad',
+            5 => 'C.total'
+        );
         $sql = "SELECT DISTINCT
                     C.iddetalle,
                     C.fk_idventa,
-                    C.cantidad                                  
+                    C.fk_idtipo_producto,
+                    C.fk_idproducto,
+                    C.descrprod,
+                    C.cantidad,
+                    C.total                    
                     FROM detalles C
                 WHERE 1=1
                 ";
         //Realiza el filtrado
-        if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
         }
-        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerTodos() {
+    public function obtenerTodos()
+    {
         $sql = "SELECT 
                   C.iddetalle,
                   C.fk_idventa,
+                  C.fk_idtipo_producto,
                   C.fk_idproducto,
-                  C.cantidad                 
+                  C.descrprod,
+                  C.cantidad,
+                  C.total                       
                 FROM detalles C ORDER BY C.iddetalle";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
+
     }
 
-    public function obtenerPorId($iddetalle) {
+    public function obtenerPorId($iddetalle)
+    {
         $sql = "SELECT
-                d.iddetalle,
-                d.fk_idtipo_producto,                
-                d.fk_idproducto,
-                d.cantidad,
-                (p.precio_venta * d.cantidad) as total                            
-                FROM detalles d inner join productos p on d.fk_idproducto=p.idproducto WHERE iddetalle = '$iddetalle'";
+                 C.iddetalle,
+                 C.fk_idventa,
+                 C.fk_idtipo_producto,
+                 C.fk_idproducto,
+                 C.descrprod,
+                 C.cantidad,
+                 C.total                       
+                FROM detalles C  WHERE iddetalle = '$iddetalle'";
         $lstRetorno = DB::select($sql);
 
-        if(count($lstRetorno)>0){
+        if (count($lstRetorno) > 0) {
             $this->iddetalle = $lstRetorno[0]->iddetalle;
-            $this->fk_idventa = $lstRetorno[0]->fk_idventa;         
-            $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
-            $this->cantidad = $lstRetorno[0]->cantidad;                        
+            $this->fk_idventa = $lstRetorno[0]->fk_idventa;
+            $this->fk_idtipo_producto = $lstRetorno[0]->fk_idtipo_producto;
+            $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;  
+            $this->descrprod = $lstRetorno[0]->descrprod;             
+            $this->cantidad = $lstRetorno[0]->cantidad;
+            $this->total = $lstRetorno[0]->total;
             return $this;
         }
         return null;
     }
-    public function obtenerDescrProducto($idproducto) {
-        $sql = "SELECT
-                P.descripcion                                                            
-                FROM productos P inner join detalles D on D.fk_idproducto = P.idproducto WHERE D.fk_idproducto = '$idproducto'";
-        $lstRetorno = DB::select($sql);
+    
 
-        if(count($lstRetorno)>0){
-            $this->iddetalle = $lstRetorno[0]->iddetalle;
-            $this->fk_idventa = $lstRetorno[0]->fk_idventa;         
-            $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
-            $this->cantidad = $lstRetorno[0]->cantidad;            
-            return $this;
-        }
-        return null;
-    }
-
-    public function guardar() {
+    public function guardar()
+    {
         $sql = "UPDATE detalles SET
-            fk_idventa = '".$this->fk_idventa. " ". $this->hora ."',
-            fk_idproducto = '$this->fk_idproducto',
+            fk_idventa = '" . $this->fk_idventa . " " . $this->hora . "',
+            fk_idtipo_producto = '$this->fk_idtipo_producto',
+            fk_idproducto = '$this->fk_idproducto',            
+            descrprod = '$this->descrprod',    
             cantidad = '$this->cantidad',           
+            total = '$this->total' 
             WHERE iddetalle=?";
         $affected = DB::update($sql, [$this->iddetalle]);
     }
 
-    public  function eliminar() {
+    public  function eliminar()
+    {
         $sql = "DELETE FROM detalles WHERE 
             iddetalle=?";
         $affected = DB::delete($sql, [$this->iddetalle]);
     }
 
-    public function insertar() {
+    public function insertar()
+    {
         $sql = "INSERT INTO detalles (
                 fk_idventa,
+                fk_idtipo_producto,
                 fk_idproducto,
-                cantidad                                
-            ) VALUES (?, ?, ?)";
-       $result = DB::insert($sql, [
-            $this->fk_idventa . " " . date("H:i:s"), 
+                descrprod,            
+                cantidad, 
+                total                               
+            ) VALUES (?, ?, ?, ?, ?, ?)";
+        $result = DB::insert($sql, [
+            $this->fk_idventa . " " . date("H:i:s"),
+            $this->fk_idtipo_producto,
             $this->fk_idproducto,
-            $this->cantidad                          
+            $this->descrprod,
+            $this->cantidad,
+            $this->total
         ]);
-       return $this->iddetalle = DB::getPdo()->lastInsertId();
-    }  
-
-    
+        return $this->iddetalle = DB::getPdo()->lastInsertId();
+    }
 }

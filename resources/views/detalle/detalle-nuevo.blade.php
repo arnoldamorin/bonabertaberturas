@@ -3,7 +3,7 @@
 @section('scripts')
 <script>
     globalId = '<?php echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; ?>
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0";?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -44,12 +44,35 @@ if (isset($msg)) {
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
-                <label>Tipo producto</label>
-                <input class="form-control" type="text" id="txtTipoProducto" name="txtTipoProducto" value="{{$detalle->fk_idtipo_producto or ''}}">
+                <label>Id Venta</label>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or ''}}">
+            </div>
+            
+            <div class="form-group col-lg-6">
+            <label>Tipo producto</label>
+                <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
+                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto ==
+                        $detalle->fk_idtipo_producto)
+                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}
+                        </option>                        
+                        @else
+                        <option value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
+                        @endif                        
+                        @endfor
+                </select>               
             </div>
             <div class="form-group col-lg-6">
-                <label>Producto:</label>
-                <input class="form-control" type="text" id="txtProducto" name="txtProducto" value="{{$detalle->obtenerDescrProducto($detalle->fk_idproducto); or ''}}">
+                <label  for="lstProducto">Producto:</label>
+                <select id="lstProducto" on-change="fBuscarProducto();" name="lstProducto" class="form-control">
+                    @for ($i = 0; $i < count($array_Producto); $i++) @if (isset($$array_TipoProducto) and $array_Producto[$i]->fk_idtipo_producto ==
+                        $$array_TipoProducto->idtipo_producto)
+                        <option selected value="{{ $array_Producto[$i]->idproducto}}">{{ $array_Producto[$i]->descripcion}}
+                        </option>                        
+                        @else
+                        <option value="{{ $array_Producto[$i]->idproducto}}">{{ $array_Producto[$i]->descripcion }}</option>
+                        @endif                        
+                        @endfor
+                </select> 
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>

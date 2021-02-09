@@ -52,6 +52,7 @@
                 $row[] = $adetalle[$i]->fk_idtipo_producto;                     
                 $row[] = $adetalle[$i]->fk_idproducto;                     
                 $row[] = $adetalle[$i]->cantidad;                     
+                $row[] = $adetalle[$i]->total; 
                 $cont++;
                 $data[] = $row;
             }
@@ -66,14 +67,15 @@
         }
        
         public function nuevo(){
-            $titulo = "Nuevo Tipo Producto";
+            $titulo = "Nuevo Detalle";
             if(Usuario::autenticado() == true){
-                if (!Patente::autorizarOperacion("detalleALTA")) {
-                    $codigo = "detalleALTA";
+                if (!Patente::autorizarOperacion("DETALLEALTA")) {
+                    $codigo = "DETALLEALTA";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    return view('detalle.tipo-producto-nuevo', compact('titulo'));
+                    
+                    return view('detalle.detalle-nuevo', compact('titulo'));
                 }
             } else {
                return redirect('admin/login');
@@ -82,7 +84,7 @@
 
         public function editar($id)
         {
-            $titulo = "Modificar Tipo Producto";
+            $titulo = "Modificar Detalle";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("DETALLEEDITAR")) {
                     $codigo = "DETALLEEDITAR";
@@ -90,7 +92,7 @@
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
                     $detalle = new detalle();
-                    $detalle->obtenerPorId($id);
+                    $detalle->obtenerPorId($id);                   
     
                     return view('detalle.detalle-nuevo', compact('detalle', 'titulo'));
                 }
@@ -103,7 +105,7 @@
         {
             try {
                 //Define la entidad servicio
-                $titulo = "Modificar Tipo Producto";
+                $titulo = "Modificar Detalle";
                 $detalle = new detalle();
                 
                 $detalle->cargarDesdeRequest($request);
@@ -121,7 +123,7 @@
                         $msg["MSG"] = OKINSERT;
                     } else {
                         //Es nuevo
-                        $titulo = "Nuevo Tipo Producto";
+                        $titulo = "Nuevo Detalle";
                         $detalle->insertar();
     
                         $msg["ESTADO"] = MSG_SUCCESS;
