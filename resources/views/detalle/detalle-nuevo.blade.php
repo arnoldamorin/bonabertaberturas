@@ -3,7 +3,7 @@
 @section('scripts')
 <script>
     globalId = '<?php echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0";?>
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -45,34 +45,30 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or ''}}">
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or '$id'}}" readonly>
             </div>
-            
             <div class="form-group col-lg-6">
-            <label>Tipo producto</label>
-                <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
+                <label>Tipo producto</label>
+                <select id="lstTipoProducto" name="lstTipoProducto" onclick="fBuscarProducto();" class="form-control">
+                    <option disabled selected value="">Seleccionar</option>
                     @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto ==
                         $detalle->fk_idtipo_producto)
-                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}
-                        </option>                        
+                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
                         @else
                         <option value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
-                        @endif                        
+                        @endif
                         @endfor
-                </select>               
+                </select>
             </div>
             <div class="form-group col-lg-6">
-                <label  for="lstProducto">Producto:</label>
-                <select id="lstProducto" on-change="fBuscarProducto();" name="lstProducto" class="form-control">
-                    @for ($i = 0; $i < count($array_Producto); $i++) @if (isset($$array_TipoProducto) and $array_Producto[$i]->fk_idtipo_producto ==
-                        $$array_TipoProducto->idtipo_producto)
-                        <option selected value="{{ $array_Producto[$i]->idproducto}}">{{ $array_Producto[$i]->descripcion}}
-                        </option>                        
-                        @else
-                        <option value="{{ $array_Producto[$i]->idproducto}}">{{ $array_Producto[$i]->descripcion }}</option>
-                        @endif                        
-                        @endfor
-                </select> 
+                <label for="lstProducto">Codigo Producto:</label>
+                <select id="lstProducto" onclick="fBuscarDescrProducto();" name="lstProducto" class="form-control">
+                    <option selected value="{{$detalle->idproducto or ''}}"></option>
+                </select>
+            </div>
+            <div class="form-group col-lg-6">
+                <label for="txtDescrProducto">Descripcion producto:</label>
+                <input class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
@@ -131,6 +127,46 @@ if (isset($msg)) {
                 } else {
                     msgShow("Error al eliminar", "success");
                 }
+            }
+        });
+    }
+
+    function fBuscarProducto() {
+        idtipo_producto = $("#lstTipoProducto option:selected").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarProducto') }}",
+            data: {
+                id: idtipo_producto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                let opciones = "<option value='0' disabled selected>Seleccionar</option>";
+                const resultado = respuesta.reduce(function(acumulador, valor) {
+                    const {
+                        codigo,
+                        idproducto
+                    } = valor;
+                    return acumulador + `<option value="${idproducto}">${codigo}</option>`;
+                }, opciones);
+                $("#lstProducto").empty().append(resultado);
+            }
+        });
+    }
+
+    function fBuscarDescrProducto() {
+        idproducto = $("#lstProducto option:selected").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarDescrProducto') }}",
+            data: {
+                id: idproducto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                $("#txtDescrProducto").val(resultado);
             }
         });
     }
