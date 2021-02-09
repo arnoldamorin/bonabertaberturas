@@ -174,11 +174,12 @@
             echo json_encode($array_Producto);
             exit;
         }       
-        public function buscarDescProducto(Request $request)
+        public function buscarDescrProducto(Request $request)
         {
             $id = $request->input('id');
-            $producto = new Producto;            
-            echo json_encode($producto->obtenerDescr($id));
+            $producto = new Producto;     
+            $descripcion = $producto->obtenerDescr($id);
+            echo json_encode($descripcion);
             exit;
         }   
     }

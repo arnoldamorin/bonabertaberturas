@@ -68,7 +68,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescrProducto">Descripcion producto:</label>
-                <input class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}">
+                <input class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
@@ -165,8 +165,8 @@ if (isset($msg)) {
             },
             async: true,
             dataType: "json",
-            success: function(respuesta) {
-                $("#txtDescrProducto").val(resultado);
+            success: function(respuesta) {        
+                $("#txtDescrProducto").val(respuesta);
             }
         });
     }

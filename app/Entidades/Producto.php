@@ -112,8 +112,9 @@ class Producto extends Model
                     P.descripcion                                                                         
                 FROM productos P
                 WHERE P.idproducto = $id";                
-        $lstRetorno = DB::select($sql);
-        return $lstRetorno;
+        $resultado = DB::select($sql);       
+        $fila = $resultado->fetch_assoc();
+        return $fila["descripcion"]; 
     }
 
 
