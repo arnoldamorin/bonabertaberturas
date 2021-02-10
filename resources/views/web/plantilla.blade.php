@@ -170,7 +170,7 @@
         </div>
     </footer>
 
-     Vendor JS Files -->
+    <!--Vendor JS Files -->
     <script src="js/codigo.js"></script>
     <!--<script src="{{ asset('web/vendor/jquery/jquery.min.js') }}"></script> -->
     <!--<script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
