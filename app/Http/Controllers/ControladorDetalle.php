@@ -5,6 +5,7 @@
     use App\Entidades\Detalle;
     use App\Entidades\Producto;
     use App\Entidades\Venta;
+    use App\Entidades\TipoProducto;
     use Illuminate\Http\Request;
     use App\Entidades\Sistema\Usuario;
     use App\Entidades\Sistema\Patente;
@@ -67,15 +68,18 @@
         }
        
         public function nuevo(){
+            $tipoProducto = new TipoProducto();
+            $array_TipoProducto = $tipoProducto->obtenerTodos();
+            
             $titulo = "Nuevo Detalle";
+            
             if(Usuario::autenticado() == true){
                 if (!Patente::autorizarOperacion("DETALLEALTA")) {
                     $codigo = "DETALLEALTA";
                     $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
-                } else {
-                    
-                    return view('detalle.detalle-nuevo', compact('titulo'));
+                } else {            
+                    return view('detalle.detalle-nuevo', compact('titulo', 'array_TipoProducto'));
                 }
             } else {
                return redirect('admin/login');
@@ -84,6 +88,8 @@
 
         public function editar($id)
         {
+            $tipoProducto = new TipoProducto();
+            $array_TipoProducto = $tipoProducto->obtenerTodos();
             $titulo = "Modificar Detalle";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("DETALLEEDITAR")) {
@@ -92,9 +98,11 @@
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
                     $detalle = new detalle();
-                    $detalle->obtenerPorId($id);                   
+                    $detalle->obtenerPorId($id);      
+                    $tipoProducto = new TipoProducto();
+                    $array_TipoProducto = $tipoProducto->obtenerTodos();            
     
-                    return view('detalle.detalle-nuevo', compact('detalle', 'titulo'));
+                    return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto'));
                 }
             } else {
                 return redirect('admin/login');
@@ -157,7 +165,21 @@
             } else {
                 return redirect('admin/login');
             }
-        }        
+        }
+        public function buscarProducto(Request $request)
+        {
+            $id = $request->input('id');
+            $producto = new Producto;
+            $array_Producto = $producto->obtenerCodigoPorTipo($id);
+            echo json_encode($array_Producto);
+            exit;
+        }       
+        public function buscarDescrProducto(Request $request)
+        {
+            $id = $request->input('id');
+            $producto = new Producto;     
+            $descripcion = $producto->obtenerDescr($id);
+            echo json_encode($descripcion);
+            exit;
+        }   
     }
-
-?>
