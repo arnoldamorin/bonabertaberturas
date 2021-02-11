@@ -153,9 +153,13 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/detalle/cargarGrilla', 'ControladorDetalle@cargarGrilla')->name('detalle.cargarGrilla');
     Route::get('/admin/detalle/nuevo/{id}', 'ControladorDetalle@editar');
     Route::post('/admin/detalle/nuevo/{id}', 'ControladorDetalle@guardar');
+    Route::get('/admin/detalle/buscarProductos', 'ControladorDetalle@buscarProductos');
     Route::get('/admin/detalle/buscarProducto', 'ControladorDetalle@buscarProducto');
+<<<<<<< HEAD
     Route::get('/admin/detalle/buscarDescrProducto', 'ControladorDetalle@buscarDescrProducto');
     Route::get('/admin/detalle/buscarCodProducto', 'ControladorDetalle@buscarCodProducto');
+=======
+>>>>>>> 1301a82ae7e4e0cf8b2d260eb9a1d458fe70dc07
 
 });
 

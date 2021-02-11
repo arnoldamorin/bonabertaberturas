@@ -49,7 +49,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
-                <select id="lstTipoProducto" name="lstTipoProducto" onclick="fBuscarProducto();" class="form-control">
+                <select id="lstTipoProducto" name="lstTipoProducto" onclick="fBuscarProductos();" class="form-control">
                     <option disabled selected value="">Seleccionar</option>
                     @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($detalle) and $array_TipoProducto[$i]->idtipo_producto ==
                         $detalle->fk_idtipo_producto)
@@ -62,7 +62,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="lstProducto">Codigo Producto:</label>
-                <select id="lstProducto" onclick="fBuscarDescrProducto();" name="lstProducto" class="form-control">
+                <select id="lstProducto" onchange="fBuscarDescrProducto();fBuscarPrecioUnitario();" name="lstProducto" class="form-control">
                     <option selected value="{{$detalle->idproducto or ''}}"></option>
                 </select>
             </div>
@@ -73,7 +73,18 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
-                <input class="form-control" type="text" id="txtCantidad" name="txtCantidad" value="{{$detalle->cantidad or ''}}">
+                <input class="form-control" type="text" id="txtCantidad" name="txtCantidad" onchange="fCalcularTotal();">
+                <!--value="{{$detalle->cantidad or ''}}"-->
+                <span id="msgStock" class="text-danger" style="display:none;">No hay stock suficiente</span>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Precio Unitario</label>
+                <input class="form-control" type="text" id="txtPrecioUnitario" name="txtPrecioUnitario" readonly>
+                <!--value="{{$detalle->cantidad or ''}}"-->
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Total</label>
+                <input class="form-control" type="text" id="txtTotal" name="txtTotal" value="{{$detalle->total or ''}}" readonly>
             </div>
         </div>
 </div>
@@ -132,11 +143,11 @@ if (isset($msg)) {
         });
     }
 
-    function fBuscarProducto() {
+    function fBuscarProductos() {
         idtipo_producto = $("#lstTipoProducto option:selected").val();
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/detalle/buscarProducto') }}",
+            url: "{{ asset('admin/detalle/buscarProductos') }}",
             data: {
                 id: idtipo_producto
             },
@@ -157,17 +168,61 @@ if (isset($msg)) {
     }
 
     function fBuscarDescrProducto() {
-        idproducto = $("#lstProducto option:selected").val();
+        idProducto = $("#lstProducto").val();
         $.ajax({
             type: "GET",
-            url: "{{ asset('admin/detalle/buscarDescrProducto') }}",
+            url: "{{ asset('admin/detalle/buscarProducto') }}",
             data: {
-                id: idproducto
+                id: idProducto
             },
             async: true,
             dataType: "json",
             success: function(respuesta) {
+<<<<<<< HEAD
                 $("#txtDescrProducto").val(respuesta);
+=======
+                $("#txtDescrProducto").val(respuesta.descripcion);
+            }
+        });
+        
+    }
+
+    function fBuscarPrecioUnitario() {
+        idProducto = $("#lstProducto").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarProducto') }}",
+            data: {
+                id: idProducto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                $("#txtPrecioUnitario").val(respuesta.precio);
+            }
+        });
+    }
+
+    function fCalcularTotal() {
+        var idProducto = $("#lstProducto").val();
+        var cantidad = $("#txtCantidad").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarProducto') }}",
+            data: {
+                id: idProducto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                if (respuesta.cantidad >= cantidad) {
+                    let resultado = respuesta.precio * cantidad;
+                    $("#txtTotal").val(resultado);
+                    $("#msgStock").hide();
+                } else {
+                    $("#msgStock").show();
+                }
+>>>>>>> 1301a82ae7e4e0cf8b2d260eb9a1d458fe70dc07
             }
         });
     }

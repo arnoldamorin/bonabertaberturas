@@ -56,7 +56,7 @@ $productos = 10;
           <div class="carousel-item active">
             <?php for ($i = 0; $i < 5; $i++) { ?>
               <div class="card mb-4">
-                <a href="producto.php">
+                <a href="/producto">
                   <img class="img img-fluid" src="img/producto-3.png" alt="Puerta Pavir Negra">
                   <p class="text-center my-0 py-2">Puerta Pavir Negra</p>
                 </a>

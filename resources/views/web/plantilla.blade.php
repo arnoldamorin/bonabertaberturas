@@ -170,10 +170,10 @@
         </div>
     </footer>
 
-    <!-- Vendor JS Files -->
+    <!--Vendor JS Files -->
     <script src="js/codigo.js"></script>
-    <script src="{{ asset('web/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!--<script src="{{ asset('web/vendor/jquery/jquery.min.js') }}"></script> -->
+    <!--<script src="{{ asset('web/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script> -->
     <script src="{{ asset('web/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('web/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('web/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
