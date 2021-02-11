@@ -12,15 +12,14 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idproducto','codigo', 'descripcion','fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_costo', 'precio_venta', 'marca', 'ganancia', 'fk_idcoeficiente' 
+        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_costo', 'precio_venta', 'marca', 'ganancia', 'fk_idcoeficiente'
     ];
 
-    protected $hidden = [
+    protected $hidden = [];
 
-    ];
-
-    function cargarDesdeRequest($request) {
-        $this->idproducto = $request->input('id')!="0" ? $request->input('id') : $this->idproducto;
+    function cargarDesdeRequest($request)
+    {
+        $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
         $this->codigo = $request->input('txtCodigo');
         $this->descripcion = $request->input('txtDescripcion');
         $this->fk_idtipo_producto = $request->input('lstTipoProducto');
@@ -28,24 +27,25 @@ class Producto extends Model
         $this->medidas_internas = $request->input('txtMedidasInternas');
         $this->peso = $request->input('txtPeso');
         $this->precio_costo = $request->input('txtPrecioCosto');
-        $this->marca = $request->input('txtMarca');    
-        $this->imagen = $request->input('ImagenProducto');          
+        $this->marca = $request->input('txtMarca');
+        $this->imagen = $request->input('ImagenProducto');
     }
 
-    public function obtenerFiltrado() {
+    public function obtenerFiltrado()
+    {
         $request = $_REQUEST;
         $columns = array(
-           0 => 'P.imagen',
-           1 => 'P.codigo',  
-           2 => 'P.descripcion',         
-           3 => 'P.medidas_externas',
-           4 => 'P.medidas_internas',
-           5 => 'P.peso',
-           6 => 'P.precio_costo',
-           7 => 'P.precio_venta',
-           8 => 'P.marca',
-           9 => 'P.idproducto'      
-           );
+            0 => 'P.imagen',
+            1 => 'P.codigo',
+            2 => 'P.descripcion',
+            3 => 'P.medidas_externas',
+            4 => 'P.medidas_internas',
+            5 => 'P.peso',
+            6 => 'P.precio_costo',
+            7 => 'P.precio_venta',
+            8 => 'P.marca',
+            9 => 'P.idproducto'
+        );
         $sql = "SELECT DISTINCT
                     P.imagen,
                     P.codigo,
@@ -63,21 +63,34 @@ class Producto extends Model
                 ";
 
         //Realiza el filtrado
-        if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( P.descripcion LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR P.precio_costo LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR P.precio_venta LIKE '%" . $request['search']['value'] . "%' ";
-            $sql.=" OR P.marca LIKE '%" . $request['search']['value'] . "%' ";  
-            $sql.=" OR P.codigo LIKE '%" . $request['search']['value'] . "%' ";                     
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( P.descripcion LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.precio_costo LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.precio_venta LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.marca LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.codigo LIKE '%" . $request['search']['value'] . "%' )";
         }
-        $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
         $lstRetorno = DB::select($sql);
 
         return $lstRetorno;
     }
+    public function obtenerFiltradoPalabra($palabra)
+    {
+    
+        $sql = "SELECT DISTINCT                    
+                    P.idproducto, 
+                    P.descripcion                   
+                    FROM productos P
+                    WHERE P.descripcion LIKE '%" . $palabra . "%'                 
+                ";        
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
 
-    public function obtenerTodos() {
+    public function obtenerTodos()
+    {
         $sql = "SELECT 
                     P.idproducto,
                     P.codigo,
@@ -97,7 +110,8 @@ class Producto extends Model
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
-    public function obtenerCodigoPorTipo($idTipoProducto) {
+    public function obtenerCodigoPorTipo($idTipoProducto)
+    {
         $sql = "SELECT 
                     P.codigo, 
                     P.idproducto                                                      
@@ -107,18 +121,20 @@ class Producto extends Model
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
-    public function obtenerDescr($id) {
+    public function obtenerDescr($id)
+    {
         $sql = "SELECT 
                     P.descripcion                                                                         
                 FROM productos P
-                WHERE P.idproducto = $id";                
-        $resultado = DB::select($sql);       
+                WHERE P.idproducto = $id";
+        $resultado = DB::select($sql);
         $fila = $resultado->fetch_assoc();
-        return $fila["descripcion"]; 
+        return $fila["descripcion"];
     }
 
 
-    public function obtenerPorId($idproducto) {
+    public function obtenerPorId($idproducto)
+    {
         $sql = "SELECT
                 P.idproducto,
                 P.codigo,
@@ -134,7 +150,7 @@ class Producto extends Model
                 FROM productos P WHERE P.idproducto = $idproducto";
         $lstRetorno = DB::select($sql);
 
-        if(count($lstRetorno)>0){
+        if (count($lstRetorno) > 0) {
             $this->idproducto = $lstRetorno[0]->idproducto;
             $this->codigo = $lstRetorno[0]->codigo;
             $this->descripcion = $lstRetorno[0]->descripcion;
@@ -145,13 +161,14 @@ class Producto extends Model
             $this->precio_costo = $lstRetorno[0]->precio_costo;
             $this->precio_venta = $lstRetorno[0]->precio_venta;
             $this->marca = $lstRetorno[0]->marca;
-            $this->imagen = $lstRetorno[0]->imagen;            
+            $this->imagen = $lstRetorno[0]->imagen;
             return $this;
         }
         return null;
     }
 
-    public function guardar() {
+    public function guardar()
+    {
         $sql = "UPDATE productos SET  
             codigo='$this->codigo',     
             descripcion='$this->descripcion',
@@ -166,13 +183,15 @@ class Producto extends Model
         $affected = DB::update($sql, [$this->idcurso]);
     }
 
-    public  function eliminar() {
+    public  function eliminar()
+    {
         $sql = "DELETE FROM productos WHERE 
             idproducto=?";
         $affected = DB::delete($sql, [$this->idcurso]);
     }
 
-    public function insertar() {
+    public function insertar()
+    {
         $sql = "INSERT INTO productos ( 
                 codigo,               
                 descripcion,
@@ -184,18 +203,17 @@ class Producto extends Model
                 marca,             
                 imagen
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
-       $result = DB::insert($sql, [   
-            $this->codigo,        
-            $this->descripcion, 
+        $result = DB::insert($sql, [
+            $this->codigo,
+            $this->descripcion,
             $this->fk_idtipo_producto,
-            $this->medidas_externas, 
-            $this->medidas_internas, 
+            $this->medidas_externas,
+            $this->medidas_internas,
             $this->peso,
             $this->precio_costo,
-            $this->marca,          
+            $this->marca,
             $this->imagen
         ]);
-       return $this->idproducto = DB::getPdo()->lastInsertId();
+        return $this->idproducto = DB::getPdo()->lastInsertId();
     }
-
 }

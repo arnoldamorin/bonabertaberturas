@@ -68,8 +68,8 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescrProducto">Descripcion producto:</label>
-                <input autocomplete="off" onkeyup="autocompletar()" class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}">
-                <ul id="lista_descr"></ul>
+                <input autocomplete="off" onkeyup="autocompletar()" class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" list="lista_descr" value="{{$detalle->descrprod or ''}}">
+                <datalist id="lista_descr"></datalist>
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
@@ -178,13 +178,10 @@ if (isset($msg)) {
             async: true,
             dataType: "json",
             success: function(respuesta) {
-<<<<<<< HEAD
-                $("#txtDescrProducto").val(respuesta);
-=======
                 $("#txtDescrProducto").val(respuesta.descripcion);
             }
         });
-        
+
     }
 
     function fBuscarPrecioUnitario() {
@@ -222,7 +219,6 @@ if (isset($msg)) {
                 } else {
                     $("#msgStock").show();
                 }
->>>>>>> 1301a82ae7e4e0cf8b2d260eb9a1d458fe70dc07
             }
         });
     }
@@ -234,23 +230,24 @@ if (isset($msg)) {
         if (palabra.length >= minimo_letras) {
             $.ajax({
                 url: "{{ asset('admin/detalle/buscarCodProducto') }}",
-                type: 'POST',
+                type: 'GET',
                 data: {
                     palabra: palabra
                 },
                 async: true,
                 dataType: "json",
-                success: function(respuesta) {                    
+                success: function(respuesta) {
+                    //$('#lista_descr').show();
+                    let opciones = "<option value='0' disabled selected>Seleccionar</option>";
                     const resultado = respuesta.reduce(function(acumulador, valor) {
-                        const {
+                        const {                            
                             idproducto,
                             descripcion
                         } = valor;
-                        $('#lista_descr').autocomplete({
-                            source:"${descripcion}"
-                        })
-                    }, opciones);                    
-                }                
+                        return acumulador + `<option value="${idproducto}">${descripcion}</option>`;
+                    }, opciones);
+                    $("#lista_descr").empty().append(resultado[descripcion]);
+                }
             });
         } else {
             //ocultamos la lista

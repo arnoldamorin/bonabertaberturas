@@ -166,31 +166,6 @@ class ControladorDetalle extends Controller
         } else {
             return redirect('admin/login');
         }
-<<<<<<< HEAD
-        public function buscarProducto(Request $request)
-        {
-            $id = $request->input('id');
-            $producto = new Producto;
-            $array_Producto = $producto->obtenerCodigoPorTipo($id);
-            echo json_encode($array_Producto);
-            exit;
-        }       
-        public function buscarDescrProducto(Request $request)
-        {
-            $id = $request->input('id');
-            $producto = new Producto;     
-            $descripcion = $producto->obtenerDescr($id);
-            echo json_encode($descripcion);
-            exit;
-        }  
-        public function buscarCodProducto(Request $request) 
-        {
-            $producto = new Producto; 
-            $array_Producto = $producto->obtenerFiltrado();
-            echo json_encode($array_Producto);
-        }
-=======
->>>>>>> 1301a82ae7e4e0cf8b2d260eb9a1d458fe70dc07
     }
     public function buscarProductos(Request $request)
     {
@@ -210,6 +185,14 @@ class ControladorDetalle extends Controller
         $aResultado["cantidad"] = $producto->cantidad;
         $aResultado["descripcion"] = $producto->descripcion;
         echo json_encode($aResultado);
+        exit;
+    }
+    public function buscarCodProducto(Request $request)
+    {
+        $palabra = $request->input('palabra');        
+        $producto = new Producto;
+        $array_Producto = $producto->obtenerFiltradoPalabra($palabra);
+        echo json_encode($array_Producto);
         exit;
     }
 }
