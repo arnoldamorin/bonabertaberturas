@@ -68,7 +68,8 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescrProducto">Descripcion producto:</label>
-                <input class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}" readonly>
+                <input autocomplete="off" onkeyup="autocompletar()" class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" value="{{$detalle->descrprod or ''}}">
+                <ul id="lista_descr"></ul>
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
@@ -165,10 +166,48 @@ if (isset($msg)) {
             },
             async: true,
             dataType: "json",
-            success: function(respuesta) {        
+            success: function(respuesta) {
                 $("#txtDescrProducto").val(respuesta);
             }
         });
+    }
+
+    function autocompletar() {
+        var minimo_letras = 0; // minimo letras visibles en el autocompletar
+        var palabra = $('#txtDescrProducto').val();
+        //Contamos el valor del input mediante una condicional
+        if (palabra.length >= minimo_letras) {
+            $.ajax({
+                url: "{{ asset('admin/detalle/buscarCodProducto') }}",
+                type: 'POST',
+                data: {
+                    palabra: palabra
+                },
+                async: true,
+                dataType: "json",
+                success: function(respuesta) {                    
+                    const resultado = respuesta.reduce(function(acumulador, valor) {
+                        const {
+                            idproducto,
+                            descripcion
+                        } = valor;
+                        $('#lista_descr').autocomplete({
+                            source:"${descripcion}"
+                        })
+                    }, opciones);                    
+                }                
+            });
+        } else {
+            //ocultamos la lista
+            $('#lista_descr').hide();
+        }
+    }
+
+    function set_item(opciones) {
+        // Cambiar el valor del formulario input
+        $('#txtDescrProducto').val(opciones);
+        // ocultar lista de proposiciones
+        $('#lista_descr').hide();
     }
 </script>
 @endsection

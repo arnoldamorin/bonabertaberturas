@@ -181,5 +181,11 @@
             $descripcion = $producto->obtenerDescr($id);
             echo json_encode($descripcion);
             exit;
-        }   
+        }  
+        public function buscarCodProducto(Request $request) 
+        {
+            $producto = new Producto; 
+            $array_Producto = $producto->obtenerFiltrado();
+            echo json_encode($array_Producto);
+        }
     }
