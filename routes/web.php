@@ -155,6 +155,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/detalle/nuevo/{id}', 'ControladorDetalle@guardar');
     Route::get('/admin/detalle/buscarProducto', 'ControladorDetalle@buscarProducto');
     Route::get('/admin/detalle/buscarDescrProducto', 'ControladorDetalle@buscarDescrProducto');
+    Route::get('/admin/detalle/buscarCodProducto', 'ControladorDetalle@buscarCodProducto');
 
 });
 
@@ -170,3 +171,5 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/cliente/nuevo/{id}', 'ControladorCliente@guardar');
 
 
+
+    
