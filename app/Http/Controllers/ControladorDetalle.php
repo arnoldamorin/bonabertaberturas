@@ -182,7 +182,7 @@ class ControladorDetalle extends Controller
         $producto = new Producto();
         $producto->obtenerPorId($id);
         $aResultado["precio"] = $producto->precio_venta;
-        $aResultado["cantidad"] = $producto->cantidad;
+        $aResultado["cantidad"] = $producto->stock;
         $aResultado["descripcion"] = $producto->descripcion;
         echo json_encode($aResultado);
         exit;
@@ -197,9 +197,10 @@ class ControladorDetalle extends Controller
     }
     public function autocompletar(Request $request)
     {
-        $palabra = $request->input('palabra');        
+        $palabra = $request->input('palabra');    
+        $tipoProducto = $request->input('tipoProducto');
         $producto = new Producto;
-        $array_Producto = $producto->obtenerFiltradoPalabra($palabra);        
+        $array_Producto = $producto->obtenerFiltradoPalabra($palabra,$tipoProducto);        
         echo json_encode($array_Producto);
         exit;
     }

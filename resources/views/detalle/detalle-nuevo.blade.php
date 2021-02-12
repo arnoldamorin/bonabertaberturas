@@ -169,7 +169,7 @@ if (isset($msg)) {
     }
 
     function fBuscarDescrProducto() {
-        if ($("#txtDescrProducto") == "") {
+        if ($("#txtDescrProducto").val() == "") {
             idProducto = $("#lstProducto").val();
             $.ajax({
                 type: "GET",
@@ -188,27 +188,27 @@ if (isset($msg)) {
 
     function fBuscarCodProducto() {
         descripcion = $("#txtDescrProducto").val();
-        if ($('#lstProducto option:selected').val() == "") {
-            $.ajax({
-                type: "GET",
-                url: "{{ asset('admin/detalle/buscarCodProducto') }}",
-                data: {
-                    descripcion: descripcion
-                },
-                async: true,
-                dataType: "json",
-                success: function(respuesta) {
-                    const resultado = respuesta.reduce(function(acumulador, valor) {
-                        const {
-                            codigo,
-                            idproducto
-                        } = valor;
-                        return acumulador + `<option value="${idproducto}">${codigo}</option>`;
-                    });
-                    $("#lstProducto").empty().append(resultado)
-                }
-            });
-        }
+        $("#lstProducto").val("");
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarCodProducto') }}",
+            data: {
+                descripcion: descripcion
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                const resultado = respuesta.reduce(function(acumulador, valor) {
+                    const {
+                        codigo,
+                        idproducto
+                    } = valor;
+                    return acumulador + `<option value selected="${idproducto}">${codigo}</option>`;
+                });
+                $("#lstProducto").empty().append(resultado);
+            }
+        });
+
     }
 
     function fBuscarPrecioUnitario() {
@@ -253,6 +253,7 @@ if (isset($msg)) {
     function autocompletar() {
         var minimo_letras = 0; // minimo letras visibles en el autocompletar
         var palabra = $('#txtDescrProducto').val();
+        var tipoProducto = $('#lstTipoProducto').val();
         //Contamos el valor del input mediante una condicional
         if ($('#lstTipoProducto option:selected').val() != "") {
             if (palabra.length >= minimo_letras) {
@@ -260,7 +261,8 @@ if (isset($msg)) {
                     url: "{{ asset('admin/detalle/autocompletar') }}",
                     type: 'GET',
                     data: {
-                        palabra: palabra
+                        palabra: palabra,
+                        tipoProducto: tipoProducto
                     },
                     async: true,
                     dataType: "json",
@@ -275,7 +277,6 @@ if (isset($msg)) {
                             return acumulador + `<option value="${descripcion}"></option>`;
                         }, opciones);
                         $("#lista_descr").empty().append(resultado);
-
                     }
                 });
             } else {

@@ -76,14 +76,14 @@ class Producto extends Model
 
         return $lstRetorno;
     }
-    public function obtenerFiltradoPalabra($palabra)
+    public function obtenerFiltradoPalabra($palabra,$tipoProducto)
     {
 
         $sql = "SELECT DISTINCT                    
                     P.descripcion,                  
                     P.idproducto 
                     FROM productos P
-                    WHERE P.descripcion LIKE '%" . $palabra . "%'                 
+                    WHERE P.descripcion LIKE '%" . $palabra . "%'  and P.fk_idtipo_producto = $tipoProducto;               
                 ";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -102,8 +102,7 @@ class Producto extends Model
                     P.precio_costo,
                     P.precio_venta,
                     P.marca,    
-                    P.imagen
-                    
+                    P.imagen                    
                 FROM productos P
                 INNER JOIN tipos_productos TP ON P.fk_idtipo_producto = TP.idtipo_producto
                 ORDER BY P.descripcion";
@@ -130,6 +129,16 @@ class Producto extends Model
         $resultado = DB::select($sql);
         $fila = $resultado->fetch_assoc();
         return $fila["descripcion"];
+    }
+    public function obtenerPorDescr($descripcion)
+    {
+        $sql = "SELECT
+                P.idproducto,
+                P.codigo 
+                FROM productos P 
+                WHERE P.descripcion = '$descripcion'";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;      
     }
 
 
@@ -166,21 +175,7 @@ class Producto extends Model
         }
         return null;
     }
-    public function obtenerPorDescr($descripcion)
-    {
-        $sql = "SELECT
-                P.idproducto,
-                P.codigo 
-                FROM productos P WHERE P.descripcion = $descripcion";
-        $lstRetorno = DB::select($sql);
-
-        if (count($lstRetorno) > 0) {
-            $this->idproducto = $lstRetorno[0]->idproducto;
-            $this->codigo = $lstRetorno[0]->codigo;
-            return $this;
-        }
-        return null;
-    }
+    
 
     public function guardar()
     {
@@ -195,14 +190,14 @@ class Producto extends Model
             imagen='$this->imagen',
             marca='$this->marca'
             WHERE idproducto=?";
-        $affected = DB::update($sql, [$this->idcurso]);
+        $affected = DB::update($sql, [$this->idproducto]);
     }
 
     public  function eliminar()
     {
         $sql = "DELETE FROM productos WHERE 
             idproducto=?";
-        $affected = DB::delete($sql, [$this->idcurso]);
+        $affected = DB::delete($sql, [$this->idproducto]);
     }
 
     public function insertar()
