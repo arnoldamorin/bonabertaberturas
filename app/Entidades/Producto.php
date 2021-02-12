@@ -78,13 +78,13 @@ class Producto extends Model
     }
     public function obtenerFiltradoPalabra($palabra)
     {
-    
+
         $sql = "SELECT DISTINCT                    
-                    P.idproducto, 
-                    P.descripcion                   
+                    P.descripcion,                  
+                    P.idproducto 
                     FROM productos P
                     WHERE P.descripcion LIKE '%" . $palabra . "%'                 
-                ";        
+                ";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -162,6 +162,21 @@ class Producto extends Model
             $this->precio_venta = $lstRetorno[0]->precio_venta;
             $this->marca = $lstRetorno[0]->marca;
             $this->imagen = $lstRetorno[0]->imagen;
+            return $this;
+        }
+        return null;
+    }
+    public function obtenerPorDescr($descripcion)
+    {
+        $sql = "SELECT
+                P.idproducto,
+                P.codigo 
+                FROM productos P WHERE P.descripcion = $descripcion";
+        $lstRetorno = DB::select($sql);
+
+        if (count($lstRetorno) > 0) {
+            $this->idproducto = $lstRetorno[0]->idproducto;
+            $this->codigo = $lstRetorno[0]->codigo;
             return $this;
         }
         return null;
