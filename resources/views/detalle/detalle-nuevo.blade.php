@@ -68,7 +68,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescrProducto">Descripcion producto:</label>
-                <input autocomplete="off" onkeyup="autocompletar()" class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" list="lista_descr" value="{{$detalle->descrprod or ''}}">
+                <input autocomplete="off" onkeyup="autocompletar();" onchange="fBuscarCodProducto();" class="form-control" type="text" id="txtDescrProducto" name="txtDescrProducto" list="lista_descr" value="{{$detalle->descrprod or ''}}">
                 <datalist id="lista_descr"></datalist>
             </div>
             <div class="form-group col-lg-6">
@@ -163,25 +163,52 @@ if (isset($msg)) {
                     return acumulador + `<option value="${idproducto}">${codigo}</option>`;
                 }, opciones);
                 $("#lstProducto").empty().append(resultado);
+
             }
         });
     }
 
     function fBuscarDescrProducto() {
-        idProducto = $("#lstProducto").val();
-        $.ajax({
-            type: "GET",
-            url: "{{ asset('admin/detalle/buscarProducto') }}",
-            data: {
-                id: idProducto
-            },
-            async: true,
-            dataType: "json",
-            success: function(respuesta) {
-                $("#txtDescrProducto").val(respuesta.descripcion);
-            }
-        });
+        if ($("#txtDescrProducto") == "") {
+            idProducto = $("#lstProducto").val();
+            $.ajax({
+                type: "GET",
+                url: "{{ asset('admin/detalle/buscarProducto') }}",
+                data: {
+                    id: idProducto
+                },
+                async: true,
+                dataType: "json",
+                success: function(respuesta) {
+                    $("#txtDescrProducto").val(respuesta.descripcion);
+                }
+            });
+        }
+    }
 
+    function fBuscarCodProducto() {
+        descripcion = $("#txtDescrProducto").val();
+        if ($('#lstProducto option:selected').val() == "") {
+            $.ajax({
+                type: "GET",
+                url: "{{ asset('admin/detalle/buscarCodProducto') }}",
+                data: {
+                    descripcion: descripcion
+                },
+                async: true,
+                dataType: "json",
+                success: function(respuesta) {
+                    const resultado = respuesta.reduce(function(acumulador, valor) {
+                        const {
+                            codigo,
+                            idproducto
+                        } = valor;
+                        return acumulador + `<option value="${idproducto}">${codigo}</option>`;
+                    });
+                    $("#lstProducto").empty().append(resultado)
+                }
+            });
+        }
     }
 
     function fBuscarPrecioUnitario() {
@@ -227,31 +254,34 @@ if (isset($msg)) {
         var minimo_letras = 0; // minimo letras visibles en el autocompletar
         var palabra = $('#txtDescrProducto').val();
         //Contamos el valor del input mediante una condicional
-        if (palabra.length >= minimo_letras) {
-            $.ajax({
-                url: "{{ asset('admin/detalle/buscarCodProducto') }}",
-                type: 'GET',
-                data: {
-                    palabra: palabra
-                },
-                async: true,
-                dataType: "json",
-                success: function(respuesta) {
-                    //$('#lista_descr').show();
-                    let opciones = "<option value='0' disabled selected>Seleccionar</option>";
-                    const resultado = respuesta.reduce(function(acumulador, valor) {
-                        const {                            
-                            idproducto,
-                            descripcion
-                        } = valor;
-                        return acumulador + `<option value="${idproducto}">${descripcion}</option>`;
-                    }, opciones);
-                    $("#lista_descr").empty().append(resultado[descripcion]);
-                }
-            });
-        } else {
-            //ocultamos la lista
-            $('#lista_descr').hide();
+        if ($('#lstTipoProducto option:selected').val() != "") {
+            if (palabra.length >= minimo_letras) {
+                $.ajax({
+                    url: "{{ asset('admin/detalle/autocompletar') }}",
+                    type: 'GET',
+                    data: {
+                        palabra: palabra
+                    },
+                    async: true,
+                    dataType: "json",
+                    success: function(respuesta) {
+                        //$('#lista_descr').show();
+                        let opciones = "<option value='0' disabled selected>Seleccionar</option>";
+                        const resultado = respuesta.reduce(function(acumulador, valor) {
+                            const {
+                                descripcion,
+                                idproducto
+                            } = valor;
+                            return acumulador + `<option value="${descripcion}"></option>`;
+                        }, opciones);
+                        $("#lista_descr").empty().append(resultado);
+
+                    }
+                });
+            } else {
+                //ocultamos la lista
+                $('#lista_descr').hide();
+            }
         }
     }
 

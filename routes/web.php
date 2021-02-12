@@ -156,6 +156,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/detalle/buscarProductos', 'ControladorDetalle@buscarProductos');
     Route::get('/admin/detalle/buscarProducto', 'ControladorDetalle@buscarProducto');
     Route::get('/admin/detalle/buscarCodProducto', 'ControladorDetalle@buscarCodProducto');
+    Route::get('/admin/detalle/autocompletar', 'ControladorDetalle@autocompletar');
 
 });
 

@@ -188,10 +188,18 @@ class ControladorDetalle extends Controller
         exit;
     }
     public function buscarCodProducto(Request $request)
+    {        
+        $descripcion = $request->input('descripcion');
+        $producto = new Producto();
+        $array_Producto=$producto->obtenerPorDescr($descripcion);        
+        echo json_encode($array_Producto);
+        exit;
+    }
+    public function autocompletar(Request $request)
     {
         $palabra = $request->input('palabra');        
         $producto = new Producto;
-        $array_Producto = $producto->obtenerFiltradoPalabra($palabra);
+        $array_Producto = $producto->obtenerFiltradoPalabra($palabra);        
         echo json_encode($array_Producto);
         exit;
     }
