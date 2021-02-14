@@ -134,11 +134,21 @@ class Producto extends Model
     {
         $sql = "SELECT
                 P.idproducto,
-                P.codigo 
+                P.codigo,
+                P.precio_venta,
+                P.stock   
                 FROM productos P 
                 WHERE P.descripcion = '$descripcion'";
-        $lstRetorno = DB::select($sql);
-        return $lstRetorno;      
+       $lstRetorno = DB::select($sql);
+
+       if (count($lstRetorno) > 0) {
+           $this->idproducto = $lstRetorno[0]->idproducto;
+           $this->codigo = $lstRetorno[0]->codigo;                      
+           $this->precio_venta = $lstRetorno[0]->precio_venta;
+           $this->stock = $lstRetorno[0]->stock;
+           return $this;
+       }
+       return null;     
     }
 
 
@@ -155,7 +165,8 @@ class Producto extends Model
                 P.precio_costo,
                 P.precio_venta,
                 P.marca,    
-                P.imagen                 
+                P.imagen,
+                P.stock                 
                 FROM productos P WHERE P.idproducto = $idproducto";
         $lstRetorno = DB::select($sql);
 
@@ -171,6 +182,7 @@ class Producto extends Model
             $this->precio_venta = $lstRetorno[0]->precio_venta;
             $this->marca = $lstRetorno[0]->marca;
             $this->imagen = $lstRetorno[0]->imagen;
+            $this->stock = $lstRetorno[0]->stock;
             return $this;
         }
         return null;

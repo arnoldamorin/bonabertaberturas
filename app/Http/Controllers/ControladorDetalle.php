@@ -191,8 +191,12 @@ class ControladorDetalle extends Controller
     {        
         $descripcion = $request->input('descripcion');
         $producto = new Producto();
-        $array_Producto=$producto->obtenerPorDescr($descripcion);        
-        echo json_encode($array_Producto);
+        $producto->obtenerPorDescr($descripcion);        
+        $aResultado["precio"] = $producto->precio_venta;
+        $aResultado["cantidad"] = $producto->stock;
+        $aResultado["descripcion"] = $producto->codigo;        
+        $aResultado["idproducto"] = $producto->idproducto; 
+        echo json_encode($aResultado);
         exit;
     }
     public function autocompletar(Request $request)
@@ -205,3 +209,4 @@ class ControladorDetalle extends Controller
         exit;
     }
 }
+

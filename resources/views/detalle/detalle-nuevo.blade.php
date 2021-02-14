@@ -145,45 +145,46 @@ if (isset($msg)) {
 
     function fBuscarProductos() {
         idtipo_producto = $("#lstTipoProducto option:selected").val();
-        $.ajax({
-            type: "GET",
-            url: "{{ asset('admin/detalle/buscarProductos') }}",
-            data: {
-                id: idtipo_producto
-            },
-            async: true,
-            dataType: "json",
-            success: function(respuesta) {
-                let opciones = "<option value='0' disabled selected>Seleccionar</option>";
-                const resultado = respuesta.reduce(function(acumulador, valor) {
-                    const {
-                        codigo,
-                        idproducto
-                    } = valor;
-                    return acumulador + `<option value="${idproducto}">${codigo}</option>`;
-                }, opciones);
-                $("#lstProducto").empty().append(resultado);
-
-            }
-        });
-    }
-
-    function fBuscarDescrProducto() {
         if ($("#txtDescrProducto").val() == "") {
-            idProducto = $("#lstProducto").val();
             $.ajax({
                 type: "GET",
-                url: "{{ asset('admin/detalle/buscarProducto') }}",
+                url: "{{ asset('admin/detalle/buscarProductos') }}",
                 data: {
-                    id: idProducto
+                    id: idtipo_producto
                 },
                 async: true,
                 dataType: "json",
                 success: function(respuesta) {
-                    $("#txtDescrProducto").val(respuesta.descripcion);
+                    let opciones = "<option value='0' disabled selected>Seleccionar</option>";
+                    const resultado = respuesta.reduce(function(acumulador, valor) {
+                        const {
+                            codigo,
+                            idproducto
+                        } = valor;
+                        return acumulador + `<option value="${idproducto}">${codigo}</option>`;
+                    }, opciones);
+                    $("#lstProducto").empty().append(resultado);
+
                 }
             });
         }
+    }
+
+    function fBuscarDescrProducto() {
+
+        idProducto = $("#lstProducto").val();
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/detalle/buscarProducto') }}",
+            data: {
+                id: idProducto
+            },
+            async: true,
+            dataType: "json",
+            success: function(respuesta) {
+                $("#txtDescrProducto").val(respuesta.descripcion);
+            }
+        });
     }
 
     function fBuscarCodProducto() {
@@ -198,17 +199,10 @@ if (isset($msg)) {
             async: true,
             dataType: "json",
             success: function(respuesta) {
-                const resultado = respuesta.reduce(function(acumulador, valor) {
-                    const {
-                        codigo,
-                        idproducto
-                    } = valor;
-                    return acumulador + `<option value selected="${idproducto}">${codigo}</option>`;
-                });
-                $("#lstProducto").empty().append(resultado);
+                $('#lstProducto').val(respuesta.idproducto);
+                $("#txtPrecioUnitario").val(respuesta.precio);
             }
         });
-
     }
 
     function fBuscarPrecioUnitario() {
@@ -285,12 +279,6 @@ if (isset($msg)) {
             }
         }
     }
-
-    function set_item(opciones) {
-        // Cambiar el valor del formulario input
-        $('#txtDescrProducto').val(opciones);
-        // ocultar lista de proposiciones
-        $('#lista_descr').hide();
-    }
+  
 </script>
 @endsection
