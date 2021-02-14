@@ -12,7 +12,7 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_costo', 'precio_venta', 'marca', 'ganancia', 'fk_idcoeficiente'
+        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_costo', 'precio_venta', 'marca', 'ganancia', 'fk_idcoeficiente', 'stock', 'color'
     ];
 
     protected $hidden = [];
