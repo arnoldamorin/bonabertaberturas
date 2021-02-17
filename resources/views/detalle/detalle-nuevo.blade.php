@@ -13,7 +13,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Guardar" href="#" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
+    <li class="btn-item"><a title="Guardar" href="/admin/venta/nueva/" class="fas fa-save" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     <li class="btn-item"><a title="Eliminar" href="#" class="fas fa-trash-alt" aria-hidden="true" onclick="javascript: $('#mdlEliminar').modal('toggle');"><span>Eliminar</span></a>
     </li>
@@ -45,7 +45,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or '$id'}}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or '1'}}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
