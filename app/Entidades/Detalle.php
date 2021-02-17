@@ -12,7 +12,7 @@ class Detalle extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'iddetalle', 'fk_idventa', 'fk_idtipo_producto', 'fk_codproducto', 'descrprod', 'preciounitario', 'cantidad', 'total'
+        'iddetalle', 'fk_idventa', 'fk_idtipo_producto', 'fk_codproducto', 'descrprod','cantidad', 'preciounitario', 'total'
     ];
 
     protected $hidden = [];
@@ -21,11 +21,11 @@ class Detalle extends Model
     {
         $this->iddetalle = $request->input('id') != "0" ? $request->input('id') : $this->iddetalle;
         $this->fk_idventa = $request->input('txtIdVenta');
-        $this->fk_idtipo_producto = $request->input('txtfk_idtipo_producto');
+        $this->fk_idtipo_producto = $request->input('lstTipoProducto');
         $this->fk_codproducto = $request->input('lstProducto');
-        $this->descrprod = $request->input('txtDescrProd');
-        $this->cantidad = $request->input('txtPrecioUnitario');
+        $this->descrprod = $request->input('txtDescrProducto');
         $this->cantidad = $request->input('txtCantidad');
+        $this->preciounitario = $request->input('txtPrecioUnitario');        
         $this->total = $request->input('txtTotal');
     }
 
