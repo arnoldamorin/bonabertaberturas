@@ -20,7 +20,7 @@ class Detalle extends Model
     function cargarDesdeRequest($request)
     {
         $this->iddetalle = $request->input('id') != "0" ? $request->input('id') : $this->iddetalle;
-        $this->fk_idventa = $request->input('txtIdVenta');
+        $this->fk_idventa = $request->input('txtfk_idventa');
         $this->fk_idtipo_producto = $request->input('lstTipoProducto');
         $this->fk_codproducto = $request->input('lstProducto');
         $this->descrprod = $request->input('txtDescrProducto');

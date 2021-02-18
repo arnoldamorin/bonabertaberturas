@@ -136,7 +136,7 @@
             $id = $request->input('id');
     
             if (Usuario::autenticado() == true) {
-                if (Patente::autorizarOperacion("CCLIENTEELIMINAR")) {
+                if (Patente::autorizarOperacion("CLIENTEELIMINAR")) {
                     $entidad = new Cliente();
                     $entidad->cargarDesdeRequest($request);
 

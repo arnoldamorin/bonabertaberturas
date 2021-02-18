@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Detalle;
 use App\Entidades\Producto;
-use App\Entidades\Venta;
+use App\Entidades\Venta_estado;
 use App\Entidades\TipoProducto;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
@@ -112,15 +112,16 @@ class ControladorDetalle extends Controller
 
     public function guardar(Request $request)
     {
+        $venta_estado = new Venta_estado();
+        $array_estado = $venta_estado->obtenerTodos();
         try {
             //Define la entidad servicio
             $titulo = "Modificar Detalle";
-            $detalle = new detalle();
-
+            $detalle = new Detalle();
             $detalle->cargarDesdeRequest($request);
 
             //validaciones
-            if ($detalle->nombre == "") {
+            if ($detalle->fk_codproducto == "") {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
@@ -139,12 +140,18 @@ class ControladorDetalle extends Controller
                     $msg["MSG"] = OKINSERT;
                 }
                 $_POST["id"] = $detalle->iddetalle;
-                return view('venta.venta-nuevo', compact('titulo', 'msg', ''));
+                return view('venta.venta-nuevo', compact('titulo', 'msg', 'venta_estado'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
+
+        $id = $detalle->iddetalle;
+        $entidad = new Detalle;
+        $entidad->obtenerPorId($id);
+
+        return view('detalle.detalle-nuevo', compact('msg', 'entidad', 'titulo')) . '?id=' . $entidad->iddetalle;
     }
 
     public function eliminar(Request $request)
