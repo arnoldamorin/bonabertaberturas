@@ -138,8 +138,8 @@ class ControladorDetalle extends Controller
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }
-                $_POST["id"] = $detalle->iddetalle;
-                return view('venta.venta-nuevo', compact('titulo', 'msg', ''));
+                $_POST["id"] = $detalle->fk_idventa;
+                return view('venta.venta-nuevo', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
