@@ -174,9 +174,11 @@ class ControladorVenta extends Controller
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
+                    $_POST["id"] = $entidad->idventa;
+                    return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'entidad'));
                 }
                 $_POST["id"] = $entidad->idventa;
-                return view('venta.detalle-nuevo', compact('titulo', 'msg', 'id'));
+                return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_estado')) . '?id=' . $entidad->idventa;
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
