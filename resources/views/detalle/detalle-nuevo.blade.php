@@ -2,9 +2,10 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php $detalle->fk_idventa = $entidad->idventa;
+    globalId = '<?php
     echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; ?>
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; 
+    ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -46,7 +47,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$detalle->fk_idventa or ''}}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$entidad->idventa or '19'}}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>

@@ -85,16 +85,21 @@ class ControladorVenta extends Controller
         $venta_estado = new Venta_estado();
         $array_estado = $venta_estado->obtenerTodos();
 
-        $producto = new Producto();
-        $array_Producto = $producto->obtenerTodos();
-
-        $tipoProducto = new TipoProducto();
-        $array_TipoProducto = $tipoProducto->obtenerTodos();
-
         $titulo = "Nueva Venta";
-        return view('venta.venta-nuevo', compact('titulo', 'array_Detalle', 'array_estado', 'array_Producto', 'array_TipoProducto'));
-    }
 
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("VENTAALTA")) {
+                $codigo = "VENTAALTA";
+                $mensaje = "No tiene pemisos para la operaci&oacute;n.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view('venta.venta-nuevo', compact('titulo', 'array_Detalle', 'array_estado'));
+            }
+        } else {
+            return redirect('admin/login');
+        }       
+    } 
+        
     public function editar($id)
     {
         $entidad = new Detalle();
@@ -102,13 +107,6 @@ class ControladorVenta extends Controller
 
         $venta_estado = new Venta_estado();
         $array_estado = $venta_estado->obtenerTodos();
-
-        $producto = new Producto();
-        $array_Producto = $producto->obtenerTodos();
-
-        $tipoProducto = new TipoProducto();
-        $array_TipoProducto = $tipoProducto->obtenerTodos();
-
 
         $titulo = "Modificar Venta";
         if (Usuario::autenticado() == true) {
@@ -120,7 +118,7 @@ class ControladorVenta extends Controller
                 $venta = new Venta();
                 $venta->obtenerPorId($id);
 
-                return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Detalle', 'array_estado', 'array_Producto', 'array_TipoProducto'));
+                return view('venta.venta-nuevo', compact('venta', 'titulo', 'array_Detalle', 'array_estado'));
             }
         } else {
             return redirect('admin/login');
@@ -136,6 +134,9 @@ class ControladorVenta extends Controller
             $entidad->cargarDesdeRequest($request);
             $entidadAnt = new Venta();
             $entidadAnt = $entidadAnt->obtenerPorId($entidad->idventa);
+            $venta_estado = new Venta_estado();
+            $array_estado = $venta_estado->obtenerTodos();
+    
 
             //validaciones
             if ($entidad->fecha == "") {
@@ -169,13 +170,15 @@ class ControladorVenta extends Controller
                     $msg["MSG"] = OKINSERT;
                 } else {
                     //Es nuevo
-                    $titulo = "Nuevo Venta";
+                    $titulo = "Nuevo Detalle";
                     $entidad->insertar();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                     $_POST["id"] = $entidad->idventa;
-                    return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'entidad'));
+                    $tipoProducto = new TipoProducto();
+                    $array_TipoProducto = $tipoProducto->obtenerTodos();
+                    return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'entidad', 'array_TipoProducto'));
                 }
                 $_POST["id"] = $entidad->idventa;
                 return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_estado')) . '?id=' . $entidad->idventa;
@@ -187,7 +190,7 @@ class ControladorVenta extends Controller
         $id = $entidad->idventa;
         $venta = new Venta();
         $venta->obtenerPorId($id);
-        return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_estado')) . '?id=' . $venta->idventa;
+        return view('venta.venta-nuevo', compact('msg', 'venta', 'array_estado')) . '?id=' . $venta->idventa;
     }
 
     public function eliminar(Request $request)

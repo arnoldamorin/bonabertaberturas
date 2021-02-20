@@ -30,12 +30,12 @@ class ControladorDetalle extends Controller
         }
     }
 
-    public function cargarGrilla()
+    public function cargarGrilla($id)
     {
         $request = $_REQUEST;
 
-        $entidaddetalle = new detalle();
-        $adetalle = $entidaddetalle->obtenerFiltrado();
+        $entidadDetalle = new Detalle();
+        $adetalle = $entidadDetalle->obtenerPorIdVenta($id);    
 
 
         $data = array();
@@ -51,8 +51,10 @@ class ControladorDetalle extends Controller
             $row = array();
             $row[] = '<a href="/admin/detalle/nuevo/' . $adetalle[$i]->iddetalle . '">' . $adetalle[$i]->fk_idventa . '</a>';
             $row[] = $adetalle[$i]->fk_idtipo_producto;
-            $row[] = $adetalle[$i]->fk_idproducto;
+            $row[] = $adetalle[$i]->fk_codproducto;
+            $row[] = $adetalle[$i]->descripcion;
             $row[] = $adetalle[$i]->cantidad;
+            $row[] = $adetalle[$i]->preciounitario;
             $row[] = $adetalle[$i]->total;
             $cont++;
             $data[] = $row;
@@ -111,9 +113,7 @@ class ControladorDetalle extends Controller
     }
 
     public function guardar(Request $request)
-    {
-        $venta_estado = new Venta_estado();
-        $array_estado = $venta_estado->obtenerTodos();
+    {       
         try {
             //Define la entidad servicio
             $titulo = "Modificar Detalle";
@@ -138,9 +138,8 @@ class ControladorDetalle extends Controller
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
-                }
-                $_POST["id"] = $detalle->iddetalle;
-                return view('venta.venta-nuevo', compact('titulo', 'msg', 'venta_estado'));
+                }              
+                return view('detalle.detalle-listar', compact('titulo', 'msg', 'detalle')). '?id=' . $detalle->idventa;
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -195,25 +194,24 @@ class ControladorDetalle extends Controller
         exit;
     }
     public function buscarCodProducto(Request $request)
-    {        
+    {
         $descripcion = $request->input('descripcion');
         $producto = new Producto();
-        $producto->obtenerPorDescr($descripcion);        
+        $producto->obtenerPorDescr($descripcion);
         $aResultado["precio"] = $producto->precio_venta;
         $aResultado["cantidad"] = $producto->stock;
-        $aResultado["descripcion"] = $producto->codigo;        
-        $aResultado["idproducto"] = $producto->idproducto; 
+        $aResultado["descripcion"] = $producto->codigo;
+        $aResultado["idproducto"] = $producto->idproducto;
         echo json_encode($aResultado);
         exit;
     }
     public function autocompletar(Request $request)
     {
-        $palabra = $request->input('palabra');    
+        $palabra = $request->input('palabra');
         $tipoProducto = $request->input('tipoProducto');
         $producto = new Producto;
-        $array_Producto = $producto->obtenerFiltradoPalabra($palabra,$tipoProducto);        
+        $array_Producto = $producto->obtenerFiltradoPalabra($palabra, $tipoProducto);
         echo json_encode($array_Producto);
         exit;
     }
 }
-

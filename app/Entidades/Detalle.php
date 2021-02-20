@@ -80,6 +80,21 @@ class Detalle extends Model
 
     public function obtenerPorId($id)
     {
+        $sql = "SELECT 
+                  C.iddetalle,
+                  C.fk_idventa,
+                  C.fk_idtipo_producto,
+                  C.descrprod,
+                  C.preciounitario,
+                  C.cantidad,
+                  C.total                           
+                FROM detalles C WHERE c.idventa = $id";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
+
+    public function obtenerPorIdVenta($id)
+    {
         $sql = "SELECT
                 C.iddetalle,
                 C.fk_idventa,
@@ -88,7 +103,7 @@ class Detalle extends Model
                 C.preciounitario,
                 C.cantidad,
                 C.total                           
-                FROM detalles C WHERE iddetalle = '$id'";
+                FROM detalles C WHERE C.fk_idventa = '$id'";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -104,6 +119,7 @@ class Detalle extends Model
         }
         return null;
     }
+
 
 
     public function guardar()
