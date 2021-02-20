@@ -238,4 +238,29 @@ class Producto extends Model
         ]);
         return $this->idproducto = DB::getPdo()->lastInsertId();
     }
+
+    public function obtenerMedidasProductos() {
+        $sql = "SELECT DISTINCT
+                    medidas_internas 
+                FROM
+                    productos 
+                ORDER BY
+                    medidas_internas DESC";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
+
+    public function obtenerPorFiltro($filtro) {
+        if ($filtro != "") {
+            $sql = "SELECT
+                        * 
+                    FROM
+                        productos 
+                    WHERE
+                        medidas_internas IN $filtro"; //agregar con un OR en el caso de que se quiera filtrar por más de un campo
+            $lstRetorno = DB::select($sql);
+            return $lstRetorno;
+        }
+        return null;
+    }
 }
