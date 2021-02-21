@@ -16,7 +16,9 @@ class ControladorWebProductosss extends Controller
         $seccion = "Productos";
         $producto = new Producto();
         $aMedidas = $producto->obtenerMedidasProductos();
-        return view('web.productos', compact('seccion', 'aMedidas'));
+        $precioMax = $producto->obtenerPrecioMaximo();
+        $precioMin = $producto->obtenerPrecioMinimo();
+        return view('web.productos', compact('seccion', 'aMedidas', 'precioMin', 'precioMax'));
     }
 
     public function obtenerProductos(Request $request) {
@@ -37,17 +39,21 @@ class ControladorWebProductosss extends Controller
 
     public function setFiltroProductos(Request $request) {
         $aFiltros = $request->input("filtro");
+        $precio = $request->input("precio");
         $producto = new Producto();
 
-        $string = "(";
-        for ($i = 0; $i < count($aFiltros); $i++) {
-            $string .= "'" . $aFiltros[$i]["filtro"] . "',";
+        if ($aFiltros != "") {
+            $string = "(";
+            for ($i = 0; $i < count($aFiltros); $i++) {
+                $string .= "'" . $aFiltros[$i]["filtro"] . "',";
+            }
+            $string = substr($string, 0, -1).")";
+        } else {
+            $string = "";
         }
 
         $aProductos = array();
-        if (count($aFiltros) > 0) {
-            $aProductos = $producto->obtenerPorFiltro(substr($string, 0, -1).")");
-        }
+        $aProductos = $producto->obtenerPorFiltro($string, $precio);
 
         if (count($aProductos) > 0) {
             $json_data =  array(

@@ -243,24 +243,45 @@ class Producto extends Model
         $sql = "SELECT DISTINCT
                     medidas_internas 
                 FROM
-                    productos 
+                    $this->table 
                 ORDER BY
                     medidas_internas DESC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerPorFiltro($filtro) {
+    public function obtenerPorFiltro($filtro, $precio = "") {
+        $sql = "SELECT
+                    * 
+                FROM
+                    $this->table 
+                WHERE ";
         if ($filtro != "") {
-            $sql = "SELECT
-                        * 
-                    FROM
-                        productos 
-                    WHERE
-                        medidas_internas IN $filtro"; //agregar con un OR en el caso de que se quiera filtrar por más de un campo
-            $lstRetorno = DB::select($sql);
-            return $lstRetorno;
+            $sql .= "(medidas_internas IN $filtro)"; //agregar con un OR en el caso de que se quiera filtrar por más de un campo
+            if ($precio != "") {
+                $sql .= " AND precio_venta <= $precio";
+            }
+        } else {
+            $sql .= "precio_venta <= $precio";
         }
-        return null;
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
     }
+
+    public function obtenerPrecioMinimo() {
+        $sql = "SELECT
+                    MIN(precio_venta) AS precioMin
+                FROM $this->table";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno[0]->precioMin;
+    }
+
+    public function obtenerPrecioMaximo() {
+        $sql = "SELECT
+                    MAX(precio_venta) AS precioMax
+                FROM $this->table";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno[0]->precioMax;
+    }
+
 }

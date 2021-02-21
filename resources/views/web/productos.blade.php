@@ -48,11 +48,22 @@ $productos = 16;
                         <p class="d-inline">Categoria 2</p><br> -->
                     </div>
                     <div class="col-12 px-0 div__subcategoria my-2 pb-2 shadow">
-                        <label class="d-block lblSubcategoria pl-2 py-1">Subcategoria</label>
-                        <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
+                        <label class="d-block lblSubcategoria pl-2 py-1">Rango de precios</label>
+                        <!-- <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
                         <p class="d-inline">Subcategoria 1</p><br>
                         <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
-                        <p class="d-inline">Subcategoria 2</p><br>
+                        <p class="d-inline">Subcategoria 2</p><br> -->
+                        <div class="row justify-content-between mx-0">
+                            <div class="col-auto p-0 pl-2" style="font-size: 10px;">{{ "$ " . number_format($precioMin, 2, ",", ".") }}</div>
+                            <div class="col-auto p-0 pr-2" style="font-size: 10px;">{{ "$ " . number_format($precioMax, 2, ",", ".") }}</div>
+                            <div class="col-12 text-center">
+                                <input type="range" class="form-range" min="{{ $precioMin }}" step="5000" max="{{ $precioMax }}" value="{{ $precioMax }}" id="rangoPrecio">
+                                <input type="text" class="form-control" id="txtPrecio" value="">
+                            </div>
+                            <div class="col-12">
+                                <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecio').val());"></i>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 px-0 div__material my-2 pb-2 shadow">
                         <label class="d-block lblMaterial pl-2 py-1">Material</label>
@@ -94,6 +105,31 @@ $productos = 16;
 <script>
 
     var aMedidasFiltro = [];
+    var precio = 0;
+
+    document.getElementById('rangoPrecio').addEventListener('mousedown', function() {
+        document.getElementById('rangoPrecio').addEventListener('mousemove', mostrarPrecio);
+        document.getElementById('rangoPrecio').addEventListener('mouseup', function() {
+            mostrarPrecio();
+            document.getElementById('rangoPrecio').removeEventListener('mousemove', mostrarPrecio);
+        });
+    });
+
+    function mostrarPrecio() {
+        $('#txtPrecio').val($('#rangoPrecio').val());
+    }
+
+    function aplicarFiltroPrecio(filtroPrecio) { //tengo que seguir laburando en esto *ISRA*
+        precio = filtroPrecio;
+
+        let divProductos = document.getElementById('div-productos');
+        while (divProductos.firstChild) {
+            divProductos.removeChild(divProductos.firstChild);
+        }
+
+        $('#spinner').show();
+        obtenerProductos('/productos/filtro/');
+    }
 
     $(document).ready(function () {
         $('#spinner').show();
@@ -138,7 +174,8 @@ $productos = 16;
             url: url,
             async: true,
             data: {
-                filtro: aMedidasFiltro
+                filtro: aMedidasFiltro,
+                precio: precio
             },
             success: function(data) {
                 if (data.error == 0) {
