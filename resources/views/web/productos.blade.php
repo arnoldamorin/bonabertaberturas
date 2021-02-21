@@ -128,7 +128,12 @@ $productos = 16;
         }
 
         $('#spinner').show();
-        obtenerProductos('/productos/filtro/');
+
+        if (precio != '') {
+            obtenerProductos('/productos/filtro/');
+        } else {
+            obtenerProductos('/productos/obtenerTodos/');
+        }
     }
 
     $(document).ready(function () {
