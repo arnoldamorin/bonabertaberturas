@@ -139,7 +139,7 @@ class ControladorDetalle extends Controller
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                 }              
-                return view('detalle.detalle-listar', compact('titulo', 'msg', 'detalle')). '?id=' . $detalle->idventa;
+                return view('detalle.detalle-listar', compact('titulo', 'msg', 'detalle')). '?id=' . $detalle->fk_idventa;
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
