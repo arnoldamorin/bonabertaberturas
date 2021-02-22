@@ -65,7 +65,7 @@ class ControladorProductos extends Controller
             {
                 $nombre = date("Ymdhmsi") . ".jpg"; 
                 $archivo = $_FILES["imagenProducto"]["tmp_name"];
-                move_uploaded_file($archivo, env('APP_PATH') . "/public/web/img/$nombre");//guardaelarchivo
+                move_uploaded_file($archivo, env('APP_PATH') . "/public/web/img/puertas/$nombre");//guardaelarchivo
                 $entidad->imagen =$nombre;
             }
 
@@ -86,7 +86,7 @@ class ControladorProductos extends Controller
                             if(isset($_FILES["imagenProducto"]) && $_FILES["imagenProducto"]["name"] != ""){
                                 $archivoAnterior =$_FILES["imagenProducto"]["name"];
                                 if($archivoAnterior !=""){
-                                    @unlink (env('APP_PATH') . "/public/web/img/$archivoAnterior");
+                                    @unlink (env('APP_PATH') . "/public/web/img/puertas/$archivoAnterior");
                                 }
                             } else {
                                 $entidad->imagen = $ProductoAnt->imagen;
@@ -177,7 +177,7 @@ class ControladorProductos extends Controller
             for ($i = $inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 
-                $row[] = "<img class='img-thumbnail' style='height: 70px' src='../../../web/img/".$aProductos[$i]->imagen."'>";               
+                $row[] = "<img class='img-thumbnail' style='height: 70px' src='/img/puertas/".$aProductos[$i]->imagen."'>";               
                 $row[] = $aProductos[$i]->codigo;               
                 $row[] = $aProductos[$i]->descripcion;                
                 $row[] = $aProductos[$i]->medidas_externas;

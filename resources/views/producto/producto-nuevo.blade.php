@@ -80,11 +80,11 @@ if (isset($msg)) {
                 </div>  
                 <div class="form-group col-lg-6">
                     <label>Precio Costo: *</label>
-                    <input class = "form-control" type="text" name = "txtPrecioCosto" id = "txtPrecioCosto" required value = "{{$producto->precio_costo or ''}}">
+                    <input class = "form-control" type="number" name = "txtPrecioCosto" id = "txtPrecioCosto" required value = "{{$producto->precio_costo or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Precio Venta: </label>// calculado hay que hacerlo con javascript
-                    <input class = "form-control" type="text" name = "txtPrecioVenta" id = "txtPrecioVenta" required value = "{{$producto->precio_venta or ''}}">
+                    <input class = "form-control" type="number" name = "txtPrecioVenta" id = "txtPrecioVenta" required value = "{{$producto->precio_venta or ''}}">
                 </div>
                 <div class="form-group col-lg-6">
                     <label>Marca: *</label>
@@ -95,7 +95,7 @@ if (isset($msg)) {
                 <div class="col-6 form-group">
                     <label for="imagen">Imagen:</label>
                     <input  type="file" class="form-control-file" name="imagenProducto" id="imagenProducto" >
-                    <img src="../../../web/img/{{ $producto->imagen or '' }}" class="img-thumbnail" width="150px">
+                    <img src="{{ $producto->imagen or '' }}" class="img-thumbnail" width="150px"> <!--  {{ $producto->imagen or '' }} -->
                 </div>
             </div>
 			

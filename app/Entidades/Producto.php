@@ -27,6 +27,7 @@ class Producto extends Model
         $this->medidas_internas = $request->input('txtMedidasInternas');
         $this->peso = $request->input('txtPeso');
         $this->precio_costo = $request->input('txtPrecioCosto');
+        $this->precio_venta = $request->input('txtPrecioVenta');
         $this->marca = $request->input('txtMarca');
         $this->imagen = $request->input('ImagenProducto');
     }
@@ -194,11 +195,11 @@ class Producto extends Model
         $sql = "UPDATE productos SET  
             codigo='$this->codigo',     
             descripcion='$this->descripcion',
-            fk_idtipo_producto='$this->fk_idtipo_producto',
-            precio_costo=$this->precio_costo,
-            medidas_externas= $this->medidas_externas,
-            medidas_internas= $this->medidas_internas,
+            fk_idtipo_producto='$this->fk_idtipo_producto',            
+            medidas_externas= '$this->medidas_externas',
+            medidas_internas= '$this->medidas_internas',
             peso='$this->peso',
+            precio_costo='$this->precio_costo',
             imagen='$this->imagen',
             marca='$this->marca'
             WHERE idproducto=?";
@@ -221,10 +222,11 @@ class Producto extends Model
                 medidas_externas,
                 medidas_internas,
                 peso,
-                precio_costo,                
+                precio_costo,  
+                precio_venta,              
                 marca,             
                 imagen
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->codigo,
             $this->descripcion,
@@ -233,6 +235,7 @@ class Producto extends Model
             $this->medidas_internas,
             $this->peso,
             $this->precio_costo,
+            $this->precio_venta,
             $this->marca,
             $this->imagen
         ]);
