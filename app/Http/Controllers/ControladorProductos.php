@@ -177,7 +177,7 @@ class ControladorProductos extends Controller
             for ($i = $inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
                 
-                $row[] = "<img class='img-thumbnail' style='height: 70px' src='/img/puertas/".$aProductos[$i]->imagen."'>";               
+                $row[] = "<img src=/web/img/puertas/".$aProductos[$i]->imagen." class='img-thumbnail' style='height: 70px'>";               
                 $row[] = $aProductos[$i]->codigo;               
                 $row[] = $aProductos[$i]->descripcion;                
                 $row[] = $aProductos[$i]->medidas_externas;

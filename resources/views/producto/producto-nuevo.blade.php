@@ -95,7 +95,7 @@ if (isset($msg)) {
                 <div class="col-6 form-group">
                     <label for="imagen">Imagen:</label>
                     <input  type="file" class="form-control-file" name="imagenProducto" id="imagenProducto" >
-                    <img src="{{ $producto->imagen or '' }}" class="img-thumbnail" width="150px"> <!--  {{ $producto->imagen or '' }} -->
+                    <img src="/web/img/puertas/{{ $producto->imagen or '' }}" class="img-thumbnail" width="150px"> <!--  {{ $producto->imagen or '' }} -->
                 </div>
             </div>
 			
