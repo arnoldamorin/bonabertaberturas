@@ -66,9 +66,9 @@ class Producto extends Model
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
             $sql .= " AND ( P.descripcion LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR P.precio_costo LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR P.precio_venta LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR P.marca LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.medidas_internas LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.medidas_externas LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.marca LIKE '%" . $request['search']['value'] . "%' ";            
             $sql .= " OR P.codigo LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
