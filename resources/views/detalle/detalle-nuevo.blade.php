@@ -1,10 +1,12 @@
 @extends('plantilla')
 @section('titulo', "$titulo")
 @section('scripts')
+<link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
+<script src="{{ asset('js/datatables.min.js') }}"></script>
 <script>
     globalId = '<?php
-    echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; 
+                echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0";
     ?>
 </script>
 @endsection
@@ -47,7 +49,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$entidad->idventa or '19'}}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$entidad->idventa or ''}}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
@@ -75,8 +77,8 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
-                <input class="form-control" type="text" id="txtCantidad" name="txtCantidad" onchange="fCalcularTotal();">
-                <!--value="{{$detalle->cantidad or ''}}"-->
+                <input class="form-control" type="text" id="txtCantidad" name="txtCantidad" onchange="fCalcularTotal();"value="{{$detalle->cantidad or ''}}">
+                <!---->
                 <span id="msgStock" class="text-danger" style="display:none;">No hay stock suficiente</span>
             </div>
             <div class="form-group col-lg-6">
@@ -90,8 +92,23 @@ if (isset($msg)) {
             </div>
         </div>
 </div>
+
+<table id="grilla" class="display">
+    <thead>
+        <tr>           
+            <th>Id Venta</th>
+            <th>Tipo Producto</th>
+            <th>Codigo</th>
+            <th>Descripcion</th>     
+            <th>Cantidad</th>  
+            <th>Precio Unitario</th>           
+            <th>Total</th>                              
+            <th>Editar</th>    
+        </tr>
+    </thead>
+</table>
 </form>
-</div>
+
 <div class="modal fade" id="mdlEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -109,7 +126,18 @@ if (isset($msg)) {
         </div>
     </div>
 </div>
-<script>
+<script>    
+    var idventa =  $('#txtfk_idventa').val();
+    var dataTable = $('#grilla').DataTable({
+	    "processing": true,
+        "serverSide": true,
+	    "bFilter": true,
+	    "bInfo": true,
+	    "bSearchable": true,
+        "pageLength": 25,
+        "order": [[ 0, "asc" ]],            
+	    "ajax": "{{ route('detalle.cargarGrilla')}}"
+    })
     $("#form1").validate();
 
     function guardar() {
@@ -281,6 +309,5 @@ if (isset($msg)) {
             }
         }
     }
-  
 </script>
 @endsection

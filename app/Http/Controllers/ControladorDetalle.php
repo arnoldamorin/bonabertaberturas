@@ -30,40 +30,41 @@ class ControladorDetalle extends Controller
         }
     }
 
-    public function cargarGrilla($id)
+    public function cargarGrilla()
     {
-        $request = $_REQUEST;
-
+        $request = $_REQUEST;        
+        
+  
         $entidadDetalle = new Detalle();
-        $adetalle = $entidadDetalle->obtenerPorIdVenta($id);    
-
+        $aDetalle = $entidadDetalle->obtenerPorIdVenta($request);            
 
         $data = array();
 
         $inicio = $request['start'];
         $registros_por_pagina = $request['length'];
 
-        if (count($adetalle) > 0) {
+        if (count($aDetalle) > 0) {
             $cont = 0;
         }
 
-        for ($i = $inicio; $i < count($adetalle) && $cont < $registros_por_pagina; $i++) {
+        for ($i = $inicio; $i < count($aDetalle) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = '<a href="/admin/detalle/nuevo/' . $adetalle[$i]->iddetalle . '">' . $adetalle[$i]->fk_idventa . '</a>';
-            $row[] = $adetalle[$i]->fk_idtipo_producto;
-            $row[] = $adetalle[$i]->fk_codproducto;
-            $row[] = $adetalle[$i]->descripcion;
-            $row[] = $adetalle[$i]->cantidad;
-            $row[] = $adetalle[$i]->preciounitario;
-            $row[] = $adetalle[$i]->total;
+            $row[] = $aDetalle[$i]->fk_idventa;
+            $row[] = $aDetalle[$i]->fk_idtipo_producto;
+            $row[] = $aDetalle[$i]->fk_codproducto;
+            $row[] = $aDetalle[$i]->descrprod;
+            $row[] = $aDetalle[$i]->cantidad;
+            $row[] = "$" . number_format($aDetalle[$i]->preciounitario, 2, ",", "."); 
+            $row[] = "$" . number_format($aDetalle[$i]->total, 2, ",", "."); 
+            $row[] = "<a href='/admin/detalle/nuevo/".$aDetalle[$i]->iddetalle."'><i class='fas fa-edit'></i></a>";
             $cont++;
             $data[] = $row;
         }
 
         $json_data = array(
             "draw" => intval($request['draw']),
-            "recordsTotal" => count($adetalle), //cantidad total de registros sin paginar
-            "recordsFiltered" => count($adetalle), //cantidad total de registros en la paginacion
+            "recordsTotal" => count($aDetalle), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aDetalle), //cantidad total de registros en la paginacion
             "data" => $data,
         );
         return json_encode($json_data);

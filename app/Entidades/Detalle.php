@@ -37,21 +37,22 @@ class Detalle extends Model
             1 => 'C.fk_idtipo_producto',
             2 => 'C.fk_codproducto',
             3 => 'C.descrprod',
-            4 => 'C.preciounitario',
-            5 => 'C.cantidad',
-            6 => 'C.total'
-
+            4 => 'C.cantidad',
+            5 => 'C.preciounitario',         
+            6 => 'C.total',
+            7 => 'C.iddetalle'
         );
-        $sql = "SELECT DISTINCT
-                    C.iddetalle,
+        $sql = "SELECT DISTINCT                         
                     C.fk_idventa,
                     C.fk_idtipo_producto,
+                    C.fk_codproducto,                 
                     C.descrprod,
-                    C.preciounitario,
                     C.cantidad,
-                    C.total                                 
+                    C.preciounitario,                   
+                    C.total,
+                    C.iddetalle 
                     FROM detalles C
-                WHERE 1=1
+                WHERE  1=1
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
@@ -61,7 +62,39 @@ class Detalle extends Model
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
-    
+    public function obtenerFiltradoxVenta()
+    {
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'C.fk_idventa',
+            1 => 'C.fk_idtipo_producto',
+            2 => 'C.fk_codproducto',
+            3 => 'C.descrprod',
+            4 => 'C.cantidad',
+            5 => 'C.preciounitario',         
+            6 => 'C.total',
+            7 => 'C.iddetalle'
+        );
+        $sql = "SELECT DISTINCT                         
+                    C.fk_idventa,
+                    C.fk_idtipo_producto,
+                    C.fk_codproducto,                 
+                    C.descrprod,
+                    C.cantidad,
+                    C.preciounitario,                   
+                    C.total,
+                    C.iddetalle 
+                    FROM detalles C
+                WHERE  C.fk_idventa = ".$request['txtfk_idventa']['value']."
+                ";
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
 
     public function obtenerTodos()
     {
@@ -84,40 +117,49 @@ class Detalle extends Model
                   C.iddetalle,
                   C.fk_idventa,
                   C.fk_idtipo_producto,
+                  C.fk_codproducto,   
                   C.descrprod,
-                  C.preciounitario,
                   C.cantidad,
+                  C.preciounitario,                  
                   C.total                           
-                FROM detalles C WHERE c.idventa = $id";
+                FROM detalles C WHERE C.iddetalle = $id";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerPorIdVenta($id)
+    public function obtenerPorIdVenta($id)    
     {
-        $sql = "SELECT
-                C.iddetalle,
-                C.fk_idventa,
-                C.fk_idtipo_producto,
-                C.descrprod,
-                C.preciounitario,
-                C.cantidad,
-                C.total                           
-                FROM detalles C WHERE C.fk_idventa = '$id'";
-        $lstRetorno = DB::select($sql);
-
-        if (count($lstRetorno) > 0) {
-            $this->iddetalle = $lstRetorno[0]->iddetalle;
-            $this->fk_idventa = $lstRetorno[0]->fk_idventa;
-            $this->fk_idtipo_producto = $lstRetorno[0]->fk_idtipo_producto;
-            $this->fk_codproducto = $lstRetorno[0]->fk_codproducto;
-            $this->descripcion = $lstRetorno[0]->descripcion;
-            $this->preciounitario = $lstRetorno[0]->preciounitario;
-            $this->cantidad = $lstRetorno[0]->cantidad;
-            $this->total = $lstRetorno[0]->total;
-            return $this;
+        $idventa = $id->input('txtfk_idventa');
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'C.fk_idventa',
+            1 => 'C.fk_idtipo_producto',
+            2 => 'C.fk_codproducto',
+            3 => 'C.descrprod',
+            4 => 'C.cantidad',
+            5 => 'C.preciounitario',         
+            6 => 'C.total',
+            7 => 'C.iddetalle'
+        );
+        $sql = "SELECT DISTINCT                         
+                    C.fk_idventa,
+                    C.fk_idtipo_producto,
+                    C.fk_codproducto,                 
+                    C.descrprod,
+                    C.cantidad,
+                    C.preciounitario,                   
+                    C.total,
+                    C.iddetalle 
+                    FROM detalles C
+                WHERE  C.fk_idventa = $idventa
+                ";
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
         }
-        return null;
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
     }
 
 
@@ -166,4 +208,5 @@ class Detalle extends Model
         return $this->iddetalle = DB::getPdo()->lastInsertId();
     }
 }
+
 

@@ -3,12 +3,6 @@
 @section('titulo', "Listado de Detalle")
 
 @section('scripts')
-<script>
-    globalId = '<?php
-    echo isset($detalle->fk_idventa) && $detalle->fk_idventa > 0 ? $detalle->fk_idventa : 0; ?>';
-    <?php $globalId = isset($detalle->fk_idventa) ? $detalle->fk_idventa : "0"; 
-    ?>
-</script>
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/datatables.min.js') }}"></script>
 @endsection
@@ -48,8 +42,7 @@ if (isset($msg)) {
         </tr>
     </thead>
 </table> 
-<script>
-    var id = globalId;
+<script>   
 	var dataTable = $('#grilla').DataTable({
 	    "processing": true,
         "serverSide": true,
@@ -57,8 +50,8 @@ if (isset($msg)) {
 	    "bInfo": true,
 	    "bSearchable": true,
         "pageLength": 25,
-        "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('detalle.cargarGrilla',['id => 1']) }}"
+        "order": [[ 0, "asc" ]],        
+	    "ajax": "{{ route('detalle.cargarGrilla') }}"        
     });
 </script>
 @endsection

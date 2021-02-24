@@ -151,8 +151,8 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/detalle/nuevo', 'ControladorDetalle@nuevo');
     Route::post('/admin/detalle/nuevo', 'ControladorDetalle@guardar');
     Route::get('/admin/detalle/eliminar', 'ControladorDetalle@eliminar');
-    Route::get('/admin/detalles', 'ControladorDetalle@index');    
-    Route::get('/admin/detalle/cargarGrilla/{id}', 'ControladorDetalle@cargarGrilla')->name('detalle.cargarGrilla');
+    Route::get('/admin/detalles', 'ControladorDetalle@index');        
+    Route::get('/admin/detalle/cargarGrilla', 'ControladorDetalle@cargarGrilla')->name('detalle.cargarGrilla');
     Route::get('/admin/detalle/nuevo/{id}', 'ControladorDetalle@editar');
     Route::post('/admin/detalle/nuevo/{id}', 'ControladorDetalle@guardar');
     Route::get('/admin/detalle/buscarProductos', 'ControladorDetalle@buscarProductos');
