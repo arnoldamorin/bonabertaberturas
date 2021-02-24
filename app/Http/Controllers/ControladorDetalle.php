@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Detalle;
 use App\Entidades\Producto;
-use App\Entidades\Venta_estado;
 use App\Entidades\TipoProducto;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
@@ -30,13 +29,12 @@ class ControladorDetalle extends Controller
         }
     }
 
-    public function cargarGrilla()
+    public function cargarGrilla($id)
     {
-        $request = $_REQUEST;        
+        $request = $_REQUEST;                
         
-  
-        $entidadDetalle = new Detalle();
-        $aDetalle = $entidadDetalle->obtenerPorIdVenta($request);            
+        $entidadDetalle = new Detalle();       
+        $aDetalle = $entidadDetalle->obtenerPorIdVenta($id);            
 
         $data = array();
 
@@ -107,6 +105,7 @@ class ControladorDetalle extends Controller
                 $array_TipoProducto = $tipoProducto->obtenerTodos();
 
                 return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto'));
+                
             }
         } else {
             return redirect('admin/login');

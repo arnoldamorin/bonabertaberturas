@@ -56,7 +56,7 @@ class Detalle extends Model
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
-            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
@@ -129,7 +129,7 @@ class Detalle extends Model
 
     public function obtenerPorIdVenta($id)    
     {
-        $idventa = $id->input('txtfk_idventa');
+        
         $request = $_REQUEST;
         $columns = array(
             0 => 'C.fk_idventa',
@@ -151,11 +151,12 @@ class Detalle extends Model
                     C.total,
                     C.iddetalle 
                     FROM detalles C
-                WHERE  C.fk_idventa = $idventa
+                WHERE  C.fk_idventa = $id
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
-            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " AND ( C.fk_idventa LIKE '%" . $request['search']['value'] . "%') ";
+            
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
