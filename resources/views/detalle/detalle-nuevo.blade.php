@@ -4,11 +4,8 @@
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
 <script src="{{ asset('js/datatables.min.js') }}"></script>
 <script>
-    globalId = '<?php
-                echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0";
-        $idventa=$entidad->idventa;
-    ?>
+    globalId = '<?php echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -50,7 +47,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{$entidad->idventa or '19'}}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{ $idVenta }}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
@@ -129,19 +126,21 @@ if (isset($msg)) {
 </div>
 <script>
     
-    var dataTable = $('#grilla').DataTable({      
-          
-        "processing": true,
-        "serverSide": true,
-        "bFilter": true,
-        "bInfo": true,
-        "bSearchable": true,
-        "pageLength": 25,
-        "order": [
-            [0, "asc"]
-        ],        
-        "ajax": "{{ route('detalle.cargarGrilla',['id'=>$idventa])}}"       
-    })
+    window.onload = function() {
+        var dataTable = $('#grilla').DataTable({        
+            "processing": true,
+            "serverSide": true,
+            "bFilter": true,
+            "bInfo": true,
+            "bSearchable": true,
+            "pageLength": 25,
+            "order": [
+                [0, "asc"]
+            ],        
+            "ajax": "{{ route('detalle.cargarGrilla',['id' => $idVenta])}}"       
+        })
+    };
+
     $("#form1").validate();
 
     function guardar() {

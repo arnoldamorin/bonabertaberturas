@@ -147,7 +147,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* CONTROLADOR DETALLES                          */
     /* --------------------------------------------- */
 
-    Route::get('/admin/detalle/nuevo', 'ControladorDetalle@nuevo');
+    Route::get('/admin/detalle/nuevo', 'ControladorDetalle@nuevo')->name('detalle-nuevo');
     Route::post('/admin/detalle/nuevo', 'ControladorDetalle@guardar');
     Route::get('/admin/detalle/eliminar', 'ControladorDetalle@eliminar');
     Route::get('/admin/detalles', 'ControladorDetalle@index');        

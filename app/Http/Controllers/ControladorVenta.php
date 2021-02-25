@@ -12,6 +12,7 @@ use App\Entidades\Producto;
 use App\Entidades\TipoProducto;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Redirect;
 
 require app_path() . '/start/constants.php';
 
@@ -171,14 +172,21 @@ class ControladorVenta extends Controller
                 } else {
                     //Es nuevo
                     $titulo = "Nuevo Detalle";
-                    $entidad->insertar();
+                    $idVenta = $entidad->insertar();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
                     $_POST["id"] = $entidad->idventa;
                     $tipoProducto = new TipoProducto();
                     $array_TipoProducto = $tipoProducto->obtenerTodos();
-                    return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'entidad', 'array_TipoProducto'));
+
+                    return Redirect::route('detalle-nuevo', array(
+                        "idVenta" => $idVenta,
+                        "titulo" => $titulo,
+                        "msg" => $msg,
+                        "array_TipoProducto" => $array_TipoProducto
+                    ));
+                    //return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'entidad', 'array_TipoProducto'));
                 }
                 $_POST["id"] = $entidad->idventa;
                 return view('venta.venta-nuevo', compact('msg', 'venta', 'fecha', 'array_estado')) . '?id=' . $entidad->idventa;
