@@ -74,6 +74,7 @@ class ControladorDetalle extends Controller
         $array_TipoProducto = $tipoProducto->obtenerTodos();
 
         $titulo = "Nuevo Detalle";
+        $idVenta = $_GET["idVenta"];
 
         if (Usuario::autenticado() == true) {
             if (!Patente::autorizarOperacion("DETALLEALTA")) {
@@ -81,7 +82,7 @@ class ControladorDetalle extends Controller
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                return view('detalle.detalle-nuevo', compact('titulo', 'array_TipoProducto'));
+                return view('detalle.detalle-nuevo', compact('titulo', 'array_TipoProducto','idVenta'));
             }
         } else {
             return redirect('admin/login');
@@ -138,8 +139,11 @@ class ControladorDetalle extends Controller
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
+                    $tipoProducto = new TipoProducto();
+                    $array_TipoProducto = $tipoProducto->obtenerTodos();
+                    $idVenta =$detalle->fk_idventa;
                 }              
-                return view('detalle.detalle-listar', compact('titulo', 'msg', 'detalle')). '?id=' . $detalle->fk_idventa;
+                return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'idVenta', 'array_TipoProducto'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;

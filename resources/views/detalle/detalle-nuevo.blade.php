@@ -5,7 +5,9 @@
 <script src="{{ asset('js/datatables.min.js') }}"></script>
 <script>
     globalId = '<?php echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; ?>
+    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; 
+    $idVenta = $_GET["idVenta"];
+    ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -47,7 +49,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{ $idVenta }}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{ $idVenta or '' }}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
@@ -65,7 +67,7 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="lstProducto">Codigo Producto:</label>
                 <select id="lstProducto" onchange="fBuscarDescrProducto();fBuscarPrecioUnitario();" name="lstProducto" class="form-control">
-                    <option selected value="{{$detalle->idproducto or ''}}"></option>
+                    <option selected value="{{$detalle->fk_codproducto or ''}}"></option>
                 </select>
             </div>
             <div class="form-group col-lg-6">
@@ -81,8 +83,8 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Precio Unitario</label>
-                <input class="form-control" type="text" id="txtPrecioUnitario" name="txtPrecioUnitario" readonly>
-                <!--value="{{$detalle->cantidad or ''}}"-->
+                <input class="form-control" type="text" id="txtPrecioUnitario" name="txtPrecioUnitario" readonly value="{{$detalle->preciounitario or ''}}">
+                <!---->
             </div>
             <div class="form-group col-lg-6">
                 <label>Total</label>
