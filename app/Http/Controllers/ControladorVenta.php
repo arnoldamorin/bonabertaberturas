@@ -266,4 +266,13 @@ class ControladorVenta extends Controller
         );
         return json_encode($json_data);
     }*/
+
+    public function remito(){
+        return view('venta.venta-remito');
+    }
+
+    public function imprimir(){
+        $pdf = \PDF::loadView('venta.venta-remito');
+            return $pdf->download('ejemplo.pdf');
+    }
 }
