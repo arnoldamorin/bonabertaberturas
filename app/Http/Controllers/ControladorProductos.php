@@ -7,6 +7,7 @@ use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
 use App\Entidades\TipoProducto;
 use App\Entidades\Producto;
+use App\Entidades\Coeficiente;
 require app_path() . '/start/constants.php';
 
 class ControladorProductos extends Controller
@@ -32,6 +33,9 @@ class ControladorProductos extends Controller
     {
         $entidad = new TipoProducto();
         $array_TipoProductos = $entidad->obtenerTodos();
+
+        $coeficiente = new Coeficiente();
+        $array_Coeficientes = $coeficiente->obtenerTodos();
 
         $titulo = "Nuevo Producto";
 
