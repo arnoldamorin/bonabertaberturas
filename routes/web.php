@@ -37,6 +37,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/home', 'ControladorHome@index');
     Route::get('/admin', 'ControladorHome@index');
 
+    
 
     /* --------------------------------------------- */
     /* CONTROLADOR LOGIN                           */
@@ -141,7 +142,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/ventas', 'ControladorVenta@index');
     Route::get('/admin/venta/nueva/{id}', 'ControladorVenta@editar');
     Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');    
-    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');    
+    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');  
+    Route::name('imprimir')->get('admin/ventas/imprimir', 'ControladorVenta@imprimir');
+    Route::get('/admin/ventas/remito','ControladorVenta@remito');  
     
     /* --------------------------------------------- */
     /* CONTROLADOR DETALLES                          */

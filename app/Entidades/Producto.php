@@ -12,7 +12,7 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_costo', 'precio_venta', 'marca', 'ganancia', 'fk_idcoeficiente', 'stock', 'color'
+        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_base', 'marca', 'fk_idcoeficiente', 'stock', 'color'
     ];
 
     protected $hidden = [];
@@ -26,12 +26,11 @@ class Producto extends Model
         $this->medidas_externas = $request->input('txtMedidasExternas');
         $this->medidas_internas = $request->input('txtMedidasInternas');
         $this->peso = $request->input('txtPeso');
-        $this->precio_costo = $request->input('txtPrecioCosto');
-        $this->precio_venta = $request->input('txtPrecioVenta');
+        $this->precio_base = $request->input('txtBase');        
         $this->marca = $request->input('txtMarca');
         $this->imagen = $request->input('ImagenProducto');
     }
-
+ 
     public function obtenerFiltrado()
     {
         $request = $_REQUEST;
