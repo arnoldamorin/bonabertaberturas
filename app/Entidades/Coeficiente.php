@@ -20,27 +20,27 @@ class Coeficiente extends Model
     ];
 
     function cargarDesdeRequest($request) {
-        $this->idtipo_producto = $request->input('id')!="0" ? $request->input('id') : $this->idtipo_producto;
+        $this->idcoeficiente = $request->input('id')!="0" ? $request->input('id') : $this->idcoeficiente;
         $this->nombre = $request->input('txtNombre');
-        $this->descripcion = $request->input('txtDescripcion');   
+        $this->valor = $request->input('txtValor');   
     }
 
     public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
-           0 => 'TP.nombre',
-           1 => 'TP.descripcion'     
+           0 => 'C.nombre',
+           1 => 'C.valor'     
             );
         $sql = "SELECT DISTINCT
-                    TP.idtipo_producto,
-                    TP.nombre,
-                    TP.descripcion                   
-                    FROM tipos_productos TP
+                    C.idcoeficiente,
+                    C.nombre,
+                    C.valor                   
+                    FROM coeficientes C
                 WHERE 1=1
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
-            $sql.=" AND ( TP.nombre LIKE '%" . $request['search']['value'] . "%' )";
+            $sql.=" AND ( C.nombre LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);
@@ -49,55 +49,54 @@ class Coeficiente extends Model
 
     public function obtenerTodos() {
         $sql = "SELECT 
-                  TP.idtipo_producto,
-                  TP.nombre,
-                  TP.descripcion
-                FROM tipos_productos TP ORDER BY TP.nombre";
+                  C.idcoeficiente,
+                  C.nombre,
+                  C.valor
+                FROM coeficientes C ORDER BY C.nombre";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idtipo_producto) {
-        $sql = "SELECT
-                idtipo_producto,
+    public function obtenerPorId($idcoeficiente) {
+        $sql = "SELECT              
                 nombre,
-                descripcion
-                FROM tipos_productos WHERE idtipo_producto = $idtipo_producto";
+                valor
+                FROM coeficientes WHERE idcoeficiente = $idcoeficiente";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){
-            $this->idtipo_producto = $lstRetorno[0]->idtipo_producto;
+            $this->idcoeficiente = $lstRetorno[0]->idcoeficiente;
             $this->nombre = $lstRetorno[0]->nombre;
-            $this->descripcion = $lstRetorno[0]->descripcion;      
+            $this->valor = $lstRetorno[0]->valor;      
             return $this;
         }
         return null;
     }
 
     public function guardar() {
-        $sql = "UPDATE tipos_productos SET
+        $sql = "UPDATE coeficientes SET
             nombre = '$this->nombre',
-            descripcion = '$this->descripcion'
-            WHERE idtipo_producto=?";
-        $affected = DB::update($sql, [$this->idtipo_producto]);
+            valor = '$this->valor'
+            WHERE idcoeficiente=?";
+        $affected = DB::update($sql, [$this->idcoeficiente]);
     }
 
     public  function eliminar() {
-        $sql = "DELETE FROM tipos_productos WHERE 
-            idtipo_producto=?";
-        $affected = DB::delete($sql, [$this->idtipo_producto]);
+        $sql = "DELETE FROM coeficientes WHERE 
+            idcoeficiente=?";
+        $affected = DB::delete($sql, [$this->idcoeficiente]);
     }
 
     public function insertar() {
-        $sql = "INSERT INTO tipos_productos (
+        $sql = "INSERT INTO coeficientes (
                 nombre,
-                descripcion             
+                valor             
             ) VALUES (?, ?);";
        $result = DB::insert($sql, [
             $this->nombre, 
-            $this->descripcion           
+            $this->valor           
         ]);
-       return $this->idtipo_producto = DB::getPdo()->lastInsertId();
+       return $this->idcoeficiente = DB::geCdo()->lastInsertId();
     }
 
 }

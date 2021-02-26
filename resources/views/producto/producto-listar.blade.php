@@ -38,8 +38,7 @@ if (isset($msg)) {
             <th>Medidas Externas</th>
             <th>Medidas Internas</th>
             <th>Peso</th>
-            <th>Precio Costo</th>
-            <th>Precio Venta</th>
+            <th>Precio Base</th>           
             <th>Marca</th>  
             <th>Acciones</th>                              
         </tr>

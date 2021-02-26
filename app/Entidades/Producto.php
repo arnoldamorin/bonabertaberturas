@@ -12,7 +12,7 @@ class Producto extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_base', 'marca', 'fk_idcoeficiente', 'stock', 'color'
+        'idproducto', 'codigo', 'descripcion', 'fk_idtipo_producto', 'medidas_externas', 'medidas_internas', 'peso', 'precio_base','precio_costo','precio_venta', 'marca', 'fk_idcoeficiente', 'stock', 'color', 'ganancia'
     ];
 
     protected $hidden = [];
@@ -21,12 +21,16 @@ class Producto extends Model
     {
         $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto;
         $this->codigo = $request->input('txtCodigo');
-        $this->descripcion = $request->input('txtDescripcion');
+        $this->descripcion = $request->input('txtDescripcion'); 
         $this->fk_idtipo_producto = $request->input('lstTipoProducto');
         $this->medidas_externas = $request->input('txtMedidasExternas');
         $this->medidas_internas = $request->input('txtMedidasInternas');
         $this->peso = $request->input('txtPeso');
+        $this->fk_idcoeficiente = $request->input('lstCoeficiente');
         $this->precio_base = $request->input('txtBase');        
+        $this->precio_costo = 0;
+        $this->precio_venta = 0;
+        $this->ganancia = 0;
         $this->marca = $request->input('txtMarca');
         $this->imagen = $request->input('ImagenProducto');
     }
@@ -41,21 +45,18 @@ class Producto extends Model
             3 => 'P.medidas_externas',
             4 => 'P.medidas_internas',
             5 => 'P.peso',
-            6 => 'P.precio_costo',
-            7 => 'P.precio_venta',
-            8 => 'P.marca',
-            9 => 'P.idproducto'
+            6 => 'P.precio_base',        
+            7 => 'P.marca',
+            8 => 'P.idproducto'
         );
         $sql = "SELECT DISTINCT
                     P.imagen,
                     P.codigo,
-                    P.descripcion,
-                    P.fk_idtipo_producto,
+                    P.descripcion,                 
                     P.medidas_externas,
                     P.medidas_internas,
                     P.peso,
-                    P.precio_costo,
-                    P.precio_venta,
+                    P.precio_base,                    
                     P.marca,
                     P.idproducto   
                     FROM productos P
@@ -198,7 +199,7 @@ class Producto extends Model
             medidas_externas= '$this->medidas_externas',
             medidas_internas= '$this->medidas_internas',
             peso='$this->peso',
-            precio_costo='$this->precio_costo',
+            precio_base='$this->precio_base',
             imagen='$this->imagen',
             marca='$this->marca'
             WHERE idproducto=?";
@@ -221,11 +222,13 @@ class Producto extends Model
                 medidas_externas,
                 medidas_internas,
                 peso,
-                precio_costo,  
-                precio_venta,              
+                fk_idcoeficiente,
+                precio_base,      
+                precio_costo,
+                precio_venta,       
                 marca,             
                 imagen
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $result = DB::insert($sql, [
             $this->codigo,
             $this->descripcion,
@@ -233,6 +236,8 @@ class Producto extends Model
             $this->medidas_externas,
             $this->medidas_internas,
             $this->peso,
+            $this->fk_idcoeficiente,
+            $this->precio_base,
             $this->precio_costo,
             $this->precio_venta,
             $this->marca,

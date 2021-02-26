@@ -77,8 +77,8 @@ if (isset($msg)) {
                 <input class="form-control" type="text" name="txtPeso" id="txtPeso" required value="{{$producto->peso or ''}}">
             </div>
             <div class="form-group col-lg-6">
-                <label>Coeficientes:</label>
-                <select id="lstTipoProducto" name="lstTipoProducto" class="form-control">
+                <label>Coeficiente:</label>
+                <select id="lstCoeficiente" name="lstCoeficiente" class="form-control">
                     <option disabled selected value="">Seleccionar</option>
                     @for ($i = 0; $i < count($array_Coeficientes); $i++) @if (isset($producto) and $array_Coeficientes[$i]->idcoeficiente == $producto->fk_idcoeficiente)
                         <option selected value="{{ $array_Coeficientes[$i]->idcoeficiente }}">{{ $array_Coeficientes[$i]->nombre }}</option>
