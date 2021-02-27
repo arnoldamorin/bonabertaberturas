@@ -51,7 +51,7 @@
                 $row[] = $aClientes[$i]->mail;
                 $row[] = $aClientes[$i]->telefono;
                 $row[] = $aClientes[$i]->direccion;                
-                $row[] = "<a href='/admin/cliente/nuevo/".$aClientes[$i]->idcliente."'><i class='fas fa-search'></i></a>";
+                $row[] = "<a href='/admin/cliente/nuevo/".$aClientes[$i]->idcliente."'><i class='fas fa-edit'></i></a>";
                 $cont++;
                 $data[] = $row;
             }

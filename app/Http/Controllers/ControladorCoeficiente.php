@@ -13,14 +13,14 @@
     {
         public function index()
         {
-            $titulo = "Coeficiente";
+            $titulo = "Coeficientes";
             if (Usuario::autenticado() == true) {
                 if (!Patente::autorizarOperacion("MENUCONSULTA")) {
                     $codigo = "MENUCONSULTA";
                     $mensaje = "No tiene permisos para la operaci&oacute;n.";
                     return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
                 } else {
-                    return view('tipoproducto.tipo-producto-listar', compact('titulo'));
+                    return view('coeficiente.coeficiente-listar', compact('titulo'));
                 }
             } else {
                 return redirect('admin/login');
@@ -46,8 +46,9 @@
     
             for ($i = $inicio; $i < count($aCoeficiente) && $cont < $registros_por_pagina; $i++) {
                 $row = array();
-                $row[] = '<a href="/admin/productos/tipodeproductos/nuevo/' . $aCoeficiente[$i]->idcoeficiente . '">' . $aCoeficiente[$i]->nombre . '</a>';
-                $row[] = $aCoeficiente[$i]->valor;                     
+                $row[] = $aCoeficiente[$i]->nombre;
+                $row[] = $aCoeficiente[$i]->valor;          
+                $row[] = "<a href='/admin/coeficiente/nuevo/" . $aCoeficiente[$i]->idcoeficiente . "'><i class='fas fa-edit'></i></a>";           
                 $cont++;
                 $data[] = $row;
             }
