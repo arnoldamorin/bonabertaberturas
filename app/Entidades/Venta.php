@@ -33,25 +33,32 @@ class Venta extends Model
   public function obtenerFiltrado() {
         $request = $_REQUEST;
         $columns = array(
-           0 => 'C.fecha',
-           1 => 'C.fk_iddetalle',
-           2 => 'C.telefono',
-           3 => 'C.correo',
-           4 => 'C.nombre_comprador',
-           5 => 'C.apellido_comprador',
-           6 => 'C.fk_idventas_estados'
+           0 => 'C.fecha',           
+           1 => 'C.telefono',
+           2 => 'C.correo',
+           3 => 'C.nombre_comprador',
+           4 => 'C.apellido_comprador',
+           5 => 'C.fk_idventas_estados',
+           6 => 'C.idventa'
             );
         $sql = "SELECT DISTINCT
-                    C.idventa,
                     C.fecha,
                     C.telefono,
-                    C.correo                   
+                    C.correo,                   
+                    C.nombre_comprador,
+                    C.apellido_comprador,
+                    C.fk_idventa_estados,
+                    C.idventa
                     FROM ventas C
                 WHERE 1=1
                 ";
         //Realiza el filtrado
         if (!empty($request['search']['value'])) { 
             $sql.=" AND ( C.fecha LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.correo LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.nombre_comprador LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.apellido_comprador LIKE '%" . $request['search']['value'] . "%' ";            
+            $sql .= " OR C.idventa LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql.=" ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
         $lstRetorno = DB::select($sql);

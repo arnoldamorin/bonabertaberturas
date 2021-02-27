@@ -71,7 +71,7 @@ if (isset($msg)) {
                 <label>Estado:</label>
                 <select id="lstEstado" name="lstEstado" class="form-control">
                     @for ($i = 0; $i < count($array_estado); $i++) @if (isset($venta) and $array_estado[$i]->idestado ==
-                        $venta->fk_idestado)
+                        $venta->fk_idventas_estados)
                         <option selected value="{{ $array_estado[$i]->idestado }}">{{ $array_estado[$i]->nombre }}
                         </option>
                         @else

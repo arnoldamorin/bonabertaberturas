@@ -176,11 +176,11 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* --------------------------------------------- */
     /* CONTROLADOR COEFICIENTE                       */
     /* --------------------------------------------- */
-    Route::get('/admin/productos/coeficiente/nuevo', 'ControladorCoeficiente@nuevo');
-    Route::post('/admin/productos/coeficiente/nuevo', 'ControladorCoeficiente@guardar');
-    Route::get('/admin/productos/coeficiente/cargarGrilla', 'ControladorCoeficiente@cargarGrilla')->name('coeficientes.cargarGrilla');
-    Route::get('/admin/productos/coeficiente', 'ControladorCoeficiente@index');
-    Route::get('/admin/productos/coeficiente/nuevo/{id}', 'ControladorCoeficiente@editar');
-    Route::post('/admin/productos/coeficiente/nuevo/{id}', 'ControladorCoeficiente@guardar');
-    Route::get('/admin/productos/coeficiente/eliminar', 'ControladorCoeficiente@eliminar');
+    Route::get('/admin/coeficiente/nuevo', 'ControladorCoeficiente@nuevo');
+    Route::post('/admin/coeficiente/nuevo', 'ControladorCoeficiente@guardar');
+    Route::get('/admin/coeficiente/cargarGrilla', 'ControladorCoeficiente@cargarGrilla')->name('coeficientes.cargarGrilla');
+    Route::get('/admin/coeficientes', 'ControladorCoeficiente@index');
+    Route::get('/admin/coeficiente/nuevo/{id}', 'ControladorCoeficiente@editar');
+    Route::post('/admin/coeficiente/nuevo/{id}', 'ControladorCoeficiente@guardar');
+    Route::get('/admin/coeficiente/eliminar', 'ControladorCoeficiente@eliminar');
 });

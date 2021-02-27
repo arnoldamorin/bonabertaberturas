@@ -39,10 +39,8 @@ class ControladorVenta extends Controller
         $request = $_REQUEST;
 
         $entidadVenta = new Venta();
-        $aVenta = $entidadVenta->obtenerTodos();
-
-        $entidadDetalle = new Detalle();
-        $aDetalle = $entidadDetalle->obtenerTodos();
+        $aVenta = $entidadVenta->obtenerFiltrado();
+      
         $entidadEstado = new Venta_estado();
 
         $data = array();
@@ -62,9 +60,9 @@ class ControladorVenta extends Controller
             $row[] = $aVenta[$i]->correo;
             $row[] = $aVenta[$i]->nombre_comprador;
             $row[] = $aVenta[$i]->apellido_comprador;
-            $entidadEstado->obtenerPorID($aVenta[$i]->fk_idestado);
+            $entidadEstado->obtenerPorID($aVenta[$i]->fk_idventas_estados);
             $row[] = $entidadEstado->nombre;
-            $row[] = "<a href='/admin/venta/nueva/" . $aVenta[$i]->idventa . "'><i class='fas fa-search'></i></a>";
+            $row[] = "<a href='/admin/venta/nueva/" . $aVenta[$i]->idventa . "'><i class='fas fa-edit'></i></a>";
             $cont++;
             $data[] = $row;
         }
@@ -233,40 +231,7 @@ class ControladorVenta extends Controller
         echo json_encode($array_Producto);
         exit;
     }
-    /*public function cargarDetalle()
-    {
-        $request = $_REQUEST;     
-
-        $entidadDetalle = new Detalle();
-        $aDetalle = $entidadDetalle->obtenerPorId($_POST["id"]);           
-        $data = array();
-        $inicio = $request['start'];
-        $registros_por_pagina = $request['length'];
-
-        if (count($aDetalle) > 0) {
-            $cont = 0;
-        }
-
-        for ($i = $inicio; $i < count($aDetalle) && $cont < $registros_por_pagina; $i++) {
-            $row = array();          
-            $row[] = $aDetalle[$i]->fk_idtipo_producto;
-            $row[] = $aDetalle[$i]->obtenerDescrProducto($aDetalle[$i]->fk_idproducto);
-            $row[] = $aDetalle[$i]->cantidad;          
-            $row[] = $aDetalle[$i]->total;      
-            $row[] = "<a href='/admin/detalle/editar/" . $aDetalle[$i]->iddetalle . "'><i class='fas fa-search'></i></a>";
-            $cont++;
-            $data[] = $row;
-        }
-
-        $json_data = array(
-            "draw" => intval($request['draw']),
-            "recordsTotal" => count($aDetalle), //cantidad total de registros sin paginar
-            "recordsFiltered" => count($aDetalle), //cantidad total de registros en la paginacion
-            "data" => $data,
-        );
-        return json_encode($json_data);
-    }*/
-
+    
     public function remito(){
         return view('venta.venta-remito');
     }

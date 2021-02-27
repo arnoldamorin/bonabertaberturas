@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de Tipos de Productos")
+@section('titulo', "Listado de Coeficientes")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
