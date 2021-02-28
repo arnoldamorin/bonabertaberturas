@@ -272,11 +272,12 @@ class Producto extends Model
                 $sql .= " AND precio_venta <= $precioMax";
             }
         } else {
-            if ($precioMin != "") {
+            if ($precioMin == "" && $precioMax != "") {
+                $sql .= "precio_venta <= $precioMax";
+            } else if ($precioMin != "" && $precioMax == "") {
                 $sql .= "precio_venta >= $precioMin";
-            }
-            if ($precioMax != "") {
-                $sql .= " AND precio_venta <= $precioMax";
+            } else if ($precioMin != "" && $precioMax != "") {
+                $sql .= "precio_venta >= $precioMin AND precio_venta <= $precioMax";
             }
         }
         $lstRetorno = DB::select($sql);

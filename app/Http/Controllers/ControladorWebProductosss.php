@@ -31,7 +31,8 @@ class ControladorWebProductosss extends Controller
             );
         } else {
             $json_data =  array(
-                "error" => 1
+                "error" => 1,
+                "mensaje" => "No se han encontrado resultados."
             );
         }
         return json_encode($json_data);
@@ -41,6 +42,16 @@ class ControladorWebProductosss extends Controller
         $aFiltros = $request->input("filtro");
         $precioMin = $request->input("precioMin");
         $precioMax = $request->input("precioMax");
+
+        if ($precioMin != "" && $precioMax != "") {
+            if ($precioMax < $precioMin) {
+                return json_encode(array(
+                    "error" => 1,
+                    "mensaje" => "El precio máximo no puede ser menor al precio mínimo. Arregle este error e inténtalo nuevamente."
+                ));
+            }
+        }
+
         $producto = new Producto();
 
         if ($aFiltros != "") {
@@ -63,7 +74,8 @@ class ControladorWebProductosss extends Controller
             );
         } else {
             $json_data =  array(
-                "error" => 1
+                "error" => 1,
+                "mensaje" => "No se han encontrado resultados."
             );
         }
         return json_encode($json_data);
