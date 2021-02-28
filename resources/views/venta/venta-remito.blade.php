@@ -4,17 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Remito</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
     <style>
+        body{
+            border: 1px solid;
+            margin: 0 auto;
+            width: 1000px;
+        }
         p {
             margin-bottom: 0;
+        }
+        a{
+            display: block;
+        }
+        .contenedor1{
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
 
 <body>
-    <a href="{{route('imprimir')}}" target="_blank" rel="noopener noreferrer"><button>Imprimir PDF</button></a>
-    <div class="container border">
+    <!--<div class="container border">
         <div class="row">
             <div class="col-7">
                 <div class="row">
@@ -130,7 +141,30 @@
                 </table>
             </div>
         </div>
+    </div>-->
+    <div class="contenedor1">
+        <table style="display: inline-flex; width:450px">
+            <tr><th>Aberturas Bonabert</th></tr>
+            <tr><td>Av. del Libertador 2323</td></tr>
+            <tr><td>CABA - Argentina</td></tr>
+            <tr><td>T.E.: 154445569</td></tr>
+            <tr><td>IVA Responsable Inscripto</td></tr>
+            <tr><td>CUIT:</td></tr>
+            <tr><td>IIBB: 20202002</td></tr>
+        </table>
+        <p style="display:inline">X</p>
+        <table style="display: inline-flex; width: 450px">
+            <tr>
+                <th>MOVIMIENTO DE STOCK</th>
+                <td>Pagina 1 de 1</td>
+            </tr>
+            <tr><td>Numero: 00000079</td></tr>
+            <tr><td>Fecha: 10/06/16</td></tr>
+            <tr><td>DOCUMENTO NO VALIDO COMO FACTURA</td></tr>
+        </table>
     </div>
+    <a href="{{route('imprimir')}}" target="_blank" rel="noopener noreferrer"><button>Imprimir PDF</button></a>
+
 
 </body>
 
