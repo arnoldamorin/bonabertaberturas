@@ -27,7 +27,7 @@ class Venta extends Model
         $this->correo = $request->input('txtCorreo'); 
         $this->nombre_comprador = $request->input('txtNombreComprador');
         $this->apellido_comprador = $request->input('txtApellidoComprador');
-        $this->fk_idventas_estados = $request->input('lstEstado');        
+        $this->fk_idventas_estados = $request->input('lstEstado');
     }
 
   public function obtenerFiltrado() {

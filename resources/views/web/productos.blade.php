@@ -49,19 +49,15 @@ $productos = 16;
                     </div>
                     <div class="col-12 px-0 div__subcategoria my-2 pb-2 shadow">
                         <label class="d-block lblSubcategoria pl-2 py-1">Rango de precios</label>
-                        <!-- <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
-                        <p class="d-inline">Subcategoria 1</p><br>
-                        <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
-                        <p class="d-inline">Subcategoria 2</p><br> -->
                         <div class="row justify-content-between mx-0">
-                            <div class="col-auto p-0 pl-2" style="font-size: 10px;">{{ "$ " . number_format($precioMin, 2, ",", ".") }}</div>
-                            <div class="col-auto p-0 pr-2" style="font-size: 10px;">{{ "$ " . number_format($precioMax, 2, ",", ".") }}</div>
-                            <div class="col-12 text-center">
-                                <input type="range" class="form-range" min="{{ $precioMin }}" step="5000" max="{{ $precioMax }}" value="{{ $precioMax }}" id="rangoPrecio">
-                                <input type="text" class="form-control" id="txtPrecio" value="">
+                            <div class="col-6 pr-1">
+                                <input type="text" class="form-control" id="txtPrecioMin" value="">
                             </div>
-                            <div class="col-12">
-                                <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecio').val());"></i>
+                            <div class="col-6 pl-1">
+                                <input type="text" class="form-control" id="txtPrecioMax" value="">
+                            </div>
+                            <div class="col-12 text-right">
+                                <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecioMin').val(), $('#txtPrecioMax').val());"></i>
                             </div>
                         </div>
                     </div>
@@ -86,18 +82,6 @@ $productos = 16;
         </div>
         <div class="col-12 col-md-9 col-lg-10">
             <div id="div-productos" class="row mx-0 px-0 text-center">
-                <!-- <?php for ($i = 0; $i < $productos; $i++) { ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <a href="producto.php" target="_blank" rel="sponsored">
-                                <img src="img/producto-3.png" class="img img-fluid" alt="producto">
-                                <p class="text-center my-0 py-2">Puerta Pavir Negra</p>
-                            </a>
-                            <p class="text-center my-0 pb-2 precio">$17,999.00</p>
-                            <button class="btn">COMPRAR <i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                <?php } ?> -->
             </div>
         </div>
     </div>
@@ -107,19 +91,8 @@ $productos = 16;
     var aMedidasFiltro = [];
     var precio = 0;
 
-    document.getElementById('rangoPrecio').addEventListener('mousedown', function() {
-        document.getElementById('rangoPrecio').addEventListener('mousemove', mostrarPrecio);
-        document.getElementById('rangoPrecio').addEventListener('mouseup', function() {
-            mostrarPrecio();
-            document.getElementById('rangoPrecio').removeEventListener('mousemove', mostrarPrecio);
-        });
-    });
-
-    function mostrarPrecio() {
-        $('#txtPrecio').val($('#rangoPrecio').val());
-    }
-
-    function aplicarFiltroPrecio(filtroPrecio) { //tengo que seguir laburando en esto *ISRA*
+    function aplicarFiltroPrecio(filtroPrecio) {
+        console.log(filtroPrecio);
         precio = filtroPrecio;
 
         let divProductos = document.getElementById('div-productos');
@@ -196,7 +169,11 @@ $productos = 16;
                         
                         let imgProducto = document.createElement('img');
                         imgProducto.classList.add('img', 'img-fluid');
-                        imgProducto.src = 'img/producto-3.png';
+                        if (valor.imagen != '') {
+                            imgProducto.src = 'web/img/puertas/' + valor.imagen;
+                        } else {
+                            imgProducto.src = 'img/producto-3.png';
+                        }
                         imgProducto.alt = 'producto';
 
                         let descrProducto = document.createElement('p');
