@@ -51,7 +51,7 @@ $productos = 16;
                         <label class="d-block lblSubcategoria pl-2 py-1">Rango de precios</label>
                         <div class="row justify-content-between mx-0">
                             <div class="col-6 pr-1">
-                                <input type="text" class="form-control" id="txtPrecioMin" value="">
+                                <input type="text" class="form-control" id="txtPrecioMin" value="" onkeypress="controlarPrecio(this.value);">
                             </div>
                             <div class="col-6 pl-1">
                                 <input type="text" class="form-control" id="txtPrecioMax" value="">
@@ -89,23 +89,29 @@ $productos = 16;
 <script>
 
     var aMedidasFiltro = [];
-    var precio = 0;
+    var precioMin = 0;
+    var precioMax = 0;
 
-    function aplicarFiltroPrecio(filtroPrecio) {
-        console.log(filtroPrecio);
-        precio = filtroPrecio;
+    function controlarPrecio(precio) {
+        console.log(precio);
+    }
 
-        let divProductos = document.getElementById('div-productos');
-        while (divProductos.firstChild) {
-            divProductos.removeChild(divProductos.firstChild);
-        }
+    function aplicarFiltroPrecio(precioMinFiltro, precioMaxFiltro) {
+        if (precioMaxFiltro > precioMinFiltro) {
+            let divProductos = document.getElementById('div-productos');
+            while (divProductos.firstChild) {
+                divProductos.removeChild(divProductos.firstChild);
+            }
+            
+            $('#spinner').show();
 
-        $('#spinner').show();
-
-        if (precio != '') {
-            obtenerProductos('/productos/filtro/');
-        } else {
-            obtenerProductos('/productos/obtenerTodos/');
+            if (precioMinFiltro != '' && precioMaxFiltro != '') {
+                precioMin = precioMinFiltro;
+                precioMax = precioMaxFiltro;
+                obtenerProductos('/productos/filtro/');
+            } else {
+                obtenerProductos('/productos/obtenerTodos/');
+            }
         }
     }
 
@@ -153,7 +159,8 @@ $productos = 16;
             async: true,
             data: {
                 filtro: aMedidasFiltro,
-                precio: precio
+                precioMin: precioMin,
+                precioMax: precioMax
             },
             success: function(data) {
                 if (data.error == 0) {
@@ -169,11 +176,13 @@ $productos = 16;
                         
                         let imgProducto = document.createElement('img');
                         imgProducto.classList.add('img', 'img-fluid');
+
                         if (valor.imagen != '') {
                             imgProducto.src = 'web/img/puertas/' + valor.imagen;
                         } else {
                             imgProducto.src = 'img/producto-3.png';
                         }
+
                         imgProducto.alt = 'producto';
 
                         let descrProducto = document.createElement('p');
