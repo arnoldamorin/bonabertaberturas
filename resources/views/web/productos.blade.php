@@ -9,11 +9,12 @@ $productos = 16;
 
 <div class="container mt-3 mt-sm-4 mx-md-0 px-0">
     <div class="row filtro-top px-2 py-2 mb-4 mx-3 mx-md-4">
-        <div class="col-12 col-md-8 px-0">
+        <div class="col-12 col-md-7 px-0">
             <p class="mb-0 mr-2 d-inline"><i class="fas fa-arrow-circle-right mr-1"></i>Categoria</p>
             <p class="mb-0 mr-2 d-inline"><i class="fas fa-arrow-circle-right mr-1"></i>Subcategoria [breadcumb]</p>
         </div>
-        <div class="col-6 col-md-4 text-right d-none d-md-inline px-0">
+        <div class="col-6 col-md-5 text-right d-none d-md-inline px-0">
+            <label class="m-0 mr-2 mr-md-3">Cantidad de productos:<span id="cant-productos"></span></label>
             <select name="lstOrden" id="lstOrden">
                 <option value="1">Menor Precio</option>
                 <option value="2">Mayor Precio</option>
@@ -51,10 +52,10 @@ $productos = 16;
                         <label class="d-block lblSubcategoria pl-2 py-1">Rango de precios</label>
                         <div class="row justify-content-between mx-0">
                             <div class="col-6 pr-1">
-                                <input type="text" class="form-control" id="txtPrecioMin" value="">
+                                <input type="text" class="form-control" id="txtPrecioMin" value="" onkeyup="controlarPrecio(this);" placeholder="Mínimo">
                             </div>
                             <div class="col-6 pl-1">
-                                <input type="text" class="form-control" id="txtPrecioMax" value="">
+                                <input type="text" class="form-control" id="txtPrecioMax" value="" onkeyup="controlarPrecio(this);" placeholder="Máximo">
                             </div>
                             <div class="col-12 text-right">
                                 <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecioMin').val(), $('#txtPrecioMax').val());"></i>
@@ -68,6 +69,12 @@ $productos = 16;
                         <input type="checkbox" name="chkMaterial" id="chkMaterial" value="" class="mx-2">
                         <p class="d-inline">Material 2</p><br>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="div-msg" class="row" style="display: none;">
+            <div class="col-12">
+                <div id="msg" class="alert alert-danger">
                 </div>
             </div>
         </div>
@@ -89,23 +96,37 @@ $productos = 16;
 <script>
 
     var aMedidasFiltro = [];
-    var precio = 0;
+    var precioMin = <?php echo $precioMin; ?>;
+    var precioMax = <?php echo $precioMax; ?>;
 
-    function aplicarFiltroPrecio(filtroPrecio) {
-        console.log(filtroPrecio);
-        precio = filtroPrecio;
+    function controlarPrecio(precio) {
+        //comprueba que sea un valor numerico
+        if (isNaN(precio.value)) {
+            //comprueba que no se incluyan comas
+            precio.value = precio.value.slice(0, precio.value.length - 1);
+        }
+    }
 
+    function aplicarFiltroPrecio(precioMinFiltro, precioMaxFiltro) {
         let divProductos = document.getElementById('div-productos');
         while (divProductos.firstChild) {
             divProductos.removeChild(divProductos.firstChild);
         }
-
+        
         $('#spinner').show();
 
-        if (precio != '') {
+        if (precioMinFiltro != '' || precioMaxFiltro != '') {
+            precioMin = precioMinFiltro;
+            precioMax = precioMaxFiltro;
             obtenerProductos('/productos/filtro/');
         } else {
-            obtenerProductos('/productos/obtenerTodos/');
+            if (aMedidasFiltro.length > 0) {
+                precioMin = <?php echo $precioMin; ?>;
+                precioMax = <?php echo $precioMax; ?>;
+                obtenerProductos('/productos/filtro/');
+            } else {
+                obtenerProductos('/productos/obtenerTodos/');
+            }
         }
     }
 
@@ -135,13 +156,20 @@ $productos = 16;
         if (aMedidasFiltro.length) {
             url = '/productos/filtro/';
         } else {
-            url = '/productos/obtenerTodos/';
+            if ($('#txtPrecioMin').val() != '' || $('#txtPrecioMax').val() != '') {
+                precioMin = $('#txtPrecioMin').val();
+                precioMax = $('#txtPrecioMax').val();
+                url = '/productos/filtro/';
+            } else {
+                url = '/productos/obtenerTodos/';
+            }
         }
 
         obtenerProductos(url);
     }
 
     function obtenerProductos(url) {
+        $('#div-msg').hide();
         $('input[type=checkbox]').each(function() {
             this.setAttribute('disabled', 'true');
         });
@@ -153,11 +181,13 @@ $productos = 16;
             async: true,
             data: {
                 filtro: aMedidasFiltro,
-                precio: precio
+                precioMin: precioMin,
+                precioMax: precioMax
             },
             success: function(data) {
                 if (data.error == 0) {
                     $('#spinner').hide();
+                    document.getElementById('cant-productos').innerText = ' ' + data.productos.length;
                     data.productos.forEach(function(valor) {
                         let col = document.createElement('div');
                         col.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3');
@@ -169,11 +199,13 @@ $productos = 16;
                         
                         let imgProducto = document.createElement('img');
                         imgProducto.classList.add('img', 'img-fluid');
+
                         if (valor.imagen != '') {
                             imgProducto.src = 'web/img/puertas/' + valor.imagen;
                         } else {
                             imgProducto.src = 'img/producto-3.png';
                         }
+
                         imgProducto.alt = 'producto';
 
                         let descrProducto = document.createElement('p');
@@ -207,10 +239,18 @@ $productos = 16;
 
                         divProductos.appendChild(col);
                     });
-                    $('input[type=checkbox]').each(function() {
-                        this.removeAttribute('disabled');
-                    });
+                } else {
+                    document.getElementById('cant-productos').innerText = ' ' + 0;
+                    if (data.mensaje != '') {
+                        $('#spinner').hide();
+                        $('#div-msg').show();
+                        let msg = document.getElementById('msg');
+                        msg.innerHTML = data.mensaje;
+                    }
                 }
+                $('input[type=checkbox]').each(function() {
+                    this.removeAttribute('disabled');
+                });
             }
         });
     }
