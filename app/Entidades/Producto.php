@@ -257,7 +257,7 @@ class Producto extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorFiltro($filtro, $precio = "") {
+    public function obtenerPorFiltro($filtro, $precioMin = "", $precioMax = "") {
         $sql = "SELECT
                     * 
                 FROM
@@ -265,11 +265,20 @@ class Producto extends Model
                 WHERE ";
         if ($filtro != "") {
             $sql .= "(medidas_internas IN $filtro)"; //agregar con un OR en el caso de que se quiera filtrar por más de un campo
-            if ($precio != "") {
-                $sql .= " AND precio_venta <= $precio";
+            if ($precioMin != "") {
+                $sql .= " AND precio_venta >= $precioMin";
+            }
+            if ($precioMax != "") {
+                $sql .= " AND precio_venta <= $precioMax";
             }
         } else {
-            $sql .= "precio_venta <= $precio";
+            if ($precioMin == "" && $precioMax != "") {
+                $sql .= "precio_venta <= $precioMax";
+            } else if ($precioMin != "" && $precioMax == "") {
+                $sql .= "precio_venta >= $precioMin";
+            } else if ($precioMin != "" && $precioMax != "") {
+                $sql .= "precio_venta >= $precioMin AND precio_venta <= $precioMax";
+            }
         }
         $lstRetorno = DB::select($sql);
         return $lstRetorno;

@@ -37,7 +37,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/home', 'ControladorHome@index');
     Route::get('/admin', 'ControladorHome@index');
 
-    
+
 
     /* --------------------------------------------- */
     /* CONTROLADOR LOGIN                           */
@@ -132,7 +132,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/patente/eliminar', 'ControladorPatente@eliminar');
     Route::get('/admin/patente/nuevo/{id}', 'ControladorPatente@editar');
     Route::post('/admin/patente/nuevo/{id}', 'ControladorPatente@guardar');
- 
+
 
     /* --------------------------------------------- */
     /* CONTROLADOR VENTAS                          */
@@ -141,11 +141,12 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::post('/admin/venta/nueva', 'ControladorVenta@guardar');
     Route::get('/admin/ventas', 'ControladorVenta@index');
     Route::get('/admin/venta/nueva/{id}', 'ControladorVenta@editar');
-    Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');    
-    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');  
+    Route::get('/admin/ventas/cargarGrilla', 'ControladorVenta@cargarGrilla')->name('ventas.cargarGrilla');
+    Route::get('/admin/ventas/eliminar', 'ControladorVenta@eliminar');
+    Route::post('/admin/venta/nueva/{id}', 'ControladorVenta@guardar');
     Route::name('imprimir')->get('admin/ventas/imprimir', 'ControladorVenta@imprimir');
-    Route::get('/admin/ventas/remito','ControladorVenta@remito');  
-    
+    Route::get('/admin/ventas/remito', 'ControladorVenta@remito');
+
     /* --------------------------------------------- */
     /* CONTROLADOR DETALLES                          */
     /* --------------------------------------------- */
@@ -153,7 +154,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/detalle/nuevo', 'ControladorDetalle@nuevo')->name('detalle-nuevo');
     Route::post('/admin/detalle/nuevo', 'ControladorDetalle@guardar');
     Route::get('/admin/detalle/eliminar', 'ControladorDetalle@eliminar');
-    Route::get('/admin/detalles', 'ControladorDetalle@index');        
+    Route::get('/admin/detalles', 'ControladorDetalle@index');
     Route::get('/admin/detalle/cargarGrilla/{id}', 'ControladorDetalle@cargarGrilla')->name('detalle.cargarGrilla');
     Route::get('/admin/detalle/nuevo/{id}', 'ControladorDetalle@editar');
     Route::post('/admin/detalle/nuevo/{id}', 'ControladorDetalle@guardar');
@@ -161,9 +162,6 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/detalle/buscarProducto', 'ControladorDetalle@buscarProducto');
     Route::get('/admin/detalle/buscarCodProducto', 'ControladorDetalle@buscarCodProducto');
     Route::get('/admin/detalle/autocompletar', 'ControladorDetalle@autocompletar');
-
-});
-
     /* --------------------------------------------- */
     /* CONTROLADOR CLIENTES                          */
     /* --------------------------------------------- */
@@ -175,6 +173,26 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/cliente/nuevo/{id}', 'ControladorCliente@editar');
     Route::post('/admin/cliente/nuevo/{id}', 'ControladorCliente@guardar');
 
+    /* --------------------------------------------- */
+    /* CONTROLADOR COEFICIENTE                       */
+    /* --------------------------------------------- */
+    Route::get('/admin/coeficiente/nuevo', 'ControladorCoeficiente@nuevo');
+    Route::post('/admin/coeficiente/nuevo', 'ControladorCoeficiente@guardar');
+    Route::get('/admin/coeficiente/cargarGrilla', 'ControladorCoeficiente@cargarGrilla')->name('coeficientes.cargarGrilla');
+    Route::get('/admin/coeficientes', 'ControladorCoeficiente@index');
+    Route::get('/admin/coeficiente/nuevo/{id}', 'ControladorCoeficiente@editar');
+    Route::post('/admin/coeficiente/nuevo/{id}', 'ControladorCoeficiente@guardar');
+    Route::get('/admin/coeficiente/eliminar', 'ControladorCoeficiente@eliminar');
+    /* --------------------------------------------- */
+    /* CONTROLADOR INGRESO DE STOCK                  */
+    /* --------------------------------------------- */
 
-
-    
+    Route::get('/admin/ingreso/nuevo', 'ControladorIngreso@nuevo')->name('ingreso-nuevo');
+    Route::post('/admin/ingreso/nuevo', 'ControladorIngreso@guardar');
+    Route::get('/admin/ingreso/eliminar', 'ControladorIngreso@eliminar');
+    Route::get('/admin/ingresos', 'ControladorIngreso@index');   
+    Route::get('/admin/ingreso/nuevo/{id}', 'ControladorIngreso@editar');
+    Route::post('/admin/ingreso/nuevo/{id}', 'ControladorIngreso@guardar');
+    Route::get('/admin/ingreso/buscarProductos', 'ControladorIngreso@buscarProductos');
+  
+});

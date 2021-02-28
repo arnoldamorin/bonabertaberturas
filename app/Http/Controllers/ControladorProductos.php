@@ -186,7 +186,7 @@ class ControladorProductos extends Controller
             $row[] = $aProductos[$i]->peso;
             $row[] = "$" . number_format($aProductos[$i]->precio_base, 2, ",", ".");   
             $row[] = $aProductos[$i]->marca;
-            $row[] = "<a href='/admin/productos/nuevo/" . $aProductos[$i]->idproducto . "'><i class='fas fa-search'></i></a>";
+            $row[] = "<a href='/admin/productos/nuevo/" . $aProductos[$i]->idproducto . "'><i class='fas fa-edit'></i></a>";
             $cont++;
             $data[] = $row;
         }

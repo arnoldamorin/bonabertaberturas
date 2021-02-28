@@ -57,11 +57,12 @@ class Coeficiente extends Model
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idcoeficiente) {
-        $sql = "SELECT              
+    public function obtenerPorId($id) {
+        $sql = "SELECT    
+                idcoeficiente,          
                 nombre,
                 valor
-                FROM coeficientes WHERE idcoeficiente = $idcoeficiente";
+                FROM coeficientes WHERE idcoeficiente = $id";
         $lstRetorno = DB::select($sql);
 
         if(count($lstRetorno)>0){

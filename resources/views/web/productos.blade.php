@@ -9,11 +9,12 @@ $productos = 16;
 
 <div class="container mt-3 mt-sm-4 mx-md-0 px-0">
     <div class="row filtro-top px-2 py-2 mb-4 mx-3 mx-md-4">
-        <div class="col-12 col-md-8 px-0">
+        <div class="col-12 col-md-7 px-0">
             <p class="mb-0 mr-2 d-inline"><i class="fas fa-arrow-circle-right mr-1"></i>Categoria</p>
             <p class="mb-0 mr-2 d-inline"><i class="fas fa-arrow-circle-right mr-1"></i>Subcategoria [breadcumb]</p>
         </div>
-        <div class="col-6 col-md-4 text-right d-none d-md-inline px-0">
+        <div class="col-6 col-md-5 text-right d-none d-md-inline px-0">
+            <label class="m-0 mr-2 mr-md-3">Cantidad de productos:<span id="cant-productos"></span></label>
             <select name="lstOrden" id="lstOrden">
                 <option value="1">Menor Precio</option>
                 <option value="2">Mayor Precio</option>
@@ -49,19 +50,15 @@ $productos = 16;
                     </div>
                     <div class="col-12 px-0 div__subcategoria my-2 pb-2 shadow">
                         <label class="d-block lblSubcategoria pl-2 py-1">Rango de precios</label>
-                        <!-- <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
-                        <p class="d-inline">Subcategoria 1</p><br>
-                        <input type="checkbox" name="chkSubcategoria" id="chkSubcategoria" value="" class="mx-2">
-                        <p class="d-inline">Subcategoria 2</p><br> -->
                         <div class="row justify-content-between mx-0">
-                            <div class="col-auto p-0 pl-2" style="font-size: 10px;">{{ "$ " . number_format($precioMin, 2, ",", ".") }}</div>
-                            <div class="col-auto p-0 pr-2" style="font-size: 10px;">{{ "$ " . number_format($precioMax, 2, ",", ".") }}</div>
-                            <div class="col-12 text-center">
-                                <input type="range" class="form-range" min="{{ $precioMin }}" step="5000" max="{{ $precioMax }}" value="{{ $precioMax }}" id="rangoPrecio">
-                                <input type="text" class="form-control" id="txtPrecio" value="">
+                            <div class="col-6 pr-1">
+                                <input type="text" class="form-control" id="txtPrecioMin" value="" onkeyup="controlarPrecio(this);" placeholder="Mínimo">
                             </div>
-                            <div class="col-12">
-                                <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecio').val());"></i>
+                            <div class="col-6 pl-1">
+                                <input type="text" class="form-control" id="txtPrecioMax" value="" onkeyup="controlarPrecio(this);" placeholder="Máximo">
+                            </div>
+                            <div class="col-12 text-right">
+                                <i class="fas fa-chevron-circle-right" style="cursor: pointer;" onclick="aplicarFiltroPrecio($('#txtPrecioMin').val(), $('#txtPrecioMax').val());"></i>
                             </div>
                         </div>
                     </div>
@@ -72,6 +69,12 @@ $productos = 16;
                         <input type="checkbox" name="chkMaterial" id="chkMaterial" value="" class="mx-2">
                         <p class="d-inline">Material 2</p><br>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div id="div-msg" class="row" style="display: none;">
+            <div class="col-12">
+                <div id="msg" class="alert alert-danger">
                 </div>
             </div>
         </div>
@@ -86,18 +89,6 @@ $productos = 16;
         </div>
         <div class="col-12 col-md-9 col-lg-10">
             <div id="div-productos" class="row mx-0 px-0 text-center">
-                <!-- <?php for ($i = 0; $i < $productos; $i++) { ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <div class="card mb-4">
-                            <a href="producto.php" target="_blank" rel="sponsored">
-                                <img src="img/producto-3.png" class="img img-fluid" alt="producto">
-                                <p class="text-center my-0 py-2">Puerta Pavir Negra</p>
-                            </a>
-                            <p class="text-center my-0 pb-2 precio">$17,999.00</p>
-                            <button class="btn">COMPRAR <i class="fas fa-shopping-cart"></i></button>
-                        </div>
-                    </div>
-                <?php } ?> -->
             </div>
         </div>
     </div>
@@ -105,34 +96,37 @@ $productos = 16;
 <script>
 
     var aMedidasFiltro = [];
-    var precio = 0;
+    var precioMin = <?php echo $precioMin; ?>;
+    var precioMax = <?php echo $precioMax; ?>;
 
-    document.getElementById('rangoPrecio').addEventListener('mousedown', function() {
-        document.getElementById('rangoPrecio').addEventListener('mousemove', mostrarPrecio);
-        document.getElementById('rangoPrecio').addEventListener('mouseup', function() {
-            mostrarPrecio();
-            document.getElementById('rangoPrecio').removeEventListener('mousemove', mostrarPrecio);
-        });
-    });
-
-    function mostrarPrecio() {
-        $('#txtPrecio').val($('#rangoPrecio').val());
+    function controlarPrecio(precio) {
+        //comprueba que sea un valor numerico
+        if (isNaN(precio.value)) {
+            //comprueba que no se incluyan comas
+            precio.value = precio.value.slice(0, precio.value.length - 1);
+        }
     }
 
-    function aplicarFiltroPrecio(filtroPrecio) { //tengo que seguir laburando en esto *ISRA*
-        precio = filtroPrecio;
-
+    function aplicarFiltroPrecio(precioMinFiltro, precioMaxFiltro) {
         let divProductos = document.getElementById('div-productos');
         while (divProductos.firstChild) {
             divProductos.removeChild(divProductos.firstChild);
         }
-
+        
         $('#spinner').show();
 
-        if (precio != '') {
+        if (precioMinFiltro != '' || precioMaxFiltro != '') {
+            precioMin = precioMinFiltro;
+            precioMax = precioMaxFiltro;
             obtenerProductos('/productos/filtro/');
         } else {
-            obtenerProductos('/productos/obtenerTodos/');
+            if (aMedidasFiltro.length > 0) {
+                precioMin = <?php echo $precioMin; ?>;
+                precioMax = <?php echo $precioMax; ?>;
+                obtenerProductos('/productos/filtro/');
+            } else {
+                obtenerProductos('/productos/obtenerTodos/');
+            }
         }
     }
 
@@ -162,13 +156,20 @@ $productos = 16;
         if (aMedidasFiltro.length) {
             url = '/productos/filtro/';
         } else {
-            url = '/productos/obtenerTodos/';
+            if ($('#txtPrecioMin').val() != '' || $('#txtPrecioMax').val() != '') {
+                precioMin = $('#txtPrecioMin').val();
+                precioMax = $('#txtPrecioMax').val();
+                url = '/productos/filtro/';
+            } else {
+                url = '/productos/obtenerTodos/';
+            }
         }
 
         obtenerProductos(url);
     }
 
     function obtenerProductos(url) {
+        $('#div-msg').hide();
         $('input[type=checkbox]').each(function() {
             this.setAttribute('disabled', 'true');
         });
@@ -180,11 +181,13 @@ $productos = 16;
             async: true,
             data: {
                 filtro: aMedidasFiltro,
-                precio: precio
+                precioMin: precioMin,
+                precioMax: precioMax
             },
             success: function(data) {
                 if (data.error == 0) {
                     $('#spinner').hide();
+                    document.getElementById('cant-productos').innerText = ' ' + data.productos.length;
                     data.productos.forEach(function(valor) {
                         let col = document.createElement('div');
                         col.classList.add('col-12', 'col-sm-6', 'col-md-4', 'col-lg-3');
@@ -196,7 +199,13 @@ $productos = 16;
                         
                         let imgProducto = document.createElement('img');
                         imgProducto.classList.add('img', 'img-fluid');
-                        imgProducto.src = 'img/producto-3.png';
+
+                        if (valor.imagen != '') {
+                            imgProducto.src = 'web/img/puertas/' + valor.imagen;
+                        } else {
+                            imgProducto.src = 'img/producto-3.png';
+                        }
+
                         imgProducto.alt = 'producto';
 
                         let descrProducto = document.createElement('p');
@@ -230,10 +239,18 @@ $productos = 16;
 
                         divProductos.appendChild(col);
                     });
-                    $('input[type=checkbox]').each(function() {
-                        this.removeAttribute('disabled');
-                    });
+                } else {
+                    document.getElementById('cant-productos').innerText = ' ' + 0;
+                    if (data.mensaje != '') {
+                        $('#spinner').hide();
+                        $('#div-msg').show();
+                        let msg = document.getElementById('msg');
+                        msg.innerHTML = data.mensaje;
+                    }
                 }
+                $('input[type=checkbox]').each(function() {
+                    this.removeAttribute('disabled');
+                });
             }
         });
     }

@@ -1,6 +1,6 @@
 @extends('plantilla')
 
-@section('titulo', "Listado de ventas")
+@section('titulo', "Listado de Coeficientes")
 
 @section('scripts')
 <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
@@ -9,12 +9,11 @@
 @section('breadcrumb')
 <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
-    <li class="breadcrumb-item active">Ventas</a></li>
+    <li class="breadcrumb-item active">Listado</a></li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/venta/nueva" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
-    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/ventas");'><span>Recargar</span></a></li>
-    <li class="btn-item"><a title="Salir" href="#" class="fas fa-reply" aria-hidden="true" onclick="javascript: $('#modalSalir').modal('toggle');"><span>Salir</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/coeficiente/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Recargar" href="#" class="fas fa-redo-alt" aria-hidden="true" onclick='window.location.replace("/admin/productos/coeficientes");'><span>Recargar</span></a></li>  
 </ol>
 <script>
 function fsalir(){
@@ -32,13 +31,9 @@ if (isset($msg)) {
 <table id="grilla" class="display">
     <thead>
         <tr>
-            <th>Fecha</th>        
-            <th>Telefono</th>
-            <th>Correo</th>
             <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Estado</th>
-            <th>Modificar</th>
+            <th>Valor</th>                   
+            <th>Editar</th>                   
         </tr>
     </thead>
 </table> 
@@ -51,7 +46,8 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('ventas.cargarGrilla') }}"
+	    "ajax": "{{ route('coeficientes.cargarGrilla') }}"
 	});
 </script>
 @endsection
+
