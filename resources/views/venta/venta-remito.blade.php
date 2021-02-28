@@ -19,7 +19,7 @@
         }
         .contenedor1{
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
         }
     </style>
 </head>
@@ -143,7 +143,7 @@
         </div>
     </div>-->
     <div class="contenedor1">
-        <table style="display: inline-flex; width:450px">
+        <table style="width:450px">
             <tr><th>Aberturas Bonabert</th></tr>
             <tr><td>Av. del Libertador 2323</td></tr>
             <tr><td>CABA - Argentina</td></tr>
@@ -153,7 +153,7 @@
             <tr><td>IIBB: 20202002</td></tr>
         </table>
         <p style="display:inline">X</p>
-        <table style="display: inline-flex; width: 450px">
+        <table style="width: 450px">
             <tr>
                 <th>MOVIMIENTO DE STOCK</th>
                 <td>Pagina 1 de 1</td>
