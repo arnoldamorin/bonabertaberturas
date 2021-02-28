@@ -39,7 +39,8 @@ class ControladorWebProductosss extends Controller
 
     public function setFiltroProductos(Request $request) {
         $aFiltros = $request->input("filtro");
-        $precio = $request->input("precio");
+        $precioMin = $request->input("precioMin");
+        $precioMax = $request->input("precioMax");
         $producto = new Producto();
 
         if ($aFiltros != "") {
@@ -53,7 +54,7 @@ class ControladorWebProductosss extends Controller
         }
 
         $aProductos = array();
-        $aProductos = $producto->obtenerPorFiltro($string, $precio);
+        $aProductos = $producto->obtenerPorFiltro($string, $precioMin, $precioMax);
 
         if (count($aProductos) > 0) {
             $json_data =  array(
