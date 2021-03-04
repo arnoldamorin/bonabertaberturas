@@ -187,12 +187,12 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     /* CONTROLADOR INGRESO DE STOCK                  */
     /* --------------------------------------------- */
 
-    Route::get('/admin/ingreso/nuevo', 'ControladorIngreso@nuevo')->name('ingreso-nuevo');
-    Route::post('/admin/ingreso/nuevo', 'ControladorIngreso@guardar');
-    Route::get('/admin/ingreso/eliminar', 'ControladorIngreso@eliminar');
-    Route::get('/admin/ingresos', 'ControladorIngreso@index');   
-    Route::get('/admin/ingreso/nuevo/{id}', 'ControladorIngreso@editar');
-    Route::post('/admin/ingreso/nuevo/{id}', 'ControladorIngreso@guardar');
-    Route::get('/admin/ingreso/buscarProductos', 'ControladorIngreso@buscarProductos');
+    Route::get('/admin/productos/ingreso/nuevo', 'ControladorIngreso@nuevo');
+    Route::post('/admin/productos/ingreso/nuevo', 'ControladorIngreso@guardar');
+    Route::get('/admin/productos/ingreso/eliminar', 'ControladorIngreso@eliminar');
+    Route::get('/admin/productos/ingresos', 'ControladorIngreso@index');   
+    Route::get('/admin/productos/ingreso/nuevo/{id}', 'ControladorIngreso@editar');
+    Route::post('/admin/productos/ingreso/nuevo/{id}', 'ControladorIngreso@guardar');
+    Route::get('/admin/productos/ingreso/buscarProductos', 'ControladorIngreso@buscarProductos');
   
 });

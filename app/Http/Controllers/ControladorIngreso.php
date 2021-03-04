@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidades\IngresoStock;
 use App\Entidades\TipoProducto;
+use App\Entidades\Producto;
 use Illuminate\Http\Request;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
@@ -73,8 +74,8 @@ class ControladorIngreso extends Controller
         $titulo = "Nuevo Ingreso";        
 
         if (Usuario::autenticado() == true) {
-            if (!Patente::autorizarOperacion("INGRESOSLTA")) {
-                $codigo = "INGRESOALTA";
+            if (!Patente::autorizarOperacion("INGRESOSALTA")) {
+                $codigo = "INGRESOSALTA";
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
@@ -172,6 +173,15 @@ class ControladorIngreso extends Controller
         } else {
             return redirect('admin/login');
         }
+    }
+
+    public function buscarProductos(Request $request)
+    {
+        $id = $request->input('id');
+        $producto = new Producto;
+        $array_Producto = $producto->obtenerCodigoPorTipo($id);
+        echo json_encode($array_Producto);
+        exit;
     }
   
 }

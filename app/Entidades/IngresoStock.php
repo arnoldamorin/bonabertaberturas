@@ -23,7 +23,8 @@ class IngresoStock extends Model
         $this->fk_idtipo_producto = $request->input('lstTipoProducto');
         $this->fk_codproducto = $request->input('lstProducto');
         $this->cantidad = $request->input('txtCantidad');
-        $this->fecha_ingreso = $request->input('txtFechaIngreso');
+        $this->fecha = $request->input('txtFecha');
+        $this->hora = $request->input('txtHora');     
     }
 
     public function obtenerFiltrado()
@@ -95,7 +96,7 @@ class IngresoStock extends Model
             fk_idtipo_producto = '$this->fk_idtipo_producto',
             fk_codproducto = '$this->fk_codproducto',            
             cantidad = '$this->cantidad',
-            fecha_ingreso = '$this->fecha_ingreso'
+            fecha_ingreso = '".$this->fecha. " ". $this->hora ."'
             WHERE idingreso=?";
         $affected = DB::update($sql, [$this->idingreso]);
     }
@@ -116,10 +117,12 @@ class IngresoStock extends Model
                 fecha_ingreso             
             ) VALUES (?, ?, ?, ?);";
         $result = DB::insert($sql, [
+            $this->fk_idtipo_producto,
             $this->fk_codproducto,
-            $this->cantidad
+            $this->cantidad,
+            $this->fecha . " " . date("H:i:s")
         ]);
-        return $this->idingreso = DB::geIdo()->lastInsertId();
+        return $this->idingreso = DB::getPdo()->lastInsertId();
     }
 }
 
