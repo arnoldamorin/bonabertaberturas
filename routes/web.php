@@ -189,6 +189,7 @@ Route::group(array('domain' => '127.0.0.1'), function () {
 
     Route::get('/admin/productos/ingreso/nuevo', 'ControladorIngreso@nuevo');
     Route::post('/admin/productos/ingreso/nuevo', 'ControladorIngreso@guardar');
+    Route::get('/admin/productos/ingreso/cargarGrilla', 'ControladorIngreso@cargarGrilla')->name('ingresos.cargarGrilla');
     Route::get('/admin/productos/ingreso/eliminar', 'ControladorIngreso@eliminar');
     Route::get('/admin/productos/ingresos', 'ControladorIngreso@index');   
     Route::get('/admin/productos/ingreso/nuevo/{id}', 'ControladorIngreso@editar');

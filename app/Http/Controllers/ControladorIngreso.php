@@ -29,12 +29,15 @@ class ControladorIngreso extends Controller
         }
     }
 
-    public function cargarGrilla($id)
+    public function cargarGrilla()
     {
         $request = $_REQUEST;                
         
         $entidadIngreso = new IngresoStock();       
-        $aIngreso = $entidadIngreso->obtenerPorIdVenta($id);            
+        $aIngreso = $entidadIngreso->obtenerFiltrado();   
+        
+        $tipoProducto = new TipoProducto();
+        $producto = new Producto();
 
         $data = array();
 
@@ -46,13 +49,14 @@ class ControladorIngreso extends Controller
         }
 
         for ($i = $inicio; $i < count($aIngreso) && $cont < $registros_por_pagina; $i++) {
+            $tipoProducto->obtenerPorId($aIngreso[$i]->fk_idtipo_producto);
             $row = array();
-            $row[] = $aIngreso[$i]->fk_idtipo_producto;
-            $row[] = $aIngreso[$i]->fk_codproducto;
-            $row[] = $aIngreso[$i]->fk_cantidad;
-            $row[] = $aIngreso[$i]->fecha;
-            $row[] = $aIngreso[$i]->cantidad;     
-            $row[] = "<a href='/admin/Ingreso/nuevo/".$aIngreso[$i]->idingreso."'><i class='fas fa-edit'></i></a>";
+            $row[] = $tipoProducto->nombre;
+            $producto->obtenerPorId($aIngreso[$i]->fk_codproducto);
+            $row[] = $producto->codigo;            
+            $row[] = $aIngreso[$i]->cantidad;   
+            $row[] = $aIngreso[$i]->fecha_ingreso;              
+            $row[] = "<a href='/admin/productos/ingreso/nuevo/".$aIngreso[$i]->idingreso."'><i class='fas fa-edit'></i></a>";
             $cont++;
             $data[] = $row;
         }
@@ -139,7 +143,7 @@ class ControladorIngreso extends Controller
             
                     
                 }    
-                $_POST["id"] = $ingreso->idproducto;          
+                $_POST["id"] = $ingreso->idingreso;          
                 return view('ingreso.ingreso-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {

@@ -71,8 +71,8 @@ class IngresoStock extends Model
     public function obtenerPorId($idingreso)
     {
         $sql = "SELECT
-                I.fk_idtipo_producto,                    
-                I.fk_codproducto,
+                fk_idtipo_producto,                    
+                fk_codproducto,
                 idingreso,                
                 cantidad,
                 fecha_ingreso
@@ -84,7 +84,7 @@ class IngresoStock extends Model
             $this->fk_codproducto = $lstRetorno[0]->fk_codproducto;
             $this->idingreso = $lstRetorno[0]->idingreso;            
             $this->cantidad = $lstRetorno[0]->cantidad;
-            $this->cantidad = $lstRetorno[0]->fecha_ingreso;
+            $this->fecha_ingreso = $lstRetorno[0]->fecha_ingreso;
             return $this;
         }
         return null;

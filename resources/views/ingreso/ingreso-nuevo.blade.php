@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($ingresostock->idingreso) && $ingresostock->idingreso > 0 ? $ingresostock->idingreso : 0; ?>';
-    <?php $globalId = isset($ingresostock->idingreso) ? $ingresostock->idingreso : "0"; 
+    globalId = '<?php echo isset($ingreso->idingreso) && $ingreso->idingreso > 0 ? $ingreso->idingreso : 0; ?>';
+    <?php $globalId = isset($ingreso->idingreso) ? $ingreso->idingreso : "0"; 
     $date = date('d-m-Y')?>
 </script>
 @endsection
@@ -49,8 +49,8 @@ if (isset($msg)) {
                 <label>Tipo producto</label>
                 <select id="lstTipoProducto" name="lstTipoProducto" onclick="fBuscarProductos();" class="form-control">
                     <option disabled selected value="">Seleccionar</option>
-                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($ingresostock) and $array_TipoProducto[$i]->idtipo_producto ==
-                        $ingresostock->fk_idtipo_producto)
+                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($ingreso) and $array_TipoProducto[$i]->idtipo_producto ==
+                        $ingreso->fk_idtipo_producto)
                         <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
                         @else
                         <option value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
@@ -66,7 +66,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Cantidad: *</label>
-                <input type="text" id="txtCantidad" name="txtCantidad" class="form-control" value="{{$ingresostock->cantidad or ''}}">
+                <input type="text" id="txtCantidad" name="txtCantidad" class="form-control" value="{{$ingreso->cantidad or ''}}">
             </div>
             <div class="form-group col-lg-6">
                 <label>Fecha: *</label>
