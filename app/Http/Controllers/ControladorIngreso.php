@@ -105,8 +105,10 @@ class ControladorIngreso extends Controller
                 $ingreso->obtenerPorId($id);
                 $tipoProducto = new TipoProducto();
                 $array_TipoProducto = $tipoProducto->obtenerTodos();
+                $producto = new Producto();
+                $producto->obtenerPorId($ingreso->fk_codproducto);
 
-                return view('ingreso.ingreso-nuevo', compact('ingreso', 'titulo', 'array_TipoProducto'));
+                return view('ingreso.ingreso-nuevo', compact('ingreso', 'titulo', 'array_TipoProducto', 'producto'));
                 
             }
         } else {

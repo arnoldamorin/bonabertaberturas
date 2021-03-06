@@ -62,6 +62,7 @@ class ControladorVenta extends Controller
             $row[] = $aVenta[$i]->apellido_comprador;
             $entidadEstado->obtenerPorID($aVenta[$i]->fk_idventas_estados);
             $row[] = $entidadEstado->nombre;
+            $row[] = $aVenta[$i]->total;
             $row[] = "<a href='/admin/venta/nueva/" . $aVenta[$i]->idventa . "'><i class='fas fa-edit'></i></a>";
             $cont++;
             $data[] = $row;

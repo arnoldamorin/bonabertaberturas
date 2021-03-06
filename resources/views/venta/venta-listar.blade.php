@@ -38,6 +38,7 @@ if (isset($msg)) {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Estado</th>
+            <th>Total</th>
             <th>Modificar</th>
         </tr>
     </thead>

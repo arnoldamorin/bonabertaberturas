@@ -104,8 +104,9 @@ class ControladorDetalle extends Controller
                 $detalle->obtenerPorId($id);
                 $tipoProducto = new TipoProducto();
                 $array_TipoProducto = $tipoProducto->obtenerTodos();
+                $idVenta = $detalle->fk_idventa;
 
-                return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto'));
+                return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto', 'idVenta'));
                 
             }
         } else {
@@ -153,8 +154,8 @@ class ControladorDetalle extends Controller
         $id = $detalle->iddetalle;
         $entidad = new Detalle;
         $entidad->obtenerPorId($id);
-
-        return view('detalle.detalle-nuevo', compact('msg', 'entidad', 'titulo')) . '?id=' . $entidad->iddetalle;
+        $idVenta = $entidad->fk_idventa;
+        return view('detalle.detalle-nuevo', compact('msg', 'entidad', 'titulo', 'idVenta')) . '?id=' . $entidad->iddetalle;
     }
 
     public function eliminar(Request $request)

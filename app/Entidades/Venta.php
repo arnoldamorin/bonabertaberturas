@@ -38,8 +38,9 @@ class Venta extends Model
            2 => 'C.correo',
            3 => 'C.nombre_comprador',
            4 => 'C.apellido_comprador',
-           5 => 'C.fk_idventas_estados',
-           6 => 'C.idventa'
+           5 => 'C.fk_idventas_estados',           
+           6 => 'C.total',
+           7 => 'C.idventa'
             );
         $sql = "SELECT DISTINCT
                     C.fecha,
@@ -47,8 +48,9 @@ class Venta extends Model
                     C.correo,                   
                     C.nombre_comprador,
                     C.apellido_comprador,
-                    C.fk_idventa_estados,
-                    C.idventa
+                    C.fk_idventas_estados,
+                    C.total,
+                    C.idventa                    
                     FROM ventas C
                 WHERE 1=1
                 ";

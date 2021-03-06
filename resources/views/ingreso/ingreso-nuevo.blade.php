@@ -3,8 +3,7 @@
 @section('scripts')
 <script>
     globalId = '<?php echo isset($ingreso->idingreso) && $ingreso->idingreso > 0 ? $ingreso->idingreso : 0; ?>';
-    <?php $globalId = isset($ingreso->idingreso) ? $ingreso->idingreso : "0"; 
-    $date = date('d-m-Y')?>
+    <?php $globalId = isset($ingreso->idingreso) ? $ingreso->idingreso : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -49,9 +48,8 @@ if (isset($msg)) {
                 <label>Tipo producto</label>
                 <select id="lstTipoProducto" name="lstTipoProducto" onclick="fBuscarProductos();" class="form-control">
                     <option disabled selected value="">Seleccionar</option>
-                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($ingreso) and $array_TipoProducto[$i]->idtipo_producto ==
-                        $ingreso->fk_idtipo_producto)
-                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
+                    @for ($i = 0; $i < count($array_TipoProducto); $i++) @if (isset($ingreso) and $array_TipoProducto[$i]->idtipo_producto == $ingreso->fk_idtipo_producto)
+                        <option selected value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option> 
                         @else
                         <option value="{{ $array_TipoProducto[$i]->idtipo_producto}}">{{ $array_TipoProducto[$i]->nombre }}</option>
                         @endif
@@ -61,7 +59,7 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="lstProducto">Codigo Producto:</label>
                 <select id="lstProducto" name="lstProducto" class="form-control">
-                    <option selected value="{{$ingreso->fk_codproducto or ''}}"></option>
+                    <option selected value="{{$ingreso->fk_codproducto or ''}}">{{$producto->codigo or ''}}</option>
                 </select>
             </div>
             <div class="form-group col-lg-6">
@@ -70,7 +68,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Fecha: *</label>
-                <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $ingreso->fecha_ingreso or date('d-m-Y')}}">
+                <input type="date" id="txtFecha" name="txtFecha" class="form-control" required value="{{ $ingreso->fecha  or date('Y-m-d') }}"><!--  -->
                 <!-- LO HICE PARA NO PERDER LA HORA DE LA COMPRA, DE LO CONTRARIO SE COMPLICABA MUCHO PODER GUARDARLA -->
                 <input type="time" id="txtHora" name="txtHora" class="form-control d-none" required value="{{ $ingreso->hora or date('H:i:s')}}">
                 <!-- ================================================================================================ -->

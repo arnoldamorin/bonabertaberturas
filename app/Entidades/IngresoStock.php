@@ -75,16 +75,18 @@ class IngresoStock extends Model
                 fk_codproducto,
                 idingreso,                
                 cantidad,
-                fecha_ingreso
+                DATE(fecha_ingreso) AS fecha,
+                TIME(fecha_ingreso) AS hora
                 FROM ingreso_stock WHERE idingreso = $idingreso";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
-            $this->idingreso = $lstRetorno[0]->fk_idtipo_producto;            
+            $this->fk_idtipo_producto = $lstRetorno[0]->fk_idtipo_producto;            
             $this->fk_codproducto = $lstRetorno[0]->fk_codproducto;
             $this->idingreso = $lstRetorno[0]->idingreso;            
             $this->cantidad = $lstRetorno[0]->cantidad;
-            $this->fecha_ingreso = $lstRetorno[0]->fecha_ingreso;
+            $this->fecha = $lstRetorno[0]->fecha;
+            $this->hora = $lstRetorno[0]->hora;
             return $this;
         }
         return null;
