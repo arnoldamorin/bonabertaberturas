@@ -36,6 +36,8 @@ class ControladorDetalle extends Controller
         $entidadDetalle = new Detalle();       
         $aDetalle = $entidadDetalle->obtenerPorIdVenta($id);            
 
+        $producto = new Producto();
+        $tipoProducto = new TipoProducto();
         $data = array();
 
         $inicio = $request['start'];
@@ -48,8 +50,10 @@ class ControladorDetalle extends Controller
         for ($i = $inicio; $i < count($aDetalle) && $cont < $registros_por_pagina; $i++) {
             $row = array();
             $row[] = $aDetalle[$i]->fk_idventa;
-            $row[] = $aDetalle[$i]->fk_idtipo_producto;
-            $row[] = $aDetalle[$i]->fk_codproducto;
+            $tipoProducto->obtenerPorId($aDetalle[$i]->fk_idtipo_producto);
+            $row[] = $tipoProducto->nombre;
+            $producto->obtenerPorId($aDetalle[$i]->fk_codproducto);
+            $row[] = $producto->codigo;
             $row[] = $aDetalle[$i]->descrprod;
             $row[] = $aDetalle[$i]->cantidad;
             $row[] = "$" . number_format($aDetalle[$i]->preciounitario, 2, ",", "."); 
@@ -100,13 +104,14 @@ class ControladorDetalle extends Controller
                 $mensaje = "No tiene pemisos para la operaci&oacute;n.";
                 return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
             } else {
-                $detalle = new detalle();
+                $detalle = new Detalle();
                 $detalle->obtenerPorId($id);
                 $tipoProducto = new TipoProducto();
-                $array_TipoProducto = $tipoProducto->obtenerTodos();
-                $idVenta = $detalle->fk_idventa;
+                $array_TipoProducto = $tipoProducto->obtenerTodos();  
+                $producto = new Producto();
+                $producto->obtenerPorId($detalle->fk_codproducto);
 
-                return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto', 'idVenta'));
+                return view('detalle.detalle-nuevo', compact('detalle', 'titulo', 'array_TipoProducto', 'producto'));
                 
             }
         } else {
@@ -117,6 +122,10 @@ class ControladorDetalle extends Controller
     public function guardar(Request $request)
     {       
         try {
+            $tipoProducto = new TipoProducto();
+            $array_TipoProducto = $tipoProducto->obtenerTodos();
+            $producto = new Producto();
+            
             //Define la entidad servicio
             $titulo = "Modificar Detalle";
             $detalle = new Detalle();
@@ -140,22 +149,20 @@ class ControladorDetalle extends Controller
 
                     $msg["ESTADO"] = MSG_SUCCESS;
                     $msg["MSG"] = OKINSERT;
-                    $tipoProducto = new TipoProducto();
-                    $array_TipoProducto = $tipoProducto->obtenerTodos();
+                   
                     $idVenta =$detalle->fk_idventa;
-                }              
-                return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'idVenta', 'array_TipoProducto'));
+                    return view('detalle.detalle-nuevo', compact('titulo', 'msg', 'idVenta', 'array_TipoProducto'));
+                }                             
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
 
-        $id = $detalle->iddetalle;
-        $entidad = new Detalle;
-        $entidad->obtenerPorId($id);
-        $idVenta = $entidad->fk_idventa;
-        return view('detalle.detalle-nuevo', compact('msg', 'entidad', 'titulo', 'idVenta')) . '?id=' . $entidad->iddetalle;
+        $id = $detalle->iddetalle;        
+        $detalle->obtenerPorId($id);
+        $producto->obtenerPorId($detalle->fk_codproducto);
+        return view('detalle.detalle-nuevo', compact('msg', 'detalle', 'titulo', 'array_TipoProducto','producto')) . '?id=' . $detalle->iddetalle;
     }
 
     public function eliminar(Request $request)

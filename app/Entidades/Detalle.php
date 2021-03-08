@@ -124,8 +124,20 @@ class Detalle extends Model
                   C.total                           
                 FROM detalles C WHERE C.iddetalle = $id";
         $lstRetorno = DB::select($sql);
-        return $lstRetorno;
+        if (count($lstRetorno) > 0) {
+            $this->iddetalle = $lstRetorno[0]->iddetalle;
+            $this->fk_idventa = $lstRetorno[0]->fk_idventa;            
+            $this->fk_idtipo_producto = $lstRetorno[0]->fk_idtipo_producto;
+            $this->fk_codproducto = $lstRetorno[0]->fk_codproducto;
+            $this->descrprod = $lstRetorno[0]->descrprod;
+            $this->cantidad = $lstRetorno[0]->cantidad;
+            $this->preciounitario = $lstRetorno[0]->preciounitario;
+            $this->total = $lstRetorno[0]->total;
+            return $this;
+        }
+        return null;
     }
+    
 
     public function obtenerPorIdVenta($id)    
     {
@@ -174,7 +186,7 @@ class Detalle extends Model
             descrprod = '$this->descrprod',
             preciounitario = '$this->preciounitario',            
             cantidad = '$this->cantidad',           
-            total = '$this->total',           
+            total = '$this->total'           
             WHERE iddetalle=?";
         $affected = DB::update($sql, [$this->iddetalle]);
     }
@@ -209,5 +221,6 @@ class Detalle extends Model
         return $this->iddetalle = DB::getPdo()->lastInsertId();
     }
 }
+
 
 

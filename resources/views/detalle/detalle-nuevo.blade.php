@@ -5,8 +5,9 @@
 <script src="{{ asset('js/datatables.min.js') }}"></script>
 <script>
     globalId = '<?php echo isset($detalle->iddetalle) && $detalle->iddetalle > 0 ? $detalle->iddetalle : 0; ?>';
-    <?php $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; 
-    $idVenta = $_GET["idVenta"];
+    <?php 
+    $globalId = isset($detalle->iddetalle) ? $detalle->iddetalle : "0"; 
+    $idVenta = isset($detalle->fk_idventa) ? $detalle->fk_idventa: $_GET["idVenta"] ;
     ?>
 </script>
 @endsection
@@ -49,7 +50,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Id Venta</label>
-                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{ $idVenta or '' }}" readonly>
+                <input class="form-control" type="text" id="txtfk_idventa" name="txtfk_idventa" value="{{ $detalle->fk_idventa or '$idVenta'}}" readonly>
             </div>
             <div class="form-group col-lg-6">
                 <label>Tipo producto</label>
@@ -67,7 +68,7 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="lstProducto">Codigo Producto:</label>
                 <select id="lstProducto" onchange="fBuscarDescrProducto();fBuscarPrecioUnitario();" name="lstProducto" class="form-control">
-                    <option selected value="{{$detalle->fk_codproducto or ''}}"></option>
+                    <option selected value="{{$detalle->fk_codproducto or ''}}">{{$producto->codigo or ''}}</option>
                 </select>
             </div>
             <div class="form-group col-lg-6">
@@ -78,13 +79,13 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label>Cantidad</label>
                 <input class="form-control" type="text" id="txtCantidad" name="txtCantidad" onchange="fCalcularTotal();" value="{{$detalle->cantidad or ''}}">
-                <!---->
+                
                 <span id="msgStock" class="text-danger" style="display:none;">No hay stock suficiente</span>
             </div>
             <div class="form-group col-lg-6">
                 <label>Precio Unitario</label>
-                <input class="form-control" type="text" id="txtPrecioUnitario" name="txtPrecioUnitario" readonly value="{{$detalle->preciounitario or ''}}">
-                <!---->
+                <input class="form-control" type="text" id="txtPrecioUnitario" name="txtPrecioUnitario" onchange="fCalcularTotal();" readonly value="{{$detalle->preciounitario or ''}}">
+                
             </div>
             <div class="form-group col-lg-6">
                 <label>Total</label>
@@ -128,7 +129,7 @@ if (isset($msg)) {
 </div>
 <script>
     
-    window.onload = function() {
+   window.onload = function() {
         var dataTable = $('#grilla').DataTable({        
             "processing": true,
             "serverSide": true,
@@ -180,7 +181,7 @@ if (isset($msg)) {
 
     function fBuscarProductos() {
         idtipo_producto = $("#lstTipoProducto option:selected").val();
-        if ($("#txtDescrProducto").val() == "") {
+        
             $.ajax({
                 type: "GET",
                 url: "{{ asset('admin/detalle/buscarProductos') }}",
@@ -202,7 +203,7 @@ if (isset($msg)) {
 
                 }
             });
-        }
+        
     }
 
     function fBuscarDescrProducto() {
